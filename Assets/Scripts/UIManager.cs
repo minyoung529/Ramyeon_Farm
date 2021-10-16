@@ -7,6 +7,7 @@ using DG.Tweening;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Image speechBubble;
+    [SerializeField] private List<Ingredient> ingredients;
 
     void Start()
     {

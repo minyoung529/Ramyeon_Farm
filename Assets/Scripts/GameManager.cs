@@ -5,7 +5,7 @@ using System.IO;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    private User user;
+    [SerializeField] private User user;
     public User CurrentUser { get { return user; } }
 
     private string SAVE_PATH = "";
@@ -14,7 +14,7 @@ public class GameManager : MonoSingleton<GameManager>
     public Transform doorPosition;
     public Transform counterPosition;
 
-    public UIManager UIManager;
+    public UIManager UIManager { get; private set; }
 
     #region 데이터 저장
     private void FirstData()
