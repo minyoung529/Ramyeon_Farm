@@ -6,6 +6,7 @@ using UnityEngine;
 public class User
 {
     [SerializeField] private long money;
+    public List<Ingredient> ingredients = new List<Ingredient>();
 
     public void AddUserMoney(int addMoney)
     {
