@@ -7,5 +7,4 @@ public class Ingredient
 {
     public string name;
     public int amount;
-    public List<int> days = new List<int>();
 }

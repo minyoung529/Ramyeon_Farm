@@ -16,6 +16,16 @@ public class GameManager : MonoSingleton<GameManager>
 
     public UIManager UIManager { get; private set; }
 
+    public Ingredient currentIngredient { get; private set; }
+
+    public Sprite[] ingredientContainerSprites;
+    public Sprite[] ingredientSprites;
+
+    public Camera mainCam { get; private set; }
+
+    public Transform Pool;
+
+
     #region 데이터 저장
     private void FirstData()
     {
@@ -60,6 +70,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         //FirstData();
         UIManager = GetComponent<UIManager>();
+        mainCam = Camera.main;
     }
 
     void Start()
@@ -70,5 +81,15 @@ public class GameManager : MonoSingleton<GameManager>
     void Update()
     {
         
+    }
+
+    public void SetCurrentIngredient(Ingredient ingredient)
+    {
+        currentIngredient = ingredient;
+    }
+
+    public Sprite GetIngredientContainer(int index)
+    {
+        return ingredientContainerSprites[index];
     }
 }
