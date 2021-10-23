@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class IngredientIcon : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class IngredientIcon : MonoBehaviour
     public void SetValue(int index)
     {
         ingredient = GameManager.Instance.CurrentUser.ingredients[index];
+        GameManager.Instance.SetCurrentIngredient(ingredient);
         spriteRenderer.sprite = GameManager.Instance.GetIngredientSprite(index);
     }
 
@@ -27,10 +29,17 @@ public class IngredientIcon : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isInPot = false;
+    }
+
     public void Inactive()
     {
         gameObject.SetActive(false);
+        GameManager.Instance.currentIngredientIcon = null;
         transform.SetParent(GameManager.Instance.Pool);
+        GameManager.Instance.SetCurrentIngredient(null);
         isInPot = false;
         ingredient = null;
     }

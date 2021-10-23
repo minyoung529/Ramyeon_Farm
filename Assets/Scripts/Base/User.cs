@@ -7,6 +7,7 @@ public class User
 {
     [SerializeField] private long money;
     public List<Ingredient> ingredients = new List<Ingredient>();
+    public List<Recipe> recipes = new List<Recipe>();
 
     public void AddUserMoney(int addMoney)
     {

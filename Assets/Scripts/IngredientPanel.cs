@@ -53,6 +53,10 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         {
             ingredientIcon.Inactive();
         }
+        else
+        {
+            GameManager.Instance.AddCurRanem();
+        }
     }
 
     private void IconInstantiateOrPooling()

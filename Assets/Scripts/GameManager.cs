@@ -8,15 +8,16 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] private User user;
     public User CurrentUser { get { return user; } }
 
+    public UIManager UIManager { get; private set; }
+
     private string SAVE_PATH = "";
     private readonly string SAVE_FILENAME = "/SaveFile.txt";
 
     public Transform doorPosition;
     public Transform counterPosition;
-
-    public UIManager UIManager { get; private set; }
-
     public Ingredient currentIngredient { get; private set; }
+    private List<Ingredient> currentRamen = new List<Ingredient>();
+    private Recipe currentRecipe;
 
     public Sprite[] ingredientContainerSprites;
     public Sprite[] ingredientSprites;
@@ -26,9 +27,7 @@ public class GameManager : MonoSingleton<GameManager>
     public Transform Pool;
 
     public IngredientIcon currentIngredientIcon;
-
     public List<IngredientIcon> ingredientIcons = new List<IngredientIcon>();
-
 
     #region 데이터 저장
     private void FirstData()
@@ -79,12 +78,10 @@ public class GameManager : MonoSingleton<GameManager>
 
     void Start()
     {
-        
-    }
-
-    void Update()
-    {
-        
+        for (int i = 0; i < user.recipes.Count; i++)
+        {
+            user.recipes[i].SetList();
+        }
     }
 
     public void SetCurrentIngredient(Ingredient ingredient)
@@ -124,5 +121,61 @@ public class GameManager : MonoSingleton<GameManager>
             }
         }
         return null;
+    }
+
+    public void AddCurRanem()
+    {
+        currentRamen.Add(currentIngredient);
+    }
+
+    public float EvaluateRamen(string recipeName)
+    {
+        Recipe recipe = user.recipes.Find(x => x.recipeName == recipeName);
+
+        List<int> checkList = new List<int>();
+
+        for (int i = 0; i < currentRamen.Count; i++)
+        {
+            for (int j = 0; j < recipe.GetIngredients().Length; j++)
+            {
+                if (checkList.Exists(x => x == j)) continue;
+
+                if (currentRamen[i].name == recipe.GetIngredients()[j])
+                {
+                    Debug.Log(currentRamen[i].name);
+                    checkList.Add(j);
+                }
+            }
+        }
+
+        if (!currentRamen.Exists(x => x.name == "물") || !currentRamen.Exists(x => x.name == "라면사리") || !currentRamen.Exists(x => x.name == "스프"))
+        {
+            return -1f;
+        }
+
+        else if (checkList.Count == currentRamen.Count && checkList.Count == recipe.GetIngredients().Length)
+        {
+            return 100f;
+        }
+
+        else if (Mathf.Abs(currentRamen.Count - recipe.GetIngredients().Length) < 3)
+        {
+            return 60f;
+        }
+
+        else
+        {
+            return 30f;
+        }
+    }
+
+    public void SetCurrentRecipe(Recipe recipe)
+    {
+        currentRecipe = recipe;
+    }
+
+    public Recipe GetRecipe()
+    {
+        return currentRecipe;
     }
 }
