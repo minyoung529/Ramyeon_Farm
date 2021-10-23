@@ -25,6 +25,10 @@ public class GameManager : MonoSingleton<GameManager>
 
     public Transform Pool;
 
+    public IngredientIcon currentIngredientIcon;
+
+    public List<IngredientIcon> ingredientIcons = new List<IngredientIcon>();
+
 
     #region 데이터 저장
     private void FirstData()
@@ -91,5 +95,34 @@ public class GameManager : MonoSingleton<GameManager>
     public Sprite GetIngredientContainer(int index)
     {
         return ingredientContainerSprites[index];
+    }
+
+    public Sprite GetIngredientSprite(int index)
+    {
+        return ingredientSprites[index];
+    }
+
+    public bool CheckPool(string objName)
+    {
+        for (int i = 0; i < Pool.childCount; i++)
+        {
+            if (Pool.childCount > 0 && Pool.GetChild(i).name.Contains(objName))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public GameObject ReturnPoolObject(string objName)
+    {
+        for (int i = 0; i < Pool.childCount; i++)
+        {
+            if (Pool.childCount > 0 && Pool.GetChild(i).name.Contains(objName))
+            {
+                return Pool.GetChild(i).gameObject;
+            }
+        }
+        return null;
     }
 }
