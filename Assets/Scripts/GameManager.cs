@@ -71,7 +71,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Awake()
     {
-        //FirstData();
+        FirstData();
         UIManager = GetComponent<UIManager>();
         mainCam = Camera.main;
     }
@@ -81,6 +81,11 @@ public class GameManager : MonoSingleton<GameManager>
         for (int i = 0; i < user.recipes.Count; i++)
         {
             user.recipes[i].SetList();
+        }
+
+        for(int i = 0; i<user.ingredients.Count;i++)
+        {
+            user.ingredients[i].SetIndex(i);
         }
     }
 
@@ -142,7 +147,6 @@ public class GameManager : MonoSingleton<GameManager>
 
                 if (currentRamen[i].name == recipe.GetIngredients()[j])
                 {
-                    Debug.Log(currentRamen[i].name);
                     checkList.Add(j);
                 }
             }

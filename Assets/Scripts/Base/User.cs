@@ -8,6 +8,7 @@ public class User
     [SerializeField] private long money;
     public List<Ingredient> ingredients = new List<Ingredient>();
     public List<Recipe> recipes = new List<Recipe>();
+    public List<Livestock> livestocks = new List<Livestock>();
 
     public void AddUserMoney(int addMoney)
     {

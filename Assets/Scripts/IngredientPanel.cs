@@ -7,11 +7,13 @@ using UnityEngine.EventSystems;
 public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private GameObject igdIcon;
-    Ingredient ingredient;
-    IngredientIcon ingredientIcon;
-    Image image;
-    GameObject icon;
-    int index;
+    [SerializeField] private Text amountText;
+
+    private Ingredient ingredient;
+    private IngredientIcon ingredientIcon;
+    private Image image;
+    private GameObject icon;
+    private int index;
 
     private void Awake()
     {
@@ -26,22 +28,44 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         {
             SetValue(1);
         }
+
+        else if (name == "Water")
+        {
+            SetValue(2);
+        }
     }
 
     public void SetValue(int index)
     {
         this.index = index;
         ingredient = GameManager.Instance.CurrentUser.ingredients[index];
+
+        if (amountText != null)
+        {
+            amountText.text = ingredient.amount.ToString();
+        }
+
         image.sprite = GameManager.Instance.GetIngredientContainer(index);
+    }
+
+    public void UpdateData()
+    {
+        if (amountText != null)
+        {
+            amountText.text = ingredient.amount.ToString();
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (ingredient.amount < 1 && ingredient.state != IngredientState.basic) return;
         IconInstantiateOrPooling();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (ingredient.amount < 1 && ingredient.state != IngredientState.basic) return;
+
         Vector2 mousePosition = Input.mousePosition;
         mousePosition = GameManager.Instance.mainCam.ScreenToWorldPoint(mousePosition);
         icon.transform.position = mousePosition;
@@ -49,6 +73,8 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (ingredient.amount < 1 && ingredient.state != IngredientState.basic) return;
+
         if (!GameManager.Instance.currentIngredientIcon.isInPot)
         {
             ingredientIcon.Inactive();
@@ -56,6 +82,8 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         else
         {
             GameManager.Instance.AddCurRanem();
+            ingredient.AddAmount(-1);
+            GameManager.Instance.UIManager.UpdateIngredientPanel();
         }
     }
 
@@ -64,7 +92,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         if (GameManager.Instance.CheckPool("IngredientIcon"))
         {
             icon = GameManager.Instance.ReturnPoolObject("IngredientIcon");
-            icon.transform.SetParent(null);
+            icon.transform.SetParent(igdIcon.transform.parent);
             ingredientIcon = GameManager.Instance.ingredientIcons.Find(x => x.gameObject == icon.gameObject);
             SetIcon(index);
         }
