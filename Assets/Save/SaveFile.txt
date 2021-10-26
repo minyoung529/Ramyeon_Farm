@@ -1,0 +1,148 @@
+﻿{
+    "money": 0,
+    "ingredients": [
+        {
+            "name": "라면사리",
+            "amount": 0,
+            "isHaving": false,
+            "state": 0
+        },
+        {
+            "name": "스프",
+            "amount": 0,
+            "isHaving": false,
+            "state": 0
+        },
+        {
+            "name": "물",
+            "amount": 0,
+            "isHaving": false,
+            "state": 0
+        },
+        {
+            "name": "대파",
+            "amount": 0,
+            "isHaving": false,
+            "state": 1
+        },
+        {
+            "name": "다진마늘",
+            "amount": 0,
+            "isHaving": false,
+            "state": 1
+        },
+        {
+            "name": "계란",
+            "amount": 0,
+            "isHaving": false,
+            "state": 2
+        },
+        {
+            "name": "청양고추",
+            "amount": 0,
+            "isHaving": false,
+            "state": 1
+        },
+        {
+            "name": "고춧가루",
+            "amount": 0,
+            "isHaving": false,
+            "state": 4
+        },
+        {
+            "name": "치즈",
+            "amount": 0,
+            "isHaving": false,
+            "state": 2
+        },
+        {
+            "name": "떡",
+            "amount": 0,
+            "isHaving": false,
+            "state": 4
+        },
+        {
+            "name": "돼지고기",
+            "amount": 0,
+            "isHaving": false,
+            "state": 2
+        },
+        {
+            "name": "김치",
+            "amount": 0,
+            "isHaving": false,
+            "state": 4
+        }
+    ],
+    "recipes": [
+        {
+            "recipeName": "기본 라면",
+            "ingredient": "물,스프,라면사리"
+        },
+        {
+            "recipeName": "대파 라면",
+            "ingredient": "물,스프,라면사리,대파"
+        },
+        {
+            "recipeName": "대파 라면(대파추가)",
+            "ingredient": "물,스프,라면사리,대파,대파"
+        },
+        {
+            "recipeName": "마늘 라면",
+            "ingredient": "물,스프,라면사리,다진마늘"
+        },
+        {
+            "recipeName": "마늘 라면(마늘추가)",
+            "ingredient": "물,스프,라면사리,다진마늘,다진마늘"
+        },
+        {
+            "recipeName": "계란 라면",
+            "ingredient": "물,스프,라면사리,계란"
+        },
+        {
+            "recipeName": "계란 라면(대파추가)",
+            "ingredient": "물,스프,라면사리,계란,대파"
+        },
+        {
+            "recipeName": "계란 라면(다진마늘추가)",
+            "ingredient": "물,스프,라면사리,계란,다진마늘"
+        },
+        {
+            "recipeName": "계란 라면(대파,다진마늘추가)",
+            "ingredient": "물,스프,라면사리,계란,다진마늘,대파"
+        },
+        {
+            "recipeName": "떡라면",
+            "ingredient": "물,스프,라면사리,떡"
+        },
+        {
+            "recipeName": "떡라면(대파추가)",
+            "ingredient": "물,스프,라면사리,떡,대파"
+        },
+        {
+            "recipeName": "떡라면(대파추가)",
+            "ingredient": "물,스프,라면사리,떡,대파"
+        },
+        {
+            "recipeName": "떡라면(대파,다진마늘 추가)",
+            "ingredient": "물,스프,라면사리,떡,대파,다진마늘"
+        }
+    ],
+    "livestocks": [
+        {
+            "livestockName": "닭",
+            "amount": 0,
+            "maxIngredientCount": 3
+        },
+        {
+            "livestockName": "젖소",
+            "amount": 0,
+            "maxIngredientCount": 3
+        },
+        {
+            "livestockName": "돼지",
+            "amount": 0,
+            "maxIngredientCount": 3
+        }
+    ]
+}
