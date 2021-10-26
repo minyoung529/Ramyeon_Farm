@@ -89,6 +89,19 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            foreach(Ingredient igd in user.ingredients)
+            {
+                igd.amount++;
+            }
+
+            UIManager.UpdateIngredientPanel();
+        }
+    }
+
     public void SetCurrentIngredient(Ingredient ingredient)
     {
         currentIngredient = ingredient;
