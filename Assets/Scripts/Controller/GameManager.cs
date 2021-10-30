@@ -7,8 +7,8 @@ public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] private User user;
     public User CurrentUser { get { return user; } }
-
     public UIManager UIManager { get; private set; }
+    public QuestManager QuestManager { get; private set; }
 
     private string SAVE_PATH = "";
     private readonly string SAVE_FILENAME = "/SaveFile.txt";
@@ -73,6 +73,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         FirstData();
         UIManager = GetComponent<UIManager>();
+        QuestManager = GetComponent<QuestManager>();
         mainCam = Camera.main;
     }
 
@@ -91,9 +92,16 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+//#if DEVELOPMENT_BUILD
+        CheatKey();
+//#endif
+    }
+
+    private void CheatKey()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            foreach(Ingredient igd in user.ingredients)
+            foreach (Ingredient igd in user.ingredients)
             {
                 igd.amount++;
             }

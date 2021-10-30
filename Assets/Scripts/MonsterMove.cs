@@ -13,15 +13,15 @@ public class MonsterMove : MonoBehaviour
     {
         scale = transform.localScale;
         transform.position = GameManager.Instance.doorPosition.position;
-        originPos = transform.position;
+        originPos = transform.localPosition;
         StartCoroutine(GoToCounter());
     }
 
     private IEnumerator GoToCounter()
     {
-        transform.DOMove(GameManager.Instance.doorPosition.position, 1f);
+        transform.DOLocalMove(GameManager.Instance.doorPosition.localPosition, 1f);
         yield return new WaitForSeconds(1f);
-        transform.DOMove(GameManager.Instance.counterPosition.position, 2f);
+        transform.DOLocalMove(GameManager.Instance.counterPosition.localPosition, 2f);
         transform.DOScale(scale * 2f, 2f);
         yield return new WaitForSeconds(2f);
         GameManager.Instance.UIManager.ShowUpSpeechBubble();

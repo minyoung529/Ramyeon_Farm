@@ -31,7 +31,6 @@ public class LivestockManager : MonoBehaviour
             {
                 if (ingredients[j].state == IngredientState.meat)
                 {
-                    Debug.Log(ingredients[j].name);
                     count = j + 1;
                     GameManager.Instance.CurrentUser.livestocks[i].SetIngredient(ingredients[j]);
                     break;

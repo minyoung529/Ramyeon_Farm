@@ -6,6 +6,9 @@ using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
+    #region 텍스트
+    [SerializeField] private Text moneyText;
+    #endregion
     #region ContentPanels
     [SerializeField] private GameObject ingredientPanelObj;
     private List<IngredientPanel> ingredientPanels = new List<IngredientPanel>();
@@ -14,6 +17,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject fieldPanelObj;
     private List<FieldPanel> fieldPanels = new List<FieldPanel>();
 
+    [SerializeField] private GameObject questPanelObj;
+    private List<PanelBase> questPanels = new List<PanelBase>();
     private bool isContentMove;
     #endregion
     #region ScreenMoving
@@ -32,12 +37,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image speechBubble;
     #endregion
 
-
     private void Awake()
     {
         screenWidth = Screen.width;
         distanceX = Mathf.Abs(distanceTransform.position.x) * 2f;
         distanceY = Mathf.Abs(distanceTransform.position.y) * 2f;
+    }
+
+    public void UpdatePanel()
+    {
+        moneyText.text = string.Format("{0}원", GameManager.Instance.CurrentUser.GetMoney());
     }
 
     void Start()
@@ -51,6 +60,8 @@ public class UIManager : MonoBehaviour
 
         InstantiateIngredientPanel();
         InstantiateFarmPanel(fieldPanelObj, IngredientState.vegetable);
+
+        InstantiatePanel(GameManager.Instance.CurrentUser.questList.Count, questPanelObj, questPanels);
     }
 
     #region InstnatiateUIPanel
@@ -66,7 +77,6 @@ public class UIManager : MonoBehaviour
 
         ingredientPanelObj.SetActive(false);
     }
-
     public void InstantiateFarmPanel(GameObject template, IngredientState state)
     {
         List<Ingredient> ingredients = GameManager.Instance.CurrentUser.ingredients;
@@ -84,6 +94,19 @@ public class UIManager : MonoBehaviour
 
         template.SetActive(false);
     }
+    public void InstantiatePanel(int count, GameObject template, List<PanelBase> panels)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            GameObject obj = Instantiate(template, template.transform.parent);
+            PanelBase panel = obj.GetComponent<PanelBase>();
+            panel.SetValue(i);
+            panels.Add(panel);
+        }
+
+        template.SetActive(false);
+    }
+
     #endregion
 
     #region RefreshData

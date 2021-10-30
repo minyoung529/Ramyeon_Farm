@@ -144,5 +144,25 @@
             "amount": 0,
             "maxIngredientCount": 3
         }
+    ],
+    "questList": [
+        {
+            "questName": "손님 10번 받기",
+            "maxValue": 10,
+            "rewardType": 0,
+            "reward": 0
+        },
+        {
+            "questName": "수입 500",
+            "maxValue": 10,
+            "rewardType": 0,
+            "reward": 0
+        },
+        {
+            "questName": "플레이 시간",
+            "maxValue": 1000,
+            "rewardType": 0,
+            "reward": 0
+        }
     ]
 }

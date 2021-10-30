@@ -58,7 +58,6 @@ public class LivestockObject : MonoBehaviour
     public void SetValue(Livestock livestock, float distanceX, float distanceY)
     {
         this.livestock = livestock;
-        Debug.Log(distanceX + ", " + distanceY);
         maxDistanceX = distanceX;
         maxDistanceY = distanceY;
     }
