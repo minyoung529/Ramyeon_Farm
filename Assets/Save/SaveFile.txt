@@ -150,7 +150,7 @@
             "questName": "손님 10번 받기",
             "maxValue": 10,
             "rewardType": 0,
-            "reward": 0,
+            "reward": 100,
             "ingredientName": "",
             "isPerform": false,
             "isRewarded": false
@@ -182,5 +182,6 @@
             "isPerform": false,
             "isRewarded": false
         }
-    ]
+    ],
+    "userDate": "20211031"
 }

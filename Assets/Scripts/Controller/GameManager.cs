@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -54,6 +55,8 @@ public class GameManager : MonoSingleton<GameManager>
 
         else
         {
+            CurrentUser.SetUserData(DateTime.Now.ToString("yyyyMMdd"));
+
             SaveToJson();
             LoadFromJson();
         }
@@ -84,7 +87,7 @@ public class GameManager : MonoSingleton<GameManager>
             user.recipes[i].SetList();
         }
 
-        for(int i = 0; i<user.ingredients.Count;i++)
+        for (int i = 0; i < user.ingredients.Count; i++)
         {
             user.ingredients[i].SetIndex(i);
         }
@@ -92,9 +95,9 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Update()
     {
-//#if DEVELOPMENT_BUILD
+        //#if DEVELOPMENT_BUILD
         CheatKey();
-//#endif
+        //#endif
     }
 
     private void CheatKey()
@@ -107,6 +110,14 @@ public class GameManager : MonoSingleton<GameManager>
             }
 
             UIManager.UpdateIngredientPanel();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            foreach(Quest quest in user.questList)
+            {
+                quest.AddCurrentValue(1);
+            }
         }
     }
 

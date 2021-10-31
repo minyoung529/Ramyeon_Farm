@@ -15,6 +15,8 @@ public class QuestPanel : PanelBase
     [SerializeField] private Image questRewardImage;
     private Text questRewardText;
 
+    [SerializeField] private Image lockImage;
+
     private Slider questSlider;
     private Text sliderText;
 
@@ -48,14 +50,17 @@ public class QuestPanel : PanelBase
         questSlider.value = quest.GetCurValue();
         sliderText.text = string.Format("{0} / {1}", quest.GetCurValue(), quest.maxValue);
 
-        if (quest.isPerform)
+        if (quest.isPerform && !quest.isRewarded)
+        {
+            questRewardButtonImage.color = Color.green;
+        }
+
+        else
         {
             questRewardButtonImage.color = Color.gray;
         }
-        else
-        {
-            questRewardButtonImage.color = Color.white;
-        }
+
+        lockImage.gameObject.SetActive(quest.isRewarded);
     }
 
     //보상 버튼에 넣어줄 함수
@@ -87,5 +92,7 @@ public class QuestPanel : PanelBase
         }
 
         quest.isRewarded = true;
+
+        UpdateUI();
     }
 }

@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
         distanceY = Mathf.Abs(distanceTransform.position.y) * 2f;
     }
 
-    public void UpdatePanel()
+    public void UpdateMoneyText()
     {
         moneyText.text = string.Format("{0}¿ø", GameManager.Instance.CurrentUser.GetMoney());
     }

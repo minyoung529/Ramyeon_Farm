@@ -1,3 +1,4 @@
+using UnityEngine;
 
 /* 퀘스트 베이스,
 이걸 가지고 User에서 리스트로 만들어서 관리
@@ -30,6 +31,7 @@ public class Quest
     public void SetCurrentValue(int curVal)
     {
         currentValue = curVal;
+        currentValue = Mathf.Clamp(currentValue, 0, maxValue);
         CheckQuest();
     }
 
@@ -37,6 +39,7 @@ public class Quest
     public void AddCurrentValue(int curVal)
     {
         currentValue += curVal;
+        currentValue = Mathf.Clamp(currentValue, 0, maxValue);
         CheckQuest();
     }
 
@@ -54,5 +57,12 @@ public class Quest
         {
             isPerform = true;
         }
+    }
+
+    public void ResetQuest()
+    {
+        currentValue = 0;
+        isRewarded = false;
+        isPerform = false;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,9 +13,18 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private int levelUpQuest;
     [SerializeField] private int timeQuest;
 
+
     void Start()
     {
+        if(GameManager.Instance.CurrentUser.GetUserData() != DateTime.Now.ToString("yyyyMMdd"))
+        {
+            foreach(Quest quest in GameManager.Instance.CurrentUser.questList)
+            {
+                quest.ResetQuest();
+            }
+        }
 
+        GameManager.Instance.CurrentUser.SetUserData(DateTime.Now.ToString("yyyyMMdd"));
     }
 
     private void Update()
