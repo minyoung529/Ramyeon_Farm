@@ -31,7 +31,6 @@ public class LivestockObject : MonoBehaviour
             GameObject obj = InstantiateOrPooling();
 
             livestockProduct = obj.GetComponent<LivestockProduct>();
-            Debug.Log(livestockProduct);
             livestockProduct.SetLiveStock(this);
 
             obj.transform.localPosition = new Vector2(Random.Range(-maxDistanceX * 0.4f, maxDistanceX * 0.4f), Random.Range(-maxDistanceY * 0.4f, maxDistanceY * 0.4f));
@@ -57,6 +56,7 @@ public class LivestockObject : MonoBehaviour
 
     public void SetValue(Livestock livestock, float distanceX, float distanceY)
     {
+        Debug.Log("sdf");
         this.livestock = livestock;
         maxDistanceX = distanceX;
         maxDistanceY = distanceY;

@@ -6,9 +6,9 @@ using UnityEngine.EventSystems;
 
 public class WandMove : MonoBehaviour, IBeginDragHandler, IDragHandler
 {
-
     private RectTransform lever;
     private RectTransform rectTransform;
+
     [SerializeField] float leverRange = 10f;
     [SerializeField] Text maxCountText;
     [SerializeField] int maxCount;

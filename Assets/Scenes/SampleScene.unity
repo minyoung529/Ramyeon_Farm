@@ -1669,7 +1669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4708,7 +4708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5383,14 +5383,30 @@ MonoBehaviour:
       maxValue: 10
       rewardType: 0
       reward: 0
-    - questName: "\uC218\uC785 500"
-      maxValue: 500
+      ingredientName: 
+      isPerform: 0
+      isRewarded: 0
+    - questName: "\uBBF8\uB2C8\uAC8C\uC784 \uB355\uD6C4"
+      maxValue: 3
       rewardType: 0
       reward: 0
-    - questName: "\uD50C\uB808\uC774 \uC2DC\uAC04"
+      ingredientName: 
+      isPerform: 0
+      isRewarded: 0
+    - questName: "\uB808\uBCA8 \uC5C5!"
       maxValue: 1000
       rewardType: 0
       reward: 0
+      ingredientName: 
+      isPerform: 0
+      isRewarded: 0
+    - questName: "\uB098\uB294\uC57C \uC601\uC5C5\uC655!"
+      maxValue: 1000
+      rewardType: 0
+      reward: 0
+      ingredientName: 
+      isPerform: 0
+      isRewarded: 0
   doorPosition: {fileID: 184975314}
   counterPosition: {fileID: 1435943213}
   ingredientContainerSprites:
@@ -5461,6 +5477,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee6dc9483f2c00d48804afadcd0b7506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guestQuest: 0
+  miniGameQuest: 1
+  levelUpQuest: 2
+  timeQuest: 3
 --- !u!1 &1324711296
 GameObject:
   m_ObjectHideFlags: 0
@@ -6918,11 +6938,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1555304184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad6621da24b9a054bb55a697776974e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 5edf1e25ec0723141a3e25f6db14cc22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   questNameText: {fileID: 549534727}
-  questRewardText: {fileID: 1703626299}
+  rewardButton: {fileID: 859871264}
+  questRewardImage: {fileID: 936813008}
 --- !u!1 &1559724438
 GameObject:
   m_ObjectHideFlags: 0
@@ -6966,7 +6987,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1559724438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd0f8fe147b57b84abff8a2893175952, type: 3}
+  m_Script: {fileID: 11500000, guid: 44d647ad7bbf824449e3dfb2c6fb9347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1565677207
@@ -8372,7 +8393,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -8386,7 +8407,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1118662369}
   m_HandleRect: {fileID: 0}

@@ -117,6 +117,14 @@ public class UIManager : MonoBehaviour
             panel.UpdateData();
         }
     }
+
+    public void UpdateQuestPanel()
+    {
+        foreach(PanelBase panel in questPanels)
+        {
+            panel.UpdateUI();
+        }
+    }
     #endregion
 
     #region Guest

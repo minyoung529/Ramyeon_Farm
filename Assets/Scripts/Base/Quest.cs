@@ -18,23 +18,41 @@ public class Quest
 
     //보상 변수
     public int reward;
+    public string ingredientName;
 
+    //보상을 받을 수 있을 때 활성화되는 불값
     public bool isPerform;
+
+    //보상을 다 받았을 때 활성화되는 불값
+    public bool isRewarded;
 
     //currentValue 설정해주는 함수
     public void SetCurrentValue(int curVal)
     {
         currentValue = curVal;
+        CheckQuest();
     }
 
     //currentValue를 인수만큼 더해주는 함수
     public void AddCurrentValue(int curVal)
     {
         currentValue += curVal;
+        CheckQuest();
     }
 
     public int GetCurValue()
     {
         return currentValue;
+    }
+
+    //퀘스트 조건 확인해주는 함수
+    private void CheckQuest()
+    {
+        GameManager.Instance.UIManager.UpdateQuestPanel();
+
+        if (currentValue >= maxValue)
+        {
+            isPerform = true;
+        }
     }
 }

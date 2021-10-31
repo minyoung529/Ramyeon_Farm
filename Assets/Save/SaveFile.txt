@@ -150,19 +150,37 @@
             "questName": "손님 10번 받기",
             "maxValue": 10,
             "rewardType": 0,
-            "reward": 0
+            "reward": 0,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
         },
         {
-            "questName": "수입 500",
-            "maxValue": 10,
+            "questName": "미니게임 덕후",
+            "maxValue": 3,
             "rewardType": 0,
-            "reward": 0
+            "reward": 0,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
         },
         {
-            "questName": "플레이 시간",
+            "questName": "레벨 업!",
             "maxValue": 1000,
             "rewardType": 0,
-            "reward": 0
+            "reward": 0,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
+        },
+        {
+            "questName": "나는야 영업왕!",
+            "maxValue": 1000,
+            "rewardType": 0,
+            "reward": 0,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
         }
     ]
 }

@@ -203,4 +203,9 @@ public class GameManager : MonoSingleton<GameManager>
     {
         return currentRecipe;
     }
+
+    private void OnApplicationQuit()
+    {
+        SaveToJson();
+    }
 }
