@@ -8,6 +8,7 @@ public class QuestPanel : PanelBase
     private Quest quest;
 
     [SerializeField] private Text questNameText;
+    [SerializeField] private Text questInfoText;
 
     [SerializeField] private Button rewardButton;
     private Image questRewardButtonImage;
@@ -19,6 +20,8 @@ public class QuestPanel : PanelBase
 
     private Slider questSlider;
     private Text sliderText;
+
+    private int index;
 
     private void Awake()
     {
@@ -37,6 +40,7 @@ public class QuestPanel : PanelBase
     // 퀘스트 값 넣어주는 함수
     public override void SetValue(int index)
     {
+        this.index = index;
         quest = GameManager.Instance.CurrentUser.questList[index];
         questSlider.maxValue = quest.maxValue;
         UpdateUI();
@@ -45,13 +49,20 @@ public class QuestPanel : PanelBase
     // UI 업데이트해주는 함수
     public override void UpdateUI()
     {
+        quest = GameManager.Instance.CurrentUser.questList[index];
+
         questNameText.text = quest.questName;
         questRewardText.text = quest.reward.ToString();
         questSlider.value = quest.GetCurValue();
         sliderText.text = string.Format("{0} / {1}", quest.GetCurValue(), quest.maxValue);
+        questInfoText.text = quest.info;
 
-        if (quest.isPerform && !quest.isRewarded)
+        questSlider.gameObject.SetActive(!quest.isRewarded);
+        rewardButton.gameObject.SetActive(!quest.isRewarded);
+
+        if (quest.isPerform)
         {
+            Debug.Log("여기 안 가?");
             questRewardButtonImage.color = Color.green;
         }
 
@@ -71,7 +82,7 @@ public class QuestPanel : PanelBase
 
         Reward();
     }
-    
+
     // 직접 보상을 받는 함수
     private void Reward()
     {
@@ -80,7 +91,7 @@ public class QuestPanel : PanelBase
             GameManager.Instance.CurrentUser.AddUserMoney(quest.reward);
         }
 
-        else if(quest.rewardType == RewardType.ingredient)
+        else if (quest.rewardType == RewardType.ingredient)
         {
             Ingredient ingredient = GameManager.Instance.CurrentUser.ingredients.Find(x => x.name == quest.ingredientName);
             ingredient.amount += quest.reward;

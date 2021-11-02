@@ -51,6 +51,9 @@ public class QuestManager : MonoBehaviour
                 quest.ResetQuest();
             }
 
+            GameManager.Instance.CurrentUser.CheckCurrentQuest();
+
+            GameManager.Instance.UIManager.ResetQuestPanelData();
             GameManager.Instance.CurrentUser.SetUserTimeSpan(nowTimeSpan);
         }
     }

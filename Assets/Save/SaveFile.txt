@@ -1,5 +1,5 @@
 ﻿{
-    "money": 0,
+    "money": 1000,
     "ingredients": [
         {
             "name": "라면사리",
@@ -148,6 +148,7 @@
     "questList": [
         {
             "questName": "손님 10번 받기",
+            "info": "",
             "maxValue": 10,
             "currentValue": 0,
             "rewardType": 0,
@@ -158,6 +159,7 @@
         },
         {
             "questName": "미니게임 덕후",
+            "info": "",
             "maxValue": 3,
             "currentValue": 0,
             "rewardType": 0,
@@ -168,6 +170,7 @@
         },
         {
             "questName": "평점이 좋은 가게",
+            "info": "",
             "maxValue": 1000,
             "currentValue": 0,
             "rewardType": 0,
@@ -178,16 +181,18 @@
         },
         {
             "questName": "나는야 영업왕",
+            "info": "",
             "maxValue": 1000,
-            "currentValue": 8,
+            "currentValue": 1000,
             "rewardType": 0,
             "reward": 1000,
             "ingredientName": "",
-            "isPerform": false,
+            "isPerform": true,
             "isRewarded": false
         },
         {
             "questName": "나는야 요리사",
+            "info": "",
             "maxValue": 15,
             "currentValue": 0,
             "rewardType": 0,
@@ -198,6 +203,7 @@
         },
         {
             "questName": "돈이 들어온다",
+            "info": "",
             "maxValue": 10000,
             "currentValue": 0,
             "rewardType": 0,
@@ -208,6 +214,7 @@
         },
         {
             "questName": "나는야 농사꾼",
+            "info": "",
             "maxValue": 10,
             "currentValue": 0,
             "rewardType": 0,

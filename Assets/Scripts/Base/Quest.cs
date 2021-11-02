@@ -9,6 +9,7 @@ public class Quest
 {
     //퀘스트 이름
     public string questName;
+    public string info;
     //curVal == maxVal일 때 퀘스트 달성
     public int maxValue;
     public int currentValue = 0;

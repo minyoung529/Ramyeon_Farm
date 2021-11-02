@@ -163,6 +163,14 @@ public class UIManager : MonoBehaviour
             panel.UpdateUI();
         }
     }
+
+    public void ResetQuestPanelData()
+    {
+        for (int i = 0; i < GameManager.Instance.CurrentUser.questIndex.Length; i++)
+        {
+            questPanels[i].SetValue(GameManager.Instance.CurrentUser.questIndex[i]);
+        }
+    }
     #endregion
 
     #region Guest
