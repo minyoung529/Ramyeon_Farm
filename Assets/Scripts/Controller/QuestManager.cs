@@ -8,25 +8,19 @@ public class QuestManager : MonoBehaviour
     private float maxTime = 1f;
     private float curTime = 0f;
 
-    [SerializeField] private int guestQuest;
-    [SerializeField] private int miniGameQuest;
-    [SerializeField] private int levelUpQuest;
-    [SerializeField] private int timeQuest;
+    public int guestQuest;
+    public int miniGameQuest;
+    public int starQuest;
+    public int timeQuest;
+    public int cookQuest;
+    public int moneyQuest;
+    public int farmQuest;
 
 
-    void Start()
+    private void Start()
     {
-        if(GameManager.Instance.CurrentUser.GetUserData() != DateTime.Now.ToString("yyyyMMdd"))
-        {
-            foreach(Quest quest in GameManager.Instance.CurrentUser.questList)
-            {
-                quest.ResetQuest();
-            }
-        }
-
-        GameManager.Instance.CurrentUser.SetUserData(DateTime.Now.ToString("yyyyMMdd"));
+        CheckNextDay();
     }
-
     private void Update()
     {
         if (GameManager.Instance.CurrentUser.questList[timeQuest].isPerform) return;
@@ -36,8 +30,40 @@ public class QuestManager : MonoBehaviour
 
         if (curTime > maxTime)
         {
-            GameManager.Instance.CurrentUser.questList[timeQuest].AddCurrentValue(1);
+            AddQuestValue(timeQuest, 1);
             curTime = 0;
         }
+    }
+
+    public void AddQuestValue(int index, int value)
+    {
+        GameManager.Instance.CurrentUser.questList[index].AddCurrentValue(value);
+    }
+
+    public void CheckNextDay()
+    {
+        TimeSpan nowTimeSpan = GameManager.Instance.ReturnNowTimeSpan();
+
+        if (GameManager.Instance.CurrentUser.GetUserTimeSpan() < nowTimeSpan.Days)
+        {
+            foreach (Quest quest in GameManager.Instance.CurrentUser.questList)
+            {
+                quest.ResetQuest();
+            }
+
+            GameManager.Instance.CurrentUser.SetUserTimeSpan(nowTimeSpan);
+        }
+    }
+
+    public bool GetNextDay()
+    {
+        TimeSpan nowTimeSpan = GameManager.Instance.ReturnNowTimeSpan();
+
+        if (GameManager.Instance.CurrentUser.GetUserTimeSpan() < nowTimeSpan.Days)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

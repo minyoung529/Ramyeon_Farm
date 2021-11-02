@@ -1,15 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+using Random = UnityEngine.Random;
+
 public class UIManager : MonoBehaviour
 {
     #region 텍스트
+    [Header("텍스트")]
     [SerializeField] private Text moneyText;
+    [SerializeField] private Text questTimeText;
     #endregion
     #region ContentPanels
+    [Header("패널")]
     [SerializeField] private GameObject ingredientPanelObj;
     private List<IngredientPanel> ingredientPanels = new List<IngredientPanel>();
     private float ingredientPanelWidth;
@@ -22,6 +28,7 @@ public class UIManager : MonoBehaviour
     private bool isContentMove;
     #endregion
     #region ScreenMoving
+    [Header("스크린 무빙")]
     [SerializeField] private List<GameObject> stagesUI;
     [SerializeField] private List<GameObject> stagesObj;
     [SerializeField] Transform distanceTransform;
@@ -33,15 +40,35 @@ public class UIManager : MonoBehaviour
     private float distanceY;
     #endregion
     #region Guest
+    [Header("손님")]
     [SerializeField] private Text guestText;
     [SerializeField] private Image speechBubble;
     #endregion
+
+    float currenTime = 0f;
 
     private void Awake()
     {
         screenWidth = Screen.width;
         distanceX = Mathf.Abs(distanceTransform.position.x) * 2f;
         distanceY = Mathf.Abs(distanceTransform.position.y) * 2f;
+    }
+
+    private void Update()
+    {
+        currenTime += Time.deltaTime;
+
+        if (currenTime > 1f)
+        {
+            QuestTimeText();
+            currenTime = 0f;
+        }
+    }
+
+    public void QuestTimeText()
+    {
+        GameManager.Instance.QuestManager.CheckNextDay();
+        questTimeText.text = string.Format("{0}시간 {1}분 {2}초", (24 - DateTime.Now.Hour), (60 - DateTime.Now.Minute), (60 - DateTime.Now.Second));
     }
 
     public void UpdateMoneyText()
@@ -61,7 +88,7 @@ public class UIManager : MonoBehaviour
         InstantiateIngredientPanel();
         InstantiateFarmPanel(fieldPanelObj, IngredientState.vegetable);
 
-        InstantiatePanel(GameManager.Instance.CurrentUser.questList.Count, questPanelObj, questPanels);
+        InstantiatePanel(3, questPanelObj, questPanels);
     }
 
     #region InstnatiateUIPanel
@@ -96,10 +123,24 @@ public class UIManager : MonoBehaviour
     }
     public void InstantiatePanel(int count, GameObject template, List<PanelBase> panels)
     {
+
         for (int i = 0; i < count; i++)
         {
             GameObject obj = Instantiate(template, template.transform.parent);
             PanelBase panel = obj.GetComponent<PanelBase>();
+
+            #region Quest
+            
+            if (panels == questPanels)
+            {
+
+                //questIndex[i] = randomIndex;
+                //panel.SetValue(randomIndex);
+                //panels.Add(panel);
+                continue;
+            }
+            #endregion
+
             panel.SetValue(i);
             panels.Add(panel);
         }
@@ -112,7 +153,7 @@ public class UIManager : MonoBehaviour
     #region RefreshData
     public void UpdateIngredientPanel()
     {
-        foreach(IngredientPanel panel in ingredientPanels)
+        foreach (IngredientPanel panel in ingredientPanels)
         {
             panel.UpdateData();
         }
@@ -120,7 +161,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateQuestPanel()
     {
-        foreach(PanelBase panel in questPanels)
+        foreach (PanelBase panel in questPanels)
         {
             panel.UpdateUI();
         }
@@ -133,6 +174,11 @@ public class UIManager : MonoBehaviour
         speechBubble.transform.DOScale(0f, 0f);
         RandomOrder();
         speechBubble.transform.DOScale(1f, 0.3f);
+    }
+
+    public void OnClickAccept()
+    {
+        GameManager.Instance.QuestManager.AddQuestValue(GameManager.Instance.QuestManager.guestQuest, 1);
     }
 
     private void RandomOrder()
@@ -168,6 +214,29 @@ public class UIManager : MonoBehaviour
         {
             guestText.text = "뭘 먹으라고 준거야!! 당장 신고야!!";
         }
+    }
+
+    private bool CheckCurrentQuest(int index)
+    {
+        if (GameManager.Instance.QuestManager.GetNextDay()) return false;
+
+        int[] questIndex = GameManager.Instance.CurrentUser.questIndex;
+        int randomIndex = Random.Range(0, GameManager.Instance.CurrentUser.questList.Count);
+
+        for (int j = 0; j < questIndex.Length; j++)
+        {
+            if (questIndex[j] == randomIndex)
+            {
+                randomIndex = Random.Range(0, GameManager.Instance.CurrentUser.questList.Count);
+                j = 0;
+            }
+
+            else
+            { }
+            questIndex[j] = randomIndex;
+        }
+
+        return false;
     }
     #endregion
 

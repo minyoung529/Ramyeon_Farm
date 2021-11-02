@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,10 @@ public class User
     public List<Quest> questList = new List<Quest>();
 
     [SerializeField] private string userDate;
+
+    [SerializeField] private long userTimeSpan;
+    public int[] questIndex = new int[3];
+
 
     //돈 더해주는 함수, 매개변수에 - 하면 빠짐
     public void AddUserMoney(int addMoney)
@@ -40,5 +45,15 @@ public class User
     public void SetUserData(string data)
     {
         userDate = data;
+    }
+
+    public long GetUserTimeSpan()
+    {
+        return userTimeSpan;
+    }
+
+    public void SetUserTimeSpan(TimeSpan timeSpan)
+    {
+        userTimeSpan = timeSpan.Days;
     }
 }

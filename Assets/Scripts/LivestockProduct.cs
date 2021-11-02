@@ -28,6 +28,7 @@ public class LivestockProduct : MonoBehaviour
         ingredient = GameManager.Instance.CurrentUser.ingredients.Find(x => x.GetIndex() == livestock.GetIngredient().GetIndex());
         ingredient.AddAmount(1);
         GameManager.Instance.UIManager.UpdateIngredientPanel();
+        GameManager.Instance.QuestManager.AddQuestValue(GameManager.Instance.QuestManager.farmQuest, 1);
         Despawn();
     }
 

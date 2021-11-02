@@ -159,29 +159,57 @@
             "questName": "미니게임 덕후",
             "maxValue": 3,
             "rewardType": 0,
-            "reward": 0,
+            "reward": 1000,
             "ingredientName": "",
             "isPerform": false,
             "isRewarded": false
         },
         {
-            "questName": "레벨 업!",
+            "questName": "평점이 좋은 가게",
             "maxValue": 1000,
             "rewardType": 0,
-            "reward": 0,
+            "reward": 1000,
             "ingredientName": "",
             "isPerform": false,
             "isRewarded": false
         },
         {
-            "questName": "나는야 영업왕!",
+            "questName": "나는야 영업왕",
             "maxValue": 1000,
             "rewardType": 0,
-            "reward": 0,
+            "reward": 1000,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
+        },
+        {
+            "questName": "나는야 요리사",
+            "maxValue": 15,
+            "rewardType": 0,
+            "reward": 1000,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
+        },
+        {
+            "questName": "돈이 들어온다",
+            "maxValue": 10,
+            "rewardType": 0,
+            "reward": 10000,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
+        },
+        {
+            "questName": "나는야 농사꾼",
+            "maxValue": 10,
+            "rewardType": 0,
+            "reward": 1000,
             "ingredientName": "",
             "isPerform": false,
             "isRewarded": false
         }
     ],
-    "userDate": "20211031"
+    "userDate": "",
+    "userTimeSpan": 18933
 }

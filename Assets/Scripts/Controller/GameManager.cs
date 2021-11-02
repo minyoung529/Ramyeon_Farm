@@ -55,10 +55,10 @@ public class GameManager : MonoSingleton<GameManager>
 
         else
         {
-            CurrentUser.SetUserData(DateTime.Now.ToString("yyyyMMdd"));
-
             SaveToJson();
             LoadFromJson();
+
+            user.SetUserTimeSpan(ReturnNowTimeSpan());
         }
     }
 
@@ -218,5 +218,13 @@ public class GameManager : MonoSingleton<GameManager>
     private void OnApplicationQuit()
     {
         SaveToJson();
+    }
+
+    public TimeSpan ReturnNowTimeSpan()
+    {
+        DateTime now = DateTime.Now;
+        TimeSpan span = (now - new DateTime(1970, 1, 1, 0, 0, 0).ToLocalTime());
+
+        return span;
     }
 }
