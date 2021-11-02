@@ -91,6 +91,8 @@ public class GameManager : MonoSingleton<GameManager>
         {
             user.ingredients[i].SetIndex(i);
         }
+
+        user.CheckCurrentQuest();
     }
 
     private void Update()

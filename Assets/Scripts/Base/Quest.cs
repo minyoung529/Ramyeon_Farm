@@ -9,10 +9,9 @@ public class Quest
 {
     //퀘스트 이름
     public string questName;
-
     //curVal == maxVal일 때 퀘스트 달성
     public int maxValue;
-    int currentValue = 0;
+    public int currentValue = 0;
 
     // 리워드 타입(돈, 재료, 가구 등)
     public RewardType rewardType;

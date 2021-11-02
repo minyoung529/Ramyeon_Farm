@@ -19,7 +19,7 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
-        CheckNextDay();
+        ResetQuest();
     }
     private void Update()
     {
@@ -40,7 +40,7 @@ public class QuestManager : MonoBehaviour
         GameManager.Instance.CurrentUser.questList[index].AddCurrentValue(value);
     }
 
-    public void CheckNextDay()
+    public void ResetQuest()
     {
         TimeSpan nowTimeSpan = GameManager.Instance.ReturnNowTimeSpan();
 
@@ -55,7 +55,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public bool GetNextDay()
+    public bool IsNextDay()
     {
         TimeSpan nowTimeSpan = GameManager.Instance.ReturnNowTimeSpan();
 

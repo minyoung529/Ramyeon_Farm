@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+using Random = UnityEngine.Random;
+
+[Serializable]
 public class User
 {
     [SerializeField] private long money;
@@ -55,5 +57,30 @@ public class User
     public void SetUserTimeSpan(TimeSpan timeSpan)
     {
         userTimeSpan = timeSpan.Days;
+    }
+
+    public void CheckCurrentQuest()
+    {
+        if (GameManager.Instance.QuestManager.IsNextDay() || IsSame())
+        {
+            for (int i = 0; i < questIndex.Length; i++)
+            {
+                questIndex[i] = Random.Range(0, GameManager.Instance.CurrentUser.questList.Count);
+
+                for (int j = 0; j < i; j++)
+                {
+                    if (questIndex[i] == questIndex[j])
+                    {
+                        i--;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private bool IsSame()
+    {
+        return (questIndex[0] == questIndex[1]) && (questIndex[1] == questIndex[2]) && (questIndex[0] == questIndex[2]);
     }
 }

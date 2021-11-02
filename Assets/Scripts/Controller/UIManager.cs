@@ -67,7 +67,7 @@ public class UIManager : MonoBehaviour
 
     public void QuestTimeText()
     {
-        GameManager.Instance.QuestManager.CheckNextDay();
+        GameManager.Instance.QuestManager.ResetQuest();
         questTimeText.text = string.Format("{0}시간 {1}분 {2}초", (24 - DateTime.Now.Hour), (60 - DateTime.Now.Minute), (60 - DateTime.Now.Second));
     }
 
@@ -123,20 +123,17 @@ public class UIManager : MonoBehaviour
     }
     public void InstantiatePanel(int count, GameObject template, List<PanelBase> panels)
     {
-
         for (int i = 0; i < count; i++)
         {
             GameObject obj = Instantiate(template, template.transform.parent);
             PanelBase panel = obj.GetComponent<PanelBase>();
 
             #region Quest
-            
             if (panels == questPanels)
             {
-
-                //questIndex[i] = randomIndex;
-                //panel.SetValue(randomIndex);
-                //panels.Add(panel);
+                GameManager.Instance.CurrentUser.CheckCurrentQuest();
+                panel.SetValue(GameManager.Instance.CurrentUser.questIndex[i]);
+                panels.Add(panel);
                 continue;
             }
             #endregion
@@ -216,28 +213,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private bool CheckCurrentQuest(int index)
-    {
-        if (GameManager.Instance.QuestManager.GetNextDay()) return false;
-
-        int[] questIndex = GameManager.Instance.CurrentUser.questIndex;
-        int randomIndex = Random.Range(0, GameManager.Instance.CurrentUser.questList.Count);
-
-        for (int j = 0; j < questIndex.Length; j++)
-        {
-            if (questIndex[j] == randomIndex)
-            {
-                randomIndex = Random.Range(0, GameManager.Instance.CurrentUser.questList.Count);
-                j = 0;
-            }
-
-            else
-            { }
-            questIndex[j] = randomIndex;
-        }
-
-        return false;
-    }
     #endregion
 
     #region MoveScreen
