@@ -18,7 +18,7 @@ public class QuestPanel : PanelBase
 
     [SerializeField] private Image lockImage;
 
-    private Slider questSlider;
+    [SerializeField] private Slider questSlider;
     private Text sliderText;
 
     private int index;
@@ -27,7 +27,6 @@ public class QuestPanel : PanelBase
     {
         //GetComponentInChildren => 자신 포함 자식 중에 해당 컴포넌트를 가져옴
         questRewardText = rewardButton.GetComponentInChildren<Text>();
-        questSlider = GetComponentInChildren<Slider>();
         sliderText = questSlider.GetComponentInChildren<Text>();
 
         questRewardButtonImage = rewardButton.GetComponent<Image>();
@@ -49,6 +48,7 @@ public class QuestPanel : PanelBase
     // UI 업데이트해주는 함수
     public override void UpdateUI()
     {
+        Debug.Log("d");
         questNameText.text = quest.questName;
         questRewardText.text = quest.reward.ToString();
         questSlider.value = quest.GetCurValue();

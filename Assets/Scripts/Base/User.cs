@@ -61,30 +61,39 @@ public class User
 
     public void CheckCurrentQuest()
     {
-        int rand = 0;
-        if (GameManager.Instance.QuestManager.IsNextDay() || IsSame())
-        {
-            for (int i = 0; i < KeyManager.QUEST_COUNT; i++)
-            {
-                rand = Random.Range(0, GameManager.Instance.QuestManager.GetQuestList().Count);
+        if (!GameManager.Instance.QuestManager.IsNextDay() && !IsSame()) return;
 
-                for (int j = 0; j < i; j++)
+        int rand;
+        List<Quest> quests = GameManager.Instance.QuestManager.GetQuestList();
+
+        for (int i = 0; i < KeyManager.QUEST_COUNT; i++)
+        {
+            rand = Random.Range(0, quests.Count);
+            questList[i] = quests[rand];
+        }
+
+        for (int i = 0; i < KeyManager.QUEST_COUNT;)
+        {
+            for (int j = 0; j < quests.Count; j++)
+            {
+                if (questList[i].questName == quests[j].questName && i != j)
                 {
-                    if (questList[i].questName == questList[j].questName)
-                    {
-                        i--;
-                        break;
-                    }
+                    rand = Random.Range(0, quests.Count);
+                    questList[i] = quests[rand];
+                    break;
                 }
 
-                questList[i] = GameManager.Instance.QuestManager.GetQuestList()[rand];
+                else if (j == quests.Count - 1)
+                {
+                    i++;
+                }
             }
         }
     }
 
     private bool IsSame()
     {
-        return (questList[0].questName == questList[1].questName) && 
+        return (questList[0].questName == questList[1].questName) &&
             (questList[1].questName == questList[2].questName) &&
             (questList[2].questName == questList[0].questName);
     }

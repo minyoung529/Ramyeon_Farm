@@ -31,9 +31,6 @@ public class QuestManager : MonoBehaviour
     }
     private void Update()
     {
-        //if (GameManager.Instance.CurrentUser.questList[timeQuest].isPerform) return;
-        //if (GameManager.Instance.CurrentUser.questList[timeQuest].isRewarded) return;
-
         curTime += Time.deltaTime;
 
         if (curTime > maxTime)
@@ -47,7 +44,9 @@ public class QuestManager : MonoBehaviour
     {
         if (Check())
         {
-            GameManager.Instance.CurrentUser.questList[GetIndex(index)].AddCurrentValue(value);
+            int index_ = GetIndex(index);
+            if (index_ < 0) return;
+            GameManager.Instance.CurrentUser.questList[index_].AddCurrentValue(value);
         }
     }
 
@@ -58,7 +57,9 @@ public class QuestManager : MonoBehaviour
             for (int j = 0; j < KeyManager.QUEST_COUNT; j++)
             {
                 if (i == GameManager.Instance.CurrentUser.questList[j].index)
+                {
                     return true;
+                }
             }
         }
 
@@ -90,9 +91,13 @@ public class QuestManager : MonoBehaviour
             GameManager.Instance.CurrentUser.CheckCurrentQuest();
 
             GameManager.Instance.UIManager.ResetQuestPanelData();
+            GameManager.Instance.UIManager.UpdateQuestPanel();
+
             GameManager.Instance.CurrentUser.SetUserTimeSpan(nowTimeSpan);
         }
     }
+
+
 
     public bool IsNextDay()
     {
@@ -100,6 +105,9 @@ public class QuestManager : MonoBehaviour
 
         if (GameManager.Instance.CurrentUser.GetUserTimeSpan() < nowTimeSpan.Days)
         {
+            Debug.Log(GameManager.Instance.CurrentUser.GetUserTimeSpan());
+            Debug.Log(nowTimeSpan.Days);
+            GameManager.Instance.CurrentUser.SetUserTimeSpan(nowTimeSpan);
             return true;
         }
 

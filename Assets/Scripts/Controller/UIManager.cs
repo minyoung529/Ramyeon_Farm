@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour
     public void QuestTimeText()
     {
         GameManager.Instance.QuestManager.ResetQuest();
-        questTimeText.text = string.Format("{0}시간 {1}분 {2}초", (24 - DateTime.Now.Hour), (60 - DateTime.Now.Minute), (60 - DateTime.Now.Second));
+        questTimeText.text = string.Format("{0}시간 {1}분 {2}초", (23 - DateTime.Now.Hour), (60 - DateTime.Now.Minute), (60 - DateTime.Now.Second));
     }
 
     public void UpdateMoneyText()
@@ -123,6 +123,8 @@ public class UIManager : MonoBehaviour
     }
     public void InstantiatePanel(int count, GameObject template, List<PanelBase> panels)
     {
+        GameManager.Instance.CurrentUser.CheckCurrentQuest();
+
         for (int i = 0; i < count; i++)
         {
             GameObject obj = Instantiate(template, template.transform.parent);
@@ -131,7 +133,6 @@ public class UIManager : MonoBehaviour
             #region Quest
             if (panels == questPanels)
             {
-                GameManager.Instance.CurrentUser.CheckCurrentQuest();
                 panel.SetValue(GameManager.Instance.CurrentUser.questList[i].index);
                 panels.Add(panel);
                 continue;
@@ -156,6 +157,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            UpdateQuestPanel();
+        }
+    }
     public void UpdateQuestPanel()
     {
         foreach (PanelBase panel in questPanels)

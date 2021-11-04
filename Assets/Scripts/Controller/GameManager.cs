@@ -94,8 +94,6 @@ public class GameManager : MonoSingleton<GameManager>
         {
             user.ingredients[i].SetIndex(i);
         }
-
-        user.CheckCurrentQuest();
     }
 
     private void Update()
@@ -227,9 +225,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public TimeSpan ReturnNowTimeSpan()
     {
-        DateTime now = DateTime.Now;
-        TimeSpan span = (now - new DateTime(1970, 1, 1, 0, 0, 0).ToLocalTime());
-
+        TimeSpan span = (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0).ToLocalTime());
         return span;
     }
 
