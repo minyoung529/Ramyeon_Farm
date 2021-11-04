@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
+    [SerializeField] private List<Quest> questList = new List<Quest>();
+
     private float maxTime = 1f;
     private float curTime = 0f;
 
@@ -16,15 +18,21 @@ public class QuestManager : MonoBehaviour
     public int moneyQuest;
     public int farmQuest;
 
-
+    private void Awake()
+    {
+        for (int i = 0; i < questList.Count; i++)
+        {
+            questList[i].index = i;
+        }
+    }
     private void Start()
     {
         ResetQuest();
     }
     private void Update()
     {
-        if (GameManager.Instance.CurrentUser.questList[timeQuest].isPerform) return;
-        if (GameManager.Instance.CurrentUser.questList[timeQuest].isRewarded) return;
+        //if (GameManager.Instance.CurrentUser.questList[timeQuest].isPerform) return;
+        //if (GameManager.Instance.CurrentUser.questList[timeQuest].isRewarded) return;
 
         curTime += Time.deltaTime;
 
@@ -37,7 +45,35 @@ public class QuestManager : MonoBehaviour
 
     public void AddQuestValue(int index, int value)
     {
-        GameManager.Instance.CurrentUser.questList[index].AddCurrentValue(value);
+        if (Check())
+        {
+            GameManager.Instance.CurrentUser.questList[GetIndex(index)].AddCurrentValue(value);
+        }
+    }
+
+    private bool Check()
+    {
+        for (int i = 0; i < GameManager.Instance.QuestManager.questList.Count; i++)
+        {
+            for (int j = 0; j < KeyManager.QUEST_COUNT; j++)
+            {
+                if (i == GameManager.Instance.CurrentUser.questList[j].index)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    public int GetIndex(int index)
+    {
+        for (int i = 0; i < KeyManager.QUEST_COUNT; i++)
+        {
+            if (GameManager.Instance.CurrentUser.questList[i].index == index)
+                return i;
+        }
+
+        return -1;
     }
 
     public void ResetQuest()
@@ -68,5 +104,10 @@ public class QuestManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public List<Quest> GetQuestList()
+    {
+        return questList;
     }
 }

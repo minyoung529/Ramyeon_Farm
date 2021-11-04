@@ -20,6 +20,9 @@ public class GameManager : MonoSingleton<GameManager>
     private List<Ingredient> currentRamen = new List<Ingredient>();
     private Recipe currentRecipe;
 
+    [SerializeField]
+    private List<Recipe> recipes = new List<Recipe>();
+
     public Sprite[] ingredientContainerSprites;
     public Sprite[] ingredientSprites;
 
@@ -82,9 +85,9 @@ public class GameManager : MonoSingleton<GameManager>
 
     void Start()
     {
-        for (int i = 0; i < user.recipes.Count; i++)
+        for (int i = 0; i < recipes.Count; i++)
         {
-            user.recipes[i].SetList();
+            recipes[i].SetList();
         }
 
         for (int i = 0; i < user.ingredients.Count; i++)
@@ -169,7 +172,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public float EvaluateRamen(string recipeName)
     {
-        Recipe recipe = user.recipes.Find(x => x.recipeName == recipeName);
+        Recipe recipe = recipes.Find(x => x.recipeName == recipeName);
 
         List<int> checkList = new List<int>();
 
@@ -228,5 +231,10 @@ public class GameManager : MonoSingleton<GameManager>
         TimeSpan span = (now - new DateTime(1970, 1, 1, 0, 0, 0).ToLocalTime());
 
         return span;
+    }
+
+    public List<Recipe> GetRecipes()
+    {
+        return recipes;
     }
 }

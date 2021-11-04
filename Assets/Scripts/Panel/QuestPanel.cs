@@ -41,7 +41,7 @@ public class QuestPanel : PanelBase
     public override void SetValue(int index)
     {
         this.index = index;
-        quest = GameManager.Instance.CurrentUser.questList[index];
+        quest = GameManager.Instance.CurrentUser.questList[GameManager.Instance.QuestManager.GetIndex(index)];
         questSlider.maxValue = quest.maxValue;
         UpdateUI();
     }
@@ -49,8 +49,6 @@ public class QuestPanel : PanelBase
     // UI 업데이트해주는 함수
     public override void UpdateUI()
     {
-        quest = GameManager.Instance.CurrentUser.questList[index];
-
         questNameText.text = quest.questName;
         questRewardText.text = quest.reward.ToString();
         questSlider.value = quest.GetCurValue();
@@ -60,9 +58,8 @@ public class QuestPanel : PanelBase
         questSlider.gameObject.SetActive(!quest.isRewarded);
         rewardButton.gameObject.SetActive(!quest.isRewarded);
 
-        if (quest.isPerform)
+        if (quest.isPerform && !quest.isRewarded)
         {
-            Debug.Log("여기 안 가?");
             questRewardButtonImage.color = Color.green;
         }
 

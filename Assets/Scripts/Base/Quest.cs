@@ -7,6 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class Quest
 {
+    public int index;
     //퀘스트 이름
     public string questName;
     public string info;

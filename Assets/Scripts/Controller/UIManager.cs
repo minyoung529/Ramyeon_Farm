@@ -88,7 +88,7 @@ public class UIManager : MonoBehaviour
         InstantiateIngredientPanel();
         InstantiateFarmPanel(fieldPanelObj, IngredientState.vegetable);
 
-        InstantiatePanel(3, questPanelObj, questPanels);
+        InstantiatePanel(KeyManager.QUEST_COUNT, questPanelObj, questPanels);
     }
 
     #region InstnatiateUIPanel
@@ -132,7 +132,7 @@ public class UIManager : MonoBehaviour
             if (panels == questPanels)
             {
                 GameManager.Instance.CurrentUser.CheckCurrentQuest();
-                panel.SetValue(GameManager.Instance.CurrentUser.questIndex[i]);
+                panel.SetValue(GameManager.Instance.CurrentUser.questList[i].index);
                 panels.Add(panel);
                 continue;
             }
@@ -166,9 +166,9 @@ public class UIManager : MonoBehaviour
 
     public void ResetQuestPanelData()
     {
-        for (int i = 0; i < GameManager.Instance.CurrentUser.questIndex.Length; i++)
+        for (int i = 0; i < KeyManager.QUEST_COUNT; i++)
         {
-            questPanels[i].SetValue(GameManager.Instance.CurrentUser.questIndex[i]);
+            questPanels[i].SetValue(GameManager.Instance.CurrentUser.questList[i].index);
         }
     }
     #endregion
@@ -188,7 +188,7 @@ public class UIManager : MonoBehaviour
 
     private void RandomOrder()
     {
-        List<Recipe> recipes = GameManager.Instance.CurrentUser.recipes;
+        List<Recipe> recipes = GameManager.Instance.GetRecipes();
         Recipe recipe = recipes[Random.Range(0, recipes.Count)];
         GameManager.Instance.SetCurrentRecipe(recipe);
         guestText.text = string.Format("{0}이 땡기는 날인데...", recipe.recipeName);

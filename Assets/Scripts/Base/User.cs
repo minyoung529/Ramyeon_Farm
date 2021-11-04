@@ -10,14 +10,14 @@ public class User
 {
     [SerializeField] private long money;
     public List<Ingredient> ingredients = new List<Ingredient>();
-    public List<Recipe> recipes = new List<Recipe>();
     public List<Livestock> livestocks = new List<Livestock>();
-    public List<Quest> questList = new List<Quest>();
+    //public List<Quest> questList = new List<Quest>();
+    public Quest[] questList = new Quest[KeyManager.QUEST_COUNT];
 
     [SerializeField] private string userDate;
 
     [SerializeField] private long userTimeSpan;
-    public int[] questIndex = new int[3];
+    //public int[] questIndex = new int[3];
 
 
     //돈 더해주는 함수, 매개변수에 - 하면 빠짐
@@ -61,26 +61,31 @@ public class User
 
     public void CheckCurrentQuest()
     {
+        int rand = 0;
         if (GameManager.Instance.QuestManager.IsNextDay() || IsSame())
         {
-            for (int i = 0; i < questIndex.Length; i++)
+            for (int i = 0; i < KeyManager.QUEST_COUNT; i++)
             {
-                questIndex[i] = Random.Range(0, GameManager.Instance.CurrentUser.questList.Count);
+                rand = Random.Range(0, GameManager.Instance.QuestManager.GetQuestList().Count);
 
                 for (int j = 0; j < i; j++)
                 {
-                    if (questIndex[i] == questIndex[j])
+                    if (questList[i].questName == questList[j].questName)
                     {
                         i--;
                         break;
                     }
                 }
+
+                questList[i] = GameManager.Instance.QuestManager.GetQuestList()[rand];
             }
         }
     }
 
     private bool IsSame()
     {
-        return (questIndex[0] == questIndex[1]) && (questIndex[1] == questIndex[2]) && (questIndex[0] == questIndex[2]);
+        return (questList[0].questName == questList[1].questName) && 
+            (questList[1].questName == questList[2].questName) &&
+            (questList[2].questName == questList[0].questName);
     }
 }
