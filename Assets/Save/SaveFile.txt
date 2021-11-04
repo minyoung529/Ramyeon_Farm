@@ -1,0 +1,134 @@
+﻿{
+    "money": 0,
+    "ingredients": [
+        {
+            "name": "라면사리",
+            "amount": 0,
+            "isHaving": false,
+            "state": 0
+        },
+        {
+            "name": "스프",
+            "amount": 0,
+            "isHaving": false,
+            "state": 0
+        },
+        {
+            "name": "물",
+            "amount": 0,
+            "isHaving": false,
+            "state": 0
+        },
+        {
+            "name": "대파",
+            "amount": 0,
+            "isHaving": false,
+            "state": 1
+        },
+        {
+            "name": "다진마늘",
+            "amount": 0,
+            "isHaving": false,
+            "state": 1
+        },
+        {
+            "name": "계란",
+            "amount": 0,
+            "isHaving": false,
+            "state": 2
+        },
+        {
+            "name": "청양고추",
+            "amount": 0,
+            "isHaving": false,
+            "state": 1
+        },
+        {
+            "name": "고춧가루",
+            "amount": 0,
+            "isHaving": false,
+            "state": 4
+        },
+        {
+            "name": "치즈",
+            "amount": 0,
+            "isHaving": false,
+            "state": 2
+        },
+        {
+            "name": "떡",
+            "amount": 0,
+            "isHaving": false,
+            "state": 4
+        },
+        {
+            "name": "돼지고기",
+            "amount": 0,
+            "isHaving": false,
+            "state": 2
+        },
+        {
+            "name": "김치",
+            "amount": 0,
+            "isHaving": false,
+            "state": 4
+        }
+    ],
+    "livestocks": [
+        {
+            "livestockName": "닭",
+            "amount": 0,
+            "maxIngredientCount": 3
+        },
+        {
+            "livestockName": "젖소",
+            "amount": 0,
+            "maxIngredientCount": 3
+        },
+        {
+            "livestockName": "돼지",
+            "amount": 0,
+            "maxIngredientCount": 3
+        }
+    ],
+    "questList": [
+        {
+            "index": 0,
+            "questName": "손님 10번 받기",
+            "info": "하루에 손님을 10번 받으세요.",
+            "maxValue": 10,
+            "currentValue": 0,
+            "rewardType": 0,
+            "reward": 100,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
+        },
+        {
+            "index": 1,
+            "questName": "미니게임 덕후",
+            "info": "하루에 미니게임을 3회 참가하세요.",
+            "maxValue": 3,
+            "currentValue": 0,
+            "rewardType": 0,
+            "reward": 1000,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
+        },
+        {
+            "index": 2,
+            "questName": "평점이 좋은 가게",
+            "info": "평점이 7점 이상으로 만드세요.",
+            "maxValue": 7,
+            "currentValue": 0,
+            "rewardType": 0,
+            "reward": 1000,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
+        }
+    ],
+    "userDate": "0",
+    "userTimeSpan": 18935
+}
