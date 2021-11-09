@@ -52,7 +52,7 @@ public class Quest
     //퀘스트 조건 확인해주는 함수
     private void CheckQuest()
     {
-        GameManager.Instance.UIManager.UpdateQuestPanel();
+        GameManager.Instance.UIManager.UpdateQuestPanel(GameManager.Instance.QuestManager.GetQuestListIndex(index));
 
         if (currentValue >= maxValue)
         {

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using Random = UnityEngine.Random;
 
 [Serializable]
@@ -11,13 +10,10 @@ public class User
     [SerializeField] private long money;
     public List<Ingredient> ingredients = new List<Ingredient>();
     public List<Livestock> livestocks = new List<Livestock>();
-    //public List<Quest> questList = new List<Quest>();
     public Quest[] questList = new Quest[KeyManager.QUEST_COUNT];
 
     [SerializeField] private string userDate;
-
     [SerializeField] private long userTimeSpan;
-    //public int[] questIndex = new int[3];
 
 
     //돈 더해주는 함수, 매개변수에 - 하면 빠짐
@@ -74,21 +70,23 @@ public class User
 
         for (int i = 0; i < KeyManager.QUEST_COUNT;)
         {
-            for (int j = 0; j < quests.Count; j++)
+            for (int j = 0; j < KeyManager.QUEST_COUNT; j++)
             {
-                if (questList[i].questName == quests[j].questName && i != j)
+                if (questList[i].questName == questList[j].questName && i != j)
                 {
                     rand = Random.Range(0, quests.Count);
                     questList[i] = quests[rand];
                     break;
                 }
 
-                else if (j == quests.Count - 1)
+                else if (j == KeyManager.QUEST_COUNT - 1)
                 {
                     i++;
                 }
             }
         }
+
+        Debug.Log("갱신");
     }
 
     private bool IsSame()

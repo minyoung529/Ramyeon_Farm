@@ -19,7 +19,7 @@ public class LivestockProduct : MonoBehaviour
     {
         this.livestockObj = livestockObj;
         livestock = livestockObj.GetLivestock();
-        spriteRenderer.sprite = GameManager.Instance.GetIngredientSprite(livestock.GetIngredient().GetIndex());
+        spriteRenderer.sprite = GameManager.Instance.ingredientSprites[livestock.GetIngredient().GetIndex()];
     }
 
     private void OnMouseUp()
@@ -28,7 +28,7 @@ public class LivestockProduct : MonoBehaviour
         ingredient = GameManager.Instance.CurrentUser.ingredients.Find(x => x.GetIndex() == livestock.GetIngredient().GetIndex());
         ingredient.AddAmount(1);
         GameManager.Instance.UIManager.UpdateIngredientPanel();
-        GameManager.Instance.QuestManager.AddQuestValue(GameManager.Instance.QuestManager.farmQuest, 1);
+        GameManager.Instance.QuestManager.AddQuestValue(KeyManager.FARMQUEST_INDEX, 1);
         Despawn();
     }
 

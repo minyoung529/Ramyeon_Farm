@@ -45,7 +45,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             amountText.text = ingredient.amount.ToString();
         }
 
-        image.sprite = GameManager.Instance.GetIngredientContainer(index);
+        image.sprite = GameManager.Instance.ingredientContainerSprites[index];
     }
 
     public void UpdateData()

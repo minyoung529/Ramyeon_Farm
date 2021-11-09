@@ -129,16 +129,6 @@ public class GameManager : MonoSingleton<GameManager>
         currentIngredient = ingredient;
     }
 
-    public Sprite GetIngredientContainer(int index)
-    {
-        return ingredientContainerSprites[index];
-    }
-
-    public Sprite GetIngredientSprite(int index)
-    {
-        return ingredientSprites[index];
-    }
-
     public bool CheckPool(string objName)
     {
         for (int i = 0; i < Pool.childCount; i++)

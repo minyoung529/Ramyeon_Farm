@@ -40,7 +40,7 @@ public class QuestPanel : PanelBase
     public override void SetValue(int index)
     {
         this.index = index;
-        quest = GameManager.Instance.CurrentUser.questList[GameManager.Instance.QuestManager.GetIndex(index)];
+        quest = GameManager.Instance.CurrentUser.questList[GameManager.Instance.QuestManager.GetQuestListIndex(index)];
         questSlider.maxValue = quest.maxValue;
         UpdateUI();
     }
@@ -48,7 +48,6 @@ public class QuestPanel : PanelBase
     // UI 업데이트해주는 함수
     public override void UpdateUI()
     {
-        Debug.Log("d");
         questNameText.text = quest.questName;
         questRewardText.text = quest.reward.ToString();
         questSlider.value = quest.GetCurValue();

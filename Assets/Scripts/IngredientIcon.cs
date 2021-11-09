@@ -18,7 +18,7 @@ public class IngredientIcon : MonoBehaviour
     {
         ingredient = GameManager.Instance.CurrentUser.ingredients[index];
         GameManager.Instance.SetCurrentIngredient(ingredient);
-        spriteRenderer.sprite = GameManager.Instance.GetIngredientSprite(index);
+        spriteRenderer.sprite = GameManager.Instance.ingredientSprites[index];
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

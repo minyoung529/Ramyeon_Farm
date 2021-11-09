@@ -25,6 +25,10 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject questPanelObj;
     private List<PanelBase> questPanels = new List<PanelBase>();
+
+    [SerializeField] private GameObject bookPanelObj;
+    private List<PanelBase> bookPanels = new List<PanelBase>();
+
     private bool isContentMove;
     #endregion
     #region ScreenMoving
@@ -68,7 +72,7 @@ public class UIManager : MonoBehaviour
     public void QuestTimeText()
     {
         GameManager.Instance.QuestManager.ResetQuest();
-        questTimeText.text = string.Format("{0}시간 {1}분 {2}초", (23 - DateTime.Now.Hour), (60 - DateTime.Now.Minute), (60 - DateTime.Now.Second));
+        questTimeText.text = string.Format("{0}시간 {1}분 {2}초", (23 - DateTime.Now.Hour), (59 - DateTime.Now.Minute), (59 - DateTime.Now.Second));
     }
 
     public void UpdateMoneyText()
@@ -87,8 +91,8 @@ public class UIManager : MonoBehaviour
 
         InstantiateIngredientPanel();
         InstantiateFarmPanel(fieldPanelObj, IngredientState.vegetable);
-
         InstantiatePanel(KeyManager.QUEST_COUNT, questPanelObj, questPanels);
+        InstantiatePanel(GameManager.Instance.CurrentUser.ingredients.Count, bookPanelObj, bookPanels);
     }
 
     #region InstnatiateUIPanel
@@ -172,6 +176,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void UpdateQuestPanel(int index)
+    {
+        questPanels[index].UpdateUI();
+    }
+
     public void ResetQuestPanelData()
     {
         for (int i = 0; i < KeyManager.QUEST_COUNT; i++)
@@ -191,7 +200,7 @@ public class UIManager : MonoBehaviour
 
     public void OnClickAccept()
     {
-        GameManager.Instance.QuestManager.AddQuestValue(GameManager.Instance.QuestManager.guestQuest, 1);
+        GameManager.Instance.QuestManager.AddQuestValue(KeyManager.GUESTQUEST_INDEX, 1);
     }
 
     private void RandomOrder()

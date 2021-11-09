@@ -38,7 +38,7 @@ public class FieldPanel : MonoBehaviour
     {
         this.index = index;
         ingredient = GameManager.Instance.CurrentUser.ingredients[index];
-        harvestButtonImage.sprite = GameManager.Instance.GetIngredientSprite(index);
+        harvestButtonImage.sprite = GameManager.Instance.ingredientSprites[index];
     }
 
     public void OnClickField()

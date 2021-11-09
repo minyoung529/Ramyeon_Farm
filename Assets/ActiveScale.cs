@@ -14,6 +14,6 @@ public class ActiveScale : MonoBehaviour
     public void OnEnactive()
     {
         gameObject.SetActive(false);
-        transform.DOScale(0f, 0f);
+        transform.DOScale(new Vector3(0f, 1f, 0f), 0f);
     }
 }

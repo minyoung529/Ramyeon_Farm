@@ -10,14 +10,6 @@ public class QuestManager : MonoBehaviour
     private float maxTime = 1f;
     private float curTime = 0f;
 
-    public int guestQuest;
-    public int miniGameQuest;
-    public int starQuest;
-    public int timeQuest;
-    public int cookQuest;
-    public int moneyQuest;
-    public int farmQuest;
-
     private void Awake()
     {
         for (int i = 0; i < questList.Count; i++)
@@ -35,7 +27,7 @@ public class QuestManager : MonoBehaviour
 
         if (curTime > maxTime)
         {
-            AddQuestValue(timeQuest, 1);
+            AddQuestValue(KeyManager.TIMEQUEST_INDEX, 1);
             curTime = 0;
         }
     }
@@ -44,7 +36,7 @@ public class QuestManager : MonoBehaviour
     {
         if (Check())
         {
-            int index_ = GetIndex(index);
+            int index_ = GetQuestListIndex(index);
             if (index_ < 0) return;
             GameManager.Instance.CurrentUser.questList[index_].AddCurrentValue(value);
         }
@@ -66,7 +58,7 @@ public class QuestManager : MonoBehaviour
         return false;
     }
 
-    public int GetIndex(int index)
+    public int GetQuestListIndex(int index)
     {
         for (int i = 0; i < KeyManager.QUEST_COUNT; i++)
         {
@@ -91,7 +83,6 @@ public class QuestManager : MonoBehaviour
             GameManager.Instance.CurrentUser.CheckCurrentQuest();
 
             GameManager.Instance.UIManager.ResetQuestPanelData();
-            GameManager.Instance.UIManager.UpdateQuestPanel();
 
             GameManager.Instance.CurrentUser.SetUserTimeSpan(nowTimeSpan);
         }
@@ -106,7 +97,6 @@ public class QuestManager : MonoBehaviour
         if (GameManager.Instance.CurrentUser.GetUserTimeSpan() < nowTimeSpan.Days)
         {
             Debug.Log(GameManager.Instance.CurrentUser.GetUserTimeSpan());
-            Debug.Log(nowTimeSpan.Days);
             GameManager.Instance.CurrentUser.SetUserTimeSpan(nowTimeSpan);
             return true;
         }
