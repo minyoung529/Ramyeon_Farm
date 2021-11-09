@@ -117,7 +117,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            foreach(Quest quest in user.questList)
+            foreach (Quest quest in user.questList)
             {
                 quest.AddCurrentValue(1);
             }
@@ -222,5 +222,20 @@ public class GameManager : MonoSingleton<GameManager>
     public List<Recipe> GetRecipes()
     {
         return recipes;
+    }
+
+    public bool IsInCurrentRamen(params string[] ingredients)
+    {
+        for (int i = 0; i < ingredients.Length; i++)
+        {
+            Ingredient igd = currentRamen.Find(x => x.name == ingredients[i]);
+
+            if (igd == null)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

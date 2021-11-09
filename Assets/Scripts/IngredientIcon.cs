@@ -5,19 +5,27 @@ using UnityEngine.EventSystems;
 
 public class IngredientIcon : MonoBehaviour
 {
-    Ingredient ingredient;
-    SpriteRenderer spriteRenderer;
+    private Ingredient ingredient;
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
+
+    private const string AnimationKey = "Index";
+
     public bool isInPot { get; private set; }
+
+    private bool isAnimation;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     public void SetValue(int index)
     {
         ingredient = GameManager.Instance.CurrentUser.ingredients[index];
         GameManager.Instance.SetCurrentIngredient(ingredient);
+        Debug.Log(index);
         spriteRenderer.sprite = GameManager.Instance.ingredientSprites[index];
     }
 
@@ -41,6 +49,20 @@ public class IngredientIcon : MonoBehaviour
         transform.SetParent(GameManager.Instance.Pool);
         GameManager.Instance.SetCurrentIngredient(null);
         isInPot = false;
+        isAnimation = false;
         ingredient = null;
+    }
+
+    private void OnMouseUp()
+    {
+        if (ingredient.state == IngredientState.basic && isAnimation) return;
+
+        isAnimation = true;
+        OnAnimationStart();
+    }
+
+    private void OnAnimationStart()
+    {
+        animator.SetInteger("Index", ingredient.GetIndex());
     }
 }

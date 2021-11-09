@@ -8,6 +8,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 {
     [SerializeField] private GameObject igdIcon;
     [SerializeField] private Text amountText;
+    [SerializeField] private Pot pot;
 
     private Ingredient ingredient;
     private IngredientIcon ingredientIcon;
@@ -81,6 +82,13 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         }
         else
         {
+            if (pot.IsDonPut())
+            {
+                ingredientIcon.Inactive();
+                return;
+            }
+
+            pot.OnIngredientPut(GameManager.Instance.currentIngredient);
             GameManager.Instance.AddCurRanem();
             ingredient.AddAmount(-1);
             GameManager.Instance.UIManager.UpdateIngredientPanel();

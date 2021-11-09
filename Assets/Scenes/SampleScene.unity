@@ -1319,6 +1319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   igdIcon: {fileID: 0}
   amountText: {fileID: 0}
+  pot: {fileID: 0}
 --- !u!1 &243478020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,6 +1411,7 @@ GameObject:
   - component: {fileID: 248317227}
   - component: {fileID: 248317228}
   - component: {fileID: 248317229}
+  - component: {fileID: 248317230}
   m_Layer: 0
   m_Name: IngredientIcon
   m_TagString: Untagged
@@ -1520,6 +1522,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d30559536ba9541ab51f3710559577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &248317230
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248317225}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f71c916b60b1cc04bb10fd577cbc7950, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &302479101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,6 +1593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   igdIcon: {fileID: 248317225}
   amountText: {fileID: 0}
+  pot: {fileID: 1541849374}
 --- !u!114 &302479104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2288,7 +2310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &452907981
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5568,6 +5590,108 @@ MonoBehaviour:
   nameText: {fileID: 569343289}
   infoText: {fileID: 107741760}
   image: {fileID: 731821991}
+--- !u!1 &1106518020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1106518021}
+  - component: {fileID: 1106518024}
+  - component: {fileID: 1106518022}
+  m_Layer: 0
+  m_Name: InPot
+  m_TagString: Pot
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1106518021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106518020}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1541849370}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1106518022
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106518020}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!212 &1106518024
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106518020}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Color: {r: 0.5, g: 0.39331684, b: 0.12924525, a: 0.35686275}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 1
+  m_Size: {x: 0.85, y: 0.85}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1108910225
 GameObject:
   m_ObjectHideFlags: 0
@@ -6267,10 +6391,10 @@ RectTransform:
   m_Father: {fileID: 1784644460}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 525.95, y: -170}
+  m_SizeDelta: {x: 340, y: 340}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1241633287
 MonoBehaviour:
@@ -6691,7 +6815,7 @@ MonoBehaviour:
   - {fileID: -1487846639901739016, guid: 9cf804468203ad541a937e34ca443137, type: 3}
   - {fileID: -8329661860612166517, guid: 9cf804468203ad541a937e34ca443137, type: 3}
   - {fileID: -1519781391214004731, guid: 9cf804468203ad541a937e34ca443137, type: 3}
-  - {fileID: -6690090318788270601, guid: 9cf804468203ad541a937e34ca443137, type: 3}
+  - {fileID: 4646649027328027380, guid: 9b4595adec7c0824fa890e61a6d6ce38, type: 3}
   - {fileID: -7541670493543904985, guid: 9cf804468203ad541a937e34ca443137, type: 3}
   - {fileID: 5148616327105364085, guid: 9cf804468203ad541a937e34ca443137, type: 3}
   - {fileID: -2804774553036113763, guid: 9cf804468203ad541a937e34ca443137, type: 3}
@@ -8319,7 +8443,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.5135, z: 0}
   m_LocalScale: {x: 2.5, y: 2.6000001, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 1106518021}
   m_Father: {fileID: 1118872771}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8364,7 +8489,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.9150943, g: 0.809601, b: 0, a: 1}
+  m_Color: {r: 0.9811321, g: 0.7829028, b: 0.17956562, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -10008,6 +10133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   igdIcon: {fileID: 248317225}
   amountText: {fileID: 456807891}
+  pot: {fileID: 1541849374}
 --- !u!1 &1784644459
 GameObject:
   m_ObjectHideFlags: 0
@@ -10044,7 +10170,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 340}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1784644461
 MonoBehaviour:
@@ -11680,6 +11806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   igdIcon: {fileID: 248317225}
   amountText: {fileID: 0}
+  pot: {fileID: 1541849374}
 --- !u!1 &2037441019
 GameObject:
   m_ObjectHideFlags: 0
@@ -11736,6 +11863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   igdIcon: {fileID: 0}
   amountText: {fileID: 0}
+  pot: {fileID: 0}
 --- !u!114 &2037441022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12031,6 +12159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   igdIcon: {fileID: 248317225}
   amountText: {fileID: 0}
+  pot: {fileID: 1541849374}
 --- !u!1 &2097910773
 GameObject:
   m_ObjectHideFlags: 0
