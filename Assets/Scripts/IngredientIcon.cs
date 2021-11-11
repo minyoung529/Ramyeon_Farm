@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class IngredientIcon : MonoBehaviour
 {
@@ -19,13 +20,13 @@ public class IngredientIcon : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        animator.enabled = false;
     }
 
     public void SetValue(int index)
     {
         ingredient = GameManager.Instance.CurrentUser.ingredients[index];
         GameManager.Instance.SetCurrentIngredient(ingredient);
-        Debug.Log(index);
         spriteRenderer.sprite = GameManager.Instance.ingredientSprites[index];
     }
 
@@ -48,14 +49,22 @@ public class IngredientIcon : MonoBehaviour
         GameManager.Instance.currentIngredientIcon = null;
         transform.SetParent(GameManager.Instance.Pool);
         GameManager.Instance.SetCurrentIngredient(null);
+        animator.SetInteger(AnimationKey, -1);
         isInPot = false;
         isAnimation = false;
+        animator.enabled = false;
+
         ingredient = null;
     }
 
-    private void OnMouseUp()
+    public void OnIngredientUp()
     {
-        if (ingredient.state == IngredientState.basic && isAnimation) return;
+        if (ingredient.state == IngredientState.basic && isAnimation)
+        {
+            return;
+        }
+
+        animator.enabled = true;
 
         isAnimation = true;
         OnAnimationStart();
@@ -63,6 +72,24 @@ public class IngredientIcon : MonoBehaviour
 
     private void OnAnimationStart()
     {
-        animator.SetInteger("Index", ingredient.GetIndex());
+        animator.SetInteger(AnimationKey, ingredient.GetIndex());
+    }
+
+    private void Update()
+    {
+        if(isAnimation)
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.2f)
+            {
+                PutInPot();
+            }
+        }
+    }
+
+    private void PutInPot()
+    {
+        gameObject.SetActive(false);
+        GameManager.Instance.GetPot().InstantiateIngredientInPot(ingredient.GetIndex());
+        Inactive();
     }
 }

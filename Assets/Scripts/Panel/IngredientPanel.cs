@@ -88,6 +88,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 return;
             }
 
+            ingredientIcon.OnIngredientUp();
             pot.OnIngredientPut(GameManager.Instance.currentIngredient);
             GameManager.Instance.AddCurRanem();
             ingredient.AddAmount(-1);

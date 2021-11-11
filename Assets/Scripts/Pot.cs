@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using DG.Tweening;
 
 public class Pot : MonoBehaviour
 {
+    #region constant
     private const string water = "물";
     private const string soup = "스프";
     private const string noodle = "라면사리";
@@ -13,15 +15,21 @@ public class Pot : MonoBehaviour
     private const float soupTime = 2f;
     private const float noodleTime = 4f;
     private const float finishTime = 2f;
+    #endregion
 
+    [SerializeField] private GameObject ingredientInPot;
+
+    private SpriteRenderer boilingWater;
     private Animator animator;
     private List<string> dontPutIngredients = new List<string>();
+    private List<SpriteRenderer> potObjs = new List<SpriteRenderer>();
 
     public bool dontPut { get; private set; }
 
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        boilingWater = transform.GetChild(0).GetComponent<SpriteRenderer>();
         DontPut("라면사리", "스프");
     }
 
@@ -31,11 +39,11 @@ public class Pot : MonoBehaviour
         {
             StartCoroutine(BoilWater());
         }
-        else if(ingredient.name == soup)
+        else if (ingredient.name == soup)
         {
             StartCoroutine(PutSoup());
         }
-        else if(ingredient.name == noodle)
+        else if (ingredient.name == noodle)
         {
             StartCoroutine(PutNoodle());
         }
@@ -60,6 +68,7 @@ public class Pot : MonoBehaviour
             StartCoroutine(Finish());
         }
 
+        boilingWater.DOColor(Color.red, soupTime);
         yield return new WaitForSeconds(soupTime);
 
         Debug.Log("스프 풀어짐");
@@ -93,13 +102,37 @@ public class Pot : MonoBehaviour
     public bool IsDonPut()
     {
         return (dontPutIngredients.Contains(GameManager.Instance.currentIngredient.name));
-        //{
-        //    dontPut = true;
-        //}
+    }
 
-        //else
-        //{
-        //    dontPut = false;
-        //}
+    public void InstantiateIngredientInPot(int index)
+    {
+        GameObject obj;
+        SpriteRenderer spRenderer;
+        if (GameManager.Instance.CheckPool("IngredientInPot"))
+        {
+            obj = GameManager.Instance.ReturnPoolObject("IngredientInPot");
+            obj.transform.SetParent(transform);
+            spRenderer = potObjs.Find(x => x.gameObject == obj);
+        }
+
+        else
+        {
+            obj = Instantiate(ingredientInPot, transform);
+            spRenderer = obj.GetComponent<SpriteRenderer>();
+            potObjs.Add(spRenderer);
+        }
+
+        spRenderer.sprite = GameManager.Instance.ingredientInPotSprites[index];
+        obj.SetActive(true);
+    }
+
+    public void DespawnObjs()
+    {
+        for (int i = 1; i < transform.childCount; i++)
+        {
+            GameObject obj = transform.GetChild(1).gameObject;
+            obj.transform.SetParent(GameManager.Instance.Pool);
+            obj.SetActive(false);
+        }
     }
 }

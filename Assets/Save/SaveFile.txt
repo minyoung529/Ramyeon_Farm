@@ -3,73 +3,73 @@
     "ingredients": [
         {
             "name": "라면사리",
-            "amount": 3,
+            "amount": 25,
             "isHaving": false,
             "state": 0
         },
         {
             "name": "스프",
-            "amount": 4,
+            "amount": 25,
             "isHaving": false,
             "state": 0
         },
         {
             "name": "물",
-            "amount": -2,
+            "amount": 19,
             "isHaving": false,
             "state": 0
         },
         {
             "name": "대파",
-            "amount": 8,
+            "amount": 17,
             "isHaving": false,
             "state": 1
         },
         {
             "name": "다진마늘",
-            "amount": 4,
+            "amount": 19,
             "isHaving": false,
             "state": 1
         },
         {
             "name": "계란",
-            "amount": 6,
+            "amount": 0,
             "isHaving": false,
             "state": 2
         },
         {
             "name": "청양고추",
-            "amount": 10,
+            "amount": 30,
             "isHaving": false,
             "state": 1
         },
         {
             "name": "고춧가루",
-            "amount": 8,
+            "amount": 29,
             "isHaving": false,
             "state": 4
         },
         {
             "name": "치즈",
-            "amount": 9,
+            "amount": 30,
             "isHaving": false,
             "state": 2
         },
         {
             "name": "떡",
-            "amount": 8,
+            "amount": 30,
             "isHaving": false,
             "state": 4
         },
         {
             "name": "돼지고기",
-            "amount": 9,
+            "amount": 31,
             "isHaving": false,
             "state": 2
         },
         {
             "name": "김치",
-            "amount": 8,
+            "amount": 30,
             "isHaving": false,
             "state": 4
         }
@@ -93,30 +93,6 @@
     ],
     "questList": [
         {
-            "index": 6,
-            "questName": "나는야 농사꾼",
-            "info": "작물을 10번 수확하세요.",
-            "maxValue": 10,
-            "currentValue": 3,
-            "rewardType": 0,
-            "reward": 1000,
-            "ingredientName": "",
-            "isPerform": false,
-            "isRewarded": false
-        },
-        {
-            "index": 4,
-            "questName": "나는야 요리사",
-            "info": "요리를 15번 완성하세요.",
-            "maxValue": 15,
-            "currentValue": 0,
-            "rewardType": 0,
-            "reward": 1000,
-            "ingredientName": "",
-            "isPerform": false,
-            "isRewarded": false
-        },
-        {
             "index": 0,
             "questName": "손님 10번 받기",
             "info": "하루에 손님을 10번 받으세요.",
@@ -127,8 +103,32 @@
             "ingredientName": "",
             "isPerform": false,
             "isRewarded": false
+        },
+        {
+            "index": 3,
+            "questName": "나는야 영업왕",
+            "info": "1000초 동안 플레이하세요",
+            "maxValue": 1000,
+            "currentValue": 771,
+            "rewardType": 0,
+            "reward": 1000,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
+        },
+        {
+            "index": 2,
+            "questName": "평점이 좋은 가게",
+            "info": "평점이 7점 이상으로 만드세요.",
+            "maxValue": 7,
+            "currentValue": 0,
+            "rewardType": 0,
+            "reward": 1000,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
         }
     ],
     "userDate": "0",
-    "userTimeSpan": 18940
+    "userTimeSpan": 18942
 }

@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class MonsterMove : MonoBehaviour
 {
-    private float speed = 20f;
     private Vector2 originPos;
     private Vector2 scale;
 

@@ -25,6 +25,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public Sprite[] ingredientContainerSprites;
     public Sprite[] ingredientSprites;
+    public Sprite[] ingredientInPotSprites;
 
     public Camera mainCam { get; private set; }
 
@@ -32,6 +33,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     public IngredientIcon currentIngredientIcon;
     public List<IngredientIcon> ingredientIcons = new List<IngredientIcon>();
+
+    private Pot pot;
 
     #region 데이터 저장
     private void FirstData()
@@ -80,6 +83,7 @@ public class GameManager : MonoSingleton<GameManager>
         FirstData();
         UIManager = GetComponent<UIManager>();
         QuestManager = GetComponent<QuestManager>();
+        pot = FindObjectOfType<Pot>();
         mainCam = Camera.main;
     }
 
@@ -222,6 +226,11 @@ public class GameManager : MonoSingleton<GameManager>
     public List<Recipe> GetRecipes()
     {
         return recipes;
+    }
+
+    public Pot GetPot()
+    {
+        return pot;
     }
 
     public bool IsInCurrentRamen(params string[] ingredients)
