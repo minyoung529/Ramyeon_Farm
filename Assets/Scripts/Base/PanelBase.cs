@@ -7,4 +7,8 @@ public class PanelBase : MonoBehaviour
     public virtual void SetValue(int index) { }
 
     public virtual void UpdateUI() { }
+
+    public virtual void SetState(BookType bookType) { }
+
+    public virtual void OnClick() { }
 }

@@ -7,6 +7,7 @@ public class Ingredient
 {
     public string name;
     public int amount;
+    [TextArea] public string info;
     public bool isHaving;
     public IngredientState state;
     private int index;

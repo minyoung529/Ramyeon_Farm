@@ -92,7 +92,9 @@ public class UIManager : MonoBehaviour
         InstantiateIngredientPanel();
         InstantiateFarmPanel(fieldPanelObj, IngredientState.vegetable);
         InstantiatePanel(KeyManager.QUEST_COUNT, questPanelObj, questPanels);
-        InstantiatePanel(GameManager.Instance.CurrentUser.ingredients.Count, bookPanelObj, bookPanels);
+
+        int max = Mathf.Max(GameManager.Instance.CurrentUser.ingredients.Count, GameManager.Instance.GetRecipes().Count);
+        InstantiatePanel(max, bookPanelObj, bookPanels);
     }
 
     #region InstnatiateUIPanel
@@ -161,21 +163,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            UpdateQuestPanel();
-        }
-    }
-    public void UpdateQuestPanel()
-    {
-        foreach (PanelBase panel in questPanels)
-        {
-            panel.UpdateUI();
-        }
-    }
-
     public void UpdateQuestPanel(int index)
     {
         questPanels[index].UpdateUI();
@@ -187,6 +174,31 @@ public class UIManager : MonoBehaviour
         {
             questPanels[i].SetValue(GameManager.Instance.CurrentUser.questList[i].index);
         }
+    }
+
+    public void UpdateBookPanel(int num)
+    {
+        int count = 0;
+        switch ((BookType)num)
+        {
+            case BookType.Ingredient:
+                count = GameManager.Instance.CurrentUser.ingredients.Count;
+                break;
+            case BookType.Ramen:
+                count = GameManager.Instance.GetRecipes().Count;
+                break;
+            case BookType.Furniture:
+                //count = GameManager.Instance.GetRecipes().Count;
+                break;
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            bookPanels[i].SetState((BookType)num);
+            bookPanels[i].SetValue(i);
+        }
+
+        bookPanels[0].OnClick();
     }
     #endregion
 

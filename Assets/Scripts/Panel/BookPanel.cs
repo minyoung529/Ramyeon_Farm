@@ -20,7 +20,7 @@ public class BookPanel : PanelBase
     private void Start()
     {
         button = GetComponent<Button>();
-        button.onClick.AddListener(() => OnClickContent());
+        button.onClick.AddListener(() => OnClick());
     }
     public override void SetValue(int index)
     {
@@ -28,7 +28,7 @@ public class BookPanel : PanelBase
         SetImage((int)bookType);
     }
 
-    public void SetBookState(BookType type)
+    public override void SetState(BookType type)
     {
         bookType = type;
         SetImage((int)bookType);
@@ -39,12 +39,17 @@ public class BookPanel : PanelBase
         switch (enumValue)
         {
             case 0:
+                if (!ActiveSelf(GameManager.Instance.CurrentUser.ingredients.Count - 1)) return;
+
+                Ingredient igd = GameManager.Instance.CurrentUser.ingredients[index];
                 image.sprite = GameManager.Instance.ingredientSprites[index];
-                contentName = GameManager.Instance.CurrentUser.ingredients[index].name;
-                info = string.Format("재료 {0}", index);
+                contentName = igd.name;
+                info = igd.info;
                 break;
 
             case 1:
+                if (!ActiveSelf(GameManager.Instance.GetRecipes().Count - 1)) return;
+
                 image.sprite = GameManager.Instance.ingredientSprites[0];
                 contentName = string.Format("라면 {0}", index);
                 info = string.Format("라면 {0}", index);
@@ -58,7 +63,20 @@ public class BookPanel : PanelBase
         }
     }
 
-    public void OnClickContent()
+    private bool ActiveSelf(int maxIndex)
+    {
+        if (index > maxIndex - 1)
+        {
+            gameObject.SetActive(false);
+            return false;
+        }
+        else
+        {
+            gameObject.SetActive(true);
+            return true;
+        }
+    }
+    public override void OnClick()
     {
         SelectedBookContent.SetValue((int)bookType, index, contentName, info);
     }

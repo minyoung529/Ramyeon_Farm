@@ -24,6 +24,8 @@ public class Pot : MonoBehaviour
     private List<string> dontPutIngredients = new List<string>();
     private List<SpriteRenderer> potObjs = new List<SpriteRenderer>();
 
+    Color soupColor = new Color32(255, 0, 0, 89);
+
     public bool dontPut { get; private set; }
 
     private void Start()
@@ -53,7 +55,7 @@ public class Pot : MonoBehaviour
     {
         dontPut = true;
         DontPut("라면사리", "스프");
-
+        boilingWater.transform.DOScale(1f, 2f);
         yield return new WaitForSeconds(boilTime);
         Debug.Log("물이 끓음");
 
@@ -68,7 +70,7 @@ public class Pot : MonoBehaviour
             StartCoroutine(Finish());
         }
 
-        boilingWater.DOColor(Color.red, soupTime);
+        boilingWater.DOColor(soupColor, soupTime);
         yield return new WaitForSeconds(soupTime);
 
         Debug.Log("스프 풀어짐");
