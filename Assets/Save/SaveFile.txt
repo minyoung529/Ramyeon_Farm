@@ -133,7 +133,7 @@
             "questName": "나는야 영업왕",
             "info": "1000초 동안 플레이하세요",
             "maxValue": 1000,
-            "currentValue": 315,
+            "currentValue": 438,
             "rewardType": 0,
             "reward": 1000,
             "ingredientName": "",

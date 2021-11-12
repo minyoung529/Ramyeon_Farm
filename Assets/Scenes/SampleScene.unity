@@ -7191,6 +7191,9 @@ MonoBehaviour:
     ingredientName: 
     isPerform: 0
     isRewarded: 0
+  achievementList: []
+  achievementName: {fileID: 4900000, guid: 9a656c3cd4ae38a41a7ea527c8dfb156, type: 3}
+  achievementInfo: {fileID: 4900000, guid: eefd7e584e7bd11418d7bc5f9d52fe20, type: 3}
 --- !u!1 &1283965158
 GameObject:
   m_ObjectHideFlags: 0

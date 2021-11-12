@@ -6,9 +6,15 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
     [SerializeField] private List<Quest> questList = new List<Quest>();
+    [SerializeField] private List<Achievement> achievementList = new List<Achievement>();
+
+    [SerializeField] private TextAsset achievementName;
+    [SerializeField] private TextAsset achievementInfo;
 
     private float maxTime = 1f;
     private float curTime = 0f;
+
+    string d = "{0}æ»≥Á«œººø‰";
 
     private void Awake()
     {
@@ -19,6 +25,7 @@ public class QuestManager : MonoBehaviour
     }
     private void Start()
     {
+        InputAchievementData();
         ResetQuest();
     }
     private void Update()
@@ -108,4 +115,32 @@ public class QuestManager : MonoBehaviour
     {
         return questList;
     }
+
+    private void InputAchievementData()
+    {
+        string[] types = achievementName.ToString().Split('\t', '\n');
+
+        for (int i = 0; i < types.Length / 2; i++)
+        {
+            achievementList.Add(new Achievement(i, int.Parse(types[i * 2]), types[i * 2 + 1]));
+        }
+
+        string[] infos = achievementInfo.ToString().Split('\t', '\n');
+        int increasement = 0;
+        for (int i = 0; i < achievementList.Count; i++)
+        {
+            //1
+            for (int j = 0; j < achievementList[i].achieveCount; j++)
+            {
+                int offset = (increasement + j) * 3;
+                Debug.Log(j);
+                achievementList[i].AddData(infos[offset], int.Parse(infos[offset + 1]), int.Parse(infos[offset + 2]));
+            }
+
+            increasement += achievementList[i].achieveCount;
+        }
+    }
+    // 0 3 6 9 12 15
+    // 1 4 7 10 13
+    // 2 5 8 11 14
 }
