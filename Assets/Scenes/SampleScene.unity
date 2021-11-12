@@ -5843,7 +5843,7 @@ Transform:
   m_GameObject: {fileID: 1106518020}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1541849370}
   m_RootOrder: 0
@@ -6642,10 +6642,10 @@ RectTransform:
   m_Father: {fileID: 1784644460}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 525.95, y: -170}
-  m_SizeDelta: {x: 340, y: 340}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1241633287
 MonoBehaviour:
@@ -7034,33 +7034,7 @@ MonoBehaviour:
     userTimeSpan: 0
   doorPosition: {fileID: 184975314}
   counterPosition: {fileID: 1435943213}
-  recipes:
-  - recipeName: "\uAE30\uBCF8 \uB77C\uBA74"
-    ingredient: "\uBB3C,\uC2A4\uD504,\uB77C\uBA74\uC0AC\uB9AC"
-  - recipeName: "\uB300\uD30C \uB77C\uBA74"
-    ingredient: "\uBB3C,\uC2A4\uD504,\uB77C\uBA74\uC0AC\uB9AC,\uB300\uD30C"
-  - recipeName: "\uB300\uD30C \uB77C\uBA74(\uB300\uD30C\uCD94\uAC00)"
-    ingredient: "\uBB3C,\uC2A4\uD504,\uB77C\uBA74\uC0AC\uB9AC,\uB300\uD30C,\uB300\uD30C"
-  - recipeName: "\uB9C8\uB298 \uB77C\uBA74"
-    ingredient: "\uBB3C,\uC2A4\uD504,\uB77C\uBA74\uC0AC\uB9AC,\uB2E4\uC9C4\uB9C8\uB298"
-  - recipeName: "\uB9C8\uB298 \uB77C\uBA74(\uB9C8\uB298\uCD94\uAC00)"
-    ingredient: "\uBB3C,\uC2A4\uD504,\uB77C\uBA74\uC0AC\uB9AC,\uB2E4\uC9C4\uB9C8\uB298,\uB2E4\uC9C4\uB9C8\uB298"
-  - recipeName: "\uACC4\uB780 \uB77C\uBA74"
-    ingredient: "\uBB3C,\uC2A4\uD504,\uB77C\uBA74\uC0AC\uB9AC,\uACC4\uB780"
-  - recipeName: "\uACC4\uB780 \uB77C\uBA74(\uB300\uD30C\uCD94\uAC00)"
-    ingredient: "\uBB3C,\uC2A4\uD504,\uB77C\uBA74\uC0AC\uB9AC,\uACC4\uB780,\uB300\uD30C"
-  - recipeName: "\uACC4\uB780 \uB77C\uBA74(\uB2E4\uC9C4\uB9C8\uB298\uCD94\uAC00)"
-    ingredient: "\uBB3C,\uC2A4\uD504,\uB77C\uBA74\uC0AC\uB9AC,\uACC4\uB780,\uB2E4\uC9C4\uB9C8\uB298"
-  - recipeName: "\uACC4\uB780 \uB77C\uBA74(\uB300\uD30C,\uB2E4\uC9C4\uB9C8\uB298\uCD94\uAC00)"
-    ingredient: "\uBB3C,\uC2A4\uD504,\uB77C\uBA74\uC0AC\uB9AC,\uACC4\uB780,\uB2E4\uC9C4\uB9C8\uB298,\uB300\uD30C"
-  - recipeName: "\uB5A1\uB77C\uBA74"
-    ingredient: "\uBB3C,\uC2A4\uD504,\uB77C\uBA74\uC0AC\uB9AC,\uB5A1"
-  - recipeName: "\uB5A1\uB77C\uBA74(\uB300\uD30C\uCD94\uAC00)"
-    ingredient: "\uBB3C,\uC2A4\uD504,\uB77C\uBA74\uC0AC\uB9AC,\uB5A1,\uB300\uD30C"
-  - recipeName: "\uB5A1\uB77C\uBA74(\uB300\uD30C\uCD94\uAC00)"
-    ingredient: "\uBB3C,\uC2A4\uD504,\uB77C\uBA74\uC0AC\uB9AC,\uB5A1,\uB300\uD30C"
-  - recipeName: "\uB5A1\uB77C\uBA74(\uB300\uD30C,\uB2E4\uC9C4\uB9C8\uB298 \uCD94\uAC00)"
-    ingredient: "\uBB3C,\uC2A4\uD504,\uB77C\uBA74\uC0AC\uB9AC,\uB5A1,\uB300\uD30C,\uB2E4\uC9C4\uB9C8\uB298"
+  recipes: []
   ingredientContainerSprites:
   - {fileID: -7576874432042752839, guid: 9cf804468203ad541a937e34ca443137, type: 3}
   - {fileID: -2432301806248295829, guid: 9cf804468203ad541a937e34ca443137, type: 3}
@@ -7103,6 +7077,8 @@ MonoBehaviour:
   Pool: {fileID: 1166096065}
   currentIngredientIcon: {fileID: 0}
   ingredientIcons: []
+  recipeNameText: {fileID: 4900000, guid: 18cdf1a6a6631204f985c831c49d2849, type: 3}
+  recipeIngredientText: {fileID: 4900000, guid: 04109e3590bc58448ba141a6b8156a76, type: 3}
 --- !u!114 &1275244967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9095,9 +9071,9 @@ RectTransform:
   m_Father: {fileID: 1124922375}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 466.55002, y: -146.4}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 966, y: 292.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1555304186
@@ -10443,9 +10419,9 @@ RectTransform:
   m_Father: {fileID: 40943379}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 213.95001, y: -175.45}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 427.90002, y: 350.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1779889872

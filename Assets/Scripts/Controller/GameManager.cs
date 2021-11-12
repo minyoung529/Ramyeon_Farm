@@ -36,6 +36,9 @@ public class GameManager : MonoSingleton<GameManager>
 
     private Pot pot;
 
+    [SerializeField] TextAsset recipeNameText;
+    [SerializeField] TextAsset recipeIngredientText;
+
     #region 데이터 저장
     private void FirstData()
     {
@@ -81,6 +84,8 @@ public class GameManager : MonoSingleton<GameManager>
     private void Awake()
     {
         FirstData();
+        InputData();
+
         UIManager = GetComponent<UIManager>();
         QuestManager = GetComponent<QuestManager>();
         pot = FindObjectOfType<Pot>();
@@ -89,11 +94,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     void Start()
     {
-        for (int i = 0; i < recipes.Count; i++)
-        {
-            recipes[i].SetList();
-        }
-
         for (int i = 0; i < user.ingredients.Count; i++)
         {
             user.ingredients[i].SetIndex(i);
@@ -246,5 +246,16 @@ public class GameManager : MonoSingleton<GameManager>
         }
 
         return true;
+    }
+
+    private void InputData()
+    {
+        string[] names = recipeNameText.ToString().Split('\n');
+        string[] ingredients = recipeIngredientText.ToString().Split('\n');
+
+        for (int i = 0; i < names.Length; i++)
+        {
+            recipes.Add(new Recipe(names[i], ingredients[i]));
+        }
     }
 }

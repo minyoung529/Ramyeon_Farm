@@ -19,4 +19,12 @@ public class Recipe
     {
         return ingredientList;
     }
+
+    public Recipe(string recipeName_, string ingredient_)
+    {
+        recipeName = recipeName_;
+        ingredient = ingredient_;
+
+        SetList();
+    }
 }
