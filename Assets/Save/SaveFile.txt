@@ -1,0 +1,168 @@
+﻿{
+    "money": 0,
+    "ingredients": [
+        {
+            "name": "라면사리",
+            "amount": 0,
+            "info": "바삭바삭한 라면사리.",
+            "isHaving": false,
+            "state": 0
+        },
+        {
+            "name": "스프",
+            "amount": 0,
+            "info": "짭쪼름한 라면스프. 조금 맵다.",
+            "isHaving": false,
+            "state": 0
+        },
+        {
+            "name": "물",
+            "amount": 0,
+            "info": "농장에서 갓 퍼온 신선한 물.",
+            "isHaving": false,
+            "state": 0
+        },
+        {
+            "name": "대파",
+            "amount": 0,
+            "info": "농장에서 뽑아온 신선한 팔딱팔딱 대파.",
+            "isHaving": false,
+            "state": 1
+        },
+        {
+            "name": "다진마늘",
+            "amount": 0,
+            "info": "한국인이라면 못참는 마늘",
+            "isHaving": false,
+            "state": 1
+        },
+        {
+            "name": "계란",
+            "amount": 0,
+            "info": "너 없는 내 삶은... 계란...",
+            "isHaving": false,
+            "state": 2
+        },
+        {
+            "name": "청양고추",
+            "amount": 0,
+            "info": "맵찔이는 못먹는 청양고추",
+            "isHaving": false,
+            "state": 1
+        },
+        {
+            "name": "고춧가루",
+            "amount": 0,
+            "info": "청양고추로 만든 고운 고춧가루",
+            "isHaving": false,
+            "state": 4
+        },
+        {
+            "name": "치즈",
+            "amount": 0,
+            "info": "직접 만든 치즈. 치즈~~",
+            "isHaving": false,
+            "state": 2
+        },
+        {
+            "name": "떡",
+            "amount": 0,
+            "info": "쫄깃쫄깃 탱글탱글 쌀떡",
+            "isHaving": false,
+            "state": 4
+        },
+        {
+            "name": "돼지고기",
+            "amount": 0,
+            "info": "라면이랑 먹으면 정말정말 맛있는 우리 돼지고기",
+            "isHaving": false,
+            "state": 2
+        },
+        {
+            "name": "김치",
+            "amount": 0,
+            "info": "진짜 짱맛있다고 소문난 김치",
+            "isHaving": false,
+            "state": 4
+        }
+    ],
+    "livestocks": [
+        {
+            "livestockName": "닭",
+            "amount": 0,
+            "maxIngredientCount": 3
+        },
+        {
+            "livestockName": "젖소",
+            "amount": 0,
+            "maxIngredientCount": 3
+        },
+        {
+            "livestockName": "돼지",
+            "amount": 0,
+            "maxIngredientCount": 3
+        }
+    ],
+    "questList": [
+        {
+            "index": 1,
+            "questName": "미니게임 덕후",
+            "info": "하루에 미니게임을 3회 참가하세요.",
+            "maxValue": 3,
+            "currentValue": 0,
+            "rewardType": 0,
+            "reward": 1000,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
+        },
+        {
+            "index": 0,
+            "questName": "손님 10번 받기",
+            "info": "하루에 손님을 10번 받으세요.",
+            "maxValue": 10,
+            "currentValue": 0,
+            "rewardType": 0,
+            "reward": 100,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
+        },
+        {
+            "index": 5,
+            "questName": "돈이 들어온다",
+            "info": "하루에 10000골드 이상 버세요.",
+            "maxValue": 10000,
+            "currentValue": 0,
+            "rewardType": 0,
+            "reward": 1000,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
+        }
+    ],
+    "achievementLevel": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "currentAchievement": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "level": 0,
+    "experiencePoint": 0,
+    "userDate": "0",
+    "userTimeSpan": 18944
+}
