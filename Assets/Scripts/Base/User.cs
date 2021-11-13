@@ -12,9 +12,14 @@ public class User
     public List<Livestock> livestocks = new List<Livestock>();
     public Quest[] questList = new Quest[KeyManager.QUEST_COUNT];
 
+    public int[] achievementLevel;
+    public int[] currentAchievement;
+
+    [SerializeField] private int level;
+    [SerializeField] private int experiencePoint;
+
     [SerializeField] private string userDate;
     [SerializeField] private long userTimeSpan;
-
 
     //돈 더해주는 함수, 매개변수에 - 하면 빠짐
     public void AddUserMoney(int addMoney)
@@ -27,32 +32,6 @@ public class User
     {
         this.money = money;
         GameManager.Instance.UIManager.UpdateMoneyText();
-    }
-
-    //돈 가지고 오는 함수
-    public long GetMoney()
-    {
-        return money;
-    }
-
-    public string GetUserData()
-    {
-        return userDate;
-    }
-
-    public void SetUserData(string data)
-    {
-        userDate = data;
-    }
-
-    public long GetUserTimeSpan()
-    {
-        return userTimeSpan;
-    }
-
-    public void SetUserTimeSpan(TimeSpan timeSpan)
-    {
-        userTimeSpan = timeSpan.Days;
     }
 
     public void CheckCurrentQuest()
@@ -85,8 +64,6 @@ public class User
                 }
             }
         }
-
-        Debug.Log("갱신");
     }
 
     private bool IsSame()
@@ -95,4 +72,90 @@ public class User
             (questList[1].questName == questList[2].questName) &&
             (questList[2].questName == questList[0].questName);
     }
+
+    public void PlusCurrentAchievement(int index, int amount)
+    {
+        currentAchievement[index] += amount;
+        GameManager.Instance.UIManager.UpdateAchievementPanel();
+    }
+
+    public void CheckAchievement(int index)
+    {
+        Achievement achievement = GameManager.Instance.QuestManager.GetAchievements()[index];
+
+        for (int i = achievementLevel[index]; i < achievement.achieveCount; i++)
+        {
+            if (currentAchievement[index] >= achievement.conditions[i])
+            {
+                achievementLevel[index] = i + 1;
+                break;
+            }
+        }
+
+        GameManager.Instance.UIManager.UpdateAchievementPanel();
+    }
+
+    public bool IsAchievementReward(int index)
+    {
+        Achievement achievement = GameManager.Instance.QuestManager.GetAchievements()[index];
+
+        for (int i = achievementLevel[index]; i < achievement.achieveCount; i++)
+        {
+            // myLevel: 2   targetLevel: 3
+            // 110           100
+
+            if (currentAchievement[index] >= achievement.conditions[i])
+            {
+                Debug.Log(index + ", " + i);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    #region GetSet
+
+    public long GetMoney()
+    {
+        return money;
+    }
+
+    public string GetUserData()
+    {
+        return userDate;
+    }
+
+    public void SetUserData(string data)
+    {
+        userDate = data;
+    }
+
+    public long GetUserTimeSpan()
+    {
+        return userTimeSpan;
+    }
+
+    public void SetUserTimeSpan(TimeSpan timeSpan)
+    {
+        userTimeSpan = timeSpan.Days;
+    }
+
+    public void SetLevel(int level)
+    {
+        this.level = level;
+    }
+    public int GetLevel()
+    {
+        return level;
+    }
+    public void SetEXP(int exp)
+    {
+        experiencePoint = exp;
+    }
+    public int GetEXP()
+    {
+        return experiencePoint;
+    }
+    #endregion
 }

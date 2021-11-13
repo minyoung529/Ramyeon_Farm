@@ -17,11 +17,16 @@ public class Achievement
         achievementInfo = info;
     }
 
-    public void AddData(string name, int reward, int condition)
+    public void AddData(string name, int condition, int reward)
     {
         achievementNames.Add(name);
         rewards.Add(reward);
         conditions.Add(condition);
+    }
+
+    public void OnClickRewardButton()
+    {
+
     }
 }
 

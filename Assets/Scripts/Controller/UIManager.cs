@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 using Random = UnityEngine.Random;
 
@@ -11,8 +12,15 @@ public class UIManager : MonoBehaviour
 {
     #region 텍스트
     [Header("텍스트")]
-    [SerializeField] private Text moneyText;
     [SerializeField] private Text questTimeText;
+    #endregion
+
+    #region 프로필
+    [SerializeField] private Text moneyText;
+    [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private Image playerProfile;
+    [SerializeField] private Slider levelSlider;
+
     #endregion
     #region ContentPanels
     [Header("패널")]
@@ -28,6 +36,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject bookPanelObj;
     private List<PanelBase> bookPanels = new List<PanelBase>();
+
+    [SerializeField] private GameObject achievementPanelObj;
+    private List<PanelBase> achievementPanels = new List<PanelBase>();
 
     private bool isContentMove;
     #endregion
@@ -54,10 +65,28 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         screenWidth = Screen.width;
+        ingredientPanelWidth = ingredientPanelObj.GetComponent<RectTransform>().sizeDelta.x;
+
         distanceX = Mathf.Abs(distanceTransform.position.x) * 2f;
         distanceY = Mathf.Abs(distanceTransform.position.y) * 2f;
+
+        for (int i = 0; i < stagesObj.Count; i++)
+        {
+            stagesObj[i].transform.position = new Vector2(distanceX * i, 0);
+        }
     }
 
+    void Start()
+    {
+        InstantiateIngredientPanel();
+        InstantiateFarmPanel(fieldPanelObj, IngredientState.vegetable);
+        InstantiatePanel(KeyManager.QUEST_COUNT, questPanelObj, questPanels);
+        InstantiatePanel(GameManager.Instance.QuestManager.GetAchievements().Count, achievementPanelObj, achievementPanels);
+
+        int max = Mathf.Max(GameManager.Instance.CurrentUser.ingredients.Count, GameManager.Instance.GetRecipes().Count);
+        InstantiatePanel(max, bookPanelObj, bookPanels);
+        UpdateMoneyText();
+    }
     private void Update()
     {
         currenTime += Time.deltaTime;
@@ -78,23 +107,6 @@ public class UIManager : MonoBehaviour
     public void UpdateMoneyText()
     {
         moneyText.text = string.Format("{0}원", GameManager.Instance.CurrentUser.GetMoney());
-    }
-
-    void Start()
-    {
-        ingredientPanelWidth = ingredientPanelObj.GetComponent<RectTransform>().sizeDelta.x;
-
-        for (int i = 0; i < stagesObj.Count; i++)
-        {
-            stagesObj[i].transform.position = new Vector2(distanceX * i, 0);
-        }
-
-        InstantiateIngredientPanel();
-        InstantiateFarmPanel(fieldPanelObj, IngredientState.vegetable);
-        InstantiatePanel(KeyManager.QUEST_COUNT, questPanelObj, questPanels);
-
-        int max = Mathf.Max(GameManager.Instance.CurrentUser.ingredients.Count, GameManager.Instance.GetRecipes().Count);
-        InstantiatePanel(max, bookPanelObj, bookPanels);
     }
 
     #region InstnatiateUIPanel
@@ -173,6 +185,14 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < KeyManager.QUEST_COUNT; i++)
         {
             questPanels[i].SetValue(GameManager.Instance.CurrentUser.questList[i].index);
+        }
+    }
+
+    public void UpdateAchievementPanel()
+    {
+        for (int i = 0; i < achievementPanels.Count; i++)
+        {
+            achievementPanels[i].UpdateUI();
         }
     }
 

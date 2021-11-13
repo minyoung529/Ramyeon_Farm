@@ -14,18 +14,17 @@ public class QuestManager : MonoBehaviour
     private float maxTime = 1f;
     private float curTime = 0f;
 
-    string d = "{0}æ»≥Á«œººø‰";
-
     private void Awake()
     {
         for (int i = 0; i < questList.Count; i++)
         {
             questList[i].index = i;
         }
+
+        InputAchievementData();
     }
     private void Start()
     {
-        InputAchievementData();
         ResetQuest();
     }
     private void Update()
@@ -36,6 +35,14 @@ public class QuestManager : MonoBehaviour
         {
             AddQuestValue(KeyManager.TIMEQUEST_INDEX, 1);
             curTime = 0;
+        }
+
+        if (Input.GetKeyUp(KeyCode.K))
+        {
+            for (int i = 0; i < achievementList.Count; i++)
+            {
+                UpdateAchievement((AchievementType)i, 1);
+            }
         }
     }
 
@@ -88,14 +95,10 @@ public class QuestManager : MonoBehaviour
             }
 
             GameManager.Instance.CurrentUser.CheckCurrentQuest();
-
             GameManager.Instance.UIManager.ResetQuestPanelData();
-
             GameManager.Instance.CurrentUser.SetUserTimeSpan(nowTimeSpan);
         }
     }
-
-
 
     public bool IsNextDay()
     {
@@ -111,36 +114,50 @@ public class QuestManager : MonoBehaviour
         return false;
     }
 
-    public List<Quest> GetQuestList()
-    {
-        return questList;
-    }
 
     private void InputAchievementData()
     {
         string[] types = achievementName.ToString().Split('\t', '\n');
-
-        for (int i = 0; i < types.Length / 2; i++)
+        int achieveCnt = types.Length / 2;
+        for (int i = 0; i < achieveCnt; i++)
         {
             achievementList.Add(new Achievement(i, int.Parse(types[i * 2]), types[i * 2 + 1]));
         }
 
         string[] infos = achievementInfo.ToString().Split('\t', '\n');
         int increasement = 0;
+
         for (int i = 0; i < achievementList.Count; i++)
         {
-            //1
             for (int j = 0; j < achievementList[i].achieveCount; j++)
             {
                 int offset = (increasement + j) * 3;
-                Debug.Log(j);
                 achievementList[i].AddData(infos[offset], int.Parse(infos[offset + 1]), int.Parse(infos[offset + 2]));
             }
 
             increasement += achievementList[i].achieveCount;
         }
+
+        if (GameManager.Instance.CurrentUser.currentAchievement.Length == 0)
+        {
+            GameManager.Instance.CurrentUser.achievementLevel = new int[achieveCnt];
+            GameManager.Instance.CurrentUser.currentAchievement = new int[achieveCnt];
+        }
     }
-    // 0 3 6 9 12 15
-    // 1 4 7 10 13
-    // 2 5 8 11 14
+
+    public void UpdateAchievement(AchievementType type, int amount)
+    {
+        GameManager.Instance.CurrentUser.PlusCurrentAchievement((int)type, amount);
+    }
+
+    #region GetSet
+    public List<Quest> GetQuestList()
+    {
+        return questList;
+    }
+    public List<Achievement> GetAchievements()
+    {
+        return achievementList;
+    }
+    #endregion
 }
