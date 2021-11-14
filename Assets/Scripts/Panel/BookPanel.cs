@@ -39,7 +39,7 @@ public class BookPanel : PanelBase
         switch (enumValue)
         {
             case 0:
-                if (!ActiveSelf(GameManager.Instance.CurrentUser.ingredients.Count - 1)) return;
+                if (!ActiveSelf(GameManager.Instance.CurrentUser.ingredients.Count)) return;
 
                 Ingredient igd = GameManager.Instance.CurrentUser.ingredients[index];
                 image.sprite = GameManager.Instance.ingredientSprites[index];
@@ -48,7 +48,7 @@ public class BookPanel : PanelBase
                 break;
 
             case 1:
-                if (!ActiveSelf(GameManager.Instance.GetRecipes().Count - 1)) return;
+                if (!ActiveSelf(GameManager.Instance.GetRecipes().Count)) return;
 
                 image.sprite = GameManager.Instance.ingredientSprites[0];
                 contentName = string.Format("라면 {0}", index);
@@ -67,11 +67,13 @@ public class BookPanel : PanelBase
     {
         if (index > maxIndex - 1)
         {
+            Debug.Log("큰" + index);
             gameObject.SetActive(false);
             return false;
         }
         else
         {
+            Debug.Log("작은" + index);
             gameObject.SetActive(true);
             return true;
         }
