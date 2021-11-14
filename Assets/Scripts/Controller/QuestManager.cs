@@ -125,17 +125,17 @@ public class QuestManager : MonoBehaviour
         }
 
         string[] infos = achievementInfo.ToString().Split('\t', '\n');
-        int increasement = 0;
+        int increment = 0;
 
         for (int i = 0; i < achievementList.Count; i++)
         {
             for (int j = 0; j < achievementList[i].achieveCount; j++)
             {
-                int offset = (increasement + j) * 3;
+                int offset = (increment + j) * 3;
                 achievementList[i].AddData(infos[offset], int.Parse(infos[offset + 1]), int.Parse(infos[offset + 2]));
             }
 
-            increasement += achievementList[i].achieveCount;
+            increment += achievementList[i].achieveCount;
         }
 
         if (GameManager.Instance.CurrentUser.currentAchievement.Length == 0)

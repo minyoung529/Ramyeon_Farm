@@ -117,6 +117,18 @@
             "isRewarded": false
         },
         {
+            "index": 6,
+            "questName": "나는야 농사꾼",
+            "info": "작물을 10번 수확하세요.",
+            "maxValue": 10,
+            "currentValue": 0,
+            "rewardType": 0,
+            "reward": 1000,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
+        },
+        {
             "index": 0,
             "questName": "손님 10번 받기",
             "info": "하루에 손님을 10번 받으세요.",
@@ -124,18 +136,6 @@
             "currentValue": 0,
             "rewardType": 0,
             "reward": 100,
-            "ingredientName": "",
-            "isPerform": false,
-            "isRewarded": false
-        },
-        {
-            "index": 5,
-            "questName": "돈이 들어온다",
-            "info": "하루에 10000골드 이상 버세요.",
-            "maxValue": 10000,
-            "currentValue": 0,
-            "rewardType": 0,
-            "reward": 1000,
             "ingredientName": "",
             "isPerform": false,
             "isRewarded": false
@@ -164,5 +164,5 @@
     "level": 0,
     "experiencePoint": 0,
     "userDate": "0",
-    "userTimeSpan": 18944
+    "userTimeSpan": 18945
 }
