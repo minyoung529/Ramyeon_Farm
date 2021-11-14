@@ -46,7 +46,6 @@ public class IngredientIcon : MonoBehaviour
     public void Inactive()
     {
         gameObject.SetActive(false);
-        GameManager.Instance.currentIngredientIcon = null;
         transform.SetParent(GameManager.Instance.Pool);
         GameManager.Instance.SetCurrentIngredient(null);
         animator.SetInteger(AnimationKey, -1);

@@ -74,17 +74,24 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (ingredient.amount < 1 && ingredient.state != IngredientState.basic) return;
+
+        if (ingredient.amount < 1 && ingredient.state != IngredientState.basic)
+        {
+            GameManager.Instance.currentIngredientIcon = null;
+            return;
+        }
 
         if (!GameManager.Instance.currentIngredientIcon.isInPot)
         {
             ingredientIcon.Inactive();
         }
+
         else
         {
             if (pot.IsDonPut())
             {
                 ingredientIcon.Inactive();
+                GameManager.Instance.currentIngredientIcon = null;
                 return;
             }
 
@@ -94,6 +101,8 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             ingredient.AddAmount(-1);
             GameManager.Instance.UIManager.UpdateIngredientPanel();
         }
+
+        GameManager.Instance.currentIngredientIcon = null;
     }
 
     private void IconInstantiateOrPooling()
@@ -103,14 +112,14 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             icon = GameManager.Instance.ReturnPoolObject("IngredientIcon");
             icon.transform.SetParent(igdIcon.transform.parent);
             ingredientIcon = GameManager.Instance.ingredientIcons.Find(x => x.gameObject == icon.gameObject);
-            SetIcon(index);
         }
 
         else
         {
             InstantiateIcon();
-            SetIcon(index);
         }
+
+        SetIcon(index);
     }
 
     public void FollowIcon()

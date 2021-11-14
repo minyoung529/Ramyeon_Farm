@@ -198,21 +198,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateBookPanel(int num)
     {
-        int count = 0;
-        switch ((BookType)num)
-        {
-            case BookType.Ingredient:
-                count = GameManager.Instance.CurrentUser.ingredients.Count;
-                break;
-            case BookType.Ramen:
-                count = GameManager.Instance.GetRecipes().Count;
-                break;
-            case BookType.Furniture:
-                //count = GameManager.Instance.GetRecipes().Count;
-                break;
-        }
-
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < bookPanels.Count; i++)
         {
             bookPanels[i].SetState((BookType)num);
             bookPanels[i].SetValue(i);
@@ -238,7 +224,8 @@ public class UIManager : MonoBehaviour
     private void RandomOrder()
     {
         List<Recipe> recipes = GameManager.Instance.GetRecipes();
-        Recipe recipe = recipes[Random.Range(0, recipes.Count)];
+        //Recipe recipe = recipes[Random.Range(0, recipes.Count)];
+        Recipe recipe = recipes[0];
         GameManager.Instance.SetCurrentRecipe(recipe);
         guestText.text = string.Format("{0}이 땡기는 날인데...", recipe.recipeName);
     }

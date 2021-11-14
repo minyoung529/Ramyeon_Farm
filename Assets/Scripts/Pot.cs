@@ -20,7 +20,8 @@ public class Pot : MonoBehaviour
     [SerializeField] private GameObject ingredientInPot;
 
     private SpriteRenderer boilingWater;
-    private Animator animator;
+    private Animator potAnimator;
+    private Animator waterAnimator;
     private List<string> dontPutIngredients = new List<string>();
     private List<SpriteRenderer> potObjs = new List<SpriteRenderer>();
 
@@ -30,7 +31,7 @@ public class Pot : MonoBehaviour
 
     private void Start()
     {
-        animator = GetComponentInChildren<Animator>();
+        waterAnimator = GetComponentInChildren<Animator>();
         boilingWater = transform.GetChild(0).GetComponent<SpriteRenderer>();
         DontPut("라면사리", "스프");
     }
@@ -58,6 +59,7 @@ public class Pot : MonoBehaviour
         boilingWater.transform.DOScale(1f, 2f);
         yield return new WaitForSeconds(boilTime);
         Debug.Log("물이 끓음");
+        waterAnimator.Play("Water_boil");
 
         DontPut("");
         dontPut = false;
@@ -125,7 +127,20 @@ public class Pot : MonoBehaviour
         }
 
         spRenderer.sprite = GameManager.Instance.ingredientInPotSprites[index];
+        spRenderer.sortingOrder = SetOrder(index);
         obj.SetActive(true);
+    }
+
+    private int SetOrder(int index)
+    {
+        if (index == 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return 2;
+        }
     }
 
     public void DespawnObjs()

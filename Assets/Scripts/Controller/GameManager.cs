@@ -165,7 +165,6 @@ public class GameManager : MonoSingleton<GameManager>
     public float EvaluateRamen(string recipeName)
     {
         Recipe recipe = recipes.Find(x => x.recipeName == recipeName);
-
         List<int> checkList = new List<int>();
 
         for (int i = 0; i < currentRamen.Count; i++)
@@ -174,13 +173,17 @@ public class GameManager : MonoSingleton<GameManager>
             {
                 if (checkList.Exists(x => x == j)) continue;
 
-                if (currentRamen[i].name == recipe.GetIngredients()[j])
+                if (recipe.GetIngredients()[j].Contains(currentRamen[i].name))
                 {
+                    Debug.Log(currentRamen[i].name + ", " + recipe.GetIngredients()[j]);
+
                     checkList.Add(j);
+                    break;
                 }
             }
         }
 
+        Debug.Log(checkList.Count);
         if (!currentRamen.Exists(x => x.name == "물") || !currentRamen.Exists(x => x.name == "라면사리") || !currentRamen.Exists(x => x.name == "스프"))
         {
             return -1f;
