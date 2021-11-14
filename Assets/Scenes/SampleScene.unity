@@ -8334,23 +8334,23 @@ MonoBehaviour:
     - name: "\uB77C\uBA74\uC0AC\uB9AC"
       amount: 0
       info: "\uBC14\uC0AD\uBC14\uC0AD\uD55C \uB77C\uBA74\uC0AC\uB9AC."
-      isHaving: 0
+      isHaving: 1
       state: 0
     - name: "\uC2A4\uD504"
       amount: 0
       info: "\uC9ED\uCABC\uB984\uD55C \uB77C\uBA74\uC2A4\uD504. \uC870\uAE08 \uB9F5\uB2E4."
-      isHaving: 0
+      isHaving: 1
       state: 0
     - name: "\uBB3C"
       amount: 0
       info: "\uB18D\uC7A5\uC5D0\uC11C \uAC13 \uD37C\uC628 \uC2E0\uC120\uD55C \uBB3C."
-      isHaving: 0
+      isHaving: 1
       state: 0
     - name: "\uB300\uD30C"
       amount: 0
       info: "\uB18D\uC7A5\uC5D0\uC11C \uBF51\uC544\uC628 \uC2E0\uC120\uD55C \uD314\uB531\uD314\uB531
         \uB300\uD30C."
-      isHaving: 0
+      isHaving: 1
       state: 1
     - name: "\uB2E4\uC9C4\uB9C8\uB298"
       amount: 0

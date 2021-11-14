@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -35,6 +36,7 @@ public class GameManager : MonoSingleton<GameManager>
     public List<IngredientIcon> ingredientIcons = new List<IngredientIcon>();
 
     private Pot pot;
+    private List<int> userRecipeIndexes = new List<int>();
 
     [SerializeField] TextAsset recipeNameText;
     [SerializeField] TextAsset recipeIngredientText;
@@ -98,6 +100,8 @@ public class GameManager : MonoSingleton<GameManager>
         {
             user.ingredients[i].SetIndex(i);
         }
+
+        SetUserIndex();
     }
 
     private void Update()
@@ -260,5 +264,41 @@ public class GameManager : MonoSingleton<GameManager>
         {
             recipes.Add(new Recipe(names[i], ingredients[i]));
         }
+    }
+
+    public void SetUserIndex()
+    {
+        userRecipeIndexes.Clear();
+        int cnt = 0;
+        Ingredient ingredient;
+
+        for (int i = 0; i < recipes.Count; i++)
+        {
+            for (int j = 0; j < recipes[i].GetIngredients().Length; j++)
+            {
+                ingredient = user.ingredients.Find(x => recipes[i].GetIngredients()[j].Contains(x.name));
+
+                if (!ingredient.isHaving)
+                {
+                    cnt = 0;
+                    break;
+                }
+  
+                else
+                {
+                    cnt++;
+                    if (cnt == recipes[i].GetIngredients().Length)
+                    {
+                        userRecipeIndexes.Add(i);
+                        cnt = 0;
+                    }
+                }
+            }
+        }
+    }
+
+    public int GetRandomRecipeIndex()
+    {
+        return userRecipeIndexes[Random.Range(0, userRecipeIndexes.Count)];
     }
 }

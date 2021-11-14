@@ -67,13 +67,11 @@ public class BookPanel : PanelBase
     {
         if (index > maxIndex - 1)
         {
-            Debug.Log("Å«" + index);
             gameObject.SetActive(false);
             return false;
         }
         else
         {
-            Debug.Log("ÀÛÀº" + index);
             gameObject.SetActive(true);
             return true;
         }
