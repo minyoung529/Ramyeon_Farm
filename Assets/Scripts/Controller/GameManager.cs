@@ -7,39 +7,50 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [SerializeField] private User user;
-    public User CurrentUser { get { return user; } }
-    public UIManager UIManager { get; private set; }
-    public QuestManager QuestManager { get; private set; }
-
+    #region Data
     private string SAVE_PATH = "";
     private readonly string SAVE_FILENAME = "/SaveFile.txt";
+    [SerializeField] private User user;
+    public User CurrentUser { get { return user; } }
 
-    public Transform doorPosition;
-    public Transform counterPosition;
-    public Ingredient currentIngredient { get; private set; }
-    private List<Ingredient> currentRamen = new List<Ingredient>();
-    private Recipe currentRecipe;
+    [SerializeField] TextAsset recipeNameText;
+    [SerializeField] TextAsset recipeIngredientText;
 
-    [SerializeField]
-    private List<Recipe> recipes = new List<Recipe>();
+    #endregion
+    #region Controller
+    public UIManager UIManager { get; private set; }
+    public QuestManager QuestManager { get; private set; }
+    public Transform Pool;
 
+    #endregion
+    #region Sprite
     public Sprite[] ingredientContainerSprites;
     public Sprite[] ingredientSprites;
     public Sprite[] ingredientInPotSprites;
+    #endregion
 
-    public Camera mainCam { get; private set; }
+    public Transform doorPosition;
+    public Transform counterPosition;
 
-    public Transform Pool;
+    #region Cook
+    [SerializeField] private List<Recipe> recipes = new List<Recipe>();
+    [SerializeField] private List<Ingredient> ingredients = new List<Ingredient>();
+
+    private List<Ingredient> currentRamen = new List<Ingredient>();
+    private Recipe currentRecipe;
 
     public IngredientIcon currentIngredientIcon;
     public List<IngredientIcon> ingredientIcons = new List<IngredientIcon>();
 
-    private Pot pot;
     private List<int> userRecipeIndexes = new List<int>();
+    #endregion
 
-    [SerializeField] TextAsset recipeNameText;
-    [SerializeField] TextAsset recipeIngredientText;
+
+    public Camera mainCam { get; private set; }
+
+    
+
+    private Pot pot;
 
     #region 데이터 저장
     private void FirstData()
@@ -96,9 +107,9 @@ public class GameManager : MonoSingleton<GameManager>
 
     void Start()
     {
-        for (int i = 0; i < user.ingredients.Count; i++)
+        for (int i = 0; i < ingredients.Count; i++)
         {
-            user.ingredients[i].SetIndex(i);
+            ingredients[i].SetIndex(i);
         }
 
         SetUserIndex();
@@ -115,9 +126,9 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            foreach (Ingredient igd in user.ingredients)
+            foreach (Ingredient igd in ingredients)
             {
-                igd.amount++;
+                igd.AddAmount(1);
             }
 
             UIManager.UpdateIngredientPanel();
@@ -130,11 +141,6 @@ public class GameManager : MonoSingleton<GameManager>
                 quest.AddCurrentValue(1);
             }
         }
-    }
-
-    public void SetCurrentIngredient(Ingredient ingredient)
-    {
-        currentIngredient = ingredient;
     }
 
     public bool CheckPool(string objName)
@@ -163,42 +169,33 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void AddCurRanem()
     {
-        currentRamen.Add(currentIngredient);
+        currentRamen.Add(currentIngredientIcon.GetIngredient());
     }
 
-    public float EvaluateRamen(string recipeName)
+    public float EvaluateRamen()
     {
-        Recipe recipe = recipes.Find(x => x.recipeName == recipeName);
         List<int> checkList = new List<int>();
 
         for (int i = 0; i < currentRamen.Count; i++)
         {
-            for (int j = 0; j < recipe.GetIngredients().Length; j++)
+            for (int j = 0; j < currentRecipe.GetIngredients().Count; j++)
             {
                 if (checkList.Exists(x => x == j)) continue;
 
-                if (recipe.GetIngredients()[j].Contains(currentRamen[i].name))
+                if (currentRecipe.GetIngredients()[j].Contains(currentRamen[i].name))
                 {
-                    Debug.Log(currentRamen[i].name + ", " + recipe.GetIngredients()[j]);
-
                     checkList.Add(j);
                     break;
                 }
             }
         }
 
-        Debug.Log(checkList.Count);
-        if (!currentRamen.Exists(x => x.name == "물") || !currentRamen.Exists(x => x.name == "라면사리") || !currentRamen.Exists(x => x.name == "스프"))
-        {
-            return -1f;
-        }
-
-        else if (checkList.Count == currentRamen.Count && checkList.Count == recipe.GetIngredients().Length)
+        if (checkList.Count == currentRamen.Count && checkList.Count == currentRecipe.GetIngredients().Count)
         {
             return 100f;
         }
 
-        else if (Mathf.Abs(currentRamen.Count - recipe.GetIngredients().Length) < 3)
+        else if (Mathf.Abs(currentRamen.Count - currentRecipe.GetIngredients().Count) < 3)
         {
             return 60f;
         }
@@ -209,35 +206,9 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    public void SetCurrentRecipe(Recipe recipe)
-    {
-        currentRecipe = recipe;
-    }
-
-    public Recipe GetRecipe()
-    {
-        return currentRecipe;
-    }
-
     private void OnApplicationQuit()
     {
         SaveToJson();
-    }
-
-    public TimeSpan ReturnNowTimeSpan()
-    {
-        TimeSpan span = (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0).ToLocalTime());
-        return span;
-    }
-
-    public List<Recipe> GetRecipes()
-    {
-        return recipes;
-    }
-
-    public Pot GetPot()
-    {
-        return pot;
     }
 
     public bool IsInCurrentRamen(params string[] ingredients)
@@ -270,15 +241,15 @@ public class GameManager : MonoSingleton<GameManager>
     {
         userRecipeIndexes.Clear();
         int cnt = 0;
-        Ingredient ingredient;
+        int ingredientIndex;
 
         for (int i = 0; i < recipes.Count; i++)
         {
-            for (int j = 0; j < recipes[i].GetIngredients().Length; j++)
+            for (int j = 0; j < recipes[i].GetIngredients().Count; j++)
             {
-                ingredient = user.ingredients.Find(x => recipes[i].GetIngredients()[j].Contains(x.name));
+                ingredientIndex = ingredients.Find(x => recipes[i].GetIngredients()[j].Contains(x.name)).GetIndex();
 
-                if (!ingredient.isHaving)
+                if (!user.isIngredientsHave[ingredientIndex])
                 {
                     cnt = 0;
                     break;
@@ -287,7 +258,7 @@ public class GameManager : MonoSingleton<GameManager>
                 else
                 {
                     cnt++;
-                    if (cnt == recipes[i].GetIngredients().Length)
+                    if (cnt == recipes[i].GetIngredients().Count)
                     {
                         userRecipeIndexes.Add(i);
                         cnt = 0;
@@ -297,8 +268,46 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
+    #region GetSet
     public int GetRandomRecipeIndex()
     {
         return userRecipeIndexes[Random.Range(0, userRecipeIndexes.Count)];
     }
+
+    public TimeSpan ReturnNowTimeSpan()
+    {
+        TimeSpan span = (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0).ToLocalTime());
+        return span;
+    }
+
+    public List<Recipe> GetRecipes()
+    {
+        return recipes;
+    }
+
+    public Pot GetPot()
+    {
+        return pot;
+    }
+
+    public void SetCurrentRecipe(Recipe recipe)
+    {
+        currentRecipe = recipe;
+    }
+
+    public Recipe GetRecipe()
+    {
+        return currentRecipe;
+    }
+
+    public List<Ingredient> GetIngredients()
+    {
+        return ingredients;
+    }
+
+    public void ClearCurrentRamen()
+    {
+        currentRamen.Clear();
+    }
+    #endregion
 }

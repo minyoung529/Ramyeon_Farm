@@ -8,8 +8,11 @@ using Random = UnityEngine.Random;
 public class User
 {
     [SerializeField] private long money;
-    public List<Ingredient> ingredients = new List<Ingredient>();
     public List<Livestock> livestocks = new List<Livestock>();
+
+    public List<bool> isIngredientsHave = new List<bool>();
+    public List<int> ingredientsAmounts = new List<int>();
+
     public Quest[] questList = new Quest[KeyManager.QUEST_COUNT];
 
     public int[] achievementLevel;

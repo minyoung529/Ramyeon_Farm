@@ -6,11 +6,11 @@ using UnityEngine;
 public class Ingredient
 {
     public string name;
-    public int amount;
     [TextArea] public string info;
     public bool isHaving;
     public IngredientState state;
     private int index;
+    public List<string> differentNames;
 
     public void SetIndex(int i)
     {
@@ -24,6 +24,16 @@ public class Ingredient
 
     public void AddAmount(int amount)
     {
-        this.amount += amount;
+        if(state == IngredientState.basic && amount < 0)
+        {
+            return;
+        }
+
+        GameManager.Instance.CurrentUser.ingredientsAmounts[index] += amount;
+    }
+
+    public string GetDifferentNames()
+    {
+        return differentNames[Random.Range(0, differentNames.Count)];
     }
 }

@@ -39,11 +39,11 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void SetValue(int index)
     {
         this.index = index;
-        ingredient = GameManager.Instance.CurrentUser.ingredients[index];
+        ingredient = GameManager.Instance.GetIngredients()[index];
 
         if (amountText != null)
         {
-            amountText.text = ingredient.amount.ToString();
+            amountText.text = GameManager.Instance.CurrentUser.ingredientsAmounts[index].ToString();
         }
 
         image.sprite = GameManager.Instance.ingredientContainerSprites[index];
@@ -53,19 +53,19 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         if (amountText != null)
         {
-            amountText.text = ingredient.amount.ToString();
+            amountText.text = GameManager.Instance.CurrentUser.ingredientsAmounts[index].ToString();
         }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (ingredient.amount < 1 && ingredient.state != IngredientState.basic) return;
+        if (GameManager.Instance.CurrentUser.ingredientsAmounts[index] < 1 && ingredient.state != IngredientState.basic) return;
         IconInstantiateOrPooling();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (ingredient.amount < 1 && ingredient.state != IngredientState.basic) return;
+        if (GameManager.Instance.CurrentUser.ingredientsAmounts[index] < 1 && ingredient.state != IngredientState.basic) return;
 
         Vector2 mousePosition = Input.mousePosition;
         mousePosition = GameManager.Instance.mainCam.ScreenToWorldPoint(mousePosition);
@@ -75,7 +75,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnEndDrag(PointerEventData eventData)
     {
 
-        if (ingredient.amount < 1 && ingredient.state != IngredientState.basic)
+        if (GameManager.Instance.CurrentUser.ingredientsAmounts[index] < 1 && ingredient.state != IngredientState.basic)
         {
             GameManager.Instance.currentIngredientIcon = null;
             return;
@@ -96,7 +96,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             }
 
             ingredientIcon.OnIngredientUp();
-            pot.OnIngredientPut(GameManager.Instance.currentIngredient);
+            pot.OnIngredientPut(GameManager.Instance.currentIngredientIcon.GetIngredient());
             GameManager.Instance.AddCurRanem();
             ingredient.AddAmount(-1);
             GameManager.Instance.UIManager.UpdateIngredientPanel();

@@ -22,7 +22,7 @@ public class LivestockManager : MonoBehaviour
 
     private void SetLivestockIngredient()
     {
-        List<Ingredient> ingredients = GameManager.Instance.CurrentUser.ingredients;
+        List<Ingredient> ingredients = GameManager.Instance.GetIngredients();
         int count = 0;
 
         for (int i = 0; i < GameManager.Instance.CurrentUser.livestocks.Count; i++)

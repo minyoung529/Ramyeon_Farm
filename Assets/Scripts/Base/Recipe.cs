@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,17 +8,7 @@ public class Recipe
 {
     public string recipeName;
     [TextArea] public string ingredient;
-    private string[] ingredientList;
-
-    public void SetList()
-    {
-        ingredientList = ingredient.Split(',');
-    }
-
-    public string[] GetIngredients()
-    {
-        return ingredientList;
-    }
+    private List<string> ingredientList;
 
     public Recipe(string recipeName_, string ingredient_)
     {
@@ -26,5 +16,32 @@ public class Recipe
         ingredient = ingredient_;
 
         SetList();
+    }
+
+    public Recipe(Recipe recipe)
+    {
+        recipeName = recipe.recipeName;
+        ingredient = recipe.ingredient;
+        SetList();
+    }
+
+    public void SetList()
+    {
+        ingredientList = ingredient.Split(',').ToList();
+    }
+
+    public List<string> GetIngredients()
+    {
+        return ingredientList;
+    }
+
+    public void AddRecipe(string ingredient)
+    {
+        ingredientList.Add(ingredient);
+    }
+
+    public void RemoveRecipe(string ingredient)
+    {
+        ingredientList.Remove(ingredient);
     }
 }

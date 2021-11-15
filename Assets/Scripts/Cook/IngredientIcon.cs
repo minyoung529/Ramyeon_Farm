@@ -25,8 +25,7 @@ public class IngredientIcon : MonoBehaviour
 
     public void SetValue(int index)
     {
-        ingredient = GameManager.Instance.CurrentUser.ingredients[index];
-        GameManager.Instance.SetCurrentIngredient(ingredient);
+        ingredient = GameManager.Instance.GetIngredients()[index];
         spriteRenderer.sprite = GameManager.Instance.ingredientSprites[index];
     }
 
@@ -47,7 +46,6 @@ public class IngredientIcon : MonoBehaviour
     {
         gameObject.SetActive(false);
         transform.SetParent(GameManager.Instance.Pool);
-        GameManager.Instance.SetCurrentIngredient(null);
         animator.SetInteger(AnimationKey, -1);
         isInPot = false;
         isAnimation = false;
@@ -90,5 +88,10 @@ public class IngredientIcon : MonoBehaviour
         gameObject.SetActive(false);
         GameManager.Instance.GetPot().InstantiateIngredientInPot(ingredient.GetIndex());
         Inactive();
+    }
+
+    public Ingredient GetIngredient()
+    {
+        return ingredient;
     }
 }

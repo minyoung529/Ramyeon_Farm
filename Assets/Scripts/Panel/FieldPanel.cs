@@ -37,7 +37,7 @@ public class FieldPanel : MonoBehaviour
     public void SetValue(int index)
     {
         this.index = index;
-        ingredient = GameManager.Instance.CurrentUser.ingredients[index];
+        ingredient = GameManager.Instance.GetIngredients()[index];
         harvestButtonImage.sprite = GameManager.Instance.ingredientSprites[index];
     }
 
@@ -59,7 +59,7 @@ public class FieldPanel : MonoBehaviour
         curTime = 0f;
         isHarvest = false;
         harvestButton.transform.DOScale(0f, 0.2f);
-        GameManager.Instance.CurrentUser.ingredients[index].AddAmount(1);
+        GameManager.Instance.GetIngredients()[index].AddAmount(1);
         GameManager.Instance.UIManager.UpdateIngredientPanel();
 
     }

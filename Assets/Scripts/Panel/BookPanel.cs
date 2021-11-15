@@ -39,9 +39,9 @@ public class BookPanel : PanelBase
         switch (enumValue)
         {
             case 0:
-                if (!ActiveSelf(GameManager.Instance.CurrentUser.ingredients.Count)) return;
+                if (!ActiveSelf(GameManager.Instance.GetIngredients().Count)) return;
 
-                Ingredient igd = GameManager.Instance.CurrentUser.ingredients[index];
+                Ingredient igd = GameManager.Instance.GetIngredients()[index];
                 image.sprite = GameManager.Instance.ingredientSprites[index];
                 contentName = igd.name;
                 info = igd.info;

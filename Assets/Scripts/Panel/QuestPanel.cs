@@ -89,8 +89,8 @@ public class QuestPanel : PanelBase
 
         else if (quest.rewardType == RewardType.ingredient)
         {
-            Ingredient ingredient = GameManager.Instance.CurrentUser.ingredients.Find(x => x.name == quest.ingredientName);
-            ingredient.amount += quest.reward;
+            Ingredient ingredient = GameManager.Instance.GetIngredients().Find(x => x.name == quest.ingredientName);
+            ingredient.AddAmount(quest.reward);
         }
 
         else if (quest.rewardType == RewardType.furniture)

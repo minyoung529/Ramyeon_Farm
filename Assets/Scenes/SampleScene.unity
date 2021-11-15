@@ -1549,7 +1549,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -8329661860612166517, guid: 9cf804468203ad541a937e34ca443137, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1557,7 +1557,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &248317228
@@ -6113,6 +6113,139 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953754612}
   m_CullTransparentMesh: 1
+--- !u!1 &955452662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 955452663}
+  - component: {fileID: 955452666}
+  - component: {fileID: 955452665}
+  - component: {fileID: 955452664}
+  m_Layer: 5
+  m_Name: RetryButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &955452663
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955452662}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1614060020}
+  m_Father: {fileID: 1911937398}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -584, y: -141}
+  m_SizeDelta: {x: 331.6, y: 167.2}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &955452664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955452662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 955452665}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1541849374}
+        m_TargetAssemblyTypeName: Pot, Assembly-CSharp
+        m_MethodName: ResetPot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &955452665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955452662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: afd2f3e97def8e44db4e1a4543139e3e, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 0.33
+--- !u!222 &955452666
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955452662}
+  m_CullTransparentMesh: 1
 --- !u!1 &971623077
 GameObject:
   m_ObjectHideFlags: 0
@@ -6338,7 +6471,7 @@ GameObject:
   - component: {fileID: 1037589886}
   - component: {fileID: 1037589885}
   m_Layer: 5
-  m_Name: Button
+  m_Name: CompleteButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6440,7 +6573,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: afd2f3e97def8e44db4e1a4543139e3e, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6449,7 +6582,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.33
 --- !u!222 &1037589887
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7350,7 +7483,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -150.5, y: -124.96997}
+  m_AnchoredPosition: {x: -150.5, y: -124.970215}
   m_SizeDelta: {x: 184.9, y: 184.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1128989629
@@ -8295,6 +8428,7 @@ GameObject:
   - component: {fileID: 1275244966}
   - component: {fileID: 1275244967}
   - component: {fileID: 1275244968}
+  - component: {fileID: 1275244969}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8330,69 +8464,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   user:
     money: 0
-    ingredients:
-    - name: "\uB77C\uBA74\uC0AC\uB9AC"
-      amount: 0
-      info: "\uBC14\uC0AD\uBC14\uC0AD\uD55C \uB77C\uBA74\uC0AC\uB9AC."
-      isHaving: 1
-      state: 0
-    - name: "\uC2A4\uD504"
-      amount: 0
-      info: "\uC9ED\uCABC\uB984\uD55C \uB77C\uBA74\uC2A4\uD504. \uC870\uAE08 \uB9F5\uB2E4."
-      isHaving: 1
-      state: 0
-    - name: "\uBB3C"
-      amount: 0
-      info: "\uB18D\uC7A5\uC5D0\uC11C \uAC13 \uD37C\uC628 \uC2E0\uC120\uD55C \uBB3C."
-      isHaving: 1
-      state: 0
-    - name: "\uB300\uD30C"
-      amount: 0
-      info: "\uB18D\uC7A5\uC5D0\uC11C \uBF51\uC544\uC628 \uC2E0\uC120\uD55C \uD314\uB531\uD314\uB531
-        \uB300\uD30C."
-      isHaving: 1
-      state: 1
-    - name: "\uB2E4\uC9C4\uB9C8\uB298"
-      amount: 0
-      info: "\uD55C\uAD6D\uC778\uC774\uB77C\uBA74 \uBABB\uCC38\uB294 \uB9C8\uB298"
-      isHaving: 0
-      state: 1
-    - name: "\uACC4\uB780"
-      amount: 0
-      info: "\uB108 \uC5C6\uB294 \uB0B4 \uC0B6\uC740... \uACC4\uB780..."
-      isHaving: 0
-      state: 2
-    - name: "\uCCAD\uC591\uACE0\uCD94"
-      amount: 0
-      info: "\uB9F5\uCC14\uC774\uB294 \uBABB\uBA39\uB294 \uCCAD\uC591\uACE0\uCD94"
-      isHaving: 0
-      state: 1
-    - name: "\uACE0\uCDA7\uAC00\uB8E8"
-      amount: 0
-      info: "\uCCAD\uC591\uACE0\uCD94\uB85C \uB9CC\uB4E0 \uACE0\uC6B4 \uACE0\uCDA7\uAC00\uB8E8"
-      isHaving: 0
-      state: 4
-    - name: "\uCE58\uC988"
-      amount: 0
-      info: "\uC9C1\uC811 \uB9CC\uB4E0 \uCE58\uC988. \uCE58\uC988~~"
-      isHaving: 0
-      state: 2
-    - name: "\uB5A1"
-      amount: 0
-      info: "\uCAC4\uAE43\uCAC4\uAE43 \uD0F1\uAE00\uD0F1\uAE00 \uC300\uB5A1"
-      isHaving: 0
-      state: 4
-    - name: "\uB3FC\uC9C0\uACE0\uAE30"
-      amount: 0
-      info: "\uB77C\uBA74\uC774\uB791 \uBA39\uC73C\uBA74 \uC815\uB9D0\uC815\uB9D0
-        \uB9DB\uC788\uB294 \uC6B0\uB9AC \uB3FC\uC9C0\uACE0\uAE30"
-      isHaving: 0
-      state: 2
-    - name: "\uAE40\uCE58"
-      amount: 0
-      info: "\uC9C4\uC9DC \uC9F1\uB9DB\uC788\uB2E4\uACE0 \uC18C\uBB38\uB09C \uAE40\uCE58"
-      isHaving: 0
-      state: 4
     livestocks:
     - livestockName: "\uB2ED"
       amount: 0
@@ -8403,6 +8474,8 @@ MonoBehaviour:
     - livestockName: "\uB3FC\uC9C0"
       amount: 0
       maxIngredientCount: 3
+    isIngredientsHave: 010101010000000000000000
+    ingredientsAmounts: 010000000100000001000000000000000000000000000000000000000000000000000000000000000000000000000000
     questList:
     - index: 0
       questName: 
@@ -8440,9 +8513,9 @@ MonoBehaviour:
     experiencePoint: 0
     userDate: 0
     userTimeSpan: 0
-  doorPosition: {fileID: 184975314}
-  counterPosition: {fileID: 1435943213}
-  recipes: []
+  recipeNameText: {fileID: 4900000, guid: 18cdf1a6a6631204f985c831c49d2849, type: 3}
+  recipeIngredientText: {fileID: 4900000, guid: 04109e3590bc58448ba141a6b8156a76, type: 3}
+  Pool: {fileID: 1166096065}
   ingredientContainerSprites:
   - {fileID: -7576874432042752839, guid: 9cf804468203ad541a937e34ca443137, type: 3}
   - {fileID: -2432301806248295829, guid: 9cf804468203ad541a937e34ca443137, type: 3}
@@ -8455,7 +8528,7 @@ MonoBehaviour:
   - {fileID: 3043345516689560434, guid: 9cf804468203ad541a937e34ca443137, type: 3}
   - {fileID: -3566493870488458173, guid: 9cf804468203ad541a937e34ca443137, type: 3}
   - {fileID: -9028938477123893177, guid: 9cf804468203ad541a937e34ca443137, type: 3}
-  - {fileID: -2432301806248295829, guid: 9cf804468203ad541a937e34ca443137, type: 3}
+  - {fileID: -7238345598928273307, guid: 9cf804468203ad541a937e34ca443137, type: 3}
   ingredientSprites:
   - {fileID: 4911007776997675480, guid: c114e66620157de42b06a8f68dcac7f4, type: 3}
   - {fileID: -7238345598928273307, guid: 9cf804468203ad541a937e34ca443137, type: 3}
@@ -8468,25 +8541,151 @@ MonoBehaviour:
   - {fileID: -2804774553036113763, guid: 9cf804468203ad541a937e34ca443137, type: 3}
   - {fileID: 435446544171256481, guid: 9cf804468203ad541a937e34ca443137, type: 3}
   - {fileID: 1717260352098108246, guid: 9cf804468203ad541a937e34ca443137, type: 3}
-  - {fileID: -7238345598928273307, guid: 9cf804468203ad541a937e34ca443137, type: 3}
+  - {fileID: 5148616327105364085, guid: 9cf804468203ad541a937e34ca443137, type: 3}
   ingredientInPotSprites:
   - {fileID: 21300000, guid: a2922b3f043ff13489f1715998aefbb1, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 21300000, guid: 3fae5091f646fc94893da1900547b491, type: 3}
-  - {fileID: 0}
+  - {fileID: -1519781391214004731, guid: 9cf804468203ad541a937e34ca443137, type: 3}
   - {fileID: 21300000, guid: cab96be1067a32a40b44c3eda9ca3dfb, type: 3}
-  - {fileID: 0}
+  - {fileID: -7541670493543904985, guid: 9cf804468203ad541a937e34ca443137, type: 3}
   - {fileID: 21300000, guid: c5357d161cd72014caae34ee5a3676f1, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Pool: {fileID: 1166096065}
+  - {fileID: -2804774553036113763, guid: 9cf804468203ad541a937e34ca443137, type: 3}
+  - {fileID: 435446544171256481, guid: 9cf804468203ad541a937e34ca443137, type: 3}
+  - {fileID: 1717260352098108246, guid: 9cf804468203ad541a937e34ca443137, type: 3}
+  - {fileID: 5148616327105364085, guid: 9cf804468203ad541a937e34ca443137, type: 3}
+  doorPosition: {fileID: 184975314}
+  counterPosition: {fileID: 1435943213}
+  recipes: []
+  ingredients:
+  - name: "\uB77C\uBA74\uC0AC\uB9AC"
+    info: "\uBC14\uC0AD\uBC14\uC0AD\uD55C \uB77C\uBA74\uC0AC\uB9AC."
+    isHaving: 1
+    state: 0
+    differentNames:
+    - "\uB77C\uBA74\uC0AC\uB9AC"
+    - "\uAF2C\uBD88\uAF2C\uBD88\uBA74"
+    - "\uB204\uB4E4"
+    - "\uB77C\uBA74\uB204\uB4E4"
+    - "\uBA74"
+    - "\uB77C\uC0AC\uBA74\uB9AC"
+  - name: "\uC2A4\uD504"
+    info: "\uC9ED\uCABC\uB984\uD55C \uB77C\uBA74\uC2A4\uD504. \uC870\uAE08 \uB9F5\uB2E4."
+    isHaving: 1
+    state: 0
+    differentNames:
+    - "\uC2A4\uD504"
+    - "\uB77C\uBA74\uC2A4\uD504"
+    - MSG
+    - "\uBE68\uAC04\uC2A4\uD504"
+  - name: "\uBB3C"
+    info: "\uB18D\uC7A5\uC5D0\uC11C \uAC13 \uD37C\uC628 \uC2E0\uC120\uD55C \uBB3C."
+    isHaving: 1
+    state: 0
+    differentNames:
+    - "\uBB3C"
+    - "\uC6CC\uD130"
+    - "\uC6B0\uD130"
+  - name: "\uB300\uD30C"
+    info: "\uB18D\uC7A5\uC5D0\uC11C \uBF51\uC544\uC628 \uC2E0\uC120\uD55C \uD314\uB531\uD314\uB531
+      \uB300\uD30C."
+    isHaving: 1
+    state: 1
+    differentNames:
+    - "\uCD08\uB85D\uC0C9 \uAE34 \uC2DD\uBB3C"
+    - "\uB300\uD30C"
+    - "\uB300\uB300\uD30C"
+    - "\uCD08\uB85D\uB300\uD30C"
+    - "\uD30C"
+  - name: "\uB2E4\uC9C4\uB9C8\uB298"
+    info: "\uD55C\uAD6D\uC778\uC774\uB77C\uBA74 \uBABB\uCC38\uB294 \uB9C8\uB298"
+    isHaving: 0
+    state: 1
+    differentNames:
+    - "\uB9C8\uB298"
+    - "\uB108\uB9CC\uC744"
+    - "\uB108\uB9C8\uB298"
+    - "\uB2F9\uC2E0\uB9C8\uB298"
+    - "\uB2F9\uC2E0\uB9CC\uC744"
+    - "\uB298\uB9C8"
+    - "\uB9C8\uB298\uB9C8\uB298"
+  - name: "\uACC4\uB780"
+    info: "\uB108 \uC5C6\uB294 \uB0B4 \uC0B6\uC740... \uACC4\uB780..."
+    isHaving: 0
+    state: 2
+    differentNames:
+    - "\uACC4\uB780"
+    - "\uB2EC\uAC40"
+    - "\uC5D0\uADF8"
+    - "\uC5D0\uADF8\uBA38\uB2C8\uB098"
+    - "\uC5D0\uADF8\uBA38\uB2C8"
+    - "\uAC40\uB2EC"
+  - name: "\uCCAD\uC591\uACE0\uCD94"
+    info: "\uB9F5\uCC14\uC774\uB294 \uBABB\uBA39\uB294 \uCCAD\uC591\uACE0\uCD94"
+    isHaving: 0
+    state: 1
+    differentNames:
+    - "\uACE0\uCD94"
+    - "\uCCAD\uC591\uACE0\uCD94"
+    - "\uD398\uD37C"
+    - "\uCCAD\uC591\uD398\uD37C"
+    - "\uCD94\uACE0"
+    - "\uB9E4\uC6B4 \uACE0\uCD94"
+  - name: "\uACE0\uCDA7\uAC00\uB8E8"
+    info: "\uCCAD\uC591\uACE0\uCD94\uB85C \uB9CC\uB4E0 \uACE0\uC6B4 \uACE0\uCDA7\uAC00\uB8E8"
+    isHaving: 0
+    state: 4
+    differentNames:
+    - "\uACE0\uCDA7\uAC00\uB8E8"
+    - "\uD398\uD37C\uAC00\uB8E8"
+    - "\uD398\uD37C\uD30C\uC6B0\uB354"
+    - "\uACE0\uCD94\uD30C\uC6B0\uB354"
+    - "\uB9E4\uC6B4\uAC00\uB8E8"
+  - name: "\uCE58\uC988"
+    info: "\uC9C1\uC811 \uB9CC\uB4E0 \uCE58\uC988. \uCE58\uC988~~"
+    isHaving: 0
+    state: 2
+    differentNames:
+    - "\uCE58\uC988"
+    - "\uCE58\uC988~"
+    - "\uBAA8\uC9DC\uB810\uB77C"
+    - "\uCCB4\uB2E4"
+    - "\uBAA8\uC9DC\uCE58\uC988"
+    - "\uCCB4\uB2E4\uCE58\uC988"
+  - name: "\uB5A1"
+    info: "\uCAC4\uAE43\uCAC4\uAE43 \uD0F1\uAE00\uD0F1\uAE00 \uC300\uB5A1"
+    isHaving: 0
+    state: 4
+    differentNames:
+    - "\uB5A1"
+    - "\uCAC4\uAE43\uB5A1"
+    - "\uC300\uB5A1"
+    - "\uBC00\uB5A1"
+    - "\uB5A1\uB5A1"
+    - TTEOK
+  - name: "\uB3FC\uC9C0\uACE0\uAE30"
+    info: "\uB77C\uBA74\uC774\uB791 \uBA39\uC73C\uBA74 \uC815\uB9D0\uC815\uB9D0 \uB9DB\uC788\uB294
+      \uC6B0\uB9AC \uB3FC\uC9C0\uACE0\uAE30"
+    isHaving: 0
+    state: 2
+    differentNames:
+    - "\uB3FC\uC9C0\uACE0\uAE30"
+    - "\uACE0\uAE30"
+    - "\uBBF8\uD2B8"
+    - "\uD55C\uB3C8"
+    - "\uB3FC\uC9C0"
+    - "\uD53C\uADF8"
+  - name: "\uAE40\uCE58"
+    info: "\uC9C4\uC9DC \uC9F1\uB9DB\uC788\uB2E4\uACE0 \uC18C\uBB38\uB09C \uAE40\uCE58"
+    isHaving: 0
+    state: 4
+    differentNames:
+    - "\uAE40\uCE58"
+    - "\uBC30\uCD94\uAE40\uCE58"
+    - KIMCHI
   currentIngredientIcon: {fileID: 0}
   ingredientIcons: []
-  recipeNameText: {fileID: 4900000, guid: 18cdf1a6a6631204f985c831c49d2849, type: 3}
-  recipeIngredientText: {fileID: 4900000, guid: 04109e3590bc58448ba141a6b8156a76, type: 3}
 --- !u!114 &1275244967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8606,6 +8805,18 @@ MonoBehaviour:
   achievementList: []
   achievementName: {fileID: 4900000, guid: 9a656c3cd4ae38a41a7ea527c8dfb156, type: 3}
   achievementInfo: {fileID: 4900000, guid: eefd7e584e7bd11418d7bc5f9d52fe20, type: 3}
+--- !u!114 &1275244969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275244964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be2e399ebd66a0845844dfab4745c5be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1283965158
 GameObject:
   m_ObjectHideFlags: 0
@@ -10922,12 +11133,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 0345bfee8a9923f4d99176b93ff25846, type: 3}
-  m_Color: {r: 0.9811321, g: 0.7829028, b: 0.17956562, a: 1}
+  m_Sprite: {fileID: 899400688522119708, guid: 1d0cf754b5720a647b990c277d3dc7fa, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_DrawMode: 1
+  m_Size: {x: 3.6, y: 3.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -10983,6 +11194,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientInPot: {fileID: 271864134}
+  potSprites:
+  - {fileID: 899400688522119708, guid: 1d0cf754b5720a647b990c277d3dc7fa, type: 3}
+  - {fileID: -1417645883285759226, guid: 1d0cf754b5720a647b990c277d3dc7fa, type: 3}
+  - {fileID: -1614104322263561506, guid: 1d0cf754b5720a647b990c277d3dc7fa, type: 3}
+  - {fileID: 466455470965381111, guid: 1d0cf754b5720a647b990c277d3dc7fa, type: 3}
 --- !u!1 &1544881460
 GameObject:
   m_ObjectHideFlags: 0
@@ -11682,6 +11898,85 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1611192228}
+  m_CullTransparentMesh: 1
+--- !u!1 &1614060019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1614060020}
+  - component: {fileID: 1614060022}
+  - component: {fileID: 1614060021}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1614060020
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614060019}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 955452663}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1614060021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614060019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 6d6d31bb58dfe2648bb9e55204a60928, type: 3}
+    m_FontSize: 73
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 88
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\uB2E4\uC2DC\uD558\uAE30"
+--- !u!222 &1614060022
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614060019}
   m_CullTransparentMesh: 1
 --- !u!1 &1615352381
 GameObject:
@@ -13797,6 +14092,7 @@ RectTransform:
   - {fileID: 1654705818}
   - {fileID: 558145673}
   - {fileID: 1037589884}
+  - {fileID: 955452663}
   m_Father: {fileID: 819396520}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14026,7 +14322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -14034,8 +14330,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 88
+    m_Font: {fileID: 12800000, guid: 6d6d31bb58dfe2648bb9e55204a60928, type: 3}
+    m_FontSize: 82
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10

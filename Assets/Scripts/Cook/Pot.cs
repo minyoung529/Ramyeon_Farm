@@ -18,6 +18,7 @@ public class Pot : MonoBehaviour
     #endregion
 
     [SerializeField] private GameObject ingredientInPot;
+    [SerializeField] Sprite[] potSprites;
 
     private SpriteRenderer boilingWater;
     private Animator potAnimator;
@@ -25,7 +26,12 @@ public class Pot : MonoBehaviour
     private List<string> dontPutIngredients = new List<string>();
     private List<SpriteRenderer> potObjs = new List<SpriteRenderer>();
 
+    private SpriteRenderer spriteRenderer;
+
+    private bool isStop = false;
+
     Color soupColor = new Color32(255, 0, 0, 89);
+    Color originColor = new Color32(0, 0, 0, 89);
 
     public bool dontPut { get; private set; }
 
@@ -33,9 +39,18 @@ public class Pot : MonoBehaviour
     {
         waterAnimator = GetComponentInChildren<Animator>();
         boilingWater = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         DontPut("라면사리", "스프");
     }
 
+    private void Update()
+    {
+        if(isStop)
+        {
+            StopAllCoroutines();
+            isStop = false;
+        }
+    }
     public void OnIngredientPut(Ingredient ingredient)
     {
         if (ingredient.name == water)
@@ -105,7 +120,7 @@ public class Pot : MonoBehaviour
 
     public bool IsDonPut()
     {
-        return (dontPutIngredients.Contains(GameManager.Instance.currentIngredient.name));
+        return (dontPutIngredients.Contains(GameManager.Instance.currentIngredientIcon.GetIngredient().name));
     }
 
     public void InstantiateIngredientInPot(int index)
@@ -126,7 +141,12 @@ public class Pot : MonoBehaviour
             potObjs.Add(spRenderer);
         }
 
-        spRenderer.sprite = GameManager.Instance.ingredientInPotSprites[index];
+        if (spRenderer == null) return;
+
+        if (GameManager.Instance.ingredientInPotSprites[index]!=null)
+        {
+            spRenderer.sprite = GameManager.Instance.ingredientInPotSprites[index];
+        }
         spRenderer.sortingOrder = SetOrder(index);
         obj.SetActive(true);
     }
@@ -143,7 +163,7 @@ public class Pot : MonoBehaviour
         }
     }
 
-    public void DespawnObjs()
+    private void DespawnObjs()
     {
         for (int i = 1; i < transform.childCount; i++)
         {
@@ -151,5 +171,17 @@ public class Pot : MonoBehaviour
             obj.transform.SetParent(GameManager.Instance.Pool);
             obj.SetActive(false);
         }
+    }
+
+    public void ResetPot()
+    {
+        isStop = true;
+        spriteRenderer.sprite = potSprites[0];
+        DespawnObjs();
+        GameManager.Instance.ClearCurrentRamen();
+        boilingWater.gameObject.SetActive(false);
+        boilingWater.transform.localScale = Vector2.zero;
+        boilingWater.color = originColor;
+        waterAnimator.Play("WaterIdle");
     }
 }

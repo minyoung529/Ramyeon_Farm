@@ -58,6 +58,7 @@ public class UIManager : MonoBehaviour
     [Header("¼Õ´Ô")]
     [SerializeField] private Text guestText;
     [SerializeField] private Image speechBubble;
+    RandomRamen randomRamen;
     #endregion
 
     float currenTime = 0f;
@@ -69,6 +70,8 @@ public class UIManager : MonoBehaviour
 
         distanceX = Mathf.Abs(distanceTransform.position.x) * 2f;
         distanceY = Mathf.Abs(distanceTransform.position.y) * 2f;
+
+        randomRamen = new RandomRamen();
 
         for (int i = 0; i < stagesObj.Count; i++)
         {
@@ -83,7 +86,7 @@ public class UIManager : MonoBehaviour
         InstantiatePanel(KeyManager.QUEST_COUNT, questPanelObj, questPanels);
         InstantiatePanel(GameManager.Instance.QuestManager.GetAchievements().Count, achievementPanelObj, achievementPanels);
 
-        int max = Mathf.Max(GameManager.Instance.CurrentUser.ingredients.Count, GameManager.Instance.GetRecipes().Count);
+        int max = Mathf.Max(GameManager.Instance.GetIngredients().Count, GameManager.Instance.GetRecipes().Count);
         InstantiatePanel(max, bookPanelObj, bookPanels);
         UpdateMoneyText();
     }
@@ -112,7 +115,7 @@ public class UIManager : MonoBehaviour
     #region InstnatiateUIPanel
     public void InstantiateIngredientPanel()
     {
-        for (int i = 3; i < GameManager.Instance.CurrentUser.ingredients.Count; i++)
+        for (int i = 3; i < GameManager.Instance.GetIngredients().Count; i++)
         {
             GameObject obj = Instantiate(ingredientPanelObj, ingredientPanelObj.transform.parent);
             IngredientPanel igdP = obj.GetComponent<IngredientPanel>();
@@ -124,7 +127,7 @@ public class UIManager : MonoBehaviour
     }
     public void InstantiateFarmPanel(GameObject template, IngredientState state)
     {
-        List<Ingredient> ingredients = GameManager.Instance.CurrentUser.ingredients;
+        List<Ingredient> ingredients = GameManager.Instance.GetIngredients();
 
         for (int i = 0; i < ingredients.Count; i++)
         {
@@ -223,18 +226,14 @@ public class UIManager : MonoBehaviour
 
     private void RandomOrder()
     {
-        List<Recipe> recipes = GameManager.Instance.GetRecipes();
-        //Recipe recipe = recipes[Random.Range(0, recipes.Count)];
-        Recipe recipe = recipes[0];
-        GameManager.Instance.SetCurrentRecipe(recipe);
-        guestText.text = string.Format("{0}ÀÌ ¶¯±â´Â ³¯ÀÎµ¥...", recipe.recipeName);
+        guestText.text = randomRamen.GetRandomGuestComment();
     }
 
     public void EvaluateCurrentRamen()
     {
         PreviousStage();
 
-        float score = GameManager.Instance.EvaluateRamen(GameManager.Instance.GetRecipe().recipeName);
+        float score = GameManager.Instance.EvaluateRamen();
 
         if (score > 99f)
         {
