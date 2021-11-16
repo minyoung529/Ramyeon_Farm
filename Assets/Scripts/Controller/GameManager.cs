@@ -24,9 +24,9 @@ public class GameManager : MonoSingleton<GameManager>
 
     #endregion
     #region Sprite
-    public Sprite[] ingredientContainerSprites;
-    public Sprite[] ingredientSprites;
-    public Sprite[] ingredientInPotSprites;
+    private Sprite[] ingredientContainerSprites;
+    private Sprite[] ingredientSprites;
+    private Sprite[] ingredientInPotSprites;
     #endregion
 
     public Transform doorPosition;
@@ -45,10 +45,7 @@ public class GameManager : MonoSingleton<GameManager>
     private List<int> userRecipeIndexes = new List<int>();
     #endregion
 
-
     public Camera mainCam { get; private set; }
-
-    
 
     private Pot pot;
 
@@ -102,6 +99,10 @@ public class GameManager : MonoSingleton<GameManager>
         UIManager = GetComponent<UIManager>();
         QuestManager = GetComponent<QuestManager>();
         pot = FindObjectOfType<Pot>();
+
+        ingredientSprites = Resources.LoadAll<Sprite>("IngredientAsset");
+        ingredientInPotSprites = Resources.LoadAll<Sprite>("IngredientInPotAsset");
+        ingredientContainerSprites = Resources.LoadAll<Sprite>("IngredientContainerAsset");
         mainCam = Camera.main;
     }
 
@@ -167,9 +168,9 @@ public class GameManager : MonoSingleton<GameManager>
         return null;
     }
 
-    public void AddCurRanem()
+    public void AddCurRanem(Ingredient ingredient)
     {
-        currentRamen.Add(currentIngredientIcon.GetIngredient());
+        currentRamen.Add(ingredient);
     }
 
     public float EvaluateRamen()
@@ -267,6 +268,11 @@ public class GameManager : MonoSingleton<GameManager>
             }
         }
     }
+    public void PlusIngredientInPot(Ingredient ingredient)
+    {
+        pot.OnIngredientPut(ingredient);
+        AddCurRanem(ingredient);
+    }
 
     #region GetSet
     public int GetRandomRecipeIndex()
@@ -308,6 +314,22 @@ public class GameManager : MonoSingleton<GameManager>
     public void ClearCurrentRamen()
     {
         currentRamen.Clear();
+    }
+
+    public Sprite GetIngredientSprite(int index)
+    {
+        return ingredientSprites[index];
+    }
+
+    public Sprite GetingredientInPotSprite(int index)
+    {
+        return ingredientInPotSprites[index];
+    }
+
+    public Sprite GetingredientContainerSprite(int index)
+    {
+        Debug.Log(index);
+        return ingredientContainerSprites[index];
     }
     #endregion
 }

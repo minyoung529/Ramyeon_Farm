@@ -32,18 +32,18 @@
         false
     ],
     "ingredientsAmounts": [
-        7,
-        7,
-        7,
+        13,
+        13,
+        13,
         3,
-        6,
-        6,
-        6,
-        6,
-        6,
-        6,
-        6,
-        6
+        9,
+        5,
+        9,
+        10,
+        11,
+        11,
+        10,
+        11
     ],
     "questList": [
         {
@@ -59,10 +59,10 @@
             "isRewarded": false
         },
         {
-            "index": 5,
-            "questName": "돈이 들어온다",
-            "info": "하루에 10000골드 이상 버세요.",
-            "maxValue": 10000,
+            "index": 1,
+            "questName": "미니게임 덕후",
+            "info": "하루에 미니게임을 3회 참가하세요.",
+            "maxValue": 3,
             "currentValue": 0,
             "rewardType": 0,
             "reward": 1000,
@@ -71,13 +71,13 @@
             "isRewarded": false
         },
         {
-            "index": 0,
-            "questName": "손님 10번 받기",
-            "info": "하루에 손님을 10번 받으세요.",
-            "maxValue": 10,
+            "index": 5,
+            "questName": "돈이 들어온다",
+            "info": "하루에 10000골드 이상 버세요.",
+            "maxValue": 10000,
             "currentValue": 0,
             "rewardType": 0,
-            "reward": 100,
+            "reward": 1000,
             "ingredientName": "",
             "isPerform": false,
             "isRewarded": false
@@ -106,5 +106,5 @@
     "level": 0,
     "experiencePoint": 0,
     "userDate": "0",
-    "userTimeSpan": 18946
+    "userTimeSpan": 18947
 }

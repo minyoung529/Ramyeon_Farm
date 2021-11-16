@@ -46,7 +46,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             amountText.text = GameManager.Instance.CurrentUser.ingredientsAmounts[index].ToString();
         }
 
-        image.sprite = GameManager.Instance.ingredientContainerSprites[index];
+        image.sprite = GameManager.Instance.GetingredientContainerSprite(index);
     }
 
     public void UpdateData()
@@ -95,14 +95,17 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 return;
             }
 
-            ingredientIcon.OnIngredientUp();
-            pot.OnIngredientPut(GameManager.Instance.currentIngredientIcon.GetIngredient());
-            GameManager.Instance.AddCurRanem();
+            if(ingredientIcon.IsAuto())
+            {
+                ingredientIcon.OnIngredientUp();
+                GameManager.Instance.PlusIngredientInPot(ingredientIcon.GetIngredient());
+            }
+
             ingredient.AddAmount(-1);
             GameManager.Instance.UIManager.UpdateIngredientPanel();
         }
 
-        GameManager.Instance.currentIngredientIcon = null;
+        ingredientIcon = null;
     }
 
     private void IconInstantiateOrPooling()

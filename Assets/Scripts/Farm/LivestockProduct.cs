@@ -19,7 +19,7 @@ public class LivestockProduct : MonoBehaviour
     {
         this.livestockObj = livestockObj;
         livestock = livestockObj.GetLivestock();
-        spriteRenderer.sprite = GameManager.Instance.ingredientSprites[livestock.GetIngredient().GetIndex()];
+        spriteRenderer.sprite = GameManager.Instance.GetIngredientSprite(livestock.GetIngredient().GetIndex());
     }
 
     private void OnMouseUp()

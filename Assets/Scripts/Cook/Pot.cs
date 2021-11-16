@@ -29,9 +29,13 @@ public class Pot : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private bool isStop = false;
+    private bool isBoil = false;
 
     Color soupColor = new Color32(255, 0, 0, 89);
     Color originColor = new Color32(0, 0, 0, 89);
+
+    private float curTime = 0f;
+    private float maxTime = 0f;
 
     public bool dontPut { get; private set; }
 
@@ -45,17 +49,27 @@ public class Pot : MonoBehaviour
 
     private void Update()
     {
-        if(isStop)
+        if (isStop)
         {
             StopAllCoroutines();
             isStop = false;
+        }
+
+        if (curTime < maxTime && !isBoil)
+        {
+            curTime += Time.deltaTime;
+        }
+
+        else if(curTime > maxTime && !isBoil)
+        {
+            BoilWaterAnimation();
         }
     }
     public void OnIngredientPut(Ingredient ingredient)
     {
         if (ingredient.name == water)
         {
-            StartCoroutine(BoilWater());
+            BoilWater();
         }
         else if (ingredient.name == soup)
         {
@@ -67,17 +81,28 @@ public class Pot : MonoBehaviour
         }
     }
 
-    private IEnumerator BoilWater()
+    private void BoilWater()
     {
         dontPut = true;
         DontPut("라면사리", "스프");
         boilingWater.transform.DOScale(1f, 2f);
-        yield return new WaitForSeconds(boilTime);
-        Debug.Log("물이 끓음");
-        waterAnimator.Play("Water_boil");
+        ResetTimer();
+    }
 
-        DontPut("");
+    private void ResetTimer()
+    {
+        maxTime = boilTime;
+        curTime = 0f;
+    }
+
+    private void BoilWaterAnimation()
+    {
+        isBoil = true;
         dontPut = false;
+
+        waterAnimator.Play("Water_boil");
+        DontPut("");
+        Debug.Log("물이 끓음");
     }
 
     private IEnumerator PutSoup()
@@ -143,9 +168,9 @@ public class Pot : MonoBehaviour
 
         if (spRenderer == null) return;
 
-        if (GameManager.Instance.ingredientInPotSprites[index]!=null)
+        if (GameManager.Instance.GetingredientInPotSprite(index) != null)
         {
-            spRenderer.sprite = GameManager.Instance.ingredientInPotSprites[index];
+            spRenderer.sprite = GameManager.Instance.GetingredientInPotSprite(index);
         }
         spRenderer.sortingOrder = SetOrder(index);
         obj.SetActive(true);
@@ -176,12 +201,19 @@ public class Pot : MonoBehaviour
     public void ResetPot()
     {
         isStop = true;
+        isBoil = false;
+
+        curTime = 0f;
+        maxTime = 0f;
+
         spriteRenderer.sprite = potSprites[0];
-        DespawnObjs();
         GameManager.Instance.ClearCurrentRamen();
+
         boilingWater.gameObject.SetActive(false);
         boilingWater.transform.localScale = Vector2.zero;
         boilingWater.color = originColor;
         waterAnimator.Play("WaterIdle");
+
+        DespawnObjs();
     }
 }

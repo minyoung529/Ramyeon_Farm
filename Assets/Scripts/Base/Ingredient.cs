@@ -5,11 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class Ingredient
 {
+    private int index;
     public string name;
     [TextArea] public string info;
+    public int price;
     public bool isHaving;
     public IngredientState state;
-    private int index;
     public List<string> differentNames;
 
     public void SetIndex(int i)

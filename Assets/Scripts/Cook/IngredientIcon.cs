@@ -15,6 +15,7 @@ public class IngredientIcon : MonoBehaviour
     public bool isInPot { get; private set; }
 
     private bool isAnimation;
+    int clickCount = 0;
 
     private void Awake()
     {
@@ -23,10 +24,21 @@ public class IngredientIcon : MonoBehaviour
         animator.enabled = false;
     }
 
+    private void Update()
+    {
+        if (isAnimation)
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.2f)
+            {
+                PutInPot();
+            }
+        }
+    }
+
     public void SetValue(int index)
     {
         ingredient = GameManager.Instance.GetIngredients()[index];
-        spriteRenderer.sprite = GameManager.Instance.ingredientSprites[index];
+        spriteRenderer.sprite = GameManager.Instance.GetIngredientSprite(index);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,6 +54,12 @@ public class IngredientIcon : MonoBehaviour
         isInPot = false;
     }
 
+    private void OnMouseUp()
+    {
+        OnIngredientUp();
+        GameManager.Instance.PlusIngredientInPot(ingredient);
+    }
+
     public void Inactive()
     {
         gameObject.SetActive(false);
@@ -52,6 +70,26 @@ public class IngredientIcon : MonoBehaviour
         animator.enabled = false;
 
         ingredient = null;
+    }
+
+    public bool IsAuto()
+    {
+        return CheckIsAuto(ingredient.name);
+    }
+
+    private bool CheckIsAuto(string ingredient)
+    {
+        string ingredients = "°íÃå°¡·ç ¶±";
+
+        if(ingredients.Contains(ingredient))
+        {
+            return true;
+        }
+
+        else
+        {
+            return false;
+        }
     }
 
     public void OnIngredientUp()
@@ -70,17 +108,6 @@ public class IngredientIcon : MonoBehaviour
     private void OnAnimationStart()
     {
         animator.SetInteger(AnimationKey, ingredient.GetIndex());
-    }
-
-    private void Update()
-    {
-        if(isAnimation)
-        {
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.2f)
-            {
-                PutInPot();
-            }
-        }
     }
 
     private void PutInPot()

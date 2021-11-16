@@ -23,15 +23,15 @@ public class SelectedBook : MonoBehaviour
         switch (type)
         {
             case 0:
-                image.sprite = GameManager.Instance.ingredientSprites[index];
+                image.sprite = GameManager.Instance.GetIngredientSprite(index);
                 break;
 
             case 1:
-                image.sprite = GameManager.Instance.ingredientSprites[0];
+                image.sprite = GameManager.Instance.GetIngredientSprite(index);
                 break;
 
             case 2:
-                image.sprite = GameManager.Instance.ingredientSprites[1];
+                image.sprite = GameManager.Instance.GetIngredientSprite(index);
                 break;
         }
     }

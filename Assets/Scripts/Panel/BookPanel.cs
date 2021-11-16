@@ -42,7 +42,7 @@ public class BookPanel : PanelBase
                 if (!ActiveSelf(GameManager.Instance.GetIngredients().Count)) return;
 
                 Ingredient igd = GameManager.Instance.GetIngredients()[index];
-                image.sprite = GameManager.Instance.ingredientSprites[index];
+                image.sprite = GameManager.Instance.GetIngredientSprite(index);
                 contentName = igd.name;
                 info = igd.info;
                 break;
@@ -50,13 +50,13 @@ public class BookPanel : PanelBase
             case 1:
                 if (!ActiveSelf(GameManager.Instance.GetRecipes().Count)) return;
 
-                image.sprite = GameManager.Instance.ingredientSprites[0];
+                image.sprite = GameManager.Instance.GetIngredientSprite(0);
                 contentName = string.Format("라면 {0}", index);
                 info = string.Format("라면 {0}", index);
                 break;
 
             case 2:
-                image.sprite = GameManager.Instance.ingredientSprites[1];
+                image.sprite = GameManager.Instance.GetIngredientSprite(1);
                 contentName = string.Format("가구 {0}", index);
                 info = string.Format("가구 {0}", index);
                 break;
