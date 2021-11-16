@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuyFirstIngredient : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    int index;
+    Button button;
+
+    private void Start()
     {
-        
+        button = GetComponent<Button>();
+        button.onClick.AddListener(() => OnClick());
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetValue(int index)
     {
-        
+        this.index = index;
+    }
+
+    public void OnClick()
+    {
+        Ingredient ingredient = GameManager.Instance.GetIngredients()[index];
+
+    }
+
+    public void PurchaseIngredient()
+    {
+
     }
 }
