@@ -15,6 +15,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     [SerializeField] TextAsset recipeNameText;
     [SerializeField] TextAsset recipeIngredientText;
+    [SerializeField] TextAsset ingredientInfoText;
 
     #endregion
     #region Controller
@@ -94,7 +95,8 @@ public class GameManager : MonoSingleton<GameManager>
     private void Awake()
     {
         FirstData();
-        InputData();
+        InputRecipeData();
+        InputIngredientData();
 
         UIManager = GetComponent<UIManager>();
         QuestManager = GetComponent<QuestManager>();
@@ -227,7 +229,7 @@ public class GameManager : MonoSingleton<GameManager>
         return true;
     }
 
-    private void InputData()
+    private void InputRecipeData()
     {
         string[] names = recipeNameText.ToString().Split('\n');
         string[] ingredients = recipeIngredientText.ToString().Split('\n');
@@ -235,6 +237,18 @@ public class GameManager : MonoSingleton<GameManager>
         for (int i = 0; i < names.Length; i++)
         {
             recipes.Add(new Recipe(names[i], ingredients[i]));
+        }
+    }
+
+    private void InputIngredientData()
+    {
+        string[] infos = ingredientInfoText.ToString().Split('\n', '\t');
+
+        Debug.Log(infos.Length);
+
+        for (int i = 0, cnt = 0; i < infos.Length - 4; i += 4, cnt++)
+        {
+            ingredients[cnt].SetInfo(infos[i], infos[i + 1], int.Parse(infos[i + 2]), int.Parse(infos[i + 3]));
         }
     }
 
@@ -250,12 +264,12 @@ public class GameManager : MonoSingleton<GameManager>
             {
                 ingredientIndex = ingredients.Find(x => recipes[i].GetIngredients()[j].Contains(x.name)).GetIndex();
 
-                if (!user.isIngredientsHave[ingredientIndex])
+                if (!user.GetIsIngredientsHave()[ingredientIndex])
                 {
                     cnt = 0;
                     break;
                 }
-  
+
                 else
                 {
                     cnt++;
@@ -328,7 +342,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     public Sprite GetingredientContainerSprite(int index)
     {
-        Debug.Log(index);
         return ingredientContainerSprites[index];
     }
     #endregion

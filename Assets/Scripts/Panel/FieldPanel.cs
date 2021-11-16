@@ -6,11 +6,12 @@ using DG.Tweening;
 
 public class FieldPanel : MonoBehaviour
 {
-    Ingredient ingredient;
+    [SerializeField] private Button harvestButton;
+
     private int index;
-    Slider timeSlider;
-    [SerializeField] Button harvestButton;
-    Image harvestButtonImage;
+    private Slider timeSlider;
+    private Image harvestButtonImage;
+    private BuyFirstIngredient firstIngredient;
 
     float maxTime = 20f;
     float curTime = 0f;
@@ -21,6 +22,7 @@ public class FieldPanel : MonoBehaviour
     {
         harvestButtonImage = harvestButton.transform.GetChild(0).GetComponent<Image>();
         harvestButton.onClick.AddListener(() => OnClickHarvest());
+        firstIngredient = GetComponent<BuyFirstIngredient>();
     }
     void Update()
     {
@@ -37,21 +39,8 @@ public class FieldPanel : MonoBehaviour
     public void SetValue(int index)
     {
         this.index = index;
-        ingredient = GameManager.Instance.GetIngredients()[index];
+        firstIngredient.SetValue(index);
         harvestButtonImage.sprite = GameManager.Instance.GetIngredientSprite(index);
-    }
-
-    public void OnClickField()
-    {
-        if(GameManager.Instance.CurrentUser.isIngredientsHave[index])
-        {
-
-        }
-
-        else
-        {
-
-        }
     }
 
     public void UpdateHarvestIcon()

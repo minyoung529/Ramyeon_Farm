@@ -9,9 +9,9 @@ public class Ingredient
     public string name;
     [TextArea] public string info;
     public int price;
+    public int firstPrice;
     public IngredientState state;
     public List<string> differentNames;
-    public int firstPrice;
 
     public void SetIndex(int i)
     {
@@ -30,11 +30,19 @@ public class Ingredient
             return;
         }
 
-        GameManager.Instance.CurrentUser.ingredientsAmounts[index] += amount;
+        GameManager.Instance.CurrentUser.AddIngredientsAmounts(index, amount);
     }
 
     public string GetDifferentNames()
     {
         return differentNames[Random.Range(0, differentNames.Count)];
+    }
+
+    public void SetInfo(string name, string info, int firstPrice, int price)
+    {
+        this.name = name;
+        this.info = info;
+        this.firstPrice = firstPrice;
+        this.price = price;
     }
 }

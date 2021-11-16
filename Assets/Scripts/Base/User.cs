@@ -10,8 +10,8 @@ public class User
     [SerializeField] private long money;
     public List<Livestock> livestocks = new List<Livestock>();
 
-    public List<bool> isIngredientsHave = new List<bool>();
-    public List<int> ingredientsAmounts = new List<int>();
+    [SerializeField] private List<bool> isIngredientsHave = new List<bool>();
+    [SerializeField] private List<int> ingredientsAmounts = new List<int>();
 
     public Quest[] questList = new Quest[KeyManager.QUEST_COUNT];
 
@@ -159,6 +159,22 @@ public class User
     public int GetEXP()
     {
         return experiencePoint;
+    }
+    public List<int> GetIngredientsAmounts()
+    {
+        return ingredientsAmounts;
+    }
+    public List<bool> GetIsIngredientsHave()
+    {
+        return isIngredientsHave;
+    }
+    public void AddIngredientsAmounts(int index, int amount)
+    {
+        ingredientsAmounts[index] += amount;
+    }
+    public void SetIsIngredientsHave(int index, bool isTrue)
+    {
+        isIngredientsHave[index] = isTrue;
     }
     #endregion
 }

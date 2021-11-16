@@ -43,7 +43,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         if (amountText != null)
         {
-            amountText.text = GameManager.Instance.CurrentUser.ingredientsAmounts[index].ToString();
+            amountText.text = GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index].ToString();
         }
 
         image.sprite = GameManager.Instance.GetingredientContainerSprite(index);
@@ -53,19 +53,19 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         if (amountText != null)
         {
-            amountText.text = GameManager.Instance.CurrentUser.ingredientsAmounts[index].ToString();
+            amountText.text = GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index].ToString();
         }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (GameManager.Instance.CurrentUser.ingredientsAmounts[index] < 1 && ingredient.state != IngredientState.basic) return;
+        if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.state != IngredientState.basic) return;
         IconInstantiateOrPooling();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (GameManager.Instance.CurrentUser.ingredientsAmounts[index] < 1 && ingredient.state != IngredientState.basic) return;
+        if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.state != IngredientState.basic) return;
 
         Vector2 mousePosition = Input.mousePosition;
         mousePosition = GameManager.Instance.mainCam.ScreenToWorldPoint(mousePosition);
@@ -75,7 +75,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnEndDrag(PointerEventData eventData)
     {
 
-        if (GameManager.Instance.CurrentUser.ingredientsAmounts[index] < 1 && ingredient.state != IngredientState.basic)
+        if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.state != IngredientState.basic)
         {
             GameManager.Instance.currentIngredientIcon = null;
             return;

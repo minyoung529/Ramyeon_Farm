@@ -117,7 +117,7 @@ public class RandomRamen : MonoBehaviour
         {
             rand = Random.Range(0, maxCount);
 
-        } while (!GameManager.Instance.CurrentUser.isIngredientsHave[rand] && rand != 3);
+        } while (!GameManager.Instance.CurrentUser.GetIsIngredientsHave()[rand] && rand != 3);
 
         return rand;
     }
