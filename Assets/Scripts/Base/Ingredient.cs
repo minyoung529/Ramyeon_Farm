@@ -9,7 +9,6 @@ public class Ingredient
     public string name;
     [TextArea] public string info;
     public int price;
-    public bool isHaving;
     public IngredientState state;
     public List<string> differentNames;
 

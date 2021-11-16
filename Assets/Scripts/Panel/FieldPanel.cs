@@ -43,9 +43,15 @@ public class FieldPanel : MonoBehaviour
 
     public void OnClickField()
     {
-        if (isHarvest) return;
-        timeSlider.transform.DOScale(1f, 0.3f);
-        timeSlider.transform.DOScale(1f, 2f).OnComplete(() => timeSlider.transform.DOScale(0f, 0.3f));
+        if(GameManager.Instance.CurrentUser.isIngredientsHave[index])
+        {
+
+        }
+
+        else
+        {
+
+        }
     }
 
     public void UpdateHarvestIcon()
@@ -61,6 +67,5 @@ public class FieldPanel : MonoBehaviour
         harvestButton.transform.DOScale(0f, 0.2f);
         GameManager.Instance.GetIngredients()[index].AddAmount(1);
         GameManager.Instance.UIManager.UpdateIngredientPanel();
-
     }
 }
