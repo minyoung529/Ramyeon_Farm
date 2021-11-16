@@ -11,6 +11,7 @@ public class Ingredient
     public int price;
     public IngredientState state;
     public List<string> differentNames;
+    public int firstPrice;
 
     public void SetIndex(int i)
     {
