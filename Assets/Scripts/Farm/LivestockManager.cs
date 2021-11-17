@@ -16,7 +16,7 @@ public class LivestockManager : MonoBehaviour
         {
             sr = transform.GetChild(i).GetComponent<SpriteRenderer>();
             livestockObjects.Add(transform.GetChild(i).GetChild(0).GetComponent<LivestockObject>());
-            livestockObjects[i].SetValue(GameManager.Instance.CurrentUser.livestocks[i], sr.size.x, sr.size.y);
+            livestockObjects[i].SetValue(i, sr.size.x, sr.size.y);
         }
     }
 

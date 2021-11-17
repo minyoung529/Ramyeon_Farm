@@ -47,10 +47,21 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         }
 
         image.sprite = GameManager.Instance.GetingredientContainerSprite(index);
+        UpdateData();
     }
 
     public void UpdateData()
     {
+        if (!GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index])
+        {
+            gameObject.SetActive(false);
+        }
+
+        else
+        {
+            gameObject.SetActive(true);
+        }
+
         if (amountText != null)
         {
             amountText.text = GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index].ToString();
@@ -74,14 +85,13 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
-
         if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.state != IngredientState.basic)
         {
-            GameManager.Instance.currentIngredientIcon = null;
+            GameManager.Instance.SetCurrentIngredientIcon(null);
             return;
         }
 
-        if (!GameManager.Instance.currentIngredientIcon.isInPot)
+        if (!GameManager.Instance.GetCurrentIngredientIcon().isInPot)
         {
             ingredientIcon.Inactive();
         }
@@ -91,11 +101,11 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             if (pot.IsDonPut())
             {
                 ingredientIcon.Inactive();
-                GameManager.Instance.currentIngredientIcon = null;
+                GameManager.Instance.SetCurrentIngredientIcon(null);
                 return;
             }
 
-            if(ingredientIcon.IsAuto())
+            if (ingredientIcon.IsAuto())
             {
                 ingredientIcon.OnIngredientUp();
                 GameManager.Instance.PlusIngredientInPot(ingredientIcon.GetIngredient());
@@ -114,7 +124,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         {
             icon = GameManager.Instance.ReturnPoolObject("IngredientIcon");
             icon.transform.SetParent(igdIcon.transform.parent);
-            ingredientIcon = GameManager.Instance.ingredientIcons.Find(x => x.gameObject == icon.gameObject);
+            ingredientIcon = GameManager.Instance.GetIngredientIcons().Find(x => x.gameObject == icon.gameObject);
         }
 
         else
@@ -136,13 +146,13 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         icon.SetActive(true);
         ingredientIcon.SetValue(index);
-        GameManager.Instance.currentIngredientIcon = ingredientIcon;
+        GameManager.Instance.SetCurrentIngredientIcon(ingredientIcon);
     }
 
     private void InstantiateIcon()
     {
         icon = Instantiate(igdIcon, igdIcon.transform.parent);
         ingredientIcon = icon.GetComponent<IngredientIcon>();
-        GameManager.Instance.ingredientIcons.Add(ingredientIcon);
+        GameManager.Instance.GetIngredientIcons().Add(ingredientIcon);
     }
 }

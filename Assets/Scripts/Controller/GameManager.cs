@@ -40,8 +40,8 @@ public class GameManager : MonoSingleton<GameManager>
     private List<Ingredient> currentRamen = new List<Ingredient>();
     private Recipe currentRecipe;
 
-    public IngredientIcon currentIngredientIcon;
-    public List<IngredientIcon> ingredientIcons = new List<IngredientIcon>();
+    private IngredientIcon currentIngredientIcon;
+    private List<IngredientIcon> ingredientIcons = new List<IngredientIcon>();
 
     private List<int> userRecipeIndexes = new List<int>();
     #endregion
@@ -143,6 +143,12 @@ public class GameManager : MonoSingleton<GameManager>
             {
                 quest.AddCurrentValue(1);
             }
+        }
+
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            user.AddUserMoney(10000);
+            UIManager.UpdateMoneyText();
         }
     }
 
@@ -343,6 +349,21 @@ public class GameManager : MonoSingleton<GameManager>
     public Sprite GetingredientContainerSprite(int index)
     {
         return ingredientContainerSprites[index];
+    }
+
+    public IngredientIcon GetCurrentIngredientIcon()
+    {
+        return currentIngredientIcon;
+    }
+
+    public void SetCurrentIngredientIcon(IngredientIcon icon)
+    {
+        currentIngredientIcon = icon;
+    }
+
+    public List<IngredientIcon> GetIngredientIcons()
+    {
+        return ingredientIcons;
     }
     #endregion
 }

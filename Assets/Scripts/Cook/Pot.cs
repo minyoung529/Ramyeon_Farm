@@ -60,7 +60,7 @@ public class Pot : MonoBehaviour
             curTime += Time.deltaTime;
         }
 
-        else if(curTime > maxTime && !isBoil)
+        else if (curTime > maxTime && !isBoil)
         {
             BoilWaterAnimation();
         }
@@ -121,7 +121,6 @@ public class Pot : MonoBehaviour
 
     private IEnumerator PutNoodle()
     {
-
         if (GameManager.Instance.IsInCurrentRamen())
         {
             StartCoroutine(Finish());
@@ -145,7 +144,7 @@ public class Pot : MonoBehaviour
 
     public bool IsDonPut()
     {
-        return (dontPutIngredients.Contains(GameManager.Instance.currentIngredientIcon.GetIngredient().name));
+        return (dontPutIngredients.Contains(GameManager.Instance.GetCurrentIngredientIcon().GetIngredient().name));
     }
 
     public void InstantiateIngredientInPot(int index)
@@ -196,6 +195,13 @@ public class Pot : MonoBehaviour
             obj.transform.SetParent(GameManager.Instance.Pool);
             obj.SetActive(false);
         }
+
+        List<IngredientIcon> icons = GameManager.Instance.GetIngredientIcons();
+
+        for (int i = 0; i < icons.Count; i++)
+        {
+            icons[i].Inactive();
+        }
     }
 
     public void ResetPot()
@@ -209,11 +215,15 @@ public class Pot : MonoBehaviour
         spriteRenderer.sprite = potSprites[0];
         GameManager.Instance.ClearCurrentRamen();
 
+        ResetWater();
+        DespawnObjs();
+    }
+
+    private void ResetWater()
+    {
         boilingWater.gameObject.SetActive(false);
         boilingWater.transform.localScale = Vector2.zero;
         boilingWater.color = originColor;
         waterAnimator.Play("WaterIdle");
-
-        DespawnObjs();
     }
 }

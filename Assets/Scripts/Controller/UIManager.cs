@@ -53,11 +53,14 @@ public class UIManager : MonoBehaviour
     private float screenWidth;
     private float distanceX;
     private float distanceY;
+
+    private int curScreen = 0;
     #endregion
     #region Guest
     [Header("¼Õ´Ô")]
     [SerializeField] private Text guestText;
     [SerializeField] private Image speechBubble;
+    private GuestMove guest;
     RandomRamen randomRamen;
     #endregion
 
@@ -72,7 +75,7 @@ public class UIManager : MonoBehaviour
         distanceY = Mathf.Abs(distanceTransform.position.y) * 2f;
 
         randomRamen = new RandomRamen();
-
+        guest = FindObjectOfType<GuestMove>();
         for (int i = 0; i < stagesObj.Count; i++)
         {
             stagesObj[i].transform.position = new Vector2(distanceX * i, 0);
@@ -254,6 +257,8 @@ public class UIManager : MonoBehaviour
         {
             guestText.text = "¹» ¸ÔÀ¸¶ó°í ÁØ°Å¾ß!! ´çÀå ½Å°í¾ß!!";
         }
+
+        guest.StartLeave();
     }
 
     #endregion
@@ -262,9 +267,10 @@ public class UIManager : MonoBehaviour
     public void NextStage()
     {
         if (isMove) return;
+        if (curScreen == stagesUI.Count - 1) return;
 
         isMove = true;
-
+        curScreen++;
         for (int i = 0; i < stagesUI.Count; i++)
         {
             stagesUI[i].transform.DOLocalMoveX(stagesUI[i].transform.localPosition.x - 1440, 0.5f).OnComplete(() => isMove = false);
@@ -279,9 +285,9 @@ public class UIManager : MonoBehaviour
     public void PreviousStage()
     {
         if (isMove) return;
-
+        if (curScreen == 0) return;
         isMove = true;
-
+        curScreen--;
         for (int i = 0; i < stagesUI.Count; i++)
         {
             stagesUI[i].transform.DOLocalMoveX(stagesUI[i].transform.localPosition.x + 1440, 0.5f).OnComplete(() => isMove = false);

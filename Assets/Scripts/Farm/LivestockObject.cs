@@ -6,8 +6,8 @@ public class LivestockObject : MonoBehaviour
 {
     [SerializeField] private GameObject livestockProductObject;
 
-    Livestock livestock;
-    LivestockProduct livestockProduct;
+    private Livestock livestock;
+    private LivestockProduct livestockProduct;
 
     private int maxCount = 5;
     private int curCount = 0;
@@ -19,8 +19,11 @@ public class LivestockObject : MonoBehaviour
     private float maxDistanceY;
 
     private readonly string livestockProductName = "LivestockProduct";
+    
     void Update()
     {
+        if (!GameManager.Instance.CurrentUser.GetIsIngredientsHave()[livestock.GetIngredient().GetIndex()]) return;
+
         if (curTime < maxTime && curCount < maxCount)
         {
             curTime += Time.deltaTime;
@@ -54,11 +57,13 @@ public class LivestockObject : MonoBehaviour
         }
     }
 
-    public void SetValue(Livestock livestock, float distanceX, float distanceY)
+    public void SetValue(int index, float distanceX, float distanceY)
     {
-        this.livestock = livestock;
+        livestock = GameManager.Instance.CurrentUser.livestocks[index];
         maxDistanceX = distanceX;
         maxDistanceY = distanceY;
+
+        transform.parent.GetComponent<BuyFirstIngredient>().SetValue(livestock.GetIngredient().GetIndex());
     }
 
     public void MinusCurCount()

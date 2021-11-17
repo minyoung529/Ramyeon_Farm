@@ -17,6 +17,7 @@ public class FieldPanel : MonoBehaviour
     float curTime = 0f;
 
     private bool isHarvest;
+    private bool isHave = false;
 
     private void Awake()
     {
@@ -26,6 +27,8 @@ public class FieldPanel : MonoBehaviour
     }
     void Update()
     {
+        if (!GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index]) return;
+
         if (!isHarvest)
         {
             curTime += Time.deltaTime;
@@ -46,6 +49,7 @@ public class FieldPanel : MonoBehaviour
     public void UpdateHarvestIcon()
     {
         isHarvest = true;
+        harvestButton.gameObject.SetActive(true);
         harvestButton.transform.DOScale(1f, 0.4f);
     }
 
