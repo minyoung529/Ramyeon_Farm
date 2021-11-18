@@ -215,11 +215,19 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region Guest
-    public void ShowUpSpeechBubble()
+    public void ShowUpSpeechBubble(bool isShow)
     {
-        speechBubble.transform.DOScale(0f, 0f);
-        RandomOrder();
-        speechBubble.transform.DOScale(1f, 0.3f);
+        if (isShow)
+        {
+            speechBubble.transform.DOScale(0f, 0f);
+            RandomOrder();
+            speechBubble.transform.DOScale(1f, 0.3f);
+        }
+
+        else
+        {
+            speechBubble.transform.DOScale(0f, 0.3f);
+        }
     }
 
     public void OnClickAccept()

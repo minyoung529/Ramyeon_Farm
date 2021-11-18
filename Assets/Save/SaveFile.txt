@@ -1,5 +1,6 @@
 ﻿{
     "money": 20010,
+    "day": 0,
     "livestocks": [
         {
             "livestockName": "닭",
@@ -35,23 +36,35 @@
         7,
         7,
         7,
-        1,
-        3,
+        4,
+        5,
         6,
         6,
         6,
-        2,
+        20,
         6,
         6,
         6
     ],
     "questList": [
         {
+            "index": 1,
+            "questName": "미니게임 덕후",
+            "info": "하루에 미니게임을 3회 참가하세요.",
+            "maxValue": 3,
+            "currentValue": 0,
+            "rewardType": 0,
+            "reward": 1000,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
+        },
+        {
             "index": 2,
             "questName": "평점이 좋은 가게",
             "info": "평점이 7점 이상으로 만드세요.",
             "maxValue": 7,
-            "currentValue": 5,
+            "currentValue": 0,
             "rewardType": 0,
             "reward": 1000,
             "ingredientName": "",
@@ -63,19 +76,7 @@
             "questName": "나는야 농사꾼",
             "info": "작물을 10번 수확하세요.",
             "maxValue": 10,
-            "currentValue": 5,
-            "rewardType": 0,
-            "reward": 1000,
-            "ingredientName": "",
-            "isPerform": false,
-            "isRewarded": false
-        },
-        {
-            "index": 1,
-            "questName": "미니게임 덕후",
-            "info": "하루에 미니게임을 3회 참가하세요.",
-            "maxValue": 3,
-            "currentValue": 3,
+            "currentValue": 10,
             "rewardType": 0,
             "reward": 1000,
             "ingredientName": "",
@@ -106,5 +107,5 @@
     "level": 0,
     "experiencePoint": 0,
     "userDate": "0",
-    "userTimeSpan": 18948
+    "userTimeSpan": 18949
 }

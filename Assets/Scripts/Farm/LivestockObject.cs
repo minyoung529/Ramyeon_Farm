@@ -9,6 +9,8 @@ public class LivestockObject : MonoBehaviour
     private Livestock livestock;
     private LivestockProduct livestockProduct;
 
+    private int ingredientIndex;
+
     private int maxCount = 5;
     private int curCount = 0;
 
@@ -22,7 +24,7 @@ public class LivestockObject : MonoBehaviour
     
     void Update()
     {
-        if (!GameManager.Instance.CurrentUser.GetIsIngredientsHave()[livestock.GetIngredient().GetIndex()]) return;
+        if (!GameManager.Instance.CurrentUser.GetIsIngredientsHave()[ingredientIndex]) return;
 
         if (curTime < maxTime && curCount < maxCount)
         {
@@ -32,9 +34,14 @@ public class LivestockObject : MonoBehaviour
         else if (curTime > maxTime && curCount < maxCount)
         {
             GameObject obj = InstantiateOrPooling();
-
+            
             livestockProduct = obj.GetComponent<LivestockProduct>();
-            livestockProduct.SetLiveStock(this);
+
+            LivestockObject livestockObj = this;
+            livestockProduct.SetLiveStock(ref livestockObj);
+
+            obj.transform.SetParent(transform);
+            obj.gameObject.SetActive(true);
 
             obj.transform.localPosition = new Vector2(Random.Range(-maxDistanceX * 0.4f, maxDistanceX * 0.4f), Random.Range(-maxDistanceY * 0.4f, maxDistanceY * 0.4f));
             obj.transform.localScale = Vector3.one;
@@ -60,12 +67,27 @@ public class LivestockObject : MonoBehaviour
     public void SetValue(int index, float distanceX, float distanceY)
     {
         livestock = GameManager.Instance.CurrentUser.livestocks[index];
+        ingredientIndex = livestock.GetIngredient().GetIndex();
+
         maxDistanceX = distanceX;
         maxDistanceY = distanceY;
 
-        transform.parent.GetComponent<BuyFirstIngredient>().SetValue(livestock.GetIngredient().GetIndex());
+        transform.parent.GetComponent<BuyFirstIngredient>().SetValue(ingredientIndex);
+
+        Active();
     }
 
+    private void Active()
+    {
+        if(GameManager.Instance.CurrentUser.GetIsIngredientsHave()[ingredientIndex])
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
     public void MinusCurCount()
     {
         curCount--;
@@ -74,5 +96,10 @@ public class LivestockObject : MonoBehaviour
     public Livestock GetLivestock()
     {
         return livestock;
+    }
+
+    public int GetCurCount()
+    {
+        return curCount;
     }
 }

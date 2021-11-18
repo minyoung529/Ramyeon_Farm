@@ -39,12 +39,14 @@ public class GuestMove : MonoBehaviour
         }
 
         yield return delay02;
-        GameManager.Instance.UIManager.ShowUpSpeechBubble();
+        GameManager.Instance.UIManager.ShowUpSpeechBubble(true);
     }
 
     private IEnumerator Leave()
     {
         yield return delay02;
+        GameManager.Instance.UIManager.ShowUpSpeechBubble(false);
+
         transform.DOLocalMove(GameManager.Instance.doorPosition.localPosition, 2f);
 
         for (float i = targetSize; i > 1f; i -= phase)
@@ -53,8 +55,9 @@ public class GuestMove : MonoBehaviour
             yield return delayFadedTime;
         }
 
-        yield return delay02;
-        GameManager.Instance.UIManager.ShowUpSpeechBubble();
+        yield return new WaitForSeconds(Random.Range(3f, 5f));
+
+        StartCoroutine(GoToCounter());
     }
 
     public void StartLeave()

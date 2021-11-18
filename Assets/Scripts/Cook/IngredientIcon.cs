@@ -64,7 +64,7 @@ public class IngredientIcon : MonoBehaviour
     {
         gameObject.SetActive(false);
         transform.SetParent(GameManager.Instance.Pool);
-        animator.SetInteger(AnimationKey, -1);
+        animator.Play("DefaultAnimation");
         isInPot = false;
         isAnimation = false;
         animator.enabled = false;
@@ -107,7 +107,7 @@ public class IngredientIcon : MonoBehaviour
 
     private void OnAnimationStart()
     {
-        animator.SetInteger(AnimationKey, ingredient.GetIndex());
+        animator.Play(ingredient.GetIndex().ToString());
     }
 
     private void PutInPot()

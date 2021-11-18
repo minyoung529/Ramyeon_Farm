@@ -15,7 +15,7 @@ public class LivestockProduct : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void SetLiveStock(LivestockObject livestockObj)
+    public void SetLiveStock(ref LivestockObject livestockObj)
     {
         this.livestockObj = livestockObj;
         livestock = livestockObj.GetLivestock();
@@ -24,6 +24,7 @@ public class LivestockProduct : MonoBehaviour
 
     private void OnMouseUp()
     {
+        Debug.Log(livestockObj.GetCurCount());
         livestockObj.MinusCurCount();
         ingredient = GameManager.Instance.GetIngredients().Find(x => x.GetIndex() == livestock.GetIngredient().GetIndex());
         ingredient.AddAmount(1);

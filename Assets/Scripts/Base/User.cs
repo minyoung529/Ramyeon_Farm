@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class User
 {
     [SerializeField] private long money;
+    [SerializeField] private int day;
     public List<Livestock> livestocks = new List<Livestock>();
 
     [SerializeField] private List<bool> isIngredientsHave = new List<bool>();
@@ -175,6 +176,14 @@ public class User
     public void SetIsIngredientsHave(int index, bool isTrue)
     {
         isIngredientsHave[index] = isTrue;
+    }
+    public void AddDay(int amount)
+    {
+        day += amount;
+    }
+    public int GetDay()
+    {
+        return day;
     }
     #endregion
 }
