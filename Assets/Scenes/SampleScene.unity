@@ -2643,7 +2643,7 @@ GameObject:
   - component: {fileID: 378364611}
   - component: {fileID: 378364612}
   m_Layer: 0
-  m_Name: town-city-street-summer-illustration_1284-23433
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2657,8 +2657,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378364610}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.69, y: 3.3000002, z: 0}
-  m_LocalScale: {x: 1.3442999, y: 1.3443, z: 1.3443}
+  m_LocalPosition: {x: 0, y: 3.3, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1634325913}
   m_RootOrder: 5
@@ -2703,12 +2703,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -13
-  m_Sprite: {fileID: 21300000, guid: 791966e162655624ea8c3df22f5b5d25, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad278cde94d7b8f498b1d5e916acc60e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 6.26, y: 2.65}
+  m_DrawMode: 1
+  m_Size: {x: 2.5499725, y: 1.7839314}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
