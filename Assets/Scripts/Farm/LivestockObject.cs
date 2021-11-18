@@ -15,7 +15,7 @@ public class LivestockObject : MonoBehaviour
     private int curCount = 0;
 
     private float curTime = 0f;
-    private float maxTime = 10f;
+    private float maxTime;
 
     private float maxDistanceX;
     private float maxDistanceY;
@@ -67,7 +67,10 @@ public class LivestockObject : MonoBehaviour
     public void SetValue(int index, float distanceX, float distanceY)
     {
         livestock = GameManager.Instance.CurrentUser.livestocks[index];
+
         ingredientIndex = livestock.GetIngredient().GetIndex();
+        Ingredient ingredient = GameManager.Instance.GetIngredients()[ingredientIndex];
+        maxTime = ingredient.GetMaxTime();  
 
         maxDistanceX = distanceX;
         maxDistanceY = distanceY;

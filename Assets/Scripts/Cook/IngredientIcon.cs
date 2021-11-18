@@ -94,7 +94,7 @@ public class IngredientIcon : MonoBehaviour
 
     public void OnIngredientUp()
     {
-        if (ingredient.state == IngredientState.basic && isAnimation)
+        if (ingredient.type == IngredientType.basic && isAnimation)
         {
             return;
         }

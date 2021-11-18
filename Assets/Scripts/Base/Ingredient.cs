@@ -10,7 +10,11 @@ public class Ingredient
     [TextArea] public string info;
     public int price;
     public int firstPrice;
-    public IngredientState state;
+    public int upgradePrice;
+    public float maxTime;
+    public float upgradeOffset;
+    public float maxTimeOffset;
+    public IngredientType type;
     public List<string> differentNames;
 
     public void SetIndex(int i)
@@ -25,7 +29,7 @@ public class Ingredient
 
     public void AddAmount(int amount)
     {
-        if(state == IngredientState.basic && amount < 0)
+        if (type == IngredientType.basic && amount < 0)
         {
             return;
         }
@@ -38,11 +42,45 @@ public class Ingredient
         return differentNames[Random.Range(0, differentNames.Count)];
     }
 
-    public void SetInfo(string name, string info, int firstPrice, int price)
+    public void SetInfo(string name, string info, int firstPrice, int price, float maxTime, int upgradePrice, float upgradeOffset)
     {
         this.name = name;
         this.info = info;
         this.firstPrice = firstPrice;
         this.price = price;
+        this.maxTime = maxTime;
+        this.upgradePrice = upgradePrice;
+        this.upgradeOffset = upgradeOffset;
+    }
+
+    public int GetUpgradePrice()
+    {
+        float price = upgradePrice;
+        for (int i = 0; i < GameManager.Instance.CurrentUser.GetIngredientLevel(index) - 1; i++)
+        {
+            price += price / upgradeOffset;
+        }
+
+        return Mathf.RoundToInt(price);
+    }
+
+    public float GetMaxTime()
+    {
+        float maxTime = this.maxTime;
+
+        for (int i = 0; i < GameManager.Instance.CurrentUser.GetIngredientLevel(index); i++)
+        {
+            maxTime -= 1 / maxTimeOffset;
+        }
+
+        return maxTime;
+    }
+
+    public int GetAmount()
+    {
+        int level = GameManager.Instance.CurrentUser.GetIngredientLevel(index);
+        int plus = 4;
+        if (index == 3) plus = 3;
+        return 1 + (level % plus);
     }
 }

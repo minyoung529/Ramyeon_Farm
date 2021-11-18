@@ -40,6 +40,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject achievementPanelObj;
     private List<PanelBase> achievementPanels = new List<PanelBase>();
 
+    [SerializeField] private GameObject ingredientUpgradePanelObj;
+    private List<PanelBase> ingredientUpgradePanels = new List<PanelBase>();
+
     private bool isContentMove;
     #endregion
     #region ScreenMoving
@@ -85,9 +88,10 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         InstantiateIngredientPanel();
-        InstantiateFarmPanel(fieldPanelObj, IngredientState.vegetable);
+        InstantiateFarmPanel(fieldPanelObj, IngredientType.vegetable);
         InstantiatePanel(KeyManager.QUEST_COUNT, questPanelObj, questPanels);
         InstantiatePanel(GameManager.Instance.QuestManager.GetAchievements().Count, achievementPanelObj, achievementPanels);
+        InstantiatePanel(GameManager.Instance.GetIngredients().Count, ingredientUpgradePanelObj, ingredientUpgradePanels, 3);
 
         int max = Mathf.Max(GameManager.Instance.GetIngredients().Count, GameManager.Instance.GetRecipes().Count);
         InstantiatePanel(max, bookPanelObj, bookPanels);
@@ -128,13 +132,13 @@ public class UIManager : MonoBehaviour
 
         ingredientPanelObj.SetActive(false);
     }
-    public void InstantiateFarmPanel(GameObject template, IngredientState state)
+    public void InstantiateFarmPanel(GameObject template, IngredientType state)
     {
         List<Ingredient> ingredients = GameManager.Instance.GetIngredients();
 
         for (int i = 0; i < ingredients.Count; i++)
         {
-            if (ingredients[i].state == state)
+            if (ingredients[i].type == state)
             {
                 GameObject obj = Instantiate(template, template.transform.parent);
                 FieldPanel fieldPanel = obj.GetComponent<FieldPanel>();
@@ -145,11 +149,11 @@ public class UIManager : MonoBehaviour
 
         template.SetActive(false);
     }
-    public void InstantiatePanel(int count, GameObject template, List<PanelBase> panels)
+    public void InstantiatePanel(int count, GameObject template, List<PanelBase> panels, int start = 0)
     {
         GameManager.Instance.CurrentUser.CheckCurrentQuest();
 
-        for (int i = 0; i < count; i++)
+        for (int i = start; i < count; i++)
         {
             GameObject obj = Instantiate(template, template.transform.parent);
             PanelBase panel = obj.GetComponent<PanelBase>();
@@ -175,9 +179,9 @@ public class UIManager : MonoBehaviour
     #region RefreshData
     public void UpdateIngredientPanel()
     {
-        foreach (IngredientPanel panel in ingredientPanels)
+        for (int i = 0; i < ingredientPanels.Count; i++)
         {
-            panel.UpdateData();
+            ingredientPanels[i].UpdateData();
         }
     }
 
@@ -211,6 +215,14 @@ public class UIManager : MonoBehaviour
         }
 
         bookPanels[0].OnClick();
+    }
+
+    public void UpdateIngredientUpgradePanel()
+    {
+        for(int i = 0; i<ingredientUpgradePanels.Count; i++)
+        {
+            ingredientUpgradePanels[i].UpdateUI();
+        }
     }
     #endregion
 

@@ -1,5 +1,5 @@
 [System.Serializable]
-public enum IngredientState
+public enum IngredientType
 {
     basic,
     vegetable,

@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoSingleton<GameManager>
@@ -110,11 +109,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     void Start()
     {
-        for (int i = 0; i < ingredients.Count; i++)
-        {
-            ingredients[i].SetIndex(i);
-        }
-
         SetUserIndex();
     }
 
@@ -250,11 +244,18 @@ public class GameManager : MonoSingleton<GameManager>
     {
         string[] infos = ingredientInfoText.ToString().Split('\n', '\t');
 
-        Debug.Log(infos.Length);
-
-        for (int i = 0, cnt = 0; i < infos.Length - 4; i += 4, cnt++)
+        for (int i = 0, cnt = 0; i < infos.Length; i += 7, cnt++)
         {
-            ingredients[cnt].SetInfo(infos[i], infos[i + 1], int.Parse(infos[i + 2]), int.Parse(infos[i + 3]));
+            ingredients[cnt].SetIndex(cnt);
+
+            ingredients[cnt].SetInfo
+                (infos[i],
+                infos[i + 1],
+                int.Parse(infos[i + 2]),
+                int.Parse(infos[i + 3]),
+                float.Parse(infos[i + 4]),
+                int.Parse(infos[i + 5]),
+                float.Parse(infos[i + 6]));
         }
     }
 
@@ -279,6 +280,7 @@ public class GameManager : MonoSingleton<GameManager>
                 else
                 {
                     cnt++;
+
                     if (cnt == recipes[i].GetIngredients().Count)
                     {
                         userRecipeIndexes.Add(i);

@@ -13,6 +13,7 @@ public class User
 
     [SerializeField] private List<bool> isIngredientsHave = new List<bool>();
     [SerializeField] private List<int> ingredientsAmounts = new List<int>();
+    [SerializeField] private List<int> ingredientsLevels = new List<int>();
 
     public Quest[] questList = new Quest[KeyManager.QUEST_COUNT];
 
@@ -184,6 +185,14 @@ public class User
     public int GetDay()
     {
         return day;
+    }
+    public int GetIngredientLevel(int index)
+    {
+        return ingredientsLevels[index];
+    }
+    public void AddIngredientLevel(int index)
+    {
+        ingredientsLevels[index]++;
     }
     #endregion
 }

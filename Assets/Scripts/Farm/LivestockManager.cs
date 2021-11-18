@@ -6,10 +6,9 @@ public class LivestockManager : MonoBehaviour
 {
     List<LivestockObject> livestockObjects = new List<LivestockObject>();
 
-    void Start()
+    private void Awake()
     {
         SpriteRenderer sr;
-
         SetLivestockIngredient();
 
         for (int i = 0; i < transform.childCount; i++)
@@ -29,7 +28,7 @@ public class LivestockManager : MonoBehaviour
         {
             for (int j = count; j < ingredients.Count; j++)
             {
-                if (ingredients[j].state == IngredientState.meat)
+                if (ingredients[j].type == IngredientType.meat)
                 {
                     count = j + 1;
                     GameManager.Instance.CurrentUser.livestocks[i].SetIngredient(ingredients[j]);

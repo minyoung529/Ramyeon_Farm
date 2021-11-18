@@ -63,6 +63,7 @@ public class BuyFirstIngredient : MonoBehaviour
 
         GameManager.Instance.CurrentUser.AddUserMoney(-price);
         GameManager.Instance.CurrentUser.SetIsIngredientsHave(index, true);
+        GameManager.Instance.UIManager.UpdateIngredientUpgradePanel();
         panel.OnEnactive();
     }
 

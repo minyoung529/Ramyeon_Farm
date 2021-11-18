@@ -70,13 +70,13 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.state != IngredientState.basic) return;
+        if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.type != IngredientType.basic) return;
         IconInstantiateOrPooling();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.state != IngredientState.basic) return;
+        if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.type != IngredientType.basic) return;
 
         Vector2 mousePosition = Input.mousePosition;
         mousePosition = GameManager.Instance.mainCam.ScreenToWorldPoint(mousePosition);
@@ -85,7 +85,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.state != IngredientState.basic)
+        if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.type != IngredientType.basic)
         {
             GameManager.Instance.SetCurrentIngredientIcon(null);
             return;
