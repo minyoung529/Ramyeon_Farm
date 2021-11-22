@@ -1,5 +1,5 @@
 ﻿{
-    "money": 30000,
+    "money": 4475,
     "day": 0,
     "livestocks": [
         {
@@ -24,7 +24,7 @@
         true,
         true,
         false,
-        false,
+        true,
         false,
         false,
         false,
@@ -36,9 +36,9 @@
         7,
         7,
         7,
+        2,
         6,
-        6,
-        6,
+        2,
         6,
         6,
         6,
@@ -50,7 +50,7 @@
         1,
         1,
         1,
-        2,
+        6,
         2,
         1,
         1,
@@ -62,11 +62,23 @@
     ],
     "questList": [
         {
-            "index": 4,
-            "questName": "나는야 요리사",
-            "info": "요리를 15번 완성하세요.",
-            "maxValue": 15,
-            "currentValue": 7,
+            "index": 0,
+            "questName": "손님 10번 받기",
+            "info": "하루에 손님을 10번 받으세요.",
+            "maxValue": 10,
+            "currentValue": 0,
+            "rewardType": 0,
+            "reward": 100,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
+        },
+        {
+            "index": 5,
+            "questName": "돈이 들어온다",
+            "info": "하루에 10000골드 이상 버세요.",
+            "maxValue": 10000,
+            "currentValue": 0,
             "rewardType": 0,
             "reward": 1000,
             "ingredientName": "",
@@ -78,19 +90,7 @@
             "questName": "나는야 농사꾼",
             "info": "작물을 10번 수확하세요.",
             "maxValue": 10,
-            "currentValue": 7,
-            "rewardType": 0,
-            "reward": 1000,
-            "ingredientName": "",
-            "isPerform": false,
-            "isRewarded": false
-        },
-        {
-            "index": 5,
-            "questName": "돈이 들어온다",
-            "info": "하루에 10000골드 이상 버세요.",
-            "maxValue": 10000,
-            "currentValue": 7,
+            "currentValue": 0,
             "rewardType": 0,
             "reward": 1000,
             "ingredientName": "",
@@ -121,5 +121,5 @@
     "level": 0,
     "experiencePoint": 0,
     "userDate": "0",
-    "userTimeSpan": 18949
+    "userTimeSpan": 18953
 }

@@ -67,6 +67,8 @@ public class UIManager : MonoBehaviour
     RandomRamen randomRamen;
     #endregion
 
+    EvaluateRamen evaluateRamen = new EvaluateRamen();
+
     float currenTime = 0f;
 
     private void Awake()
@@ -254,31 +256,7 @@ public class UIManager : MonoBehaviour
 
     public void EvaluateCurrentRamen()
     {
-        PreviousStage();
-
-        float score = GameManager.Instance.EvaluateRamen();
-
-        if (score > 99f)
-        {
-            guestText.text = "완벽해요!";
-        }
-
-        else if (score > 59f)
-        {
-            guestText.text = "그냥 먹을게요";
-        }
-
-        else if (score > 0)
-        {
-            guestText.text = "이게뭐죠? 참...";
-        }
-
-        else
-        {
-            guestText.text = "뭘 먹으라고 준거야!! 당장 신고야!!";
-        }
-
-        guest.StartLeave();
+        evaluateRamen.Evaluate();
     }
 
     #endregion

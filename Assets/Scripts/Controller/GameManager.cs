@@ -367,5 +367,10 @@ public class GameManager : MonoSingleton<GameManager>
     {
         return ingredientIcons;
     }
+
+    public List<Ingredient> GetCurrentRamen()
+    {
+        return currentRamen;
+    }
     #endregion
 }
