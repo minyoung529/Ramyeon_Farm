@@ -1,5 +1,5 @@
 ﻿{
-    "money": 4475,
+    "money": 3940,
     "day": 0,
     "livestocks": [
         {
@@ -33,25 +33,25 @@
         false
     ],
     "ingredientsAmounts": [
-        7,
-        7,
-        7,
+        3,
+        3,
+        3,
+        8,
         2,
-        6,
+        4,
         2,
-        6,
-        6,
-        6,
-        6,
-        6,
-        6
+        2,
+        2,
+        2,
+        2,
+        2
     ],
     "ingredientsLevels": [
         1,
         1,
         1,
-        6,
-        2,
+        1,
+        1,
         1,
         1,
         1,
@@ -62,39 +62,39 @@
     ],
     "questList": [
         {
+            "index": 3,
+            "questName": "나는야 영업왕",
+            "info": "1000초 동안 플레이하세요",
+            "maxValue": 1000,
+            "currentValue": 430,
+            "rewardType": 0,
+            "reward": 1000,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
+        },
+        {
+            "index": 2,
+            "questName": "평점이 좋은 가게",
+            "info": "평점이 7점 이상으로 만드세요.",
+            "maxValue": 7,
+            "currentValue": 7,
+            "rewardType": 0,
+            "reward": 1000,
+            "ingredientName": "",
+            "isPerform": true,
+            "isRewarded": false
+        },
+        {
             "index": 0,
             "questName": "손님 10번 받기",
             "info": "하루에 손님을 10번 받으세요.",
             "maxValue": 10,
-            "currentValue": 0,
+            "currentValue": 10,
             "rewardType": 0,
             "reward": 100,
             "ingredientName": "",
-            "isPerform": false,
-            "isRewarded": false
-        },
-        {
-            "index": 5,
-            "questName": "돈이 들어온다",
-            "info": "하루에 10000골드 이상 버세요.",
-            "maxValue": 10000,
-            "currentValue": 0,
-            "rewardType": 0,
-            "reward": 1000,
-            "ingredientName": "",
-            "isPerform": false,
-            "isRewarded": false
-        },
-        {
-            "index": 6,
-            "questName": "나는야 농사꾼",
-            "info": "작물을 10번 수확하세요.",
-            "maxValue": 10,
-            "currentValue": 0,
-            "rewardType": 0,
-            "reward": 1000,
-            "ingredientName": "",
-            "isPerform": false,
+            "isPerform": true,
             "isRewarded": false
         }
     ],
@@ -121,5 +121,5 @@
     "level": 0,
     "experiencePoint": 0,
     "userDate": "0",
-    "userTimeSpan": 18953
+    "userTimeSpan": 18954
 }

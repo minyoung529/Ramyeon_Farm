@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     #region 텍스트
     [Header("텍스트")]
     [SerializeField] private Text questTimeText;
+    [SerializeField] private Text priceEffectText;
     #endregion
 
     #region 프로필
@@ -91,6 +92,7 @@ public class UIManager : MonoBehaviour
     {
         InstantiateIngredientPanel();
         InstantiateFarmPanel(fieldPanelObj, IngredientType.vegetable);
+
         InstantiatePanel(KeyManager.QUEST_COUNT, questPanelObj, questPanels);
         InstantiatePanel(GameManager.Instance.QuestManager.GetAchievements().Count, achievementPanelObj, achievementPanels);
         InstantiatePanel(GameManager.Instance.GetIngredients().Count, ingredientUpgradePanelObj, ingredientUpgradePanels, 3);
@@ -221,7 +223,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateIngredientUpgradePanel()
     {
-        for(int i = 0; i<ingredientUpgradePanels.Count; i++)
+        for (int i = 0; i < ingredientUpgradePanels.Count; i++)
         {
             ingredientUpgradePanels[i].UpdateUI();
         }
@@ -256,9 +258,33 @@ public class UIManager : MonoBehaviour
 
     public void EvaluateCurrentRamen()
     {
-        evaluateRamen.Evaluate();
+        int price = evaluateRamen.GetRamenPrice();
+        GameManager.Instance.CurrentUser.AddUserMoney(price);
+        StartCoroutine(PriceTextEffect(price));
+
+        guest.StartLeave();
     }
 
+    private IEnumerator PriceTextEffect(int price)
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        Vector2 offset = priceEffectText.transform.position;
+        priceEffectText.text = string.Format("+{0}", price);
+
+        guestText.text = "감사합니다.";
+
+        priceEffectText.gameObject.SetActive(true);
+        priceEffectText.transform.DOMoveY(0.5f, 1f);
+        priceEffectText.DOFade(0f, 1f).OnComplete(() => ResetPriceText(offset));
+    }
+
+    private void ResetPriceText(Vector2 offset)
+    {
+        priceEffectText.gameObject.SetActive(false);
+        priceEffectText.transform.position = offset;
+        priceEffectText.color = Color.black;
+    }
     #endregion
 
     #region MoveScreen

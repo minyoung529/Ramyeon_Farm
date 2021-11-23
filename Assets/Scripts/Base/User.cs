@@ -172,6 +172,7 @@ public class User
     }
     public void AddIngredientsAmounts(int index, int amount)
     {
+        if (!isIngredientsHave[index]) return;
         ingredientsAmounts[index] += amount;
     }
     public void SetIsIngredientsHave(int index, bool isTrue)

@@ -7,30 +7,48 @@ public class EvaluateRamen : MonoBehaviour
     List<int> recipeToInt = new List<int>();
     List<int> myRecipeToInt = new List<int>();
 
+    List<Ingredient> plus = new List<Ingredient>();
+    List<Ingredient> minus = new List<Ingredient>();
+    List<Ingredient> wrong = new List<Ingredient>();
+
+    int price;
+
+    public int GetRamenPrice()
+    {
+        Evaluate();
+        if (price < 0) price = 0;
+        return price;
+    }
+
     public void Evaluate()
     {
         SetRecipeToListInt();
 
         bool isMatch = CheckIsMatchRecipe();
-        int checkListCnt = GetMyCheckListCount();
+        price = GetPrice();
 
         if (isMatch)
         {
-            if (myRecipeToInt.Count == recipeToInt.Count)
-            {
-                Debug.Log("완벽");
-                //완벽
-            }
-
-            else if (myRecipeToInt.Count > recipeToInt.Count)
+            if (myRecipeToInt.Count > recipeToInt.Count)
             {
                 Debug.Log("매치, 많을 때");
+                for (int i = 0; i < plus.Count; i++)
+                {
+                    price -= Mathf.RoundToInt(plus[i].price * 0.8f);
+                }
                 //재료가 더 많을 때 
             }
 
-            else
+            else if (myRecipeToInt.Count < recipeToInt.Count)
             {
+                SettingMinusList();
+                for (int i = 0; i < minus.Count; i++)
+                {
+                    Debug.Log(price);
+                    price -= Mathf.RoundToInt(minus[i].price * 1.1f);
+                }
                 Debug.Log("매치, 적을 때");
+
                 //재료가 더 없을 때 
             }
         }
@@ -39,12 +57,22 @@ public class EvaluateRamen : MonoBehaviour
         {
             if (myRecipeToInt.Count > recipeToInt.Count)
             {
+                for (int i = 0; i < wrong.Count; i++)
+                {
+                    price -= Mathf.RoundToInt(wrong[i].price * 1.2f);
+                }
+
+                for (int i = 0; i < plus.Count; i++)
+                {
+                    price += Mathf.RoundToInt(plus[i].price * 1.2f);
+                }
                 Debug.Log("노매치, 많을 때");
                 //재료가 더 많을 때 
             }
 
             else
             {
+                price = 0;
                 Debug.Log("노매치, 적을 때");
                 //재료가 더 없을 때 
             }
@@ -71,19 +99,22 @@ public class EvaluateRamen : MonoBehaviour
     {
         if (myRecipeToInt.Count == 0) return false;
 
-        Debug.Log(myRecipeToInt.Count);
+        int cnt = 0;
 
         for (int i = 0; i < myRecipeToInt.Count; i++)
         {
-            if(!recipeToInt.Contains(myRecipeToInt[i]))
+            if (recipeToInt.Contains(myRecipeToInt[i]))
             {
-                Debug.Log(i);
+                cnt++;
+            }
 
-                return false;
+            else
+            {
+                wrong.Add(GameManager.Instance.GetIngredients().Find(x => x.GetIndex() == myRecipeToInt[i]));
             }
         }
 
-        return true;
+        return (cnt == myRecipeToInt.Count);
     }
 
     private int GetMyCheckListCount()
@@ -105,5 +136,39 @@ public class EvaluateRamen : MonoBehaviour
         }
 
         return checkList.Count;
+    }
+
+    private int GetPrice()
+    {
+        int price = 1500;
+
+        List<Ingredient> ingredients = GameManager.Instance.GetCurrentRamen();
+
+        for (int j = 0; j < ingredients.Count; j++)
+        {
+            if (!ingredients[j].name.Contains("물") && !ingredients[j].name.Contains("라면사리") && !ingredients[j].name.Contains("스프"))
+            {
+                plus.Add(ingredients[j]);
+            }
+        }
+
+        for (int i = 0; i < plus.Count; i++)
+        {
+            Debug.Log(price);
+            price += plus[i].price;
+        }
+
+        return (price + (plus.Count - 1) * 100);
+    }
+
+    private void SettingMinusList()
+    {
+        for (int i = 0; i < recipeToInt.Count; i++)
+        {
+            if (!myRecipeToInt.Contains(recipeToInt[i]))
+            {
+                minus.Add(GameManager.Instance.GetIngredients()[recipeToInt[i]]);
+            }
+        }
     }
 }

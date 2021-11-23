@@ -27,6 +27,8 @@ public class IngredientUpdatePanel : PanelBase
 
         int level = GameManager.Instance.CurrentUser.GetIngredientLevel(index);
         levelText.text = string.Format("Lv.{0}  -> Lv.{1}", level, level + 1);
+        ingredientPriceText.text = string.Format("{0}¿ø  -> {1}¿ø", ingredient.GetPrice(), ingredient.GetNextPrice());
+
         upgradePriceText.text = ingredient.GetUpgradePrice().ToString();
         nameText.text = ingredient.name;
     }

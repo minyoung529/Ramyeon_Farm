@@ -85,6 +85,7 @@ public class Pot : MonoBehaviour
     {
         dontPut = true;
         DontPut("라면사리", "스프");
+        boilingWater.gameObject.SetActive(true);
         boilingWater.transform.DOScale(1f, 2f);
         ResetTimer();
     }
@@ -117,7 +118,6 @@ public class Pot : MonoBehaviour
 
         Debug.Log("스프 풀어짐");
     }
-
 
     private IEnumerator PutNoodle()
     {
@@ -181,6 +181,7 @@ public class Pot : MonoBehaviour
         {
             return 0;
         }
+
         else
         {
             return 2;
@@ -189,11 +190,17 @@ public class Pot : MonoBehaviour
 
     private void DespawnObjs()
     {
+        List<GameObject> objs = new List<GameObject>();
+
         for (int i = 1; i < transform.childCount; i++)
         {
-            GameObject obj = transform.GetChild(1).gameObject;
-            obj.transform.SetParent(GameManager.Instance.Pool);
-            obj.SetActive(false);
+            objs.Add(transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < objs.Count; i++)
+        {
+            objs[i].gameObject.SetActive(false);
+            objs[i].transform.SetParent(GameManager.Instance.Pool);
         }
 
         List<IngredientIcon> icons = GameManager.Instance.GetIngredientIcons();

@@ -9,6 +9,7 @@ public class Recipe
     public string recipeName;
     [TextArea] public string ingredient;
     private List<string> ingredientList;
+    private string info;
 
     public Recipe(string recipeName_, string ingredient_)
     {

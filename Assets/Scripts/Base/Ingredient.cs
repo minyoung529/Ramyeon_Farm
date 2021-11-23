@@ -83,4 +83,18 @@ public class Ingredient
         if (index == 3) plus = 3;
         return 1 + (level % plus);
     }
+
+    public int GetNextPrice()
+    {
+        int price = this.price;
+        price += Mathf.RoundToInt((GameManager.Instance.CurrentUser.GetIngredientLevel(index)) * price * 0.05f);
+        return price;
+    }
+
+    public int GetPrice()
+    {
+        int price = this.price;
+        price += Mathf.RoundToInt((GameManager.Instance.CurrentUser.GetIngredientLevel(index) - 1) * price * 0.05f);
+        return price;
+    }
 }
