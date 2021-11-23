@@ -81,7 +81,7 @@ public class RandomRamen : MonoBehaviour
                 }
                 else
                 {
-                    comment += string.Format(" {0}랑", ingredients[i].GetDifferentNames());
+                    comment += string.Format(" {0},", ingredients[i].GetDifferentNames());
                 }
             }
             comment += "도 넣어주세여~~";

@@ -37,7 +37,6 @@ public class AchievementPanel : PanelBase
 
         if (GameManager.Instance.CurrentUser.IsAchievementReward(index))
         {
-            Debug.Log("sd");
             rewardButton.transform.localScale = Vector3.one;
         }
 

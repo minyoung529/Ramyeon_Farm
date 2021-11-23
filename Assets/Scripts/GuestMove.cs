@@ -30,6 +30,8 @@ public class GuestMove : MonoBehaviour
 
     private IEnumerator GoToCounter()
     {
+        GameManager.Instance.QuestManager.AddQuestValue(KeyManager.GUESTQUEST_INDEX, 1);
+        spriteRenderer.sprite = GameManager.Instance.GetRandomGuestSprite();
         transform.DOLocalMove(GameManager.Instance.counterPosition.localPosition, 2f);
 
         for (float i = 1f; i < targetSize; i += phase)

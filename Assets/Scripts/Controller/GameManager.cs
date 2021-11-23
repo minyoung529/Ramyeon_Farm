@@ -27,6 +27,7 @@ public class GameManager : MonoSingleton<GameManager>
     private Sprite[] ingredientContainerSprites;
     private Sprite[] ingredientSprites;
     private Sprite[] ingredientInPotSprites;
+    private Sprite[] guestSprites;
     #endregion
 
     public Transform doorPosition;
@@ -104,6 +105,8 @@ public class GameManager : MonoSingleton<GameManager>
         ingredientSprites = Resources.LoadAll<Sprite>("IngredientAsset");
         ingredientInPotSprites = Resources.LoadAll<Sprite>("IngredientInPotAsset");
         ingredientContainerSprites = Resources.LoadAll<Sprite>("IngredientContainerAsset");
+        guestSprites = Resources.LoadAll<Sprite>("Guests");
+
         mainCam = Camera.main;
     }
 
@@ -371,6 +374,11 @@ public class GameManager : MonoSingleton<GameManager>
     public List<Ingredient> GetCurrentRamen()
     {
         return currentRamen;
+    }
+
+    public Sprite GetRandomGuestSprite()
+    {
+        return guestSprites[Random.Range(0, guestSprites.Length)];
     }
     #endregion
 }

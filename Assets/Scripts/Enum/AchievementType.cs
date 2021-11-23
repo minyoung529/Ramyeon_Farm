@@ -2,7 +2,7 @@ public enum AchievementType
 {
     Cook,
     BadCook,
-    Burn,
+    //Burn,
     MiniGame,
     Time,
     Money

@@ -34,6 +34,7 @@ public class QuestManager : MonoBehaviour
         if (curTime > maxTime)
         {
             AddQuestValue(KeyManager.TIMEQUEST_INDEX, 1);
+            GameManager.Instance.CurrentUser.AddSecond();
             curTime = 0;
         }
 

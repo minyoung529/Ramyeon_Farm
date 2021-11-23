@@ -20,15 +20,19 @@ public class User
     public int[] achievementLevel;
     public int[] currentAchievement;
 
-    [SerializeField] private int level;
-    [SerializeField] private int experiencePoint;
-
     [SerializeField] private string userDate;
     [SerializeField] private long userTimeSpan;
+
+    [SerializeField] private int playTime;
 
     //돈 더해주는 함수, 매개변수에 - 하면 빠짐
     public void AddUserMoney(int addMoney)
     {
+        if(addMoney > 0)
+        {
+            PlusCurrentAchievement((int)AchievementType.Money, addMoney);
+        }
+
         money += addMoney;
         GameManager.Instance.UIManager.UpdateMoneyText();
     }
@@ -146,22 +150,6 @@ public class User
         userTimeSpan = timeSpan.Days;
     }
 
-    public void SetLevel(int level)
-    {
-        this.level = level;
-    }
-    public int GetLevel()
-    {
-        return level;
-    }
-    public void SetEXP(int exp)
-    {
-        experiencePoint = exp;
-    }
-    public int GetEXP()
-    {
-        return experiencePoint;
-    }
     public List<int> GetIngredientsAmounts()
     {
         return ingredientsAmounts;
@@ -194,6 +182,22 @@ public class User
     public void AddIngredientLevel(int index)
     {
         ingredientsLevels[index]++;
+    }
+
+    public void AddSecond()
+    {
+        int index = (int)AchievementType.Time;
+        Achievement achievement = GameManager.Instance.QuestManager.GetAchievements()[index];
+
+        if (achievement.conditions[achievementLevel[index]] == achievement.achieveCount) return;
+
+        playTime++;
+
+        if (playTime == 3600)
+        {
+            PlusCurrentAchievement(index, 1);
+            playTime = 0;
+        }
     }
     #endregion
 }

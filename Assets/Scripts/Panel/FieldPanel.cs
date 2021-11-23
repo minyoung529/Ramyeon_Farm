@@ -65,5 +65,6 @@ public class FieldPanel : MonoBehaviour
         harvestButton.transform.DOScale(0f, 0.2f);
         GameManager.Instance.GetIngredients()[index].AddAmount(ingredient.GetAmount());
         GameManager.Instance.UIManager.UpdateIngredientPanel();
+        GameManager.Instance.QuestManager.AddQuestValue(KeyManager.FARMQUEST_INDEX, 1);
     }
 }

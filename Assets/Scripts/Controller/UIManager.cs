@@ -191,6 +191,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateQuestPanel(int index)
     {
+        if (questPanels.Count == 0) return;
         questPanels[index].UpdateUI();
     }
 
@@ -258,8 +259,11 @@ public class UIManager : MonoBehaviour
 
     public void EvaluateCurrentRamen()
     {
+        GameManager.Instance.QuestManager.AddQuestValue(KeyManager.COOKQUESST_INDEX, 1);
+
         int price = evaluateRamen.GetRamenPrice();
         GameManager.Instance.CurrentUser.AddUserMoney(price);
+        GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.Cook, 1);
         StartCoroutine(PriceTextEffect(price));
 
         guest.StartLeave();

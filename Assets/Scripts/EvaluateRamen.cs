@@ -36,6 +36,8 @@ public class EvaluateRamen : MonoBehaviour
                 {
                     price -= Mathf.RoundToInt(plus[i].price * 0.8f);
                 }
+
+                GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
                 //재료가 더 많을 때 
             }
 
@@ -48,6 +50,7 @@ public class EvaluateRamen : MonoBehaviour
                     price -= Mathf.RoundToInt(minus[i].price * 1.1f);
                 }
                 Debug.Log("매치, 적을 때");
+                GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
 
                 //재료가 더 없을 때 
             }
@@ -67,6 +70,7 @@ public class EvaluateRamen : MonoBehaviour
                     price += Mathf.RoundToInt(plus[i].price * 1.2f);
                 }
                 Debug.Log("노매치, 많을 때");
+                GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
                 //재료가 더 많을 때 
             }
 
@@ -74,6 +78,7 @@ public class EvaluateRamen : MonoBehaviour
             {
                 price = 0;
                 Debug.Log("노매치, 적을 때");
+                GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
                 //재료가 더 없을 때 
             }
         }
