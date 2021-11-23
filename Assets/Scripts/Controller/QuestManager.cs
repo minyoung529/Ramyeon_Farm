@@ -114,7 +114,6 @@ public class QuestManager : MonoBehaviour
         return false;
     }
 
-
     private void InputAchievementData()
     {
         string[] types = achievementName.ToString().Split('\t', '\n');

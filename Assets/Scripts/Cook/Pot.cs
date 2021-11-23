@@ -32,7 +32,7 @@ public class Pot : MonoBehaviour
     private bool isBoil = false;
 
     Color soupColor = new Color32(255, 0, 0, 89);
-    Color originColor = new Color32(0, 0, 0, 89);
+    Color originColor = new Color32(255, 255, 255, 89);
 
     private float curTime = 0f;
     private float maxTime = 0f;
