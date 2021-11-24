@@ -1,5 +1,5 @@
 ﻿{
-    "money": 1000,
+    "money": 24350,
     "day": 0,
     "livestocks": [
         {
@@ -36,7 +36,7 @@
         1,
         1,
         1,
-        0,
+        3,
         0,
         0,
         0,
@@ -66,53 +66,53 @@
             "questName": "손님 10번 받기",
             "info": "하루에 손님을 10번 받으세요.",
             "maxValue": 10,
-            "currentValue": 6,
+            "currentValue": 10,
             "rewardType": 0,
             "reward": 100,
             "ingredientName": "",
-            "isPerform": false,
-            "isRewarded": false
-        },
-        {
-            "index": 4,
-            "questName": "나는야 농사꾼",
-            "info": "작물을 10번 수확하세요.",
-            "maxValue": 10,
-            "currentValue": 0,
-            "rewardType": 0,
-            "reward": 1000,
-            "ingredientName": "",
-            "isPerform": false,
-            "isRewarded": false
+            "isPerform": true,
+            "isRewarded": true
         },
         {
             "index": 3,
-            "questName": "나는야 요리사",
-            "info": "요리를 15번 완성하세요.",
-            "maxValue": 15,
-            "currentValue": 15,
+            "questName": "나는야 농사꾼",
+            "info": "작물을 10번 수확하세요.",
+            "maxValue": 10,
+            "currentValue": 10,
             "rewardType": 0,
             "reward": 1000,
             "ingredientName": "",
             "isPerform": true,
             "isRewarded": true
+        },
+        {
+            "index": 1,
+            "questName": "나는야 영업왕",
+            "info": "1000초 동안 플레이하세요",
+            "maxValue": 1000,
+            "currentValue": 827,
+            "rewardType": 0,
+            "reward": 1000,
+            "ingredientName": "",
+            "isPerform": false,
+            "isRewarded": false
         }
     ],
     "achievementLevel": [
-        0,
+        1,
         0,
         0,
         0,
         0
     ],
     "currentAchievement": [
-        1,
-        1,
+        16,
+        9,
         0,
         0,
-        1000
+        24350
     ],
     "userDate": "0",
-    "userTimeSpan": 18954,
-    "playTime": 79
+    "userTimeSpan": 18955,
+    "playTime": 965
 }

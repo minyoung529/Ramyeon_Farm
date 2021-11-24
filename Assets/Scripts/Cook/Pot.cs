@@ -28,6 +28,8 @@ public class Pot : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+    ParticleSystem smokeParticle;
+
     private bool isStop = false;
     private bool isBoil = false;
 
@@ -44,6 +46,8 @@ public class Pot : MonoBehaviour
         waterAnimator = GetComponentInChildren<Animator>();
         boilingWater = transform.GetChild(0).GetComponent<SpriteRenderer>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        smokeParticle = boilingWater.GetComponentInChildren<ParticleSystem>();
+        smokeParticle.gameObject.SetActive(false);
         DontPut("라면사리", "스프");
     }
 
@@ -104,6 +108,7 @@ public class Pot : MonoBehaviour
         waterAnimator.Play("Water_boil");
         DontPut("");
         Debug.Log("물이 끓음");
+        smokeParticle.gameObject.SetActive(true);
     }
 
     private IEnumerator PutSoup()
@@ -232,5 +237,6 @@ public class Pot : MonoBehaviour
         boilingWater.transform.localScale = Vector2.zero;
         boilingWater.color = originColor;
         waterAnimator.Play("WaterIdle");
+        smokeParticle.gameObject.SetActive(false);
     }
 }

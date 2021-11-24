@@ -13,6 +13,10 @@ public class EvaluateRamen : MonoBehaviour
 
     int price;
 
+    private GuestComment guestComment = new GuestComment();
+    private string comment = "";
+
+
     public int GetRamenPrice()
     {
         Evaluate();
@@ -31,10 +35,11 @@ public class EvaluateRamen : MonoBehaviour
         {
             if (myRecipeToInt.Count > recipeToInt.Count)
             {
+                SetComment(myRecipeToInt.Count, recipeToInt.Count);
                 Debug.Log("매치, 많을 때");
                 for (int i = 0; i < plus.Count; i++)
                 {
-                    price -= Mathf.RoundToInt(plus[i].price * 0.8f);
+                    price -= Mathf.RoundToInt(plus[i].GetPrice() * 1.5f);
                 }
 
                 GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
@@ -44,15 +49,22 @@ public class EvaluateRamen : MonoBehaviour
             else if (myRecipeToInt.Count < recipeToInt.Count)
             {
                 SettingMinusList();
+                SetComment(myRecipeToInt.Count, recipeToInt.Count);
+
                 for (int i = 0; i < minus.Count; i++)
                 {
                     Debug.Log(price);
-                    price -= Mathf.RoundToInt(minus[i].price * 1.1f);
+                    price -= Mathf.RoundToInt(minus[i].GetPrice() * 1.1f);
                 }
                 Debug.Log("매치, 적을 때");
                 GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
 
                 //재료가 더 없을 때 
+            }
+
+            else
+            {
+                comment = guestComment.GetGoodComments();
             }
         }
 
@@ -62,14 +74,16 @@ public class EvaluateRamen : MonoBehaviour
             {
                 for (int i = 0; i < wrong.Count; i++)
                 {
-                    price -= Mathf.RoundToInt(wrong[i].price * 1.2f);
+                    price -= Mathf.RoundToInt(wrong[i].GetPrice() * 1.2f);
                 }
 
                 for (int i = 0; i < plus.Count; i++)
                 {
-                    price += Mathf.RoundToInt(plus[i].price * 1.2f);
+                    price += Mathf.RoundToInt(plus[i].GetPrice() * 1.2f);
                 }
                 Debug.Log("노매치, 많을 때");
+                comment = guestComment.GetBadComments();
+
                 GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
                 //재료가 더 많을 때 
             }
@@ -79,6 +93,8 @@ public class EvaluateRamen : MonoBehaviour
                 price = 0;
                 Debug.Log("노매치, 적을 때");
                 GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
+                comment = guestComment.GetBadComments();
+
                 //재료가 더 없을 때 
             }
         }
@@ -160,7 +176,7 @@ public class EvaluateRamen : MonoBehaviour
         for (int i = 0; i < plus.Count; i++)
         {
             Debug.Log(price);
-            price += plus[i].price;
+            price += plus[i].GetPrice();
         }
 
         return (price + (plus.Count - 1) * 100);
@@ -175,5 +191,34 @@ public class EvaluateRamen : MonoBehaviour
                 minus.Add(GameManager.Instance.GetIngredients()[recipeToInt[i]]);
             }
         }
+    }
+
+    public void ResetData()
+    {
+        recipeToInt.Clear();
+        myRecipeToInt.Clear();
+
+        plus.Clear();
+        minus.Clear();
+        wrong.Clear();
+
+        price = 0;
+    }
+
+    private void SetComment(int count1, int count2)
+    {
+        if (Mathf.Abs(count2 - count1) > 2)
+        {
+            comment = guestComment.GetBadComments();
+        }
+        else
+        {
+            comment = guestComment.GetCommonComments();
+        }
+    }
+
+    public string GetComment()
+    {
+        return comment;
     }
 }

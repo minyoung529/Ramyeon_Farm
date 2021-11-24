@@ -8,7 +8,7 @@ public class Ingredient
     private int index;
     public string name;
     [TextArea] public string info;
-    public int price;
+    [SerializeField] private int price;
     public int firstPrice;
     public int upgradePrice;
     public float maxTime;
@@ -81,7 +81,7 @@ public class Ingredient
         int level = GameManager.Instance.CurrentUser.GetIngredientLevel(index);
         int plus = 4;
         if (index == 3) plus = 3;
-        return 1 + (level % plus);
+        return 1 + (level / plus);
     }
 
     public int GetNextPrice()

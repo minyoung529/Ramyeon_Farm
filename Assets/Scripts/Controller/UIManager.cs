@@ -276,11 +276,13 @@ public class UIManager : MonoBehaviour
         Vector2 offset = priceEffectText.transform.position;
         priceEffectText.text = string.Format("+{0}", price);
 
-        guestText.text = "감사합니다.";
+        guestText.text = evaluateRamen.GetComment();
 
         priceEffectText.gameObject.SetActive(true);
         priceEffectText.transform.DOMoveY(0.5f, 1f);
         priceEffectText.DOFade(0f, 1f).OnComplete(() => ResetPriceText(offset));
+
+        evaluateRamen.ResetData();
     }
 
     private void ResetPriceText(Vector2 offset)

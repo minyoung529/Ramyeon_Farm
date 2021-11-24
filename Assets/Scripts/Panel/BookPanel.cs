@@ -36,6 +36,8 @@ public class BookPanel : PanelBase
 
     private void SetImage(int enumValue)
     {
+        info = "";
+
         switch (enumValue)
         {
             case 0:
@@ -52,13 +54,11 @@ public class BookPanel : PanelBase
 
                 image.sprite = GameManager.Instance.GetIngredientSprite(0);
                 contentName = string.Format("라면 {0}", index);
-                info = string.Format("라면 {0}", index);
-                break;
-
-            case 2:
-                image.sprite = GameManager.Instance.GetIngredientSprite(1);
-                contentName = string.Format("가구 {0}", index);
-                info = string.Format("가구 {0}", index);
+                List<string> ingredients = GameManager.Instance.GetRecipes()[index].GetIngredients();
+                for (int i = 0; i< ingredients.Count; i++)
+                {
+                    info += string.Format("{0}, ", ingredients[i]);
+                }
                 break;
         }
     }

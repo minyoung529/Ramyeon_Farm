@@ -6,6 +6,7 @@ public class RandomRamen : MonoBehaviour
 {
     private List<Ingredient> differentIngredients = new List<Ingredient>();
     private bool isAdd;
+    private GuestComment guestComment = new GuestComment();
 
     private Recipe GetRandomRamen()
     {
@@ -63,13 +64,13 @@ public class RandomRamen : MonoBehaviour
 
         if (ingredients.Count > 0 && !isAdd)
         {
-            comment = string.Format("{0} 주세용~", recipe.recipeName);
-            comment += string.Format(" {0} 빼고요!!", ingredients[0].GetDifferentNames());
+            comment = string.Format(guestComment.GetOrderComments(), recipe.recipeName);
+            comment += string.Format(guestComment.GetRemoveComments(), ingredients[0].GetDifferentNames());
         }
 
         else if (ingredients.Count > 0 && isAdd)
         {
-            comment = string.Format("{0} 주세여", recipe.recipeName);
+            comment = string.Format(guestComment.GetOrderComments(), recipe.recipeName);
 
             comment += " 추가로";
 
@@ -84,12 +85,12 @@ public class RandomRamen : MonoBehaviour
                     comment += string.Format(" {0},", ingredients[i].GetDifferentNames());
                 }
             }
-            comment += "도 넣어주세여~~";
+            comment += guestComment.GetAddComments();
         }
 
         else
         {
-            comment = string.Format("{0} 주시라구요", recipe.recipeName);
+            comment = string.Format(guestComment.GetOrderComments(), recipe.recipeName);
         }
 
         ResetData();
