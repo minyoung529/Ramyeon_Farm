@@ -68,6 +68,9 @@ public class UIManager : MonoBehaviour
     RandomRamen randomRamen;
     #endregion
 
+    [SerializeField] private GameObject quitPanel;
+    [SerializeField] private ParticleSystem coinEffect;
+
     EvaluateRamen evaluateRamen = new EvaluateRamen();
 
     float currenTime = 0f;
@@ -109,6 +112,11 @@ public class UIManager : MonoBehaviour
         {
             QuestTimeText();
             currenTime = 0f;
+        }
+
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+            quitPanel.SetActive(true);
         }
     }
 
@@ -273,6 +281,10 @@ public class UIManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
+        if(price != 0)
+        {
+            coinEffect.Play();
+        }
         Vector2 offset = priceEffectText.transform.position;
         priceEffectText.text = string.Format("+{0}", price);
 

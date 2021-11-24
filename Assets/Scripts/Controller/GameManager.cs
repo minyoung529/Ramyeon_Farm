@@ -381,4 +381,9 @@ public class GameManager : MonoSingleton<GameManager>
         return guestSprites[Random.Range(0, guestSprites.Length)];
     }
     #endregion
+
+    public void OnClickQuit()
+    {
+        Application.Quit();
+    }
 }

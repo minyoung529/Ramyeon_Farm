@@ -47,7 +47,6 @@ public class RandomRamen : MonoBehaviour
 
         if (isAdd)
         {
-            ingredient = GameManager.Instance.GetIngredients()[GetRandomIngredientIndex()];
             recipe.AddRecipe(ingredient.name);
         }
         else
@@ -111,13 +110,12 @@ public class RandomRamen : MonoBehaviour
 
     private int GetRandomIngredientIndex()
     {
-        int maxCount = GameManager.Instance.GetIngredients().Count;
         int rand;
 
         do
         {
-            rand = Random.Range(0, maxCount);
-        } while (!GameManager.Instance.CurrentUser.GetIsIngredientsHave()[rand] && rand != 2);
+            rand = Random.Range(0, GameManager.Instance.GetIngredients().Count);
+        } while (!GameManager.Instance.CurrentUser.GetIsIngredientsHave()[rand] || rand != 2);
 
         return rand;
     }
