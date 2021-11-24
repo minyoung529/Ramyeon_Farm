@@ -41,5 +41,7 @@ public class Factory : MonoBehaviour
     {
         harvestButton.gameObject.SetActive(false);
         GameManager.Instance.CurrentUser.AddIngredientsAmounts(index, ingredient.GetAmount());
+        curTime = 0f;
+        isHarvest = false;
     }
 }
