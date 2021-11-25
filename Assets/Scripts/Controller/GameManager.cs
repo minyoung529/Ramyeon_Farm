@@ -262,6 +262,7 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
+
     public void SetUserIndex()
     {
         userRecipeIndexes.Clear();

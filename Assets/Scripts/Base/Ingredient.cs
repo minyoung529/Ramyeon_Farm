@@ -52,7 +52,10 @@ public class Ingredient
         this.upgradePrice = upgradePrice;
         this.upgradeOffset = upgradeOffset;
     }
+    public void SetInfo(string name, string info)
+    {
 
+    }
     public int GetUpgradePrice()
     {
         float price = upgradePrice;

@@ -162,6 +162,8 @@ public class User
     {
         if (!isIngredientsHave[index]) return;
         ingredientsAmounts[index] += amount;
+
+        GameManager.Instance.UIManager.UpdateInventoryPanel();
     }
     public void SetIsIngredientsHave(int index, bool isTrue)
     {
