@@ -85,6 +85,7 @@ public class AchievementPanel : PanelBase
         User user = GameManager.Instance.CurrentUser;
         user.AddUserMoney(achievement.rewards[user.achievementLevel[index]]);
         GameManager.Instance.CurrentUser.CheckAchievement(index);
+        GameManager.Instance.UIManager.CheckIsUpdateInMenu();
     }
 
     public override bool CheckIsUpdate()

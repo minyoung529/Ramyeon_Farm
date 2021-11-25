@@ -54,6 +54,7 @@ public class QuestManager : MonoBehaviour
             int index_ = GetQuestListIndex(index);
             if (index_ < 0) return;
             GameManager.Instance.CurrentUser.questList[index_].AddCurrentValue(value);
+            GameManager.Instance.UIManager.CheckIsUpdateInMenu();
         }
     }
 

@@ -72,6 +72,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private ParticleSystem coinEffect;
 
     EvaluateRamen evaluateRamen = new EvaluateRamen();
+    MenuButton menuButton;
 
     float currenTime = 0f;
 
@@ -84,7 +85,9 @@ public class UIManager : MonoBehaviour
         distanceY = Mathf.Abs(distanceTransform.position.y) * 2f;
 
         randomRamen = new RandomRamen();
+        menuButton = FindObjectOfType<MenuButton>();
         guest = FindObjectOfType<GuestMove>();
+
         for (int i = 0; i < stagesObj.Count; i++)
         {
             stagesObj[i].transform.position = new Vector2(distanceX * i, 0);
@@ -103,6 +106,7 @@ public class UIManager : MonoBehaviour
         int max = Mathf.Max(GameManager.Instance.GetIngredients().Count, GameManager.Instance.GetRecipes().Count);
         InstantiatePanel(max, bookPanelObj, bookPanels);
         UpdateMoneyText();
+
     }
     private void Update()
     {
@@ -384,6 +388,11 @@ public class UIManager : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void CheckIsUpdateInMenu()
+    {
+        menuButton.CheckIsUpdate();
     }
     #endregion
 

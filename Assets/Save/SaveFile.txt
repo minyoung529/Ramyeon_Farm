@@ -1,5 +1,5 @@
 ﻿{
-    "money": 1000,
+    "money": 40602,
     "day": 0,
     "livestocks": [
         {
@@ -24,8 +24,8 @@
         true,
         true,
         false,
-        false,
-        false,
+        true,
+        true,
         false,
         false,
         false,
@@ -36,9 +36,9 @@
         1,
         1,
         1,
-        1,
+        2,
         0,
-        0,
+        2,
         0,
         0,
         0,
@@ -66,24 +66,24 @@
             "questName": "나는야 요리사",
             "info": "요리를 15번 완성하세요.",
             "maxValue": 15,
-            "currentValue": 0,
+            "currentValue": 15,
             "rewardType": 0,
             "reward": 1000,
             "ingredientName": "",
-            "isPerform": false,
-            "isRewarded": false
+            "isPerform": true,
+            "isRewarded": true
         },
         {
             "index": 3,
             "questName": "나는야 농사꾼",
             "info": "작물을 10번 수확하세요.",
             "maxValue": 10,
-            "currentValue": 1,
+            "currentValue": 10,
             "rewardType": 0,
             "reward": 1000,
             "ingredientName": "",
-            "isPerform": false,
-            "isRewarded": false
+            "isPerform": true,
+            "isRewarded": true
         },
         {
             "index": 0,
@@ -95,7 +95,7 @@
             "reward": 100,
             "ingredientName": "",
             "isPerform": true,
-            "isRewarded": false
+            "isRewarded": true
         }
     ],
     "achievementLevel": [
@@ -103,16 +103,16 @@
         0,
         0,
         0,
-        0
+        1
     ],
     "currentAchievement": [
+        9,
         4,
-        1,
         0,
         0,
-        6000
+        645602
     ],
     "userDate": "0",
     "userTimeSpan": 18956,
-    "playTime": 457
+    "playTime": 1132
 }

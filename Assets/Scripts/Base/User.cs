@@ -86,6 +86,7 @@ public class User
     {
         currentAchievement[index] += amount;
         GameManager.Instance.UIManager.UpdateAchievementPanel();
+        GameManager.Instance.UIManager.CheckIsUpdateInMenu();
     }
 
     public void CheckAchievement(int index)
@@ -102,6 +103,7 @@ public class User
         }
 
         GameManager.Instance.UIManager.UpdateAchievementPanel();
+        GameManager.Instance.UIManager.CheckIsUpdateInMenu();
     }
 
     public bool IsAchievementReward(int index)

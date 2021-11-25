@@ -31,6 +31,8 @@ public class MenuButton : MonoBehaviour
         }
 
         button.onClick.AddListener(() => OnClick(isActive));
+
+        CheckIsUpdate();
     }
 
     private void OnClick(bool active)
@@ -84,16 +86,10 @@ public class MenuButton : MonoBehaviour
     }
 
     //이거 호출하는 거 작성하기
-    private void CheckIsUpdate()
+    public void CheckIsUpdate()
     {
-        if (CheckQuest())
-        {
-            updateIcons[questIndex].SetActive(true);
-        }
-
-        else if (CheckAchievement())
-        {
-            updateIcons[achievementIndex].SetActive(true);
-        }
+        if (updateIcons.Count == 0) return;
+        updateIcons[questIndex].SetActive(CheckQuest());
+        updateIcons[achievementIndex].SetActive(CheckAchievement());
     }
 }
