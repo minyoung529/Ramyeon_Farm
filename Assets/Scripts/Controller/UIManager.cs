@@ -44,6 +44,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject ingredientUpgradePanelObj;
     private List<PanelBase> ingredientUpgradePanels = new List<PanelBase>();
 
+    [SerializeField] private GameObject inventoryPanelObj;
+    private List<PanelBase> inventoryPanels = new List<PanelBase>();
+
     private bool isContentMove;
     #endregion
     #region ScreenMoving
@@ -102,6 +105,7 @@ public class UIManager : MonoBehaviour
         InstantiatePanel(KeyManager.QUEST_COUNT, questPanelObj, questPanels);
         InstantiatePanel(GameManager.Instance.QuestManager.GetAchievements().Count, achievementPanelObj, achievementPanels);
         InstantiatePanel(GameManager.Instance.GetIngredients().Count, ingredientUpgradePanelObj, ingredientUpgradePanels, 3);
+        InstantiatePanel(GameManager.Instance.GetIngredients().Count, inventoryPanelObj, inventoryPanels, 3);
 
         int max = Mathf.Max(GameManager.Instance.GetIngredients().Count, GameManager.Instance.GetRecipes().Count);
         InstantiatePanel(max, bookPanelObj, bookPanels);
@@ -239,6 +243,14 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < ingredientUpgradePanels.Count; i++)
         {
             ingredientUpgradePanels[i].UpdateUI();
+        }
+    }
+
+    public void UpdateInventoryPanel()
+    {
+        for(int i = 0; i<inventoryPanels.Count; i++)
+        {
+            inventoryPanels[i].UpdateUI();
         }
     }
     #endregion
