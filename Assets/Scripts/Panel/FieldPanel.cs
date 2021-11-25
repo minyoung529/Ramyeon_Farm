@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class FieldPanel : MonoBehaviour
+public class FieldPanel : IngredientPurchase
 {
     [SerializeField] private Button harvestButton;
 
@@ -17,7 +17,6 @@ public class FieldPanel : MonoBehaviour
     float curTime = 0f;
 
     private bool isHarvest;
-    private bool isHave = false;
 
     private void Awake()
     {

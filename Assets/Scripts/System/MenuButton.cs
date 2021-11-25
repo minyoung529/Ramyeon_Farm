@@ -9,8 +9,12 @@ public class MenuButton : MonoBehaviour
     private bool isActive = true;
     private Button button;
     private List<RectTransform> childTransforms = new List<RectTransform>();
+    private List<GameObject> updateIcons = new List<GameObject>();
 
     private WaitForSeconds delay01 = new WaitForSeconds(0.1f);
+
+    private const int questIndex = 0;
+    private const int achievementIndex = 2;
 
     private void Start()
     {
@@ -19,6 +23,11 @@ public class MenuButton : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             childTransforms.Add(transform.GetChild(i).GetComponent<RectTransform>());
+        }
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            updateIcons.Add(transform.GetChild(i).GetChild(0).gameObject);
         }
 
         button.onClick.AddListener(() => OnClick(isActive));
@@ -56,9 +65,35 @@ public class MenuButton : MonoBehaviour
             {
                 childTransforms[i].DOAnchorPosY(offset + adjust, 0.2f);
             }
+
             yield return delay01;
+
             childTransforms[i].gameObject.SetActive(!isActive);
             adjust += increment;
+        }
+    }
+
+    private bool CheckQuest()
+    {
+        return GameManager.Instance.UIManager.CheckIsReward_Quest();
+    }
+
+    private bool CheckAchievement()
+    {
+        return GameManager.Instance.UIManager.CheckIsReward_Achievement();
+    }
+
+    //이거 호출하는 거 작성하기
+    private void CheckIsUpdate()
+    {
+        if (CheckQuest())
+        {
+            updateIcons[questIndex].SetActive(true);
+        }
+
+        else if (CheckAchievement())
+        {
+            updateIcons[achievementIndex].SetActive(true);
         }
     }
 }

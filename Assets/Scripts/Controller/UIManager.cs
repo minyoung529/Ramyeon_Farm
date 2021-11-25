@@ -114,7 +114,7 @@ public class UIManager : MonoBehaviour
             currenTime = 0f;
         }
 
-        if(Input.GetKeyUp(KeyCode.Escape))
+        if (Input.GetKeyUp(KeyCode.Escape))
         {
             quitPanel.SetActive(true);
         }
@@ -244,6 +244,7 @@ public class UIManager : MonoBehaviour
     {
         if (isShow)
         {
+            SoundManager.Instance?.ButtonSound((int)ButtonSoundType.PopSound);
             speechBubble.transform.DOScale(0f, 0f);
             RandomOrder();
             speechBubble.transform.DOScale(1f, 0.3f);
@@ -281,7 +282,7 @@ public class UIManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        if(price != 0)
+        if (price != 0)
         {
             coinEffect.Play();
         }
@@ -357,6 +358,32 @@ public class UIManager : MonoBehaviour
         isContentMove = true;
         rectTransform.DOAnchorPosX(rectTransform.anchoredPosition.x - ingredientPanelWidth * 3 - 49 * 3, 0.3f).
             OnComplete(() => isContentMove = false);
+    }
+    #endregion
+
+    #region
+    public bool CheckIsReward_Quest()
+    {
+        for (int i = 0; i < questPanels.Count; i++)
+        {
+            if(questPanels[i].CheckIsUpdate())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool CheckIsReward_Achievement()
+    {
+        for (int i = 0; i < achievementPanels.Count; i++)
+        {
+            if (achievementPanels[i].CheckIsUpdate())
+            {
+                return true;
+            }
+        }
+        return false;
     }
     #endregion
 

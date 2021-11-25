@@ -16,7 +16,6 @@ public class EvaluateRamen : MonoBehaviour
     private GuestComment guestComment = new GuestComment();
     private string comment = "";
 
-
     public int GetRamenPrice()
     {
         Evaluate();

@@ -15,9 +15,12 @@ public class BuyFirstIngredient : MonoBehaviour
     [SerializeField] private ActiveScale panel;
     [SerializeField] private Button purchaseButton;
 
+    private IngredientPurchase ingredientPurchase;
+
     private void Start()
     {
         button = GetComponent<Button>();
+        ingredientPurchase = GetComponent<IngredientPurchase>();
         button?.onClick.AddListener(() => OnClick());
     }
 
@@ -25,7 +28,7 @@ public class BuyFirstIngredient : MonoBehaviour
     {
         this.index = index;
 
-        if(ingredientName!=null)
+        if (ingredientName != null)
         {
             ingredientName.text = GameManager.Instance.GetIngredients()[index].name;
         }
@@ -42,7 +45,13 @@ public class BuyFirstIngredient : MonoBehaviour
         else
         {
             ingredientPanelImage.sprite = GameManager.Instance.GetIngredientSprite(index);
-            ingredientPanelText.text = string.Format("{0}을 구매하시겠습니까?", ingredient.name);
+            string name="";
+
+            if (ingredient.type == IngredientType.meat) name = "농장";
+            else if (ingredient.type == IngredientType.vegetable) name = "밭";
+            else if (ingredient.type == IngredientType.processed) name = "공장";
+
+            ingredientPanelText.text = string.Format("{0} {1}을 구매하시겠습니까?", ingredient.name, name);
             priceText.text = string.Format("가격: {0}원", ingredient.firstPrice);
             AssignButtonListner();
             panel.OnActive();
@@ -50,7 +59,7 @@ public class BuyFirstIngredient : MonoBehaviour
     }
     private void OnMouseUp()
     {
-        if(button==null)
+        if (button == null)
         {
             OnClick();
         }
@@ -64,6 +73,8 @@ public class BuyFirstIngredient : MonoBehaviour
         GameManager.Instance.CurrentUser.AddUserMoney(-price);
         GameManager.Instance.CurrentUser.SetIsIngredientsHave(index, true);
         GameManager.Instance.UIManager.UpdateIngredientUpgradePanel();
+
+        ingredientPurchase?.UpdateUI();
         panel.OnEnactive();
     }
 

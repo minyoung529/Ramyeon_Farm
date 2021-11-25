@@ -1,5 +1,5 @@
 ﻿{
-    "money": 6000,
+    "money": 1000,
     "day": 0,
     "livestocks": [
         {
@@ -36,7 +36,7 @@
         1,
         1,
         1,
-        0,
+        1,
         0,
         0,
         0,
@@ -50,7 +50,7 @@
         1,
         1,
         1,
-        1,
+        2,
         1,
         1,
         1,
@@ -62,23 +62,11 @@
     ],
     "questList": [
         {
-            "index": 0,
-            "questName": "손님 10번 받기",
-            "info": "하루에 손님을 10번 받으세요.",
-            "maxValue": 10,
-            "currentValue": 10,
-            "rewardType": 0,
-            "reward": 100,
-            "ingredientName": "",
-            "isPerform": true,
-            "isRewarded": false
-        },
-        {
-            "index": 1,
-            "questName": "나는야 영업왕",
-            "info": "1000초 동안 플레이하세요",
-            "maxValue": 1000,
-            "currentValue": 255,
+            "index": 2,
+            "questName": "나는야 요리사",
+            "info": "요리를 15번 완성하세요.",
+            "maxValue": 15,
+            "currentValue": 0,
             "rewardType": 0,
             "reward": 1000,
             "ingredientName": "",
@@ -90,11 +78,23 @@
             "questName": "나는야 농사꾼",
             "info": "작물을 10번 수확하세요.",
             "maxValue": 10,
-            "currentValue": 4,
+            "currentValue": 1,
             "rewardType": 0,
             "reward": 1000,
             "ingredientName": "",
             "isPerform": false,
+            "isRewarded": false
+        },
+        {
+            "index": 0,
+            "questName": "손님 10번 받기",
+            "info": "하루에 손님을 10번 받으세요.",
+            "maxValue": 10,
+            "currentValue": 10,
+            "rewardType": 0,
+            "reward": 100,
+            "ingredientName": "",
+            "isPerform": true,
             "isRewarded": false
         }
     ],
@@ -113,6 +113,6 @@
         6000
     ],
     "userDate": "0",
-    "userTimeSpan": 18955,
-    "playTime": 255
+    "userTimeSpan": 18956,
+    "playTime": 457
 }

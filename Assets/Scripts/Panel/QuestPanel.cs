@@ -93,13 +93,13 @@ public class QuestPanel : PanelBase
             ingredient.AddAmount(quest.reward);
         }
 
-        else if (quest.rewardType == RewardType.furniture)
-        {
-
-        }
-
         quest.isRewarded = true;
 
         UpdateUI();
+    }
+
+    public override bool CheckIsUpdate()
+    {
+        return quest.isRewarded;
     }
 }

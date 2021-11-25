@@ -11,4 +11,6 @@ public class PanelBase : MonoBehaviour
     public virtual void SetState(BookType bookType) { }
 
     public virtual void OnClick() { }
+
+    public virtual bool CheckIsUpdate() { return false; }
 }

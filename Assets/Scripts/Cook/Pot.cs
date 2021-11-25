@@ -73,6 +73,7 @@ public class Pot : MonoBehaviour
     {
         if (ingredient.name == water)
         {
+            if (dontPut) return;
             BoilWater();
         }
         else if (ingredient.name == soup)
