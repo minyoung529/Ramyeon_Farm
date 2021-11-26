@@ -20,8 +20,8 @@ public class GuestMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         originScale = spriteRenderer.size;
 
-        transform.position = GameManager.Instance.doorPosition.position;
-        originPos = transform.localPosition;
+        transform.position = GameManager.Instance.doorPosition.position - new Vector3(0.4f, 0, 0);
+        originPos = transform.position;
 
         delayFadedTime = new WaitForSeconds(phase / (targetSize - 1f) / 2.2f);
 

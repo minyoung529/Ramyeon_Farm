@@ -53,8 +53,8 @@ public class GameManager : MonoSingleton<GameManager>
     #region 데이터 저장
     private void FirstData()
     {
-        SAVE_PATH = Application.dataPath + "/Save";
         //SAVE_PATH = Application.dataPath + "/Save";
+        SAVE_PATH = Application.persistentDataPath + "/Save";
         if (!Directory.Exists(SAVE_PATH))
         {
             Directory.CreateDirectory(SAVE_PATH);
@@ -84,7 +84,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void SaveToJson()
     {
-        SAVE_PATH = Application.dataPath + "/Save";
+        SAVE_PATH = Application.persistentDataPath + "/Save";
 
         if (user == null) return;
         string json = JsonUtility.ToJson(user, true);

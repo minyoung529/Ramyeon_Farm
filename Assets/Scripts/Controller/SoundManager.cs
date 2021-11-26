@@ -11,8 +11,10 @@ public class SoundManager : MonoSingleton<SoundManager>
     [SerializeField] private AudioClip gameBGM;
 
     [SerializeField] private AudioClip ddiringSound;
+    [SerializeField] private AudioClip coinSound;
 
     [SerializeField] private AudioClip[] buttonSounds;
+    [SerializeField] private AudioClip[] ingredientSounds;
 
 
     private void Awake()
@@ -26,14 +28,13 @@ public class SoundManager : MonoSingleton<SoundManager>
     }
 
     public void DdiringSound()
-    {
-        effectSoundAudio.PlayOneShot(ddiringSound);
-    }
+        => effectSoundAudio.PlayOneShot(ddiringSound);
+
+    public void CoinSound()
+        => effectSoundAudio.PlayOneShot(coinSound);
 
     public void ButtonSound(int num)
-    {
-        effectSoundAudio.PlayOneShot(buttonSounds[num]);
-    }
+=> effectSoundAudio.PlayOneShot(buttonSounds[num]);
 
     public void LobbySound()
     {
@@ -45,5 +46,10 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         bgmAudio.clip = gameBGM;
         bgmAudio.Play();
+    }
+
+    public void PlayIngredientSound(int index)
+    {
+        effectSoundAudio.PlayOneShot(ingredientSounds[index]);
     }
 }

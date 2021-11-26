@@ -28,9 +28,8 @@ public class Factory : IngredientPurchase
         if (!IsHave())
         {
             firstIngredient = GetComponentInChildren<BuyFirstIngredient>();
+            firstIngredient.SetValue(index);
         }
-
-        firstIngredient.SetValue(index);
     }
 
     void Update()

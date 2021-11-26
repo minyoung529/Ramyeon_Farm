@@ -53,9 +53,9 @@ public class BookPanel : PanelBase
                 if (!ActiveSelf(GameManager.Instance.GetRecipes().Count)) return;
 
                 image.sprite = GameManager.Instance.GetIngredientSprite(0);
-                contentName = string.Format("¶ó¸é {0}", index);
+                contentName = GameManager.Instance.GetRecipes()[index].recipeName;
                 List<string> ingredients = GameManager.Instance.GetRecipes()[index].GetIngredients();
-                for (int i = 0; i< ingredients.Count; i++)
+                for (int i = 0; i < ingredients.Count; i++)
                 {
                     info += string.Format("{0}, ", ingredients[i]);
                 }

@@ -10,12 +10,9 @@ public class IngredientIcon : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
-    private const string AnimationKey = "Index";
-
     public bool isInPot { get; private set; }
 
     private bool isAnimation;
-    int clickCount = 0;
 
     private void Awake()
     {
@@ -100,7 +97,7 @@ public class IngredientIcon : MonoBehaviour
         }
 
         animator.enabled = true;
-
+        SoundManager.Instance.PlayIngredientSound(ingredient.GetIndex());
         isAnimation = true;
         OnAnimationStart();
     }

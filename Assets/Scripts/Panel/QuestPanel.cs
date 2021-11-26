@@ -95,8 +95,8 @@ public class QuestPanel : PanelBase
 
         quest.isRewarded = true;
 
-        GameManager.Instance.UIManager.CheckIsUpdateInMenu();
         UpdateUI();
+        GameManager.Instance.UIManager.CheckIsUpdateInMenu();
     }
 
     public override bool CheckIsUpdate()

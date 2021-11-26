@@ -52,8 +52,7 @@ public class EvaluateRamen : MonoBehaviour
 
                 for (int i = 0; i < minus.Count; i++)
                 {
-                    Debug.Log(price);
-                    price -= Mathf.RoundToInt(minus[i].GetPrice() * 1.1f);
+                    price -= Mathf.RoundToInt(minus[i].GetPrice() * 1.3f);
                 }
                 Debug.Log("매치, 적을 때");
                 GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
@@ -73,11 +72,15 @@ public class EvaluateRamen : MonoBehaviour
             {
                 for (int i = 0; i < wrong.Count; i++)
                 {
+                    if (wrong[i] == null) continue;
+
                     price -= Mathf.RoundToInt(wrong[i].GetPrice() * 1.2f);
                 }
 
                 for (int i = 0; i < plus.Count; i++)
                 {
+                    if (plus[i] == null) continue;
+
                     price += Mathf.RoundToInt(plus[i].GetPrice() * 1.2f);
                 }
                 Debug.Log("노매치, 많을 때");

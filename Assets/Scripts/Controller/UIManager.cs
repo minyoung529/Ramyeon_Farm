@@ -124,7 +124,7 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            quitPanel.SetActive(true);
+            quitPanel.SetActive(quitPanel.activeSelf);
         }
     }
 
@@ -304,7 +304,6 @@ public class UIManager : MonoBehaviour
         }
         Vector2 offset = priceEffectText.transform.position;
         priceEffectText.text = string.Format("+{0}", price);
-
         guestText.text = evaluateRamen.GetComment();
 
         priceEffectText.gameObject.SetActive(true);
@@ -312,6 +311,7 @@ public class UIManager : MonoBehaviour
         priceEffectText.DOFade(0f, 1f).OnComplete(() => ResetPriceText(offset));
 
         evaluateRamen.ResetData();
+        SoundManager.Instance.CoinSound();
     }
 
     private void ResetPriceText(Vector2 offset)
