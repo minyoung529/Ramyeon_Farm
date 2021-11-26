@@ -11,7 +11,7 @@ public class LivestockObject : MonoBehaviour
 
     private int ingredientIndex;
 
-    private int maxCount = 5;
+    private int maxCount;
     private int curCount = 0;
 
     private float curTime = 0f;
@@ -74,6 +74,8 @@ public class LivestockObject : MonoBehaviour
 
         maxDistanceX = distanceX;
         maxDistanceY = distanceY;
+
+        maxCount = ingredient.GetAmount();
 
         transform.parent.GetComponent<BuyFirstIngredient>().SetValue(ingredientIndex);
 

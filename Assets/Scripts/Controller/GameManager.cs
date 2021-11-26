@@ -28,6 +28,7 @@ public class GameManager : MonoSingleton<GameManager>
     private Sprite[] ingredientSprites;
     private Sprite[] ingredientInPotSprites;
     private Sprite[] guestSprites;
+    private Sprite[] recipeSprites;
     #endregion
 
     public Transform doorPosition;
@@ -105,6 +106,7 @@ public class GameManager : MonoSingleton<GameManager>
         ingredientSprites = Resources.LoadAll<Sprite>("IngredientAsset");
         ingredientInPotSprites = Resources.LoadAll<Sprite>("IngredientInPotAsset");
         ingredientContainerSprites = Resources.LoadAll<Sprite>("IngredientContainerAsset");
+        recipeSprites = Resources.LoadAll<Sprite>("Recipes_Sheet");
         guestSprites = Resources.LoadAll<Sprite>("Guests");
 
         mainCam = Camera.main;
@@ -355,6 +357,11 @@ public class GameManager : MonoSingleton<GameManager>
     public Sprite GetingredientContainerSprite(int index)
     {
         return ingredientContainerSprites[index];
+    }
+
+    public Sprite GetRecipeSprite(int index)
+    {
+        return recipeSprites[index];
     }
 
     public IngredientIcon GetCurrentIngredientIcon()

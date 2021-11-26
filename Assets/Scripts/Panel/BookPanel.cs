@@ -16,6 +16,7 @@ public class BookPanel : PanelBase
 
     [SerializeField] private Image image;
     [SerializeField] private SelectedBook SelectedBookContent;
+    [SerializeField] private GameObject pot;
 
     private void Start()
     {
@@ -47,18 +48,21 @@ public class BookPanel : PanelBase
                 image.sprite = GameManager.Instance.GetIngredientSprite(index);
                 contentName = igd.name;
                 info = igd.info;
+                pot.gameObject.SetActive(false);
                 break;
 
             case 1:
                 if (!ActiveSelf(GameManager.Instance.GetRecipes().Count)) return;
 
-                image.sprite = GameManager.Instance.GetIngredientSprite(0);
+                image.sprite = GameManager.Instance.GetRecipeSprite(index);
                 contentName = GameManager.Instance.GetRecipes()[index].recipeName;
                 List<string> ingredients = GameManager.Instance.GetRecipes()[index].GetIngredients();
                 for (int i = 0; i < ingredients.Count; i++)
                 {
                     info += string.Format("{0}, ", ingredients[i]);
                 }
+                pot.gameObject.SetActive(true);
+
                 break;
         }
     }

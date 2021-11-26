@@ -97,7 +97,7 @@ public class IngredientIcon : MonoBehaviour
         }
 
         animator.enabled = true;
-        SoundManager.Instance.PlayIngredientSound(ingredient.GetIndex());
+        SoundManager.Instance?.PlayIngredientSound(ingredient.GetIndex());
         isAnimation = true;
         OnAnimationStart();
     }

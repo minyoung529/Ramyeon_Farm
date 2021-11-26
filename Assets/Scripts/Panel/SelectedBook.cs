@@ -8,6 +8,7 @@ public class SelectedBook : MonoBehaviour
     [SerializeField] Text nameText;
     [SerializeField] Text infoText;
     [SerializeField] Image image;
+    [SerializeField] Image pot;
 
 
     public void SetValue(int type, int index, string name, string info)
@@ -24,14 +25,12 @@ public class SelectedBook : MonoBehaviour
         {
             case 0:
                 image.sprite = GameManager.Instance.GetIngredientSprite(index);
+                pot.gameObject.SetActive(false);
                 break;
 
             case 1:
-                image.sprite = GameManager.Instance.GetIngredientSprite(index);
-                break;
-
-            case 2:
-                image.sprite = GameManager.Instance.GetIngredientSprite(index);
+                image.sprite = GameManager.Instance.GetRecipeSprite(index);
+                pot.gameObject.SetActive(true);
                 break;
         }
     }
