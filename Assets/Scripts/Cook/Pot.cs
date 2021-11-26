@@ -178,6 +178,8 @@ public class Pot : MonoBehaviour
             spRenderer.sprite = GameManager.Instance.GetingredientInPotSprite(index);
         }
         spRenderer.sortingOrder = SetOrder(index);
+        obj.transform.localPosition = Vector2.zero;
+        obj.transform.rotation = Quaternion.Euler(0, 0, Random.Range(-30f, 30f));
         obj.SetActive(true);
     }
 

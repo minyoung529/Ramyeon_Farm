@@ -18,7 +18,10 @@ public class InventoryPanel : PanelBase
 
     public override void UpdateUI()
     {
+        int amount = GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index];
+        if (amount == 0) { gameObject.SetActive(false); }
+        else { gameObject.SetActive(true); }
         nameImage.sprite = GameManager.Instance.GetIngredientSprite(index);
-        inventoryText.text = string.Format("{0}",GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index]);
+        inventoryText.text = amount.ToString();
     }
 }
