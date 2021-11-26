@@ -44,6 +44,7 @@ public class BuyFirstIngredient : MonoBehaviour
 
         else
         {
+            SoundManager.Instance?.ButtonSound((int)ButtonSoundType.Bbang);
             ingredientPanelImage.sprite = GameManager.Instance.GetIngredientSprite(index);
             string name="";
 

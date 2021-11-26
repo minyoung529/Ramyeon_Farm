@@ -19,5 +19,6 @@ public enum ButtonSoundType
     CloseSound,
     WaterSound,
     PopSound,
+    Bbang,
     Count
 }

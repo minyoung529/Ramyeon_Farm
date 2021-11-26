@@ -1509,11 +1509,13 @@ MonoBehaviour:
   lobbyBGM: {fileID: 8300000, guid: ca8cc0f340aed0246bf6127ed0416935, type: 3}
   gameBGM: {fileID: 8300000, guid: 25f5f7e6bf9a585438913ccc7a9246ec, type: 3}
   ddiringSound: {fileID: 8300000, guid: 52cd501f94e94d342aa1c9b371aa17fe, type: 3}
+  coinSound: {fileID: 0}
   buttonSounds:
   - {fileID: 8300000, guid: 5b6020ec8de263f48a7008431d518542, type: 3}
   - {fileID: 8300000, guid: 8d31d87daba70514a9857aef7917caad, type: 3}
   - {fileID: 8300000, guid: 0eea157c442431d4e986e24df54a308b, type: 3}
   - {fileID: 8300000, guid: 6982e1ed4add3df40bc48c7d7c22c098, type: 3}
+  - {fileID: 8300000, guid: e0d2bbf4208a1304ca9b579541f82469, type: 3}
   ingredientSounds:
   - {fileID: 8300000, guid: 40c9aa8770bcc4f43aeba221db4a4032, type: 3}
   - {fileID: 8300000, guid: 41dad780d7e79ae48b76c043496c3f51, type: 3}
