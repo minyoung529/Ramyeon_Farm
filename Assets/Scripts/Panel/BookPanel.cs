@@ -45,6 +45,8 @@ public class BookPanel : PanelBase
                 if (!ActiveSelf(GameManager.Instance.GetIngredients().Count)) return;
 
                 Ingredient igd = GameManager.Instance.GetIngredients()[index];
+                gameObject.SetActive(GameManager.Instance.CurrentUser.GetIsIngredientsHave()[igd.GetIndex()]);
+
                 image.sprite = GameManager.Instance.GetIngredientSprite(index);
                 contentName = igd.name;
                 info = igd.info;
@@ -53,6 +55,7 @@ public class BookPanel : PanelBase
 
             case 1:
                 if (!ActiveSelf(GameManager.Instance.GetRecipes().Count)) return;
+                gameObject.SetActive(GameManager.Instance.IsUserRecipe(index));
 
                 image.sprite = GameManager.Instance.GetRecipeSprite(index);
                 contentName = GameManager.Instance.GetRecipes()[index].recipeName;
@@ -62,7 +65,6 @@ public class BookPanel : PanelBase
                     info += string.Format("{0}, ", ingredients[i]);
                 }
                 pot.gameObject.SetActive(true);
-
                 break;
         }
     }

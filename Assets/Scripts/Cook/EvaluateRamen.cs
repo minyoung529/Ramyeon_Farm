@@ -35,10 +35,9 @@ public class EvaluateRamen : MonoBehaviour
             if (myRecipeToInt.Count > recipeToInt.Count)
             {
                 SetComment(myRecipeToInt.Count, recipeToInt.Count);
-                Debug.Log("매치, 많을 때");
                 for (int i = 0; i < plus.Count; i++)
                 {
-                    price -= Mathf.RoundToInt(plus[i].GetPrice() * 1.5f);
+                    price -= Mathf.RoundToInt(plus[i].GetPrice() * 1.2f);
                 }
 
                 GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
@@ -54,7 +53,6 @@ public class EvaluateRamen : MonoBehaviour
                 {
                     price -= Mathf.RoundToInt(minus[i].GetPrice() * 1.3f);
                 }
-                Debug.Log("매치, 적을 때");
                 GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
 
                 //재료가 더 없을 때 
@@ -74,17 +72,24 @@ public class EvaluateRamen : MonoBehaviour
                 {
                     if (wrong[i] == null) continue;
 
-                    price -= Mathf.RoundToInt(wrong[i].GetPrice() * 1.2f);
+                    price -= Mathf.RoundToInt(wrong[i].GetPrice() * 1.8f);
                 }
 
                 for (int i = 0; i < plus.Count; i++)
                 {
                     if (plus[i] == null) continue;
 
-                    price += Mathf.RoundToInt(plus[i].GetPrice() * 1.2f);
+                    price += Mathf.RoundToInt(plus[i].GetPrice() * 1.1f);
                 }
-                Debug.Log("노매치, 많을 때");
-                comment = guestComment.GetBadComments();
+                if (wrong.Count > 2)
+                {
+                    comment = guestComment.GetBadComments();
+                }
+
+                else
+                {
+                    comment = guestComment.GetCommonComments();
+                }
 
                 GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
                 //재료가 더 많을 때 
@@ -92,8 +97,19 @@ public class EvaluateRamen : MonoBehaviour
 
             else
             {
-                price = 0;
-                Debug.Log("노매치, 적을 때");
+                for (int i = 0; i < wrong.Count; i++)
+                {
+                    price -= Mathf.RoundToInt(wrong[i].GetPrice() * 1.1f);
+                }
+
+                for (int i = 0; i < recipeToInt.Count; i++)
+                {
+                    if (!myRecipeToInt.Contains(recipeToInt[i]))
+                    {
+                        price -= Mathf.RoundToInt(GameManager.Instance.GetIngredients()[recipeToInt[i]].GetPrice() * 1.2f);
+                    }
+                }
+
                 GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
                 comment = guestComment.GetBadComments();
 
@@ -120,7 +136,10 @@ public class EvaluateRamen : MonoBehaviour
 
     private bool CheckIsMatchRecipe()
     {
-        if (myRecipeToInt.Count == 0) return false;
+        if (myRecipeToInt.Count == 0)
+        {
+            return false;
+        }
 
         int cnt = 0;
 
@@ -137,7 +156,7 @@ public class EvaluateRamen : MonoBehaviour
             }
         }
 
-        return (cnt == myRecipeToInt.Count);
+        return (cnt == recipeToInt.Count);
     }
 
     private int GetMyCheckListCount()
@@ -177,7 +196,6 @@ public class EvaluateRamen : MonoBehaviour
 
         for (int i = 0; i < plus.Count; i++)
         {
-            Debug.Log(price);
             price += plus[i].GetPrice();
         }
 
@@ -213,6 +231,7 @@ public class EvaluateRamen : MonoBehaviour
         {
             comment = guestComment.GetBadComments();
         }
+
         else
         {
             comment = guestComment.GetCommonComments();

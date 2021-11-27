@@ -11,7 +11,7 @@ public class IngredientIcon : MonoBehaviour
     private Animator animator;
 
     public bool isInPot { get; private set; }
-
+    private bool isClick;
     private bool isAnimation;
 
     private void Awake()
@@ -53,8 +53,10 @@ public class IngredientIcon : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (isClick) return;
         OnIngredientUp();
         GameManager.Instance.PlusIngredientInPot(ingredient);
+        isClick = true;
     }
 
     public void Inactive()
@@ -65,28 +67,13 @@ public class IngredientIcon : MonoBehaviour
         isInPot = false;
         isAnimation = false;
         animator.enabled = false;
-
+        isClick = false;
         ingredient = null;
     }
 
     public bool IsAuto()
     {
-        return CheckIsAuto(ingredient.name);
-    }
-
-    private bool CheckIsAuto(string ingredient)
-    {
-        string ingredients = "∞Ì√Â∞°∑Á ∂±";
-
-        if(ingredients.Contains(ingredient))
-        {
-            return true;
-        }
-
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     public void OnIngredientUp()

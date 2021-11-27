@@ -10,8 +10,12 @@ public class SoundManager : MonoSingleton<SoundManager>
     [SerializeField] private AudioClip lobbyBGM;
     [SerializeField] private AudioClip gameBGM;
 
+    [SerializeField] private AudioClip boilingWaterSound;
+
     [SerializeField] private AudioClip ddiringSound;
     [SerializeField] private AudioClip coinSound;
+    [SerializeField] private AudioClip putIngredientSound;
+    [SerializeField] private AudioClip rewardSound;
 
     [SerializeField] private AudioClip[] buttonSounds;
     [SerializeField] private AudioClip[] ingredientSounds;
@@ -33,8 +37,28 @@ public class SoundManager : MonoSingleton<SoundManager>
     public void CoinSound()
         => effectSoundAudio.PlayOneShot(coinSound);
 
+    public void PutIngredientSound()
+        => effectSoundAudio.PlayOneShot(putIngredientSound);
+
     public void ButtonSound(int num)
-=> effectSoundAudio.PlayOneShot(buttonSounds[num]);
+        => effectSoundAudio.PlayOneShot(buttonSounds[num]);
+
+    public void RewardSound()
+        => effectSoundAudio.PlayOneShot(rewardSound);
+
+    public void BoilingWaterSound()
+    {
+        if (GameManager.Instance.GetPot().IsBoilingWater() && GameManager.Instance.UIManager.isKitchenScene())
+        {
+            effectSoundAudio.clip = boilingWaterSound;
+            effectSoundAudio.Play();
+        }
+
+        else
+        {
+            effectSoundAudio.Stop();
+        }
+    }
 
     public void LobbySound()
     {
@@ -51,5 +75,17 @@ public class SoundManager : MonoSingleton<SoundManager>
     public void PlayIngredientSound(int index)
     {
         effectSoundAudio.PlayOneShot(ingredientSounds[index]);
+    }
+
+    public void SetVolume(int index, float value)
+    {
+        if (index == 0)
+        {
+            bgmAudio.volume = value;
+        }
+        else
+        {
+            effectSoundAudio.volume = value;
+        }
     }
 }

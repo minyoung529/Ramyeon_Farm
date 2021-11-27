@@ -24,13 +24,14 @@ public class LivestockProduct : MonoBehaviour
 
     private void OnMouseUp()
     {
-        Debug.Log(livestockObj.GetCurCount());
         GameManager.Instance.QuestManager.AddQuestValue(KeyManager.FARMQUEST_INDEX, 1);
         livestockObj.MinusCurCount();
         ingredient = GameManager.Instance.GetIngredients().Find(x => x.GetIndex() == livestock.GetIngredient().GetIndex());
         ingredient.AddAmount(1);
         GameManager.Instance.UIManager.UpdateIngredientPanel();
         GameManager.Instance.QuestManager.AddQuestValue(KeyManager.FARMQUEST_INDEX, 1);
+        SoundManager.Instance?.ButtonSound((int)ButtonSoundType.Bbang);
+
         Despawn();
     }
 

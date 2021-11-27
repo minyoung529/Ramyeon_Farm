@@ -117,7 +117,6 @@ public class User
 
             if (currentAchievement[index] >= achievement.conditions[i])
             {
-                Debug.Log(index + ", " + i);
                 return true;
             }
         }
@@ -170,6 +169,7 @@ public class User
     public void SetIsIngredientsHave(int index, bool isTrue)
     {
         isIngredientsHave[index] = isTrue;
+        GameManager.Instance.SetUserIndex();
     }
     public void AddDay(int amount)
     {

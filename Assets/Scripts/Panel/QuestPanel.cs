@@ -94,13 +94,13 @@ public class QuestPanel : PanelBase
         }
 
         quest.isRewarded = true;
-
+        SoundManager.Instance?.RewardSound();
         UpdateUI();
         GameManager.Instance.UIManager.CheckIsUpdateInMenu();
     }
 
     public override bool CheckIsUpdate()
     {
-        return quest.isRewarded;
+        return (quest.isPerform && !quest.isRewarded);
     }
 }

@@ -302,6 +302,11 @@ public class GameManager : MonoSingleton<GameManager>
         AddCurRanem(ingredient);
     }
 
+    public bool IsUserRecipe(int index)
+    {
+        return (userRecipeIndexes.Contains(index));
+    }
+
     #region GetSet
     public int GetRandomRecipeIndex()
     {

@@ -108,8 +108,9 @@ public class Pot : MonoBehaviour
 
         waterAnimator.Play("Water_boil");
         DontPut("");
-        Debug.Log("물이 끓음");
         smokeParticle.gameObject.SetActive(true);
+
+        SoundManager.Instance?.BoilingWaterSound();
     }
 
     private IEnumerator PutSoup()
@@ -121,8 +122,6 @@ public class Pot : MonoBehaviour
 
         boilingWater.DOColor(soupColor, soupTime);
         yield return new WaitForSeconds(soupTime);
-
-        Debug.Log("스프 풀어짐");
     }
 
     private IEnumerator PutNoodle()
@@ -133,14 +132,11 @@ public class Pot : MonoBehaviour
         }
 
         yield return new WaitForSeconds(noodleTime);
-
-        Debug.Log("면 풀ㄷ어짐");
     }
 
     private IEnumerator Finish()
     {
         yield return new WaitForSeconds(finishTime);
-        Debug.Log("완성!");
     }
     private void DontPut(params string[] ingredientsName)
     {
@@ -241,5 +237,10 @@ public class Pot : MonoBehaviour
         boilingWater.color = originColor;
         waterAnimator.Play("WaterIdle");
         smokeParticle.gameObject.SetActive(false);
+    }
+
+    public bool IsBoilingWater()
+    {
+        return isBoil;
     }
 }

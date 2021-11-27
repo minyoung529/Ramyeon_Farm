@@ -72,6 +72,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.type != IngredientType.basic) return;
         IconInstantiateOrPooling();
+        SoundManager.Instance?.PutIngredientSound();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -100,6 +101,8 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         {
             if (pot.IsDonPut())
             {
+                GameManager.Instance.UIManager.ErrorMessage("지금은 넣을 수 없습니다.");
+
                 ingredientIcon.Inactive();
                 GameManager.Instance.SetCurrentIngredientIcon(null);
                 return;

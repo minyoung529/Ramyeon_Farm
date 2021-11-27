@@ -15,5 +15,6 @@ public class ActiveScale : MonoBehaviour
     {
         gameObject.SetActive(false);
         transform.DOScale(new Vector3(0f, 1f, 0f), 0f);
+        SoundManager.Instance?.ButtonSound((int)ButtonSoundType.CloseSound);
     }
 }

@@ -74,6 +74,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject quitPanel;
     [SerializeField] private ParticleSystem coinEffect;
 
+    [SerializeField] private GameObject errorPanel;
+    private Text errorText;
+
+
     EvaluateRamen evaluateRamen = new EvaluateRamen();
     MenuButton menuButton;
 
@@ -86,7 +90,7 @@ public class UIManager : MonoBehaviour
 
         distanceX = Mathf.Abs(distanceTransform.position.x) * 2f;
         distanceY = Mathf.Abs(distanceTransform.position.y) * 2f;
-
+        errorText = errorPanel.GetComponentInChildren<Text>();
         randomRamen = new RandomRamen();
         menuButton = FindObjectOfType<MenuButton>();
         guest = FindObjectOfType<GuestMove>();
@@ -124,7 +128,7 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            quitPanel.SetActive(quitPanel.activeSelf);
+            quitPanel.SetActive(!quitPanel.activeSelf);
         }
     }
 
@@ -311,7 +315,7 @@ public class UIManager : MonoBehaviour
         priceEffectText.DOFade(0f, 1f).OnComplete(() => ResetPriceText(offset));
 
         evaluateRamen.ResetData();
-        SoundManager.Instance.CoinSound();
+        SoundManager.Instance?.CoinSound();
     }
 
     private void ResetPriceText(Vector2 offset)
@@ -339,6 +343,8 @@ public class UIManager : MonoBehaviour
         {
             stagesObj[i].transform.DOMoveX(stagesObj[i].transform.position.x - distanceX, 0.5f);
         }
+
+        SoundManager.Instance?.BoilingWaterSound();
     }
 
     public void PreviousStage()
@@ -356,6 +362,13 @@ public class UIManager : MonoBehaviour
         {
             stagesObj[i].transform.DOMoveX(stagesObj[i].transform.position.x + distanceX, 0.5f);
         }
+
+        SoundManager.Instance?.BoilingWaterSound();
+    }
+
+    public bool isKitchenScene()
+    {
+        return (curScreen == 1);
     }
     #endregion
 
@@ -364,7 +377,7 @@ public class UIManager : MonoBehaviour
     {
         if (isContentMove) return;
         isContentMove = true;
-        rectTransform.DOAnchorPosX(rectTransform.anchoredPosition.x + ingredientPanelWidth * 3 + 49 * 3, 0.3f).
+        rectTransform.DOAnchorPosX(rectTransform.anchoredPosition.x + ingredientPanelWidth * 3 + 6 * 3, 0.3f).
             OnComplete(() => isContentMove = false);
     }
 
@@ -372,7 +385,7 @@ public class UIManager : MonoBehaviour
     {
         if (isContentMove) return;
         isContentMove = true;
-        rectTransform.DOAnchorPosX(rectTransform.anchoredPosition.x - ingredientPanelWidth * 3 - 49 * 3, 0.3f).
+        rectTransform.DOAnchorPosX(rectTransform.anchoredPosition.x - ingredientPanelWidth * 3 - 6 * 3, 0.3f).
             OnComplete(() => isContentMove = false);
     }
     #endregion
@@ -419,4 +432,17 @@ public class UIManager : MonoBehaviour
         return distanceY;
     }
     #endregion
+
+    private IEnumerator ErrorCoroutine(string info)
+    {
+        errorText.text = info;
+        errorPanel.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        errorPanel.gameObject.SetActive(false);
+    }
+
+    public void ErrorMessage(string info)
+    {
+        StartCoroutine(ErrorCoroutine(info));
+    }
 }

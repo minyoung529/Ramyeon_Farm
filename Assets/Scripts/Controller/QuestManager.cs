@@ -108,7 +108,6 @@ public class QuestManager : MonoBehaviour
 
         if (GameManager.Instance.CurrentUser.GetUserTimeSpan() < nowTimeSpan.Days)
         {
-            Debug.Log(GameManager.Instance.CurrentUser.GetUserTimeSpan());
             GameManager.Instance.CurrentUser.SetUserTimeSpan(nowTimeSpan);
             return true;
         }

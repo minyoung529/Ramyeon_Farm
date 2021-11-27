@@ -21,7 +21,7 @@ public class GuestMove : MonoBehaviour
         originScale = spriteRenderer.size;
 
         transform.position = GameManager.Instance.doorPosition.position - new Vector3(0.4f, 0, 0);
-        originPos = transform.position;
+        originPos = transform.localPosition;
 
         delayFadedTime = new WaitForSeconds(phase / (targetSize - 1f) / 2.2f);
 
@@ -49,7 +49,7 @@ public class GuestMove : MonoBehaviour
         yield return delay02;
         GameManager.Instance.UIManager.ShowUpSpeechBubble(false);
 
-        transform.DOLocalMove(GameManager.Instance.doorPosition.localPosition, 2f);
+        transform.DOLocalMove(originPos, 2f);
 
         for (float i = targetSize; i > 1f; i -= phase)
         {
