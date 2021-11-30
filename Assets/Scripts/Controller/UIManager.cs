@@ -262,6 +262,7 @@ public class UIManager : MonoBehaviour
     #region Guest
     public void ShowUpSpeechBubble(bool isShow)
     {
+        
         if (isShow)
         {
             SoundManager.Instance?.ButtonSound((int)ButtonSoundType.PopSound);

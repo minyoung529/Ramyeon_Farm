@@ -15,19 +15,31 @@ public class GuestMove : MonoBehaviour
     private WaitForSeconds delay02 = new WaitForSeconds(2f);
     private WaitForSeconds delayFadedTime = new WaitForSeconds(2f);
 
+    private IEnumerator Corountine;
+    
+    private bool isTutorial;
     void Start()
     {
+        gameObject.SetActive(false);
         spriteRenderer = GetComponent<SpriteRenderer>();
         originScale = spriteRenderer.size;
+        Corountine = DelayTutorial();
 
         transform.position = GameManager.Instance.doorPosition.position - new Vector3(0.4f, 0, 0);
         originPos = transform.localPosition;
 
         delayFadedTime = new WaitForSeconds(phase / (targetSize - 1f) / 2.2f);
-
+    }
+    public void StartGoToCounter()
+    {
+        gameObject.SetActive(true);
+        isTutorial = true;
         StartCoroutine(GoToCounter());
     }
-
+    public void SetIsTutorial(bool isTutorial)
+    {
+        this.isTutorial = isTutorial;
+    }
     private IEnumerator GoToCounter()
     {
         GameManager.Instance.QuestManager.AddQuestValue(KeyManager.GUESTQUEST_INDEX, 1);
@@ -41,9 +53,22 @@ public class GuestMove : MonoBehaviour
         }
 
         yield return delay02;
+        yield return StartCoroutine(DelayTutorial());
         GameManager.Instance.UIManager.ShowUpSpeechBubble(true);
     }
-
+    private IEnumerator DelayTutorial()
+    {
+        if (!isTutorial)
+            StopCoroutine(DelayTutorial());
+        while (isTutorial)
+        {
+            yield return null;
+            if (!isTutorial)
+            {
+                StopCoroutine(DelayTutorial());
+            }
+        }
+    }
     private IEnumerator Leave()
     {
         yield return delay02;

@@ -20,6 +20,8 @@ public class GameManager : MonoSingleton<GameManager>
     #region Controller
     public UIManager UIManager { get; private set; }
     public QuestManager QuestManager { get; private set; }
+    public TutorialManager TutorialManager { get; private set; }
+    public GuestMove GuestMove;
     public Transform Pool;
 
     #endregion
@@ -98,9 +100,12 @@ public class GameManager : MonoSingleton<GameManager>
         FirstData();
         InputRecipeData();
         InputIngredientData();
+        InvokeRepeating("SaveToJson", 60f, 1f);
 
         UIManager = GetComponent<UIManager>();
         QuestManager = GetComponent<QuestManager>();
+        GuestMove = FindObjectOfType<GuestMove>(); 
+        TutorialManager = FindObjectOfType<TutorialManager>();
         pot = FindObjectOfType<Pot>();
 
         ingredientSprites = Resources.LoadAll<Sprite>("IngredientAsset");
