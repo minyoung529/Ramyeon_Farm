@@ -41,9 +41,7 @@ public class BuyFirstIngredient : MonoBehaviour
     {
         Ingredient ingredient = GameManager.Instance.GetIngredients()[index];
 
-        if (GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index])
-        {
-        }
+        if (GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index]) { }
 
         else
         {
