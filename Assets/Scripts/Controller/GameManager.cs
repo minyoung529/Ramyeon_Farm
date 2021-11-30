@@ -117,13 +117,6 @@ public class GameManager : MonoSingleton<GameManager>
         SetUserIndex();
     }
 
-    private void Update()
-    {
-        //#if DEVELOPMENT_BUILD
-        CheatKey();
-        //#endif
-    }
-
     private void CheatKey()
     {
         if (Input.GetKeyDown(KeyCode.Space))

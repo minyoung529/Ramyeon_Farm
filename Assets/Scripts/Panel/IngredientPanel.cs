@@ -78,18 +78,18 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private bool CheckCurrentIcon()
     {
         IngredientIcon icon = GameManager.Instance.GetCurrentIngredientIcon();
+
         if (icon != null)
         {
             isOverlap = (icon.GetIngredient().name.Contains("¹°") && ingredient.name == "¹°");
             return isOverlap;
         }
+
         return false;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.type != IngredientType.basic) return;
-        if (CheckIsOverlap()) return;
-        if (CheckCurrentIcon()) return;
 
         IconInstantiateOrPooling();
         SoundManager.Instance?.PutIngredientSound();
@@ -98,8 +98,6 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnDrag(PointerEventData eventData)
     {
         if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.type != IngredientType.basic) return;
-        if (CheckIsOverlap()) return;
-        if (isOverlap) return;
 
         Vector2 mousePosition = Input.mousePosition;
         mousePosition = GameManager.Instance.mainCam.ScreenToWorldPoint(mousePosition);
@@ -109,7 +107,6 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnEndDrag(PointerEventData eventData)
     {
         if (CheckIsOverlap()) return;
-        if (isOverlap) return;
 
         if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.type != IngredientType.basic)
         {

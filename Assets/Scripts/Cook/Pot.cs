@@ -214,6 +214,7 @@ public class Pot : MonoBehaviour
     {
         isStop = true;
         isBoil = false;
+        dontPut = false;
 
         curTime = 0f;
         maxTime = 0f;
