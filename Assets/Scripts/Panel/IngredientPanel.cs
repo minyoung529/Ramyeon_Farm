@@ -15,6 +15,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private Image image;
     private GameObject icon;
     private int index;
+    private bool isOverlap;
 
     private void Awake()
     {
@@ -71,12 +72,24 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private bool CheckIsOverlap()
     {
         int waterIndex = 2;
-        return (ingredient.name == "¹°" && GameManager.Instance.GetCurrentRamen().Contains(GameManager.Instance.GetIngredients()[waterIndex]));
+        string waterName = "¹°";
+        return (ingredient.name == waterName && GameManager.Instance.GetCurrentRamen().Contains(GameManager.Instance.GetIngredients()[waterIndex]));
+    }
+    private bool CheckCurrentIcon()
+    {
+        if (GameManager.Instance.GetCurrentIngredientIcon() != null)
+        {
+            isOverlap = (GameManager.Instance.GetCurrentIngredientIcon().GetIngredient().name == "¹°");
+            return isOverlap;
+        }
+        return false;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.type != IngredientType.basic) return;
         if (CheckIsOverlap()) return;
+        if (CheckCurrentIcon()) return;
+
         IconInstantiateOrPooling();
         SoundManager.Instance?.PutIngredientSound();
     }
@@ -85,6 +98,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.type != IngredientType.basic) return;
         if (CheckIsOverlap()) return;
+        if (isOverlap) return;
 
         Vector2 mousePosition = Input.mousePosition;
         mousePosition = GameManager.Instance.mainCam.ScreenToWorldPoint(mousePosition);
@@ -94,6 +108,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnEndDrag(PointerEventData eventData)
     {
         if (CheckIsOverlap()) return;
+        if (isOverlap) return;
 
         if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.type != IngredientType.basic)
         {
