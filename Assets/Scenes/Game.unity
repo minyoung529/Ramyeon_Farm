@@ -26582,7 +26582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7349277, y: 0}
+  m_AnchoredPosition: {x: -7380313.5, y: 0}
   m_SizeDelta: {x: 0.00036621, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1181231608
@@ -27347,14 +27347,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6320754, g: 0.37924522, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 35723993e3956784a9783d4b910f3939, type: 3}
+  m_Sprite: {fileID: 9152259562568687453, guid: 9a623eac56ae773479f1f27d2ce226a4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -27386,6 +27386,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   harvestButton: {fileID: 1827660670}
   seedSprite: {fileID: 21300000, guid: 191a99d8dc3bccc4b92aa391d43715f6, type: 3}
+  FieldSprite: {fileID: 9152259562568687453, guid: 9a623eac56ae773479f1f27d2ce226a4, type: 3}
+  daepaSprite:
+  - {fileID: 7535059208313454641, guid: 9a623eac56ae773479f1f27d2ce226a4, type: 3}
+  - {fileID: 7861248849352672343, guid: 9a623eac56ae773479f1f27d2ce226a4, type: 3}
+  - {fileID: -2308355778040930176, guid: 9a623eac56ae773479f1f27d2ce226a4, type: 3}
+  pepperSprite:
+  - {fileID: 7535059208313454641, guid: 9a623eac56ae773479f1f27d2ce226a4, type: 3}
+  - {fileID: -4124019843281685661, guid: 9a623eac56ae773479f1f27d2ce226a4, type: 3}
+  - {fileID: 5692570242948776101, guid: 9a623eac56ae773479f1f27d2ce226a4, type: 3}
+  garlicSprite:
+  - {fileID: 7535059208313454641, guid: 9a623eac56ae773479f1f27d2ce226a4, type: 3}
+  - {fileID: 3740389400574216914, guid: 9a623eac56ae773479f1f27d2ce226a4, type: 3}
+  - {fileID: 7782888773197907159, guid: 9a623eac56ae773479f1f27d2ce226a4, type: 3}
+  seedFieldImage: {fileID: 0}
 --- !u!114 &1261506882
 MonoBehaviour:
   m_ObjectHideFlags: 0
