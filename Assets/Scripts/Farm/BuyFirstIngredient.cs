@@ -17,10 +17,13 @@ public class BuyFirstIngredient : MonoBehaviour
 
     private IngredientPurchase ingredientPurchase;
 
+    private void Awake()
+    {
+        ingredientPurchase = GetComponentInChildren<IngredientPurchase>();
+    }
     private void Start()
     {
         button = GetComponent<Button>();
-        ingredientPurchase = GetComponentInChildren<IngredientPurchase>();
         button?.onClick.AddListener(() => OnClick());
     }
 
@@ -75,7 +78,7 @@ public class BuyFirstIngredient : MonoBehaviour
         GameManager.Instance.CurrentUser.SetIsIngredientsHave(index, true);
         GameManager.Instance.UIManager.UpdateIngredientUpgradePanel();
 
-        ingredientPurchase?.UpdateUI();
+        ingredientPurchase.UpdateUI();
         panel.OnEnactive();
     }
 

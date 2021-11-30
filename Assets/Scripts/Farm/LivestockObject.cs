@@ -21,7 +21,7 @@ public class LivestockObject : IngredientPurchase
     private float maxDistanceY;
 
     private readonly string livestockProductName = "LivestockProduct";
-    
+
     void Update()
     {
         if (!GameManager.Instance.CurrentUser.GetIsIngredientsHave()[ingredientIndex]) return;
@@ -34,7 +34,7 @@ public class LivestockObject : IngredientPurchase
         else if (curTime > maxTime && curCount < maxCount)
         {
             GameObject obj = InstantiateOrPooling();
-            
+
             livestockProduct = obj.GetComponent<LivestockProduct>();
 
             LivestockObject livestockObj = this;
@@ -70,7 +70,7 @@ public class LivestockObject : IngredientPurchase
 
         ingredientIndex = livestock.GetIngredient().GetIndex();
         Ingredient ingredient = GameManager.Instance.GetIngredients()[ingredientIndex];
-        maxTime = ingredient.GetMaxTime();  
+        maxTime = ingredient.GetMaxTime();
 
         maxDistanceX = distanceX;
         maxDistanceY = distanceY;
@@ -84,14 +84,8 @@ public class LivestockObject : IngredientPurchase
 
     public override void UpdateUI()
     {
-        if (GameManager.Instance.CurrentUser.GetIsIngredientsHave()[ingredientIndex])
-        {
-            gameObject.SetActive(true);
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
+        Debug.Log(GameManager.Instance.CurrentUser.GetIsIngredientsHave()[ingredientIndex]);
+        gameObject.SetActive(GameManager.Instance.CurrentUser.GetIsIngredientsHave()[ingredientIndex]);
     }
     public void MinusCurCount()
     {
