@@ -258,7 +258,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateInventoryPanel()
     {
-        for(int i = 0; i<inventoryPanels.Count; i++)
+        for (int i = 0; i < inventoryPanels.Count; i++)
         {
             inventoryPanels[i].UpdateUI();
         }
@@ -401,7 +401,7 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < questPanels.Count; i++)
         {
-            if(questPanels[i].CheckIsUpdate())
+            if (questPanels[i].CheckIsUpdate())
             {
                 return true;
             }
@@ -463,62 +463,64 @@ public class UIManager : MonoBehaviour
         int grade = 0;
 
         lottoPanel.gameObject.SetActive(true);
-        
-        if (GameManager.Instance.CurrentUser.GetMoney() >= 1000)
+
+        if (GameManager.Instance.CurrentUser.GetMoney() < 1000)
         {
-            GameManager.Instance.CurrentUser.AddUserMoney(-1000);
-            SoundManager.Instance.RewardSound();
-
-            float random = Random.Range(0f, 100f);
-
-            if(random < 0.0001f)
-            {
-                reward = 5000000;
-                grade++;
-            }
-
-            else if(random < 0.1f)
-            {
-                reward = 1000000;
-                grade++;
-
-            }
-
-            else if(random < 2f)
-            {
-                reward = 50000;
-                grade++;
-            }
-
-            else if( random < 4f)
-            {
-                reward = 10000;
-                grade++;
-            }
-
-            else if (random < 10f)
-            {
-                reward = 5000;
-                grade++;
-            }
-
-            else
-            {
-                reward = 0;
-                grade++;
-            }
+            ErrorMessage("돈이 부족합니다.");
+            return;
         }
 
-        if(grade < 6)
+        GameManager.Instance.CurrentUser.AddUserMoney(-1000);
+        SoundManager.Instance?.RewardSound();
+
+        float random = Random.Range(0f, 100f);
+
+        if (random < 0.0007f)
         {
-            lottoStatusText.text = string.Format("축하합니다! {0}등 당첨!", grade);
+            reward = 5000000;
+            grade = 1;
+        }
+
+        else if (random < 0.1f)
+        {
+            reward = 1000000;
+            grade = 2;
+        }
+
+        else if (random < 2f)
+        {
+            reward = 50000;
+            grade = 3;
+        }
+
+        else if (random < 4f)
+        {
+            reward = 10000;
+            grade = 4;
+        }
+
+        else if (random < 10f)
+        {
+            reward = 5000;
+            grade = 5;
+        }
+
+        else
+        {
+            grade = -1;
+            reward = 0;
+        }
+
+        if (grade != -1)
+        {
+            lottoStatusText.text = string.Format("{0}등 당첨!", grade);
             lottoRewardText.text = string.Format("보상금 +{0}원", reward);
             GameManager.Instance.CurrentUser.AddUserMoney(reward);
         }
 
         else
         {
-            lottoStatusText.text = string.Format("꽝입니다!");
+            lottoStatusText.text = "꽝입니다!";
             lottoRewardText.text = "";
         }
     }
