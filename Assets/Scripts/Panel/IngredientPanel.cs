@@ -77,9 +77,10 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     }
     private bool CheckCurrentIcon()
     {
-        if (GameManager.Instance.GetCurrentIngredientIcon() != null)
+        IngredientIcon icon = GameManager.Instance.GetCurrentIngredientIcon();
+        if (icon != null)
         {
-            isOverlap = (GameManager.Instance.GetCurrentIngredientIcon().GetIngredient().name == "¹°");
+            isOverlap = (icon.GetIngredient().name.Contains("¹°") && ingredient.name == "¹°");
             return isOverlap;
         }
         return false;
@@ -147,7 +148,6 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     private void IconInstantiateOrPooling()
     {
-
         if (GameManager.Instance.CheckPool("IngredientIcon"))
         {
             icon = GameManager.Instance.ReturnPoolObject("IngredientIcon");

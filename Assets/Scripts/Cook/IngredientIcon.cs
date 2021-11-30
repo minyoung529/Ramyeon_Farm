@@ -68,7 +68,6 @@ public class IngredientIcon : MonoBehaviour
         isAnimation = false;
         animator.enabled = false;
         isClick = false;
-        ingredient = null;
     }
 
     public bool IsAuto()

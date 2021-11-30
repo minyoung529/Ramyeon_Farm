@@ -12,7 +12,11 @@ public class FieldPanel : IngredientPurchase
     [SerializeField] private List<Sprite> daepaSprite;
     [SerializeField] private List<Sprite> pepperSprite;
     [SerializeField] private List<Sprite> garlicSprite;
+    [SerializeField] private List<Material> materials;
     [SerializeField] private Image seedFieldImage;
+
+    private ParticleSystem particle;
+    private ParticleSystemRenderer pr;
 
     private Ingredient ingredient;
     private int index;
@@ -32,6 +36,8 @@ public class FieldPanel : IngredientPurchase
         harvestButtonImage = harvestButton.transform.GetChild(0).GetComponent<Image>();
         harvestButton.onClick.AddListener(() => OnClickIcon());
         firstIngredient = GetComponent<BuyFirstIngredient>();
+        particle = GetComponentInChildren<ParticleSystem>();
+        pr = GetComponentInChildren<ParticleSystemRenderer>();
         curTime = maxTime;
     }
     void Update()
@@ -59,7 +65,7 @@ public class FieldPanel : IngredientPurchase
         this.index = index;
         firstIngredient.SetValue(index);
         ingredient = GameManager.Instance.GetIngredients()[index];
-
+        pr.material = materials[GetIndex()];
         maxTime = ingredient.GetMaxTime();
         UpdateUI();
     }
@@ -104,6 +110,9 @@ public class FieldPanel : IngredientPurchase
 
         harvestButtonImage.sprite = seedSprite;
         seedFieldImage.sprite = FieldSprite;
+
+        particle.Play();
+
         isGrow = false;
         isSeed = true;
     }
@@ -141,5 +150,23 @@ public class FieldPanel : IngredientPurchase
 
                 break;
         }
+    }
+
+    int GetIndex()
+    {
+        switch (ingredient.name)
+        {
+            case "대파":
+                return 0;
+            case "마늘":
+                return 1;
+            case "청양고추":
+                return 2;
+            default:
+
+                break;
+        }
+
+        return -1;
     }
 }
