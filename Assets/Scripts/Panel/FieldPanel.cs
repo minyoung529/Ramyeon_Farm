@@ -8,7 +8,13 @@ public class FieldPanel : IngredientPurchase
 {
     [SerializeField] private Button harvestButton;
     [SerializeField] private Sprite seedSprite;
+    [SerializeField] private Sprite FieldSprite;
+    [SerializeField] private List<Sprite> daepaSprite;
+    [SerializeField] private List<Sprite> pepperSprite;
+    [SerializeField] private List<Sprite> garlicSprite;
+    [SerializeField] private Image seedFieldImage;
 
+    private Ingredient ingredient;
     private int index;
     private Image harvestButtonImage;
     private BuyFirstIngredient firstIngredient;
@@ -18,9 +24,11 @@ public class FieldPanel : IngredientPurchase
 
     private bool isHarvest;
     private bool isSeed = true;
+    private bool isGrow = false;
 
     private void Awake()
     {
+        seedFieldImage = GetComponent<Image>();
         harvestButtonImage = harvestButton.transform.GetChild(0).GetComponent<Image>();
         harvestButton.onClick.AddListener(() => OnClickIcon());
         firstIngredient = GetComponent<BuyFirstIngredient>();
@@ -40,12 +48,17 @@ public class FieldPanel : IngredientPurchase
         {
             UpdateHarvestIcon();
         }
+        if(isGrow == false && curTime > maxTime * 0.5f)
+        {
+            FieldChange(1);
+            isGrow = true;
+        }
     }
     public void SetValue(int index)
     {
         this.index = index;
         firstIngredient.SetValue(index);
-        Ingredient ingredient = GameManager.Instance.GetIngredients()[index];
+        ingredient = GameManager.Instance.GetIngredients()[index];
 
         maxTime = ingredient.GetMaxTime();
         UpdateUI();
@@ -57,6 +70,7 @@ public class FieldPanel : IngredientPurchase
         harvestButton.gameObject.SetActive(true);
         harvestButton.transform.DOScale(1f, 0.4f);
         harvestButtonImage.sprite = GameManager.Instance.GetIngredientSprite(index);
+        FieldChange(2);
     }
 
     public void OnClickIcon()
@@ -89,6 +103,8 @@ public class FieldPanel : IngredientPurchase
         GameManager.Instance.QuestManager.AddQuestValue(KeyManager.FARMQUEST_INDEX, 1);
 
         harvestButtonImage.sprite = seedSprite;
+        seedFieldImage.sprite = FieldSprite;
+        isGrow = false;
         isSeed = true;
     }
 
@@ -101,11 +117,29 @@ public class FieldPanel : IngredientPurchase
             GameManager.Instance.UIManager.ErrorMessage("돈이 부족합니다.");
             return;
         }
-
         GameManager.Instance.CurrentUser.AddUserMoney(-price);
         curTime = 0f;
         harvestButtonImage.sprite = seedSprite;
         harvestButton.transform.DOScale(0f, 0.2f);
         isSeed = false;
+        FieldChange(0);
+    }
+    void FieldChange(int index)
+    {
+        switch(ingredient.name) 
+        {
+            case "마늘":
+                seedFieldImage.sprite = garlicSprite[index];
+                break;
+            case "대파":
+                seedFieldImage.sprite = daepaSprite[index];
+                break;
+            case "청양고추":
+                seedFieldImage.sprite = pepperSprite[index];
+                break;
+            default:
+
+                break;
+        }
     }
 }
