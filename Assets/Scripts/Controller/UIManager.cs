@@ -71,6 +71,12 @@ public class UIManager : MonoBehaviour
     RandomRamen randomRamen;
     #endregion
 
+    #region Lotto
+    [SerializeField] private Text lottoStatusText;
+    [SerializeField] private Text lottoRewardText;
+    [SerializeField] private GameObject lottoPanel;
+    #endregion
+
     [SerializeField] private GameObject quitPanel;
     [SerializeField] private ParticleSystem coinEffect;
 
@@ -433,6 +439,7 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+    #region Message
     private IEnumerator ErrorCoroutine(string info)
     {
         errorText.text = info;
@@ -445,4 +452,75 @@ public class UIManager : MonoBehaviour
     {
         StartCoroutine(ErrorCoroutine(info));
     }
+    #endregion
+
+    #region Lotto
+    public void Lotto()
+    {
+        if (lottoPanel.activeSelf) return;
+
+        int reward = 0;
+        int grade = 0;
+
+        lottoPanel.gameObject.SetActive(true);
+        
+        if (GameManager.Instance.CurrentUser.GetMoney() >= 1000)
+        {
+            GameManager.Instance.CurrentUser.AddUserMoney(-1000);
+            SoundManager.Instance.RewardSound();
+
+            float random = Random.Range(0f, 100f);
+
+            if(random < 0.0001f)
+            {
+                reward = 5000000;
+                grade++;
+            }
+
+            else if(random < 0.1f)
+            {
+                reward = 1000000;
+                grade++;
+
+            }
+
+            else if(random < 2f)
+            {
+                reward = 50000;
+                grade++;
+            }
+
+            else if( random < 4f)
+            {
+                reward = 10000;
+                grade++;
+            }
+
+            else if (random < 10f)
+            {
+                reward = 5000;
+                grade++;
+            }
+
+            else
+            {
+                reward = 0;
+                grade++;
+            }
+        }
+
+        if(grade < 6)
+        {
+            lottoStatusText.text = string.Format("축하합니다! {0}등 당첨!", grade);
+            lottoRewardText.text = string.Format("보상금 +{0}원", reward);
+            GameManager.Instance.CurrentUser.AddUserMoney(reward);
+        }
+
+        else
+        {
+            lottoStatusText.text = string.Format("꽝입니다!");
+            lottoRewardText.text = "";
+        }
+    }
+    #endregion
 }

@@ -47,7 +47,7 @@ public class AchievementPanel : PanelBase
 
         nameText.text = achievement.achievementNames[currentLevel];
         infoText.text = string.Format(achievement.achievementInfo, achievement.conditions[currentLevel]);
-        rewardText.text = achievement.rewards[currentLevel].ToString();
+        rewardText.text = achievement.rewards[Mathf.Clamp(currentLevel,0, achievement.rewards.Count)].ToString();
         UpdateStars();
     }
 

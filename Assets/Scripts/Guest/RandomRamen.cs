@@ -59,7 +59,7 @@ public class RandomRamen : MonoBehaviour
 
     private string GuestComment(Recipe recipe, List<Ingredient> ingredients)
     {
-        string comment = "";
+        string comment;
 
         if (ingredients.Count > 0 && !isAdd)
         {

@@ -84,7 +84,6 @@ public class LivestockObject : IngredientPurchase
 
     public override void UpdateUI()
     {
-        Debug.Log(GameManager.Instance.CurrentUser.GetIsIngredientsHave()[ingredientIndex]);
         gameObject.SetActive(GameManager.Instance.CurrentUser.GetIsIngredientsHave()[ingredientIndex]);
     }
     public void MinusCurCount()
