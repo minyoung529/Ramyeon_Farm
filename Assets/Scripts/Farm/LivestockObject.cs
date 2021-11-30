@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LivestockObject : MonoBehaviour
+public class LivestockObject : IngredientPurchase
 {
     [SerializeField] private GameObject livestockProductObject;
 
@@ -79,12 +79,12 @@ public class LivestockObject : MonoBehaviour
 
         transform.parent.GetComponent<BuyFirstIngredient>().SetValue(ingredientIndex);
 
-        Active();
+        UpdateUI();
     }
 
-    private void Active()
+    public override void UpdateUI()
     {
-        if(GameManager.Instance.CurrentUser.GetIsIngredientsHave()[ingredientIndex])
+        if (GameManager.Instance.CurrentUser.GetIsIngredientsHave()[ingredientIndex])
         {
             gameObject.SetActive(true);
         }

@@ -21,7 +21,6 @@ public class Pot : MonoBehaviour
     [SerializeField] Sprite[] potSprites;
 
     private SpriteRenderer boilingWater;
-    private Animator potAnimator;
     private Animator waterAnimator;
     private List<string> dontPutIngredients = new List<string>();
     private List<SpriteRenderer> potObjs = new List<SpriteRenderer>();
@@ -182,14 +181,10 @@ public class Pot : MonoBehaviour
     private int SetOrder(int index)
     {
         if (index == 0)
-        {
             return 0;
-        }
 
         else
-        {
             return 2;
-        }
     }
 
     private void DespawnObjs()
@@ -232,6 +227,7 @@ public class Pot : MonoBehaviour
 
     private void ResetWater()
     {
+        boilingWater.DOKill();
         boilingWater.gameObject.SetActive(false);
         boilingWater.transform.localScale = Vector2.zero;
         boilingWater.color = originColor;

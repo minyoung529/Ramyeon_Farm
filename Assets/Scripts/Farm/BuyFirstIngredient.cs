@@ -20,7 +20,7 @@ public class BuyFirstIngredient : MonoBehaviour
     private void Start()
     {
         button = GetComponent<Button>();
-        ingredientPurchase = GetComponent<IngredientPurchase>();
+        ingredientPurchase = GetComponentInChildren<IngredientPurchase>();
         button?.onClick.AddListener(() => OnClick());
     }
 
