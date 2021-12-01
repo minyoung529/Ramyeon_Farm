@@ -15,6 +15,8 @@ public class GuestMove : MonoBehaviour
     private WaitForSeconds delay02 = new WaitForSeconds(2f);
     private WaitForSeconds delayFadedTime = new WaitForSeconds(2f);
 
+    private bool isStaging = false;
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -32,8 +34,10 @@ public class GuestMove : MonoBehaviour
     {
         GameManager.Instance.QuestManager.AddQuestValue(KeyManager.GUESTQUEST_INDEX, 1);
         spriteRenderer.sprite = GameManager.Instance.GetRandomGuestSprite();
+        transform.DOKill();
         transform.DOLocalMove(GameManager.Instance.counterPosition.localPosition, 2f);
         SoundManager.Instance?.DdiringSound();
+
         for (float i = 1f; i < targetSize; i += phase)
         {
             spriteRenderer.size = originScale * i;
@@ -41,14 +45,18 @@ public class GuestMove : MonoBehaviour
         }
 
         yield return delay02;
+        isStaging = true;
         GameManager.Instance.UIManager.ShowUpSpeechBubble(true);
     }
 
     private IEnumerator Leave()
     {
+        isStaging = false;
+
         yield return delay02;
         GameManager.Instance.UIManager.ShowUpSpeechBubble(false);
 
+        transform.DOKill();
         transform.DOLocalMove(originPos, 2f);
 
         for (float i = targetSize; i > 1f; i -= phase)
@@ -65,5 +73,10 @@ public class GuestMove : MonoBehaviour
     public void StartLeave()
     {
         StartCoroutine(Leave());
+    }
+
+    public bool GetIsStaging()
+    {
+        return isStaging;
     }
 }

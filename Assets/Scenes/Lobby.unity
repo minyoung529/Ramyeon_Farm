@@ -1347,6 +1347,7 @@ MonoBehaviour:
   coinSound: {fileID: 8300000, guid: 31adc455d0964d347a9411f8575f54dd, type: 3}
   putIngredientSound: {fileID: 8300000, guid: 7c140bb0dc881e848b05397c8076f300, type: 3}
   rewardSound: {fileID: 8300000, guid: 08a51594e0ca8a74fa57dced2bc05067, type: 3}
+  zzaraSound: {fileID: 0}
   buttonSounds:
   - {fileID: 8300000, guid: 5b6020ec8de263f48a7008431d518542, type: 3}
   - {fileID: 8300000, guid: 8d31d87daba70514a9857aef7917caad, type: 3}

@@ -192,7 +192,7 @@ public class GameManager : MonoSingleton<GameManager>
         }
 
         if (checkList.Count == currentRamen.Count && checkList.Count == currentRecipe.GetIngredients().Count)
-        {
+        {   
             return 100f;
         }
 

@@ -114,7 +114,6 @@ public class User
         {
             // myLevel: 2   targetLevel: 3
             // 110           100
-
             if (currentAchievement[index] >= achievement.conditions[i])
             {
                 return true;

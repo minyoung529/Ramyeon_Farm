@@ -16,6 +16,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     [SerializeField] private AudioClip coinSound;
     [SerializeField] private AudioClip putIngredientSound;
     [SerializeField] private AudioClip rewardSound;
+    [SerializeField] private AudioClip zzaraSound;
 
     [SerializeField] private AudioClip[] buttonSounds;
     [SerializeField] private AudioClip[] ingredientSounds;
@@ -45,6 +46,9 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     public void RewardSound()
         => effectSoundAudio.PlayOneShot(rewardSound);
+
+    public void ZzaraSound()
+        => effectSoundAudio.PlayOneShot(zzaraSound);
 
     public void BoilingWaterSound()
     {

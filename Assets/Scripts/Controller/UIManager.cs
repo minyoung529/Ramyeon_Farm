@@ -18,9 +18,6 @@ public class UIManager : MonoBehaviour
 
     #region 프로필
     [SerializeField] private Text moneyText;
-    [SerializeField] private TextMeshProUGUI levelText;
-    [SerializeField] private Image playerProfile;
-    [SerializeField] private Slider levelSlider;
 
     #endregion
     #region ContentPanels
@@ -74,7 +71,10 @@ public class UIManager : MonoBehaviour
     #region Lotto
     [SerializeField] private Text lottoStatusText;
     [SerializeField] private Text lottoRewardText;
-    [SerializeField] private GameObject lottoPanel;
+    [SerializeField] private ActiveScale lottoPanel;
+    [SerializeField] private GameObject blackUI;
+
+    private ParticleSystem lottoParticle;
     #endregion
 
     [SerializeField] private GameObject quitPanel;
@@ -100,7 +100,7 @@ public class UIManager : MonoBehaviour
         randomRamen = new RandomRamen();
         menuButton = FindObjectOfType<MenuButton>();
         guest = FindObjectOfType<GuestMove>();
-
+        lottoParticle = lottoPanel.GetComponentInChildren<ParticleSystem>();
         for (int i = 0; i < stagesObj.Count; i++)
         {
             stagesObj[i].transform.position = new Vector2(distanceX * i, 0);
@@ -218,7 +218,10 @@ public class UIManager : MonoBehaviour
     public void UpdateQuestPanel(int index)
     {
         if (questPanels.Count == 0) return;
-        questPanels[index].UpdateUI();
+        for(int i = 0; i<questPanels.Count; i++)
+        {
+            questPanels[i].UpdateUI();
+        }
     }
 
     public void ResetQuestPanelData()
@@ -271,13 +274,15 @@ public class UIManager : MonoBehaviour
         if (isShow)
         {
             SoundManager.Instance?.ButtonSound((int)ButtonSoundType.PopSound);
-            speechBubble.transform.DOScale(0f, 0f);
+            speechBubble.transform.localScale = Vector3.zero;
             RandomOrder();
+            speechBubble.transform.DOKill();
             speechBubble.transform.DOScale(1f, 0.3f);
         }
 
         else
         {
+            speechBubble.transform.DOKill();
             speechBubble.transform.DOScale(0f, 0.3f);
         }
     }
@@ -317,6 +322,8 @@ public class UIManager : MonoBehaviour
         guestText.text = evaluateRamen.GetComment();
 
         priceEffectText.gameObject.SetActive(true);
+        priceEffectText.DOKill();
+        priceEffectText.transform.DOKill();
         priceEffectText.transform.DOMoveY(0.5f, 1f);
         priceEffectText.DOFade(0f, 1f).OnComplete(() => ResetPriceText(offset));
 
@@ -342,12 +349,16 @@ public class UIManager : MonoBehaviour
         curScreen++;
         for (int i = 0; i < stagesUI.Count; i++)
         {
-            stagesUI[i].transform.DOLocalMoveX(stagesUI[i].transform.localPosition.x - 1440, 0.5f).OnComplete(() => isMove = false);
+            stagesUI[i].transform.DOLocalMoveX(stagesUI[i].transform.localPosition.x - 1440, 0.5f).OnComplete(() =>
+            {
+                isMove = false;
+                stagesUI[i].transform.DOKill();
+            });
         }
 
         for (int i = 0; i < stagesObj.Count; i++)
         {
-            stagesObj[i].transform.DOMoveX(stagesObj[i].transform.position.x - distanceX, 0.5f);
+            stagesObj[i].transform.DOMoveX(stagesObj[i].transform.position.x - distanceX, 0.5f).OnComplete(() => stagesObj[i].transform.DOKill());
         }
 
         SoundManager.Instance?.BoilingWaterSound();
@@ -361,12 +372,17 @@ public class UIManager : MonoBehaviour
         curScreen--;
         for (int i = 0; i < stagesUI.Count; i++)
         {
-            stagesUI[i].transform.DOLocalMoveX(stagesUI[i].transform.localPosition.x + 1440, 0.5f).OnComplete(() => isMove = false);
+            stagesUI[i].transform.DOLocalMoveX(stagesUI[i].transform.localPosition.x + 1440, 0.5f)
+                .OnComplete(() =>
+                {
+                    isMove = false;
+                    stagesUI[i].transform.DOKill();
+                });
         }
 
         for (int i = 0; i < stagesObj.Count; i++)
         {
-            stagesObj[i].transform.DOMoveX(stagesObj[i].transform.position.x + distanceX, 0.5f);
+            stagesObj[i].transform.DOMoveX(stagesObj[i].transform.position.x + distanceX, 0.5f).OnComplete(() => stagesObj[i].transform.DOKill());
         }
 
         SoundManager.Instance?.BoilingWaterSound();
@@ -396,7 +412,7 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
-    #region
+    #region Check
     public bool CheckIsReward_Quest()
     {
         for (int i = 0; i < questPanels.Count; i++)
@@ -437,6 +453,10 @@ public class UIManager : MonoBehaviour
     {
         return distanceY;
     }
+    public GuestMove GetGuest()
+    {
+        return guest;
+    }
     #endregion
 
     #region Message
@@ -457,12 +477,11 @@ public class UIManager : MonoBehaviour
     #region Lotto
     public void Lotto()
     {
-        if (lottoPanel.activeSelf && lottoPanel.transform.localScale == Vector3.one) return;
+        if (lottoPanel.gameObject.activeSelf && lottoPanel.transform.localScale == Vector3.one) return;
 
-        int reward = 0;
-        int grade = 0;
+        int reward;
+        int grade;
 
-        lottoPanel.gameObject.SetActive(true);
 
         if (GameManager.Instance.CurrentUser.GetMoney() < 1000)
         {
@@ -471,7 +490,9 @@ public class UIManager : MonoBehaviour
         }
 
         GameManager.Instance.CurrentUser.AddUserMoney(-1000);
-        SoundManager.Instance?.RewardSound();
+        GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.MiniGame, 1);
+        lottoPanel.OnActive();
+        blackUI.gameObject.SetActive(true);
 
         float random = Random.Range(0f, 100f);
 
@@ -516,13 +537,19 @@ public class UIManager : MonoBehaviour
             lottoStatusText.text = string.Format("{0}등 당첨!", grade);
             lottoRewardText.text = string.Format("보상금 +{0}원", reward);
             GameManager.Instance.CurrentUser.AddUserMoney(reward);
+
+            SoundManager.Instance?.ZzaraSound();
         }
 
         else
         {
             lottoStatusText.text = "꽝입니다!";
             lottoRewardText.text = "";
+
+            SoundManager.Instance?.RewardSound();
         }
+
+        lottoParticle.gameObject.SetActive(grade != -1);
     }
     #endregion
 }
