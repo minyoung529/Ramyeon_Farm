@@ -8,13 +8,13 @@ public class ActiveScale : MonoBehaviour
     public void OnActive()
     {
         gameObject.SetActive(true);
-        transform.DOScale(1f, 0.3f);
+        transform.DOScale(1f, 0.3f).OnComplete(() => transform.DOKill());
     }
 
     public void OnEnactive()
     {
         gameObject.SetActive(false);
-        transform.DOScale(new Vector3(0f, 1f, 0f), 0f);
+        transform.localScale = Vector3.zero;
         SoundManager.Instance?.ButtonSound((int)ButtonSoundType.CloseSound);
     }
 }

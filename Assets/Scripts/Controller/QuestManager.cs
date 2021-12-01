@@ -119,6 +119,7 @@ public class QuestManager : MonoBehaviour
     {
         string[] types = achievementName.ToString().Split('\t', '\n');
         int achieveCnt = types.Length / 2;
+
         for (int i = 0; i < achieveCnt; i++)
         {
             achievementList.Add(new Achievement(i, int.Parse(types[i * 2]), types[i * 2 + 1]));

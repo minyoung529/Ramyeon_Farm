@@ -87,10 +87,14 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         return false;
     }
+    private bool CheckIsWater()
+    {
+        return pot.isWater && ingredient.name == "¹°";
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.type != IngredientType.basic) return;
-
+        if (CheckIsWater()) return;
         IconInstantiateOrPooling();
         SoundManager.Instance?.PutIngredientSound();
     }
@@ -98,6 +102,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnDrag(PointerEventData eventData)
     {
         if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.type != IngredientType.basic) return;
+        if (CheckIsWater()) return;
 
         Vector2 mousePosition = Input.mousePosition;
         mousePosition = GameManager.Instance.mainCam.ScreenToWorldPoint(mousePosition);
@@ -107,6 +112,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnEndDrag(PointerEventData eventData)
     {
         if (CheckIsOverlap()) return;
+        if (CheckIsWater()) return;
 
         if (GameManager.Instance.CurrentUser.GetIngredientsAmounts()[index] < 1 && ingredient.type != IngredientType.basic)
         {
@@ -136,6 +142,10 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 GameManager.Instance.PlusIngredientInPot(ingredientIcon.GetIngredient());
             }
 
+            if(ingredient.name == "¹°")
+            {
+                pot.SetIsWater(true);
+            }
             ingredient.AddAmount(-1);
             GameManager.Instance.UIManager.UpdateIngredientPanel();
         }

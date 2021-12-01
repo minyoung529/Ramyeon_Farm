@@ -457,7 +457,7 @@ public class UIManager : MonoBehaviour
     #region Lotto
     public void Lotto()
     {
-        if (lottoPanel.activeSelf) return;
+        if (lottoPanel.activeSelf && lottoPanel.transform.localScale == Vector3.one) return;
 
         int reward = 0;
         int grade = 0;

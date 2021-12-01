@@ -39,6 +39,7 @@ public class Pot : MonoBehaviour
     private float maxTime = 0f;
 
     public bool dontPut { get; private set; }
+    public bool isWater { get; private set; }
 
     private void Start()
     {
@@ -215,6 +216,7 @@ public class Pot : MonoBehaviour
         isStop = true;
         isBoil = false;
         dontPut = false;
+        isWater = false;
 
         curTime = 0f;
         maxTime = 0f;
@@ -239,5 +241,10 @@ public class Pot : MonoBehaviour
     public bool IsBoilingWater()
     {
         return isBoil;
+    }
+
+    public void SetIsWater(bool isWater)
+    {
+        this.isWater = isWater;
     }
 }
