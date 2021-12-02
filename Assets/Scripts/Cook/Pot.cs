@@ -93,7 +93,11 @@ public class Pot : MonoBehaviour
         boilingWater.transform.DOScale(1f, 2f);
         ResetTimer();
     }
-
+    private void TutorialBoilWater()
+    {
+        if (!GameManager.Instance.TutorialManager.GetIsTutorial())
+            GameManager.Instance.TutorialManager.TutorialNumber(2);
+    }
     private void ResetTimer()
     {
         maxTime = boilTime;
@@ -106,6 +110,7 @@ public class Pot : MonoBehaviour
         dontPut = false;
 
         waterAnimator.Play("Water_boil");
+        TutorialBoilWater();
         DontPut("");
         smokeParticle.gameObject.SetActive(true);
 

@@ -57,6 +57,14 @@ public class IngredientIcon : MonoBehaviour
         OnIngredientUp();
         GameManager.Instance.PlusIngredientInPot(ingredient);
         isClick = true;
+        TutorialIngredient();
+    }
+    private void TutorialIngredient()
+    {
+        if (ingredient.name == "물") return;
+        else if (ingredient.name == "라면사리") GameManager.Instance.TutorialManager.TutorialIngredient("라면사리", true);
+        else if (ingredient.name == "스프") GameManager.Instance.TutorialManager.TutorialIngredient("스프", true); ;
+
     }
 
     public void Inactive()
