@@ -72,6 +72,8 @@ public class FieldPanel : IngredientPurchase
 
     public void UpdateHarvestIcon()
     {
+        if (!GameManager.Instance.TutorialManager.GetIsTutorial()&&!GameManager.Instance.TutorialManager.GetEndTutorial())
+            GameManager.Instance.TutorialManager.TutorialNumber(5);
         isHarvest = true;
         harvestButton.gameObject.SetActive(true);
         harvestButton.transform.DOScale(1f, 0.4f);
@@ -82,10 +84,11 @@ public class FieldPanel : IngredientPurchase
     public void OnClickIcon()
     {
         Ingredient ingredient = GameManager.Instance.GetIngredients()[index];
-
         if (isHarvest)
         {
             Harvest(ingredient);
+            if (!GameManager.Instance.TutorialManager.GetIsTutorial())
+                GameManager.Instance.TutorialManager.TutorialNumber(6);
         }
 
         else

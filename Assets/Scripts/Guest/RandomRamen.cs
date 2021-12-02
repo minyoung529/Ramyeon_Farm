@@ -12,7 +12,12 @@ public class RandomRamen : MonoBehaviour
     {
         Recipe recipe = new Recipe(GameManager.Instance.GetRecipes()[GameManager.Instance.GetRandomRecipeIndex()]);
 
-        if (Random.Range(0, 2) == 0)
+        if (!GameManager.Instance.TutorialManager.GetEndTutorial())
+        {
+            GameManager.Instance.SetCurrentRecipe(GameManager.Instance.GetRecipes().Find(x => x.recipeName == "기본라면"));
+        }
+
+        else if (Random.Range(0, 2) == 0)
         {
             if (Random.Range(0, 3) == 0)
             {

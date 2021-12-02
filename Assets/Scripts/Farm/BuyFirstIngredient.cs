@@ -39,7 +39,7 @@ public class BuyFirstIngredient : MonoBehaviour
 
     public void OnClick()
     {
-        if (GameManager.Instance.TutorialManager.GetIsTutorial()) return;
+        if (!GameManager.Instance.TutorialManager.GetIsTutorial()) return;
 
         Ingredient ingredient = GameManager.Instance.GetIngredients()[index];
         if (GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index]) { }

@@ -13,25 +13,29 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private string[] tutorialText;
     private bool isTutorial = false; //true면 넘어가지 않음, false면 넘어감
     private int tutorialChange = 0;
-    private IEnumerator Corountine;
+    private IEnumerator corountine;
     [SerializeField] private GameObject[] UIPanel;
+    private bool isEndTutorial = false;
     private void Awake()
     {
         tutorialNum = PlayerPrefs.GetInt("Tutorial", 0);
         TutorialPanel.SetActive(false);
-        Corountine = Typing();
-        TutorialNumber(0);
+        corountine = Typing();
         if (tutorialNum != 19)
         {
-            OnTutorial();
+            TutorialNumber(0);
             NextBtn.SetActive(false);
             StartTutorial();
         }
-        else if (tutorialNum == 19)
-            SetIsTutorial(true);
+        else if (tutorialNum <= 19)
+        {
+            isTutorial = true;
+        }
     }
     public void TutorialNumber(int number)
     {
+        tutorialChange = 0;
+
         switch (number)
         {
             case 0:
@@ -44,23 +48,37 @@ public class TutorialManager : MonoBehaviour
                 break;
             case 2:
                 tutorialNum = 8;
-                tutorialChange = 0;
                 break;
             case 3:
                 tutorialNum = 9;
-                tutorialChange = 0;
                 break;
             case 4:
                 tutorialNum = 10;
-                tutorialChange = 0;
                 break;
-
+            case 5:
+                tutorialNum = 11;
+                break;
+            case 6:
+                tutorialNum = 12;
+                break;
+            case 7:
+                tutorialNum = 13;
+                break;
+            case 8:
+                tutorialNum = 14;
+                break;
+            case 9:
+                tutorialNum = 15;
+                
+                tutorialChange = 3;
+                break;
         }
         isTutorial = true;
         OnTutorial();
     }
     private bool isTutorialRamen = false;
     private bool isTutorialSoufu = false;
+    private bool isTutorialDaefa = false;
     public void TutorialIngredient(string name, bool isTutorial)
     {
         switch(name)
@@ -71,6 +89,9 @@ public class TutorialManager : MonoBehaviour
             case "스프":
                 isTutorialSoufu = isTutorial;
                 break;
+            case "대파":
+                isTutorialDaefa = isTutorial;
+                break;
         }
         TutorialIngredient();
     }
@@ -78,8 +99,15 @@ public class TutorialManager : MonoBehaviour
     {
         if (!isTutorial && isTutorialRamen == true && isTutorialSoufu == true)
         {
-            TutorialNumber(3);
+            if (isTutorialDaefa == true)
+                TutorialNumber(8);
+            else
+                TutorialNumber(3);
         }
+    }
+    public bool GetEndTutorial()
+    {
+        return isEndTutorial;
     }
     public int GetTutorialNum()
     {
@@ -95,10 +123,11 @@ public class TutorialManager : MonoBehaviour
     }
     public void NextButton()
     {
+        if (isEndTutorial) return;
         NextBtn.SetActive(false);
         if (tutorialNum == 1)
         {
-            GameManager.Instance.GuestMove.StartGoToCounter();
+            GameManager.Instance.GuestMove.StartGoToCounter(true);
         }
         else if (tutorialNum == 2)
         {
@@ -110,21 +139,25 @@ public class TutorialManager : MonoBehaviour
         }
         else if (tutorialNum == 9)
             UIPanel[2].SetActive(true);
-        else if (tutorialNum == 19)
-            EndTutorial();
+        else if (tutorialNum == 12)
+            UIPanel[1].SetActive(true);
+        else if(tutorialNum == 14)
+            UIPanel[4].SetActive(true);
         else
             StartTutorial();
+
         tutorialNum += 1;
-
-        Debug.Log(tutorialNum);
-
+        StopCoroutine(Typing());
+        TutorialPanel.SetActive(isTutorial);
         if (isTutorial && tutorialChange > 0)
             tutorialChange--;
         else if (isTutorial && tutorialChange == 0)
             isTutorial = false;
-
-        StopCoroutine(Typing());
-        OnTutorial();
+        if (tutorialNum < 19)
+            OnTutorial();
+        else
+            EndTutorial();
+        
     }
     public void OnTutorial()
     {
@@ -138,16 +171,28 @@ public class TutorialManager : MonoBehaviour
             UIPanel[i].SetActive(false);
         }
     }
+    public void SkipButton()
+    {
+        tutorialNum = 19;
+        EndTutorial();
+    }
     private void EndTutorial()
     {
+        StopCoroutine(Typing());
+        if (tutorialNum == 19)
+        {
+            GameManager.Instance.GuestMove.StartGoToCounter(false);
+        }
         for (int i = 0; i < UIPanel.Length; i++)
         {
             UIPanel[i].SetActive(true);
         }
+        isEndTutorial = true;
+        TutorialPanel.SetActive(false);
     }
     public void OnApplicationQuit()
     {
-        if (tutorialNum < 20)
+        if (tutorialNum <= 19)
             PlayerPrefs.SetInt("Tutorial", 0);
         else
             PlayerPrefs.SetInt("Tutorial", 19);
@@ -156,10 +201,13 @@ public class TutorialManager : MonoBehaviour
     IEnumerator Typing()
     {
         yield return new WaitForSeconds(0.05f);
+        Debug.Log(tutorialNum);
+        Debug.Log(tutorialText.Length);
+        if (tutorialNum >= tutorialText.Length) yield break;
         for (int i = 0; i <= tutorialText[tutorialNum].Length; i++)
         {
             TutorialText.text = tutorialText[tutorialNum].Substring(0, i);
-            yield return new WaitForSeconds(0.08f);
+            yield return new WaitForSeconds(0.03f);
         }
         yield return new WaitForSeconds(0.2f);
         NextBtn.SetActive(true);

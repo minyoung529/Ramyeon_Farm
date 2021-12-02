@@ -32,10 +32,10 @@ public class GuestMove : MonoBehaviour
 
         delayFadedTime = new WaitForSeconds(phase / (targetSize - 1f) / 2.2f);
     }
-    public void StartGoToCounter()
+    public void StartGoToCounter(bool isTutorial)
     {
         gameObject.SetActive(true);
-        isTutorial = true;
+        this.isTutorial = isTutorial;
         StartCoroutine(GoToCounter());
     }
     public void SetIsTutorial(bool isTutorial)
@@ -93,7 +93,10 @@ public class GuestMove : MonoBehaviour
 
         yield return new WaitForSeconds(Random.Range(3f, 5f));
 
-        StartCoroutine(GoToCounter());
+        if(GameManager.Instance.TutorialManager.GetEndTutorial())
+        {
+            StartCoroutine(GoToCounter());
+        }
     }
 
     public void StartLeave()
