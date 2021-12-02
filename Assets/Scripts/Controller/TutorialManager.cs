@@ -18,16 +18,16 @@ public class TutorialManager : MonoBehaviour
     private bool isEndTutorial = false;
     private void Awake()
     {
-        tutorialNum = PlayerPrefs.GetInt("Tutorial", 0);
+       
         TutorialPanel.SetActive(false);
         corountine = Typing();
-        if (tutorialNum != 19)
+        if (!GameManager.Instance.CurrentUser.isCompleteTutorial)
         {
             TutorialNumber(0);
             NextBtn.SetActive(false);
             StartTutorial();
         }
-        else if (tutorialNum <= 19)
+        else if (GameManager.Instance.CurrentUser.isCompleteTutorial)
         {
             isTutorial = true;
         }
@@ -153,7 +153,7 @@ public class TutorialManager : MonoBehaviour
             tutorialChange--;
         else if (isTutorial && tutorialChange == 0)
             isTutorial = false;
-        if (tutorialNum < 19)
+        if (!GameManager.Instance.CurrentUser.isCompleteTutorial)
             OnTutorial();
         else
             EndTutorial();
@@ -173,13 +173,13 @@ public class TutorialManager : MonoBehaviour
     }
     public void SkipButton()
     {
-        tutorialNum = 19;
+        GameManager.Instance.CurrentUser.isCompleteTutorial = true;
         EndTutorial();
     }
     private void EndTutorial()
     {
         StopCoroutine(Typing());
-        if (tutorialNum == 19)
+        if (GameManager.Instance.CurrentUser.isCompleteTutorial)
         {
             GameManager.Instance.GuestMove.StartGoToCounter(false);
         }
@@ -192,17 +192,15 @@ public class TutorialManager : MonoBehaviour
     }
     public void OnApplicationQuit()
     {
-        if (tutorialNum <= 19)
-            PlayerPrefs.SetInt("Tutorial", 0);
+        if (GameManager.Instance.CurrentUser.isCompleteTutorial)
+            GameManager.Instance.CurrentUser.isCompleteTutorial =false;
         else
-            PlayerPrefs.SetInt("Tutorial", 19);
+            GameManager.Instance.CurrentUser.isCompleteTutorial = true;
     }
 
     IEnumerator Typing()
     {
         yield return new WaitForSeconds(0.05f);
-        Debug.Log(tutorialNum);
-        Debug.Log(tutorialText.Length);
         if (tutorialNum >= tutorialText.Length) yield break;
         for (int i = 0; i <= tutorialText[tutorialNum].Length; i++)
         {

@@ -17,20 +17,19 @@ public class GuestMove : MonoBehaviour
 
     private bool isStaging = false;
 
-    private IEnumerator Corountine;
-    
     private bool isTutorial;
     void Start()
     {
         gameObject.SetActive(false);
         spriteRenderer = GetComponent<SpriteRenderer>();
         originScale = spriteRenderer.size;
-        Corountine = DelayTutorial();
 
         transform.position = GameManager.Instance.doorPosition.position - new Vector3(0.4f, 0, 0);
         originPos = transform.localPosition;
 
         delayFadedTime = new WaitForSeconds(phase / (targetSize - 1f) / 2.2f);
+        if (GameManager.Instance.CurrentUser.isCompleteTutorial)
+            StartGoToCounter(true);
     }
     public void StartGoToCounter(bool isTutorial)
     {
@@ -38,10 +37,7 @@ public class GuestMove : MonoBehaviour
         this.isTutorial = isTutorial;
         StartCoroutine(GoToCounter());
     }
-    public void SetIsTutorial(bool isTutorial)
-    {
-        this.isTutorial = isTutorial;
-    }
+    
     private IEnumerator GoToCounter()
     {
         GameManager.Instance.QuestManager.AddQuestValue(KeyManager.GUESTQUEST_INDEX, 1);
@@ -58,7 +54,8 @@ public class GuestMove : MonoBehaviour
 
         yield return delay02;
         isStaging = true;
-        yield return StartCoroutine(DelayTutorial());
+        if(!GameManager.Instance.CurrentUser.isCompleteTutorial)
+            yield return StartCoroutine(DelayTutorial());
         GameManager.Instance.UIManager.ShowUpSpeechBubble(true);
     }
     private IEnumerator DelayTutorial()
@@ -107,5 +104,10 @@ public class GuestMove : MonoBehaviour
     public bool GetIsStaging()
     {
         return isStaging;
+    }
+
+    public void SetIsTutorial(bool isTutorial)
+    {
+        this.isTutorial = isTutorial;
     }
 }
