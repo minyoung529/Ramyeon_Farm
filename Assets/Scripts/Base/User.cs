@@ -25,6 +25,10 @@ public class User
 
     [SerializeField] private int playTime;
 
+    public bool isCompleteTutorial;
+    //완료시 user에서 변수 true 시키고
+    //앞으로 게임 켰을 때 true이면 튜토리얼 실행 X
+
     //돈 더해주는 함수, 매개변수에 - 하면 빠짐
     public void AddUserMoney(int addMoney)
     {
@@ -112,8 +116,6 @@ public class User
 
         for (int i = achievementLevel[index]; i < achievement.achieveCount; i++)
         {
-            // myLevel: 2   targetLevel: 3
-            // 110           100
             if (currentAchievement[index] >= achievement.conditions[i])
             {
                 return true;

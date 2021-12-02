@@ -15,14 +15,11 @@ public class GuestMove : MonoBehaviour
     private WaitForSeconds delay02 = new WaitForSeconds(2f);
     private WaitForSeconds delayFadedTime = new WaitForSeconds(2f);
 
-<<<<<<< HEAD
     private bool isStaging = false;
 
-=======
     private IEnumerator Corountine;
     
     private bool isTutorial;
->>>>>>> cgim971
     void Start()
     {
         gameObject.SetActive(false);
@@ -60,17 +57,15 @@ public class GuestMove : MonoBehaviour
         }
 
         yield return delay02;
-<<<<<<< HEAD
         isStaging = true;
-=======
         yield return StartCoroutine(DelayTutorial());
->>>>>>> cgim971
         GameManager.Instance.UIManager.ShowUpSpeechBubble(true);
     }
     private IEnumerator DelayTutorial()
     {
         if (!isTutorial)
             StopCoroutine(DelayTutorial());
+
         while (isTutorial)
         {
             yield return null;
