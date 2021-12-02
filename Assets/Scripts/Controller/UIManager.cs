@@ -271,6 +271,7 @@ public class UIManager : MonoBehaviour
     #region Guest
     public void ShowUpSpeechBubble(bool isShow)
     {
+        
         if (isShow)
         {
             SoundManager.Instance?.ButtonSound((int)ButtonSoundType.PopSound);
@@ -342,6 +343,11 @@ public class UIManager : MonoBehaviour
     #region MoveScreen
     public void NextStage()
     {
+        if (!GameManager.Instance.TutorialManager.GetIsTutorial() && GameManager.Instance.TutorialManager.GetTutorialNum() == 5)
+            GameManager.Instance.TutorialManager.TutorialNumber(1);
+        else if (!GameManager.Instance.TutorialManager.GetIsTutorial() && GameManager.Instance.TutorialManager.GetTutorialNum() == 10)
+            GameManager.Instance.TutorialManager.TutorialNumber(4);
+    
         if (isMove) return;
         if (curScreen == stagesUI.Count - 1) return;
 
