@@ -30,6 +30,12 @@ public class EvaluateRamen : MonoBehaviour
         bool isMatch = CheckIsMatchRecipe();
         price = GetPrice();
 
+        if (myRecipeToInt.Count < 3)
+        {
+            price = 0;
+            return;
+        }
+        
         if (isMatch)
         {
             if (myRecipeToInt.Count > recipeToInt.Count)
