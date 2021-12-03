@@ -7,7 +7,7 @@ public class FinishRamen : MonoBehaviour, IPointerUpHandler
 {
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (!GameManager.Instance.TutorialManager.GetIsTutorial() && GameManager.Instance.TutorialManager.GetTutorialNum() == 15)
+        if(!GameManager.Instance.CurrentUser.isCompleteTutorial&& !GameManager.Instance.TutorialManager.GetIsTutorial() && GameManager.Instance.TutorialManager.GetTutorialNum() == 15)
         {
             GameManager.Instance.TutorialManager.TutorialNumber(9);
         }

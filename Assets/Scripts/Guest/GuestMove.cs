@@ -60,6 +60,7 @@ public class GuestMove : MonoBehaviour
     }
     private IEnumerator DelayTutorial()
     {
+        if (GameManager.Instance.CurrentUser.isCompleteTutorial) yield break;
         if (!isTutorial)
             StopCoroutine(DelayTutorial());
 

@@ -57,6 +57,7 @@ public class IngredientIcon : MonoBehaviour
         OnIngredientUp();
         GameManager.Instance.PlusIngredientInPot(ingredient);
         isClick = true;
+        if (GameManager.Instance.CurrentUser.isCompleteTutorial) return;
         TutorialIngredient();
     }
     private void TutorialIngredient()

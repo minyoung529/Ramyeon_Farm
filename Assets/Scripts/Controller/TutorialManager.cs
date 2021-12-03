@@ -13,14 +13,11 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private string[] tutorialText;
     private bool isTutorial = false; //true면 넘어가지 않음, false면 넘어감
     private int tutorialChange = 0;
-    private IEnumerator corountine;
     [SerializeField] private GameObject[] UIPanel;
     private bool isEndTutorial = false;
     private void Awake()
     {
-       
         TutorialPanel.SetActive(false);
-        corountine = Typing();
         if (!GameManager.Instance.CurrentUser.isCompleteTutorial)
         {
             TutorialNumber(0);
@@ -153,11 +150,13 @@ public class TutorialManager : MonoBehaviour
             tutorialChange--;
         else if (isTutorial && tutorialChange == 0)
             isTutorial = false;
-        if (!GameManager.Instance.CurrentUser.isCompleteTutorial)
-            OnTutorial();
-        else
+        if(tutorialNum == 19)
+        {
+            GameManager.Instance.CurrentUser.isCompleteTutorial = true;
             EndTutorial();
-        
+        }
+        else if (!GameManager.Instance.CurrentUser.isCompleteTutorial)
+            OnTutorial();
     }
     public void OnTutorial()
     {
@@ -166,7 +165,7 @@ public class TutorialManager : MonoBehaviour
     }
     private void StartTutorial()
     {
-        for (int i = 0; i < UIPanel.Length; i++)
+        for (int i = 0; i < UIPanel.Length -1; i++)
         {
             UIPanel[i].SetActive(false);
         }
@@ -179,11 +178,12 @@ public class TutorialManager : MonoBehaviour
     private void EndTutorial()
     {
         StopCoroutine(Typing());
+        UIPanel[11].SetActive(false);
         if (GameManager.Instance.CurrentUser.isCompleteTutorial)
         {
             GameManager.Instance.GuestMove.StartGoToCounter(false);
         }
-        for (int i = 0; i < UIPanel.Length; i++)
+        for (int i = 0; i < UIPanel.Length-1; i++)
         {
             UIPanel[i].SetActive(true);
         }

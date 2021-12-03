@@ -111,7 +111,8 @@ public class Pot : MonoBehaviour
         dontPut = false;
 
         waterAnimator.Play("Water_boil");
-        TutorialBoilWater();
+        if(!GameManager.Instance.CurrentUser.isCompleteTutorial)
+            TutorialBoilWater();
         DontPut("");
         smokeParticle.gameObject.SetActive(true);
 
