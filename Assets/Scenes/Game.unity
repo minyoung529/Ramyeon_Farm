@@ -723,8 +723,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -614.9, y: -0.0000076294}
-  m_SizeDelta: {x: 140.2, y: 142.5}
+  m_AnchoredPosition: {x: -615, y: -230}
+  m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &67642361
 MonoBehaviour:
@@ -24323,8 +24323,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 586, y: -9.09e-13}
-  m_SizeDelta: {x: 140.2, y: 142.5}
+  m_AnchoredPosition: {x: 615, y: -230}
+  m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &971623079
 MonoBehaviour:
@@ -31700,7 +31700,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -34998490, y: 0}
+  m_AnchoredPosition: {x: -35174744, y: 0}
   m_SizeDelta: {x: 0.00036621, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1181231608
@@ -32839,7 +32839,7 @@ MonoBehaviour:
   recipeNameText: {fileID: 4900000, guid: 18cdf1a6a6631204f985c831c49d2849, type: 3}
   recipeIngredientText: {fileID: 4900000, guid: 04109e3590bc58448ba141a6b8156a76, type: 3}
   ingredientInfoText: {fileID: 4900000, guid: 9f5e31af6953f8b4186b0e8feb01d0f2, type: 3}
-  GuestMove: {fileID: 0}
+  GuestMove: {fileID: 435072398}
   Pool: {fileID: 1166096065}
   doorPosition: {fileID: 184975314}
   counterPosition: {fileID: 1435943213}
