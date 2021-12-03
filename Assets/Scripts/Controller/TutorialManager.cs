@@ -192,16 +192,15 @@ public class TutorialManager : MonoBehaviour
     }
     public void OnApplicationQuit()
     {
-        if (GameManager.Instance.CurrentUser.isCompleteTutorial)
-            GameManager.Instance.CurrentUser.isCompleteTutorial =false;
-        else
-            GameManager.Instance.CurrentUser.isCompleteTutorial = true;
+        bool isComplete = GameManager.Instance.CurrentUser.isCompleteTutorial;
+        GameManager.Instance.CurrentUser.isCompleteTutorial = !isComplete;
     }
 
     IEnumerator Typing()
     {
         yield return new WaitForSeconds(0.05f);
         if (tutorialNum >= tutorialText.Length) yield break;
+        TutorialText.text = "";
         for (int i = 0; i <= tutorialText[tutorialNum].Length; i++)
         {
             TutorialText.text = tutorialText[tutorialNum].Substring(0, i);
