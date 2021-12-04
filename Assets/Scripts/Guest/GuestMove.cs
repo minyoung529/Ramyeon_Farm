@@ -66,6 +66,7 @@ public class GuestMove : MonoBehaviour
 
         while (isTutorial)
         {
+            if (GameManager.Instance.CurrentUser.isCompleteTutorial) yield break;
             yield return null;
             if (!isTutorial)
             {
