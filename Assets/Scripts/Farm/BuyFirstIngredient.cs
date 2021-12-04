@@ -17,14 +17,18 @@ public class BuyFirstIngredient : MonoBehaviour
 
     private IngredientPurchase ingredientPurchase;
 
+    private Collider2D col;
+
     private void Awake()
     {
         ingredientPurchase = GetComponentInChildren<IngredientPurchase>();
     }
     private void Start()
     {
+        col = GetComponent<Collider2D>();
         button = GetComponent<Button>();
         button?.onClick.AddListener(() => OnClick());
+        ActiveCollider();
     }
 
     public void SetValue(int index)
@@ -48,7 +52,7 @@ public class BuyFirstIngredient : MonoBehaviour
         {
             SoundManager.Instance?.ButtonSound((int)ButtonSoundType.Bbang);
             ingredientPanelImage.sprite = GameManager.Instance.GetIngredientSprite(index);
-            string name="";
+            string name = "";
 
             if (ingredient.type == IngredientType.meat) name = "³óÀå";
             else if (ingredient.type == IngredientType.vegetable) name = "¹ç";
@@ -77,13 +81,22 @@ public class BuyFirstIngredient : MonoBehaviour
         GameManager.Instance.CurrentUser.SetIsIngredientsHave(index, true);
         GameManager.Instance.UIManager.UpdateIngredientUpgradePanel();
 
-        ingredientPurchase.UpdateUI();
+        ingredientPurchase?.UpdateUI();
         panel.OnEnactive();
+        ActiveCollider();
     }
 
     private void AssignButtonListner()
     {
         purchaseButton.onClick.RemoveAllListeners();
         purchaseButton.onClick.AddListener(() => PurchaseIngredient());
+    }
+
+    private void ActiveCollider()
+    {
+        if (col != null)
+        {
+            col.enabled = !GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index];
+        }
     }
 }

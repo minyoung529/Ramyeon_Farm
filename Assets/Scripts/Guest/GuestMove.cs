@@ -96,6 +96,8 @@ public class GuestMove : MonoBehaviour
         {
             StartCoroutine(GoToCounter());
         }
+        else if (GameManager.Instance.CurrentUser.isCompleteTutorial)
+            StartCoroutine(GoToCounter());
     }
 
     public void StartLeave()

@@ -172,11 +172,13 @@ public class TutorialManager : MonoBehaviour
     }
     public void SkipButton()
     {
+        
         GameManager.Instance.CurrentUser.isCompleteTutorial = true;
         EndTutorial();
     }
     private void EndTutorial()
     {
+        
         StopCoroutine(Typing());
         UIPanel[11].SetActive(false);
         if (GameManager.Instance.CurrentUser.isCompleteTutorial)
