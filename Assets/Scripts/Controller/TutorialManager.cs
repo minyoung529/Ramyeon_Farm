@@ -15,6 +15,11 @@ public class TutorialManager : MonoBehaviour
     private int tutorialChange = 0;
     [SerializeField] private GameObject[] UIPanel;
     private bool isEndTutorial = false;
+
+    private bool isTutorialRamen = false;
+    private bool isTutorialSoufu = false;
+    private bool isTutorialDaefa = false;
+
     private void Awake()
     {
         TutorialPanel.SetActive(false);
@@ -32,12 +37,12 @@ public class TutorialManager : MonoBehaviour
     public void TutorialNumber(int number)
     {
         tutorialChange = 0;
-
         switch (number)
         {
             case 0:
                 tutorialNum = 0;
                 tutorialChange = 4;
+                GameManager.Instance.CurrentUser.SetMoney(1000);
                 break;
             case 1:
                 tutorialNum = 5;
@@ -66,19 +71,16 @@ public class TutorialManager : MonoBehaviour
                 break;
             case 9:
                 tutorialNum = 15;
-                
                 tutorialChange = 3;
                 break;
         }
+
         isTutorial = true;
         OnTutorial();
     }
-    private bool isTutorialRamen = false;
-    private bool isTutorialSoufu = false;
-    private bool isTutorialDaefa = false;
     public void TutorialIngredient(string name, bool isTutorial)
     {
-        switch(name)
+        switch (name)
         {
             case "라면사리":
                 isTutorialRamen = isTutorial;
@@ -138,7 +140,7 @@ public class TutorialManager : MonoBehaviour
             UIPanel[2].SetActive(true);
         else if (tutorialNum == 12)
             UIPanel[1].SetActive(true);
-        else if(tutorialNum == 14)
+        else if (tutorialNum == 14)
             UIPanel[4].SetActive(true);
         else
             StartTutorial();
@@ -150,7 +152,7 @@ public class TutorialManager : MonoBehaviour
             tutorialChange--;
         else if (isTutorial && tutorialChange == 0)
             isTutorial = false;
-        if(tutorialNum == 19)
+        if (tutorialNum == 19)
         {
             GameManager.Instance.CurrentUser.isCompleteTutorial = true;
             EndTutorial();
@@ -165,27 +167,27 @@ public class TutorialManager : MonoBehaviour
     }
     private void StartTutorial()
     {
-        for (int i = 0; i < UIPanel.Length -1; i++)
+        for (int i = 0; i < UIPanel.Length - 1; i++)
         {
             UIPanel[i].SetActive(false);
         }
     }
     public void SkipButton()
     {
-        
+
         GameManager.Instance.CurrentUser.isCompleteTutorial = true;
         EndTutorial();
     }
     private void EndTutorial()
     {
-        
+
         StopCoroutine(Typing());
         UIPanel[11].SetActive(false);
         if (GameManager.Instance.CurrentUser.isCompleteTutorial)
         {
             GameManager.Instance.GuestMove.StartGoToCounter(false);
         }
-        for (int i = 0; i < UIPanel.Length-1; i++)
+        for (int i = 0; i < UIPanel.Length - 1; i++)
         {
             UIPanel[i].SetActive(true);
         }

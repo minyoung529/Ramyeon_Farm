@@ -33,6 +33,8 @@ public class Factory : IngredientPurchase
             firstIngredient = GetComponentInChildren<BuyFirstIngredient>();
             firstIngredient.SetValue(index);
         }
+
+        particle.gameObject.SetActive(IsHave());
     }
 
     void Update()
@@ -76,12 +78,12 @@ public class Factory : IngredientPurchase
 
     public override void UpdateUI()
     {
-        particle.gameObject.SetActive(IsHave());
         harvestButton.gameObject.SetActive(IsHave());
     }
 
     private void Harvest()
     {
+        particle.gameObject.SetActive(false);
         harvestButtonImage.sprite = seedSprite;
         harvestButtonImage.color = Color.black;
         GameManager.Instance.CurrentUser.AddIngredientsAmounts(index, ingredient.GetAmount());
@@ -103,6 +105,7 @@ public class Factory : IngredientPurchase
         GameManager.Instance.CurrentUser.AddUserMoney(-price);
         curTime = 0f;
         harvestButton.gameObject.SetActive(false);
+        particle.gameObject.SetActive(true);
         isSeed = false;
     }
     private bool IsHave()

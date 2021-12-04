@@ -94,7 +94,9 @@ public class BuyFirstIngredient : MonoBehaviour
 
     private void ActiveCollider()
     {
-        if (col != null)
+        Ingredient ingredient = GameManager.Instance.GetIngredients()[index];
+
+        if (ingredient.type == IngredientType.meat)
         {
             col.enabled = !GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index];
         }
