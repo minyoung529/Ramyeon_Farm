@@ -32,6 +32,7 @@ public class EvaluateRamen : MonoBehaviour
 
         if (myRecipeToInt.Count < 3)
         {
+            comment = guestComment.GetBadComments();
             price = 0;
             return;
         }
