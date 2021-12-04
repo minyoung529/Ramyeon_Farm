@@ -100,6 +100,7 @@ public class UIManager : MonoBehaviour
         randomRamen = new RandomRamen();
         menuButton = FindObjectOfType<MenuButton>();
         guest = FindObjectOfType<GuestMove>();
+
         lottoParticle = lottoPanel.GetComponentInChildren<ParticleSystem>();
         for (int i = 0; i < stagesObj.Count; i++)
         {
@@ -319,6 +320,7 @@ public class UIManager : MonoBehaviour
         }
         Vector2 offset = priceEffectText.transform.position;
         priceEffectText.text = string.Format("+{0}", price);
+
         guestText.text = evaluateRamen.GetComment();
 
         priceEffectText.gameObject.SetActive(true);
