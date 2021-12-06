@@ -31965,7 +31965,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -35658360, y: 0}
+  m_AnchoredPosition: {x: -35686104, y: 0}
   m_SizeDelta: {x: 0.00036621, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1181231608
@@ -33050,7 +33050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user:
-    money: 1000
+    money: 1200
     day: 0
     livestocks:
     - livestockName: "\uB2ED"
