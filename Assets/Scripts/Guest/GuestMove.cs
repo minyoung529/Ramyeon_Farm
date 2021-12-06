@@ -14,6 +14,7 @@ public class GuestMove : MonoBehaviour
 
     private WaitForSeconds delay02 = new WaitForSeconds(2f);
     private WaitForSeconds delayFadedTime = new WaitForSeconds(2f);
+    private Door door;
 
     private bool isStaging = false;
 
@@ -26,7 +27,7 @@ public class GuestMove : MonoBehaviour
 
         transform.position = GameManager.Instance.doorPosition.position - new Vector3(0.4f, 0, 0);
         originPos = transform.localPosition;
-
+        door = GameManager.Instance.doorPosition.GetComponent<Door>();
         delayFadedTime = new WaitForSeconds(phase / (targetSize - 1f) / 2.2f);
         if (GameManager.Instance.CurrentUser.isCompleteTutorial)
             StartGoToCounter(true);
@@ -38,13 +39,22 @@ public class GuestMove : MonoBehaviour
         StartCoroutine(GoToCounter());
     }
     
-    private IEnumerator GoToCounter()
+    private void ToCounter()
     {
+        door.OpenDoor();
+
         GameManager.Instance.QuestManager.AddQuestValue(KeyManager.GUESTQUEST_INDEX, 1);
         spriteRenderer.sprite = GameManager.Instance.GetRandomGuestSprite();
         transform.DOKill();
         transform.DOLocalMove(GameManager.Instance.counterPosition.localPosition, 2f);
         SoundManager.Instance?.DdiringSound();
+
+        
+    }
+
+    private IEnumerator GoToCounter()
+    {
+        ToCounter();
 
         for (float i = 1f; i < targetSize; i += phase)
         {
@@ -53,9 +63,14 @@ public class GuestMove : MonoBehaviour
         }
 
         yield return delay02;
+
         isStaging = true;
+
         if(!GameManager.Instance.CurrentUser.isCompleteTutorial)
+        {
             yield return StartCoroutine(DelayTutorial());
+        }
+
         GameManager.Instance.UIManager.ShowUpSpeechBubble(true);
     }
     private IEnumerator DelayTutorial()
@@ -74,15 +89,19 @@ public class GuestMove : MonoBehaviour
             }
         }
     }
+    private void ToDoor()
+    {
+        GameManager.Instance.UIManager.ShowUpSpeechBubble(false);
+
+        transform.DOKill();
+        transform.DOLocalMove(originPos, 2f);
+    }
     private IEnumerator Leave()
     {
         isStaging = false;
 
         yield return delay02;
-        GameManager.Instance.UIManager.ShowUpSpeechBubble(false);
-
-        transform.DOKill();
-        transform.DOLocalMove(originPos, 2f);
+        ToDoor();
 
         for (float i = targetSize; i > 1f; i -= phase)
         {
@@ -97,7 +116,9 @@ public class GuestMove : MonoBehaviour
             StartCoroutine(GoToCounter());
         }
         else if (GameManager.Instance.CurrentUser.isCompleteTutorial)
+        {
             StartCoroutine(GoToCounter());
+        }
     }
 
     public void StartLeave()

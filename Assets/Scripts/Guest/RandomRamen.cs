@@ -12,7 +12,7 @@ public class RandomRamen : MonoBehaviour
     {
         Recipe recipe = new Recipe(GameManager.Instance.GetRecipes()[GameManager.Instance.GetRandomRecipeIndex()]);
 
-        if (!GameManager.Instance.TutorialManager.GetEndTutorial())
+        if (!GameManager.Instance.CurrentUser.isCompleteTutorial)
         {
             recipe = GameManager.Instance.GetRecipes()[0];
             GameManager.Instance.SetCurrentRecipe(recipe);
