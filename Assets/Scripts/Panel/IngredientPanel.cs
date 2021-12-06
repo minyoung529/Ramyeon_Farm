@@ -53,15 +53,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void UpdateData()
     {
-        if (!GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index])
-        {
-            gameObject.SetActive(false);
-        }
-
-        else
-        {
-            gameObject.SetActive(true);
-        }
+            gameObject.SetActive(GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index]);
 
         if (amountText != null)
         {

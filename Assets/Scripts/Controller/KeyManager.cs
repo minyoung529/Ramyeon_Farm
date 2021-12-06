@@ -14,4 +14,6 @@ public static class KeyManager
 
     public const string GAME_SCENE = "Game";
     public const string LOBBY_SCENE = "Lobby";
+
+    public const string GUEST_TAG = "Guest";
 }

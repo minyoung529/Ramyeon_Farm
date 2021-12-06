@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Monster
   - Pot
+  - Guest
   layers:
   - Default
   - TransparentFX

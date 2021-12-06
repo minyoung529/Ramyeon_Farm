@@ -17,7 +17,7 @@ public class Door : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Monster"))
+        if (collision.CompareTag(KeyManager.GUEST_TAG))
         {
             if (isOpen) return;
             isOpen = true;

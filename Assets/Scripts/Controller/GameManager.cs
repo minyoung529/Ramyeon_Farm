@@ -100,7 +100,7 @@ public class GameManager : MonoSingleton<GameManager>
         FirstData();
         InputRecipeData();
         InputIngredientData();
-        InvokeRepeating("SaveToJson", 60f, 1f);
+        InvokeRepeating("SaveToJson", 40f, 1f);
 
         UIManager = GetComponent<UIManager>();
         QuestManager = GetComponent<QuestManager>();
