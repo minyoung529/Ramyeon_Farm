@@ -15,14 +15,10 @@ public class BuyFirstIngredient : MonoBehaviour
     [SerializeField] private ActiveScale panel;
     [SerializeField] private Button purchaseButton;
 
-    private IngredientPurchase ingredientPurchase;
+    [SerializeField] private IngredientPurchase ingredientPurchase;
 
     private Collider2D col;
 
-    private void Awake()
-    {
-        ingredientPurchase = GetComponentInChildren<IngredientPurchase>();
-    }
     private void Start()
     {
         col = GetComponent<Collider2D>();
@@ -75,12 +71,15 @@ public class BuyFirstIngredient : MonoBehaviour
     {
         int price = GameManager.Instance.GetIngredients()[index].firstPrice;
 
-        if (price > GameManager.Instance.CurrentUser.GetMoney()) return;
+        if (price > GameManager.Instance.CurrentUser.GetMoney())
+        {
+            GameManager.Instance.UIManager.ErrorMessage("소지금이 부족합니다.");
+            return;
+        }
 
         GameManager.Instance.CurrentUser.AddUserMoney(-price);
         GameManager.Instance.CurrentUser.SetIsIngredientsHave(index, true);
-        GameManager.Instance.UIManager.UpdateIngredientUpgradePanel();
-
+        GameManager.Instance.UIManager.UpdatePanels();
         ingredientPurchase?.UpdateUI();
         panel.OnEnactive();
         ActiveCollider();

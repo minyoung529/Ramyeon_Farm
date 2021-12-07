@@ -207,6 +207,13 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region RefreshData
+    public void UpdatePanels()
+    {
+        UpdateIngredientPanel();
+        UpdateAchievementPanel();
+        UpdateIngredientUpgradePanel();
+        UpdateBookPanel((int)BookType.Ingredient);
+    }
     public void UpdateIngredientPanel()
     {
         for (int i = 0; i < ingredientPanels.Count; i++)
@@ -218,6 +225,7 @@ public class UIManager : MonoBehaviour
     public void UpdateQuestPanel(int index)
     {
         if (questPanels.Count == 0) return;
+
         for(int i = 0; i<questPanels.Count; i++)
         {
             questPanels[i].UpdateUI();
