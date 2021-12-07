@@ -171,6 +171,7 @@ public class User
     {
         isIngredientsHave[index] = isTrue;
         GameManager.Instance.SetUserIndex();
+        GameManager.Instance.UIManager.UpdateIngredientPanel();
     }
     public void AddDay(int amount)
     {

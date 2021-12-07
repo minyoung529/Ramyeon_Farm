@@ -88,7 +88,6 @@ public class UIManager : MonoBehaviour
     MenuButton menuButton;
 
     float currenTime = 0f;
-
     private void Awake()
     {
         screenWidth = Screen.width;
