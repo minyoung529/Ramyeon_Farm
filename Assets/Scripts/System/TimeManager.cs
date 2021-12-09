@@ -5,18 +5,17 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour
 {
     [SerializeField] private float curTime = 0;
-    [SerializeField] private float maxTime = 20f;
-    [SerializeField] GameObject TenM;
-
+    [SerializeField] private float maxTime = 60f;
+    [SerializeField] GameObject timePanel;
     void Update()
     {
         Timer();
     }
 
-
     void Timer()
     {
         curTime += Time.deltaTime;
+
         if(curTime >= maxTime)
         {
             Show();
@@ -27,6 +26,6 @@ public class TimeManager : MonoBehaviour
     void Show()
     {
         Time.timeScale = 0;
-        TenM.SetActive(true);
+        GameManager.Instance.UIManager.AppearCalculatorPanel();
     }
 }

@@ -103,8 +103,9 @@ public class Factory : IngredientPurchase
             return;
         }
 
-
         GameManager.Instance.CurrentUser.AddUserMoney(-price);
+        GameManager.Instance.AddDatasOfDay(DataOfDay.SpentIngredientMoney, price);
+
         curTime = 0f;
         harvestButton.gameObject.SetActive(false);
         particle.gameObject.SetActive(true);

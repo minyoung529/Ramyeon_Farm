@@ -13,4 +13,6 @@ public class PanelBase : MonoBehaviour
     public virtual void OnClick() { }
 
     public virtual bool CheckIsUpdate() { return false; }
+
+    public virtual int GetMoney() { return 0; }
 }

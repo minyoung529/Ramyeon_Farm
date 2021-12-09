@@ -40,6 +40,8 @@ public class IngredientUpdatePanel : PanelBase
         if (ingredient.GetUpgradePrice() <= GameManager.Instance.CurrentUser.GetMoney())
         {
             GameManager.Instance.CurrentUser.AddUserMoney(-ingredient.GetUpgradePrice());
+            GameManager.Instance.AddDatasOfDay(DataOfDay.SpentIngredientMoney, ingredient.GetUpgradePrice());
+
             GameManager.Instance.CurrentUser.AddIngredientLevel(index);
             UpdateUI();
         }

@@ -78,6 +78,7 @@ public class BuyFirstIngredient : MonoBehaviour
         }
 
         GameManager.Instance.CurrentUser.AddUserMoney(-price);
+        GameManager.Instance.AddDatasOfDay(DataOfDay.SpentIngredientMoney, price);
         GameManager.Instance.CurrentUser.SetIsIngredientsHave(index, true);
         GameManager.Instance.UIManager.UpdatePanels();
         ingredientPurchase?.UpdateUI();

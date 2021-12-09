@@ -52,7 +52,7 @@ public class FieldPanel : IngredientPurchase
         {
             UpdateHarvestIcon();
         }
-        if(isGrow == false && curTime > maxTime * 0.5f)
+        if (isGrow == false && curTime > maxTime * 0.5f)
         {
             FieldChange(1);
             isGrow = true;
@@ -70,7 +70,7 @@ public class FieldPanel : IngredientPurchase
 
     public void UpdateHarvestIcon()
     {
-        if (!GameManager.Instance.CurrentUser.isCompleteTutorial && !GameManager.Instance.TutorialManager.GetIsTutorial()&&!GameManager.Instance.TutorialManager.GetEndTutorial())
+        if (!GameManager.Instance.CurrentUser.isCompleteTutorial && !GameManager.Instance.TutorialManager.GetIsTutorial() && !GameManager.Instance.TutorialManager.GetEndTutorial())
             GameManager.Instance.TutorialManager.TutorialNumber(5);
         isHarvest = true;
         harvestButton.gameObject.SetActive(true);
@@ -85,7 +85,7 @@ public class FieldPanel : IngredientPurchase
         if (isHarvest)
         {
             Harvest(ingredient);
-            if (!GameManager.Instance.CurrentUser.isCompleteTutorial&&!GameManager.Instance.TutorialManager.GetIsTutorial())
+            if (!GameManager.Instance.CurrentUser.isCompleteTutorial && !GameManager.Instance.TutorialManager.GetIsTutorial())
                 GameManager.Instance.TutorialManager.TutorialNumber(6);
         }
 
@@ -128,6 +128,7 @@ public class FieldPanel : IngredientPurchase
             return;
         }
         GameManager.Instance.CurrentUser.AddUserMoney(-price);
+        GameManager.Instance.AddDatasOfDay(DataOfDay.SpentIngredientMoney, price);
         curTime = 0f;
         harvestButtonImage.sprite = seedSprite;
         harvestButton.transform.DOScale(0f, 0.2f);
@@ -136,7 +137,7 @@ public class FieldPanel : IngredientPurchase
     }
     void FieldChange(int index)
     {
-        switch(ingredient.name) 
+        switch (ingredient.name)
         {
             case "¸¶´Ã":
                 seedFieldImage.sprite = garlicSprite[index];

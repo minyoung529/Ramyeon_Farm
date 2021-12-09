@@ -37,6 +37,8 @@ public class GameManager : MonoSingleton<GameManager>
     public Transform doorPosition;
     public Transform counterPosition;
 
+    public string[] calculatedFactors;
+
     #region Cook
     [SerializeField] private List<Recipe> recipes = new List<Recipe>();
     [SerializeField] private List<Ingredient> ingredients = new List<Ingredient>();
@@ -95,6 +97,8 @@ public class GameManager : MonoSingleton<GameManager>
         File.WriteAllText(SAVE_PATH + SAVE_FILENAME, json, System.Text.Encoding.UTF8);
     }
     #endregion
+
+    private int[] datasOfDay = new int[(int)DataOfDay.Count];
 
     private void Awake()
     {
@@ -212,7 +216,7 @@ public class GameManager : MonoSingleton<GameManager>
         }
 
         if (checkList.Count == currentRamen.Count && checkList.Count == currentRecipe.GetIngredients().Count)
-        {   
+        {
             return 100f;
         }
 
@@ -411,5 +415,15 @@ public class GameManager : MonoSingleton<GameManager>
     public void OnClickQuit()
     {
         Application.Quit();
+    }
+
+    public void AddDatasOfDay(DataOfDay type, int value)
+    {
+        datasOfDay[(int)type] += value;
+    }
+
+    public int GetDataofDay(int index)
+    {
+        return datasOfDay[index];
     }
 }

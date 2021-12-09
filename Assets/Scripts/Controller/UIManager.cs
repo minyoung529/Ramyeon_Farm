@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text priceEffectText;
     [SerializeField] private Text moneyText;
     #endregion
+
+
     #region ContentPanels
     [Header("패널")]
     [SerializeField] private GameObject ingredientPanelObj;
@@ -39,6 +41,12 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject inventoryPanelObj;
     private List<PanelBase> inventoryPanels = new List<PanelBase>();
+
+    [SerializeField] private GameObject calculatePanelObj;
+    private List<PanelBase> calculatePanels = new List<PanelBase>();
+
+    [SerializeField] private GameObject calculatorPanel;
+    [SerializeField] private Text incomeText;
 
     private bool isContentMove;
     #endregion
@@ -115,6 +123,7 @@ public class UIManager : MonoBehaviour
         InstantiatePanel(GameManager.Instance.QuestManager.GetAchievements().Count, achievementPanelObj, achievementPanels);
         InstantiatePanel(GameManager.Instance.GetIngredients().Count, ingredientUpgradePanelObj, ingredientUpgradePanels, 3);
         InstantiatePanel(GameManager.Instance.GetIngredients().Count, inventoryPanelObj, inventoryPanels, 3);
+        InstantiatePanel((int)DataOfDay.Count, calculatePanelObj, calculatePanels);
 
         int max = Mathf.Max(GameManager.Instance.GetIngredients().Count, GameManager.Instance.GetRecipes().Count);
         InstantiatePanel(max, bookPanelObj, bookPanels);
@@ -313,7 +322,10 @@ public class UIManager : MonoBehaviour
 
         int price = evaluateRamen.GetRamenPrice();
         GameManager.Instance.CurrentUser.AddUserMoney(price);
+
+        GameManager.Instance.AddDatasOfDay(DataOfDay.RamenMoney, price);
         GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.Cook, 1);
+
         StartCoroutine(PriceTextEffect(price));
     }
 
@@ -508,6 +520,17 @@ public class UIManager : MonoBehaviour
     {
         return guest;
     }
+    public int GetIncome()
+    {
+        int income = 0;
+
+        for (int i = 0; i < calculatePanels.Count; i++)
+        {
+            income += calculatePanels[i].GetMoney();
+        }
+
+        return income;
+    }
     #endregion
 
     #region Message
@@ -533,15 +556,16 @@ public class UIManager : MonoBehaviour
         int reward;
         int grade;
 
-
-        if (GameManager.Instance.CurrentUser.GetMoney() < 1000)
+        if (GameManager.Instance.CurrentUser.GetMoney() < KeyManager.LOTTO_PRICE)
         {
             ErrorMessage("돈이 부족합니다.");
             return;
         }
 
-        GameManager.Instance.CurrentUser.AddUserMoney(-1000);
+        GameManager.Instance.CurrentUser.AddUserMoney(-KeyManager.LOTTO_PRICE);
+        GameManager.Instance.AddDatasOfDay(DataOfDay.SpentLottoMoney, KeyManager.LOTTO_PRICE);
         GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.MiniGame, 1);
+
         lottoPanel.OnActive();
         blackUI.gameObject.SetActive(true);
 
@@ -588,9 +612,10 @@ public class UIManager : MonoBehaviour
             lottoStatusText.text = string.Format("{0}등 당첨!", grade);
             lottoRewardText.text = string.Format("보상금 +{0}원", reward);
             GameManager.Instance.CurrentUser.AddUserMoney(reward);
+            GameManager.Instance.AddDatasOfDay(DataOfDay.EarnedLottoMoney, reward);
 
             SoundManager.Instance?.ZzaraSound();
-            if(GameManager.Instance.AdManager.IsAdLoad())
+            if (GameManager.Instance.AdManager.IsAdLoad())
             {
                 lottoCloseButton.onClick.AddListener(() => GameManager.Instance.AdManager.AdsShow());
             }
@@ -608,4 +633,13 @@ public class UIManager : MonoBehaviour
         lottoParticle.gameObject.SetActive(grade != -1);
     }
     #endregion
+
+    public void AppearCalculatorPanel()
+    {
+        foreach(PanelBase panel in calculatePanels)
+        {
+            panel.UpdateUI();
+        }
+        incomeText.text = GetIncome().ToString();
+    }
 }
