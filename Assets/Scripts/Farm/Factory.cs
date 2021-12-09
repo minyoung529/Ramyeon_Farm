@@ -5,11 +5,9 @@ using UnityEngine.UI;
 
 public class Factory : IngredientPurchase
 {
-    [SerializeField] private int index;
     [SerializeField] Button harvestButton;
     [SerializeField] Image harvestButtonImage;
     [SerializeField] Sprite seedSprite;
-    private Ingredient ingredient;
     private BuyFirstIngredient firstIngredient;
     private ParticleSystem particle;
 
@@ -18,6 +16,7 @@ public class Factory : IngredientPurchase
     private bool isHarvest = false;
     private bool isSeed = true;
 
+    [SerializeField] private string ingredientName;
     void Start()
     {
         ingredient = GameManager.Instance.GetIngredients().Find(x => x.GetIndex() == index);
@@ -26,6 +25,7 @@ public class Factory : IngredientPurchase
         harvestButton.onClick.AddListener(() => OnClickIcon());
         particle = GetComponentInChildren<ParticleSystem>();
 
+        index = GameManager.Instance.GetIngredients().Find(x => x.name == ingredientName).GetIndex();
         UpdateUI();
 
         if (!IsHave())
@@ -34,7 +34,9 @@ public class Factory : IngredientPurchase
             firstIngredient.SetValue(index);
         }
 
-        particle.gameObject.SetActive(IsHave());
+        {
+            particle.Play();
+        }
     }
 
     void Update()

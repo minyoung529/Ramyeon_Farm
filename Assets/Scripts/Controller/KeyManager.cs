@@ -12,8 +12,13 @@ public static class KeyManager
     public const int COOKQUESST_INDEX = 2;
     public const int FARMQUEST_INDEX = 3;
 
+    public const int FIRST_USER_MONEY = 1200;
+
     public const string GAME_SCENE = "Game";
     public const string LOBBY_SCENE = "Lobby";
 
     public const string GUEST_TAG = "Guest";
+
+    public const string LIVESTOCK_PRODUCT_NAME = "LivestockProduct";
+
 }

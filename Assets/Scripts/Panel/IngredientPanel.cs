@@ -112,7 +112,7 @@ public class IngredientPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             return;
         }
 
-        if (!GameManager.Instance.GetCurrentIngredientIcon().isInPot)
+        if (!GameManager.Instance.GetCurrentIngredientIcon().IsInPot)
         {
             ingredientIcon.Inactive();
         }

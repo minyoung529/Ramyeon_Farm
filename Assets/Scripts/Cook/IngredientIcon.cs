@@ -10,7 +10,7 @@ public class IngredientIcon : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
-    public bool isInPot { get; private set; }
+    public bool IsInPot { get; private set; }
     private bool isClick;
     private bool isAnimation;
 
@@ -29,6 +29,7 @@ public class IngredientIcon : MonoBehaviour
             {
                 PutInPot();
             }
+
         }
     }
 
@@ -42,13 +43,13 @@ public class IngredientIcon : MonoBehaviour
     {
         if (collision.CompareTag("Pot"))
         {
-            isInPot = true;
+            IsInPot = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isInPot = false;
+        IsInPot = false;
     }
 
     private void OnMouseUp()
@@ -73,7 +74,7 @@ public class IngredientIcon : MonoBehaviour
         gameObject.SetActive(false);
         transform.SetParent(GameManager.Instance.Pool);
         animator.Play("DefaultAnimation");
-        isInPot = false;
+        IsInPot = false;
         isAnimation = false;
         animator.enabled = false;
         isClick = false;

@@ -59,7 +59,7 @@ public class Pot : MonoBehaviour
             isStop = false;
         }
 
-        if (curTime < maxTime && !isBoil)
+        if (curTime < maxTime && !isBoil && isWater)
         {
             curTime += Time.deltaTime;
         }
@@ -111,7 +111,7 @@ public class Pot : MonoBehaviour
         dontPut = false;
 
         waterAnimator.Play("Water_boil");
-        if(!GameManager.Instance.CurrentUser.isCompleteTutorial)
+        if (!GameManager.Instance.CurrentUser.isCompleteTutorial)
             TutorialBoilWater();
         DontPut("");
         smokeParticle.gameObject.SetActive(true);
@@ -152,7 +152,8 @@ public class Pot : MonoBehaviour
 
     public bool IsDonPut()
     {
-        return (dontPutIngredients.Contains(GameManager.Instance.GetCurrentIngredientIcon().GetIngredient().name));
+        string name = GameManager.Instance.GetCurrentIngredientIcon().GetIngredient().name;
+        return (dontPutIngredients.Contains(name) || name != "¹°" && !isWater);
     }
 
     public void InstantiateIngredientInPot(int index)
@@ -164,6 +165,7 @@ public class Pot : MonoBehaviour
             obj = GameManager.Instance.ReturnPoolObject("IngredientInPot");
             obj.transform.SetParent(transform);
             spRenderer = potObjs.Find(x => x.gameObject == obj);
+
         }
 
         else
@@ -198,7 +200,7 @@ public class Pot : MonoBehaviour
     {
         List<GameObject> objs = new List<GameObject>();
 
-        for (int i = 1; i < transform.childCount; i++)
+        for (int i = 2; i < transform.childCount; i++)
         {
             objs.Add(transform.GetChild(i).gameObject);
         }
@@ -224,8 +226,7 @@ public class Pot : MonoBehaviour
         dontPut = false;
         isWater = false;
 
-        curTime = 0f;
-        maxTime = 0f;
+        ResetTimer();
 
         spriteRenderer.sprite = potSprites[0];
         GameManager.Instance.ClearCurrentRamen();

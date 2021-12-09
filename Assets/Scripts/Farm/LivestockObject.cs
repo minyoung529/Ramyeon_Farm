@@ -9,8 +9,6 @@ public class LivestockObject : IngredientPurchase
     private Livestock livestock;
     private LivestockProduct livestockProduct;
 
-    private int ingredientIndex;
-
     private int maxCount;
     private int curCount = 0;
 
@@ -20,11 +18,10 @@ public class LivestockObject : IngredientPurchase
     private float maxDistanceX;
     private float maxDistanceY;
 
-    private readonly string livestockProductName = "LivestockProduct";
 
     void Update()
     {
-        if (!GameManager.Instance.CurrentUser.GetIsIngredientsHave()[ingredientIndex]) return;
+        if (!GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index]) return;
 
         if (curTime < maxTime && curCount < maxCount)
         {
@@ -53,9 +50,9 @@ public class LivestockObject : IngredientPurchase
 
     private GameObject InstantiateOrPooling()
     {
-        if (GameManager.Instance.CheckPool(livestockProductName))
+        if (GameManager.Instance.CheckPool(KeyManager.LIVESTOCK_PRODUCT_NAME))
         {
-            return GameManager.Instance.ReturnPoolObject(livestockProductName);
+            return GameManager.Instance.ReturnPoolObject(KeyManager.LIVESTOCK_PRODUCT_NAME);
         }
 
         else
@@ -68,8 +65,8 @@ public class LivestockObject : IngredientPurchase
     {
         livestock = GameManager.Instance.CurrentUser.livestocks[index];
 
-        ingredientIndex = livestock.GetIngredient().GetIndex();
-        Ingredient ingredient = GameManager.Instance.GetIngredients()[ingredientIndex];
+        this.index = livestock.GetIngredient().GetIndex();
+        Ingredient ingredient = GameManager.Instance.GetIngredients()[this.index];
         maxTime = ingredient.GetMaxTime();
 
         maxDistanceX = distanceX;
@@ -77,14 +74,14 @@ public class LivestockObject : IngredientPurchase
 
         maxCount = ingredient.GetAmount();
 
-        transform.parent.GetComponent<BuyFirstIngredient>().SetValue(ingredientIndex);
+        transform.parent.GetComponent<BuyFirstIngredient>().SetValue(this.index);
 
         UpdateUI();
     }
 
     public override void UpdateUI()
     {
-        gameObject.SetActive(GameManager.Instance.CurrentUser.GetIsIngredientsHave()[ingredientIndex]);
+        gameObject.SetActive(GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index]);
     }
     public void MinusCurCount()
     {
@@ -94,10 +91,5 @@ public class LivestockObject : IngredientPurchase
     public Livestock GetLivestock()
     {
         return livestock;
-    }
-
-    public int GetCurCount()
-    {
-        return curCount;
     }
 }

@@ -42,7 +42,7 @@ public class TutorialManager : MonoBehaviour
             case 0:
                 tutorialNum = 0;
                 tutorialChange = 4;
-                GameManager.Instance.CurrentUser.SetMoney(1200);
+                GameManager.Instance.CurrentUser.SetMoney(KeyManager.FIRST_USER_MONEY);
                 break;
             case 1:
                 tutorialNum = 5;

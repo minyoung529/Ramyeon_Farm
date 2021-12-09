@@ -18,8 +18,6 @@ public class FieldPanel : IngredientPurchase
     private ParticleSystem particle;
     private ParticleSystemRenderer pr;
 
-    private Ingredient ingredient;
-    private int index;
     private Image harvestButtonImage;
     private BuyFirstIngredient firstIngredient;
 

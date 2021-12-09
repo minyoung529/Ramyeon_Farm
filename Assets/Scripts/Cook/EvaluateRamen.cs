@@ -42,6 +42,7 @@ public class EvaluateRamen : MonoBehaviour
             if (myRecipeToInt.Count > recipeToInt.Count)
             {
                 SetComment(myRecipeToInt.Count, recipeToInt.Count);
+
                 for (int i = 0; i < plus.Count; i++)
                 {
                     price -= Mathf.RoundToInt(plus[i].GetPrice() * 1.2f);
