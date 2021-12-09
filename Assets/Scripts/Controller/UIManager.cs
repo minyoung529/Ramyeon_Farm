@@ -320,7 +320,7 @@ public class UIManager : MonoBehaviour
     //leave=true
     private void LeaveOrAd()
     {
-        if (Random.Range(0, 2) == 0)
+        if (Random.Range(0, 2) == 0 && GameManager.Instance.AdManager.IsAdLoad())
         {
             guestText.text = "";
             guestText.DOText("저기... 제가 소개해드릴 물건이 있는데 보시겠어요?", 1f);
@@ -590,7 +590,10 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.CurrentUser.AddUserMoney(reward);
 
             SoundManager.Instance?.ZzaraSound();
-            lottoCloseButton.onClick.AddListener(() => GameManager.Instance.AdManager.AdsShow());
+            if(GameManager.Instance.AdManager.IsAdLoad())
+            {
+                lottoCloseButton.onClick.AddListener(() => GameManager.Instance.AdManager.AdsShow());
+            }
         }
 
         else

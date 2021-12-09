@@ -28,12 +28,16 @@ public class AdManager : MonoBehaviour
     {
         if (interstitial.IsLoaded())
         {
-            RequestInterstitial();
             interstitial.Show();
         }
         else
         {
             RequestInterstitial();
         }
+    }
+
+    public bool IsAdLoad()
+    {
+        return interstitial.IsLoaded();
     }
 }
