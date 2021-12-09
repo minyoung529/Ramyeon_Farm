@@ -100,7 +100,6 @@ public class GuestMove : MonoBehaviour
     {
         isStaging = false;
 
-        yield return delay02;
         ToDoor();
 
         for (float i = targetSize; i > 1f; i -= phase)

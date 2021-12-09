@@ -21,6 +21,7 @@ public class GameManager : MonoSingleton<GameManager>
     public UIManager UIManager { get; private set; }
     public QuestManager QuestManager { get; private set; }
     public TutorialManager TutorialManager { get; private set; }
+    public AdManager AdManager { get; private set; }
     public GuestMove GuestMove;
     public Transform Pool;
 
@@ -102,21 +103,35 @@ public class GameManager : MonoSingleton<GameManager>
         InputIngredientData();
         InvokeRepeating("SaveToJson", 40f, 1f);
 
-        UIManager = GetComponent<UIManager>();
-        QuestManager = GetComponent<QuestManager>();
-        GuestMove = FindObjectOfType<GuestMove>(); 
-        TutorialManager = FindObjectOfType<TutorialManager>();
-        pot = FindObjectOfType<Pot>();
+        GetControllerComponent();
+        SearchComponent();
+        ImportSprites();
 
+        mainCam = Camera.main;
+    }
+    private void ImportSprites()
+    {
         ingredientSprites = Resources.LoadAll<Sprite>("IngredientAsset");
         ingredientInPotSprites = Resources.LoadAll<Sprite>("IngredientInPotAsset");
         ingredientContainerSprites = Resources.LoadAll<Sprite>("IngredientContainerAsset");
         recipeSprites = Resources.LoadAll<Sprite>("Recipes_Sheet");
         guestSprites = Resources.LoadAll<Sprite>("Guests");
 
-        mainCam = Camera.main;
     }
+    private void SearchComponent()
+    {
+        GuestMove = FindObjectOfType<GuestMove>();
+        TutorialManager = FindObjectOfType<TutorialManager>();
+        pot = FindObjectOfType<Pot>();
 
+    }
+    private void GetControllerComponent()
+    {
+        UIManager = GetComponent<UIManager>();
+        QuestManager = GetComponent<QuestManager>();
+        AdManager = GetComponent<AdManager>();
+
+    }
     void Start()
     {
         SetUserIndex();

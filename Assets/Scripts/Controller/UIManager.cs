@@ -14,11 +14,7 @@ public class UIManager : MonoBehaviour
     [Header("텍스트")]
     [SerializeField] private Text questTimeText;
     [SerializeField] private Text priceEffectText;
-    #endregion
-
-    #region 프로필
     [SerializeField] private Text moneyText;
-
     #endregion
     #region ContentPanels
     [Header("패널")]
@@ -64,8 +60,10 @@ public class UIManager : MonoBehaviour
     [Header("손님")]
     [SerializeField] private Text guestText;
     [SerializeField] private Image speechBubble;
+    [SerializeField] private Button yesButton;
+    [SerializeField] private Button noButton;
     private GuestMove guest;
-    RandomRamen randomRamen;
+    RandomRamen randomRamen = new RandomRamen();
     #endregion
 
     #region Lotto
@@ -73,7 +71,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text lottoRewardText;
     [SerializeField] private ActiveScale lottoPanel;
     [SerializeField] private GameObject blackUI;
-
+    private Button lottoCloseButton;
     private ParticleSystem lottoParticle;
     #endregion
 
@@ -82,7 +80,6 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject errorPanel;
     private Text errorText;
-
 
     EvaluateRamen evaluateRamen = new EvaluateRamen();
     MenuButton menuButton;
@@ -96,7 +93,6 @@ public class UIManager : MonoBehaviour
         distanceX = Mathf.Abs(distanceTransform.position.x) * 2f;
         distanceY = Mathf.Abs(distanceTransform.position.y) * 2f;
         errorText = errorPanel.GetComponentInChildren<Text>();
-        randomRamen = new RandomRamen();
         menuButton = FindObjectOfType<MenuButton>();
         guest = FindObjectOfType<GuestMove>();
 
@@ -105,6 +101,9 @@ public class UIManager : MonoBehaviour
         {
             stagesObj[i].transform.position = new Vector2(distanceX * i, 0);
         }
+
+        yesButton.onClick.AddListener(() => SettingAd());
+        noButton.onClick.AddListener(() => RejectAd());
     }
 
     void Start()
@@ -120,6 +119,8 @@ public class UIManager : MonoBehaviour
         int max = Mathf.Max(GameManager.Instance.GetIngredients().Count, GameManager.Instance.GetRecipes().Count);
         InstantiatePanel(max, bookPanelObj, bookPanels);
         UpdateMoneyText();
+
+        lottoCloseButton = lottoPanel.GetComponentInChildren<Button>();
 
     }
     private void Update()
@@ -226,7 +227,7 @@ public class UIManager : MonoBehaviour
     {
         if (questPanels.Count == 0) return;
 
-        for(int i = 0; i<questPanels.Count; i++)
+        for (int i = 0; i < questPanels.Count; i++)
         {
             questPanels[i].UpdateUI();
         }
@@ -302,7 +303,8 @@ public class UIManager : MonoBehaviour
 
     private void RandomOrder()
     {
-        guestText.text = randomRamen.GetRandomGuestComment();
+        guestText.text = "";
+        guestText.DOText(randomRamen.GetRandomGuestComment(), 1f);
     }
 
     public void EvaluateCurrentRamen()
@@ -313,8 +315,34 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.CurrentUser.AddUserMoney(price);
         GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.Cook, 1);
         StartCoroutine(PriceTextEffect(price));
+    }
 
+    //leave=true
+    private void LeaveOrAd()
+    {
+        if (Random.Range(0, 2) == 0)
+        {
+            guestText.text = "";
+            guestText.DOText("저기... 제가 소개해드릴 물건이 있는데 보시겠어요?", 1f);
+            yesButton.transform.parent.gameObject.SetActive(true);
+        }
+        else
+        {
+            guest.StartLeave();
+            yesButton.transform.parent.gameObject.SetActive(false);
+        }
+    }
+    private void SettingAd()
+    {
+        GameManager.Instance.AdManager.AdsShow();
+        guestText.text = "";
+        guestText.DOText("감사합니다", 0.5f).OnComplete(() => guest.StartLeave());
+        yesButton.transform.parent.gameObject.SetActive(false);
+    }
+    private void RejectAd()
+    {
         guest.StartLeave();
+        yesButton.transform.parent.gameObject.SetActive(false);
     }
 
     private IEnumerator PriceTextEffect(int price)
@@ -328,16 +356,18 @@ public class UIManager : MonoBehaviour
         Vector2 offset = priceEffectText.transform.position;
         priceEffectText.text = string.Format("+{0}", price);
 
-        guestText.text = evaluateRamen.GetComment();
+        guestText.text = "";
+        guestText.DOText(evaluateRamen.GetComment(), 0.5f);
+        evaluateRamen.ResetData();
 
         priceEffectText.gameObject.SetActive(true);
         priceEffectText.DOKill();
-        priceEffectText.transform.DOKill();
         priceEffectText.transform.DOMoveY(0.5f, 1f);
         priceEffectText.DOFade(0f, 1f).OnComplete(() => ResetPriceText(offset));
-
-        evaluateRamen.ResetData();
         SoundManager.Instance?.CoinSound();
+
+        yield return new WaitForSeconds(2f);
+        LeaveOrAd();
     }
 
     private void ResetPriceText(Vector2 offset)
@@ -560,6 +590,7 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.CurrentUser.AddUserMoney(reward);
 
             SoundManager.Instance?.ZzaraSound();
+            lottoCloseButton.onClick.AddListener(() => GameManager.Instance.AdManager.AdsShow());
         }
 
         else
@@ -568,6 +599,7 @@ public class UIManager : MonoBehaviour
             lottoRewardText.text = "";
 
             SoundManager.Instance?.RewardSound();
+            lottoCloseButton.onClick.RemoveListener(() => GameManager.Instance.AdManager.AdsShow());
         }
 
         lottoParticle.gameObject.SetActive(grade != -1);
