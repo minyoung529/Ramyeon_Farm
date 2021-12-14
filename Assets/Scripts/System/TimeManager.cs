@@ -1,32 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeManager : MonoBehaviour
 {
-    [SerializeField] private float curTime = 0;
-    [SerializeField] private float maxTime = 20f;
-    [SerializeField] GameObject TenM;
+    private int begin = 7;
+    private int end = 22;
+    private int time;
 
-    void Update()
+    void Start()
     {
         Timer();
     }
 
+    IEnumerator DayTime()
+    {
+        for(int i = begin; i <= end; i++)
+        {
+            for(int j = 0; j < 60; j += 10)
+            {
+                Debug.Log(i + ", " + j);
+                yield return new WaitForSeconds(time);
+                if(i == 12)
+                {
+                    
+                }
+            }
+        }
+    }
+
+    void Update()
+    {
+        
+    }
 
     void Timer()
     {
-        curTime += Time.deltaTime;
-        if(curTime >= maxTime)
-        {
-            Show();
-            curTime = 0;
-        }
+
     }
 
     void Show()
     {
         Time.timeScale = 0;
-        TenM.SetActive(true);
     }
 }
