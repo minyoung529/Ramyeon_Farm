@@ -91,13 +91,11 @@ public class UIManager : MonoBehaviour
 
     EvaluateRamen evaluateRamen = new EvaluateRamen();
     MenuButton menuButton;
-
     float currenTime = 0f;
     private void Awake()
     {
         screenWidth = Screen.width;
         ingredientPanelWidth = ingredientPanelObj.GetComponent<RectTransform>().sizeDelta.x;
-
         distanceX = Mathf.Abs(distanceTransform.position.x) * 2f;
         distanceY = Mathf.Abs(distanceTransform.position.y) * 2f;
         errorText = errorPanel.GetComponentInChildren<Text>();
@@ -583,19 +581,19 @@ public class UIManager : MonoBehaviour
             grade = 2;
         }
 
-        else if (random < 2f)
+        else if (random < 1)
         {
             reward = 50000;
             grade = 3;
         }
 
-        else if (random < 4f)
+        else if (random < 2.5)
         {
             reward = 10000;
             grade = 4;
         }
 
-        else if (random < 10f)
+        else if (random < 6)
         {
             reward = 5000;
             grade = 5;
@@ -617,7 +615,7 @@ public class UIManager : MonoBehaviour
             SoundManager.Instance?.ZzaraSound();
             if (GameManager.Instance.AdManager.IsAdLoad())
             {
-                lottoCloseButton.onClick.AddListener(() => GameManager.Instance.AdManager.AdsShow());
+                GameManager.Instance.AdManager.AdsShow();
             }
         }
 
@@ -627,7 +625,6 @@ public class UIManager : MonoBehaviour
             lottoRewardText.text = "";
 
             SoundManager.Instance?.RewardSound();
-            lottoCloseButton.onClick.RemoveListener(() => GameManager.Instance.AdManager.AdsShow());
         }
 
         lottoParticle.gameObject.SetActive(grade != -1);
