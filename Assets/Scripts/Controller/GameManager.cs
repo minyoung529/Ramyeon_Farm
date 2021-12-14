@@ -55,6 +55,8 @@ public class GameManager : MonoSingleton<GameManager>
     public Camera mainCam { get; private set; }
 
     private Pot pot;
+    private int[] datasOfDay = new int[(int)DataOfDay.Count];
+
 
     #region 데이터 저장
     private void FirstData()
@@ -88,7 +90,7 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    private void SaveToJson()
+    public void SaveToJson()
     {
         SAVE_PATH = Application.persistentDataPath + "/Save";
 
@@ -98,14 +100,12 @@ public class GameManager : MonoSingleton<GameManager>
     }
     #endregion
 
-    private int[] datasOfDay = new int[(int)DataOfDay.Count];
 
     private void Awake()
     {
         FirstData();
         InputRecipeData();
         InputIngredientData();
-        InvokeRepeating("SaveToJson", 40f, 1f);
 
         GetControllerComponent();
         SearchComponent();
@@ -229,11 +229,6 @@ public class GameManager : MonoSingleton<GameManager>
         {
             return 30f;
         }
-    }
-
-    private void OnApplicationQuit()
-    {
-        SaveToJson();
     }
 
     public bool IsInCurrentRamen(params string[] ingredients)

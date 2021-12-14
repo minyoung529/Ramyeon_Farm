@@ -39,10 +39,9 @@ public class TimeManager : MonoBehaviour
     {
         curTime += Time.deltaTime;
 
-        if (curTime >= maxTime)
+        if (curTime >= maxTime && !timePanel.gameObject.activeSelf)
         {
             Show();
-            curTime = 0;
         }
     }
 
@@ -50,6 +49,8 @@ public class TimeManager : MonoBehaviour
     {
         Time.timeScale = 0;
         timePanel.OnActive();
+        GameManager.Instance.CurrentUser.AddDay();
+        GameManager.Instance.SaveToJson();
         GameManager.Instance.UIManager.AppearCalculatorPanel();
     }
 }

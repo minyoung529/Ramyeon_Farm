@@ -24,5 +24,5 @@ public static class KeyManager
     public const string LIVESTOCK_PRODUCT_NAME = "LivestockProduct";
     public const string SPENT_KEY = "Spent";
 
-
+    public const short LOTTO_MAX_COUNT = 10;
 }

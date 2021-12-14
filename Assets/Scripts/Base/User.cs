@@ -205,5 +205,10 @@ public class User
             playTime = 0;
         }
     }
+    
+    public void AddDay()
+    {
+        day++;
+    }
     #endregion
 }
