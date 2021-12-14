@@ -30,6 +30,30 @@ public class User
     //앞으로 게임 켰을 때 true이면 튜토리얼 실행 X
 
     //돈 더해주는 함수, 매개변수에 - 하면 빠짐
+
+    private long grade; //평점
+
+    private int goodFood;
+    private int badFood;
+
+    public void SetGoodFood(int goodFood)
+    {
+        this.goodFood = goodFood;
+    }
+    public void SetBadFood(int badFood)
+    {
+        this.badFood = badFood;
+    }
+
+    public long GetGrade()
+    {
+        return grade;
+    }
+    public void SetGrade(long grade)
+    {
+        this.grade = grade;
+    }
+
     public void AddUserMoney(int addMoney)
     {
         if(addMoney > 0)

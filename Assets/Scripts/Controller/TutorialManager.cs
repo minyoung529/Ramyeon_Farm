@@ -25,54 +25,39 @@ public class TutorialManager : MonoBehaviour
         TutorialPanel.SetActive(false);
         if (!GameManager.Instance.CurrentUser.isCompleteTutorial)
         {
+            GameManager.Instance.CurrentUser.SetGrade(3);    //평점 3점 셋
+            GameManager.Instance.CurrentUser.SetGoodFood(0);
+            GameManager.Instance.CurrentUser.SetBadFood(0);
             TutorialNumber(0);
             NextBtn.SetActive(false);
             StartTutorial();
         }
         else if (GameManager.Instance.CurrentUser.isCompleteTutorial)
         {
-            isTutorial = true;
+            isTutorial = true;  
         }
     }
     public void TutorialNumber(int number)
     {
         tutorialChange = 0;
-        switch (number)
+
+        if (number == 0)
         {
-            case 0:
-                tutorialNum = 0;
-                tutorialChange = 4;
-                GameManager.Instance.CurrentUser.SetMoney(KeyManager.FIRST_USER_MONEY);
-                break;
-            case 1:
-                tutorialNum = 5;
-                tutorialChange = 2;
-                break;
-            case 2:
-                tutorialNum = 8;
-                break;
-            case 3:
-                tutorialNum = 9;
-                break;
-            case 4:
-                tutorialNum = 10;
-                break;
-            case 5:
-                tutorialNum = 11;
-                break;
-            case 6:
-                tutorialNum = 12;
-                break;
-            case 7:
-                tutorialNum = 13;
-                break;
-            case 8:
-                tutorialNum = 14;
-                break;
-            case 9:
-                tutorialNum = 15;
-                tutorialChange = 3;
-                break;
+            tutorialNum = 0;
+            tutorialChange = 4;
+            GameManager.Instance.CurrentUser.SetMoney(KeyManager.FIRST_USER_MONEY);
+        }
+        else if (number == 1)
+        {
+            tutorialNum = 5;
+            tutorialChange = 2;
+        }
+        else if (2 <= number && number <= 8)
+            tutorialNum += 1;
+        else if (number == 9)
+        {
+            tutorialNum = 15;
+            tutorialChange = 3;
         }
 
         isTutorial = true;
