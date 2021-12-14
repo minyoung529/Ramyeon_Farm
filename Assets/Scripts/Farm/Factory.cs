@@ -24,7 +24,7 @@ public class Factory : IngredientPurchase
 
         harvestButton.onClick.AddListener(() => OnClickIcon());
         particle = GetComponentInChildren<ParticleSystem>();
-
+        particle.gameObject.SetActive(false);
         index = GameManager.Instance.GetIngredients().Find(x => x.name == ingredientName).GetIndex();
         UpdateUI();
     }
@@ -48,6 +48,7 @@ public class Factory : IngredientPurchase
 
     private void UpdateHarvestIcon()
     {
+        Debug.Log("sdf");
         harvestButtonImage.color = Color.white;
         harvestButtonImage.sprite = GameManager.Instance.GetIngredientSprite(index);
         harvestButton.gameObject.SetActive(true);
