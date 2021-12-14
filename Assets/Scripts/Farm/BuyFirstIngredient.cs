@@ -82,7 +82,7 @@ public class BuyFirstIngredient : MonoBehaviour
         GameManager.Instance.CurrentUser.SetIsIngredientsHave(index, true);
         GameManager.Instance.UIManager.UpdatePanels();
         ingredientPurchase?.UpdateUI();
-        panel.OnEnactive();
+        panel.OnInactive();
         ActiveCollider();
     }
 

@@ -27,16 +27,6 @@ public class Factory : IngredientPurchase
 
         index = GameManager.Instance.GetIngredients().Find(x => x.name == ingredientName).GetIndex();
         UpdateUI();
-
-        if (!IsHave())
-        {
-            firstIngredient = GetComponentInChildren<BuyFirstIngredient>();
-            firstIngredient.SetValue(index);
-        }
-
-        {
-            particle.Play();
-        }
     }
 
     void Update()

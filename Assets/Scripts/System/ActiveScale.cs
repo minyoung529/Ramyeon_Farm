@@ -11,7 +11,7 @@ public class ActiveScale : MonoBehaviour
         transform.DOScale(1f, 0.3f).OnComplete(() => transform.DOKill());
     }
 
-    public void OnEnactive()
+    public void OnInactive()
     {
         gameObject.SetActive(false);
         transform.localScale = Vector3.zero;
