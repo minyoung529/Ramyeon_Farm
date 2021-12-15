@@ -90,7 +90,7 @@ public class Ingredient
     public int GetNextPrice()
     {
         int price = this.price;
-        price += Mathf.RoundToInt((GameManager.Instance.CurrentUser.GetIngredientLevel(index)) * price * 0.05f);
+        price += Mathf.RoundToInt((GameManager.Instance.CurrentUser.GetIngredientLevel(index)) * price * 0.1f);
         return price;
     }
 
