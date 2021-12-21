@@ -16,4 +16,5 @@ public static class KeyManager
     public const string LOBBY_SCENE = "Lobby";
 
     public const string GUEST_TAG = "Guest";
+    public const int TIME_DAY = 10;
 }

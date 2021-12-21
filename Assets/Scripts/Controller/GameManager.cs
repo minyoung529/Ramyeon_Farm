@@ -85,7 +85,7 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    private void SaveToJson()
+    public void SaveToJson()
     {
         SAVE_PATH = Application.persistentDataPath + "/Save";
 
