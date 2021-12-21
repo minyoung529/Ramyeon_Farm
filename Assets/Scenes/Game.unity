@@ -5843,6 +5843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100aa1899e4dc5a4b9b7caee127239e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 11
   ingredientName: {fileID: 0}
   ingredientPanelImage: {fileID: 1376854516}
   ingredientPanelText: {fileID: 341826375}
@@ -6427,6 +6428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100aa1899e4dc5a4b9b7caee127239e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 10
   ingredientName: {fileID: 0}
   ingredientPanelImage: {fileID: 1376854516}
   ingredientPanelText: {fileID: 341826375}
@@ -7139,6 +7141,8 @@ GameObject:
   - component: {fileID: 197422923}
   - component: {fileID: 197422922}
   - component: {fileID: 197422921}
+  - component: {fileID: 197422924}
+  - component: {fileID: 197422925}
   m_Layer: 5
   m_Name: LottoButton
   m_TagString: Untagged
@@ -7158,6 +7162,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1194149887}
+  - {fileID: 507245267}
   m_Father: {fileID: 2097910774}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7260,6 +7265,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197422919}
   m_CullTransparentMesh: 1
+--- !u!114 &197422924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197422919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
+--- !u!114 &197422925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197422919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5a637b890c5b2b46bdc6b960cd3629a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillImage: {fileID: 0}
 --- !u!1 &209664542
 GameObject:
   m_ObjectHideFlags: 0
@@ -14929,6 +14960,81 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &507245266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 507245267}
+  - component: {fileID: 507245269}
+  - component: {fileID: 507245268}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &507245267
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507245266}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 197422920}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &507245268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507245266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.44705883}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -5725856851397658011, guid: abc492d0ed6f03d4b843b7173538a8c8, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 0
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 0.1
+--- !u!222 &507245269
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507245266}
+  m_CullTransparentMesh: 1
 --- !u!1 &507886442
 GameObject:
   m_ObjectHideFlags: 0
@@ -24832,6 +24938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100aa1899e4dc5a4b9b7caee127239e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 9
   ingredientName: {fileID: 0}
   ingredientPanelImage: {fileID: 1376854516}
   ingredientPanelText: {fileID: 341826375}
@@ -31004,6 +31111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100aa1899e4dc5a4b9b7caee127239e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
   ingredientName: {fileID: 0}
   ingredientPanelImage: {fileID: 1376854516}
   ingredientPanelText: {fileID: 341826375}
@@ -32551,7 +32659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1139988488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33185,7 +33293,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -39994040, y: 0}
+  m_AnchoredPosition: {x: -40791544, y: 0}
   m_SizeDelta: {x: 0.00036621, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1181231608
@@ -34006,6 +34114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100aa1899e4dc5a4b9b7caee127239e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
   ingredientName: {fileID: 1126216753}
   ingredientPanelImage: {fileID: 1376854516}
   ingredientPanelText: {fileID: 341826375}
@@ -34718,13 +34827,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275244964}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07fe83403032d9a4cb1dac7487134361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   curTime: 0
-  maxTime: 40
+  maxTime: 3000
   timePanel: {fileID: 753358943}
 --- !u!1 &1279981937
 GameObject:
@@ -42884,6 +42993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100aa1899e4dc5a4b9b7caee127239e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
   ingredientName: {fileID: 0}
   ingredientPanelImage: {fileID: 1376854516}
   ingredientPanelText: {fileID: 341826375}
@@ -52137,6 +52247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100aa1899e4dc5a4b9b7caee127239e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
   ingredientName: {fileID: 0}
   ingredientPanelImage: {fileID: 1376854516}
   ingredientPanelText: {fileID: 341826375}
