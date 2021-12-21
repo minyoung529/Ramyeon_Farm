@@ -7,11 +7,16 @@ public class TimeManager : MonoBehaviour
 {
     private int begin = 7;
     private int end = 22;
-    private int time;
+    private float time;
+    private float second;
+    [SerializeField]
+    private Text timeText;
 
     void Start()
     {
-        Timer();
+        //Timer();
+        StartCoroutine(DayTime());
+        time = second / end - begin / 6;
     }
 
     IEnumerator DayTime()
@@ -24,8 +29,13 @@ public class TimeManager : MonoBehaviour
                 yield return new WaitForSeconds(time);
                 if(i == 12)
                 {
-                    
+                    timeText.text = string.Format(" {0}시 {0}분 ", i, j);
                 }
+                else
+                {
+                    timeText.text = string.Format(" {0}시 {0}분 ", i / 12, j);
+                }
+
             }
         }
     }
@@ -43,5 +53,8 @@ public class TimeManager : MonoBehaviour
     void Show()
     {
         Time.timeScale = 0;
+        //GameManager.Instance.CurrentUser.AddDay();
+        //GameManager.Instance.SaveToJson();
+        //GameManager.Instance.UIManager.AppearCalulatorPanel();
     }
 }
