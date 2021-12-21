@@ -25,7 +25,7 @@ public class TutorialManager : MonoBehaviour
         TutorialPanel.SetActive(false);
         if (!GameManager.Instance.CurrentUser.isCompleteTutorial)
         {
-            GameManager.Instance.CurrentUser.SetGrade(3);    //평점 3점 셋
+            GameManager.Instance.CurrentUser.SetGrade(3);    //평점 3점 셋팅
             GameManager.Instance.CurrentUser.SetGoodFood(0);
             GameManager.Instance.CurrentUser.SetBadFood(0);
             TutorialNumber(0);

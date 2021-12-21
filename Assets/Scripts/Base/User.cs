@@ -40,9 +40,29 @@ public class User
     {
         this.goodFood = goodFood;
     }
+    public void AddGoodFood(int goodFood) //요리를 잘 만들시 상승
+    {
+        this.goodFood += goodFood;
+        Debug.Log(this.goodFood);
+        if(this.goodFood >= 20)
+        {
+            grade += 1;
+            AddBadFood(-1);
+            this.goodFood = 0;
+        }
+    }
     public void SetBadFood(int badFood)
     {
         this.badFood = badFood;
+    }
+    public void AddBadFood(int badFood)
+    {
+        this.badFood += badFood;
+        if(this.badFood >= 2)
+        {
+            grade -= 1;
+            goodFood = 0; //2번 잘 못 만들시 굿푸드 0
+        }
     }
 
     public long GetGrade()

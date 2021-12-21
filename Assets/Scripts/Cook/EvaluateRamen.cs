@@ -36,7 +36,7 @@ public class EvaluateRamen : MonoBehaviour
             price = 0;
             return;
         }
-        
+
         if (isMatch)
         {
             if (myRecipeToInt.Count > recipeToInt.Count)
@@ -50,6 +50,8 @@ public class EvaluateRamen : MonoBehaviour
 
                 GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
                 //재료가 더 많을 때 
+                GameManager.Instance.CurrentUser.AddBadFood(1);
+
             }
 
             else if (myRecipeToInt.Count < recipeToInt.Count)
@@ -64,11 +66,13 @@ public class EvaluateRamen : MonoBehaviour
                 GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
 
                 //재료가 더 없을 때 
+                GameManager.Instance.CurrentUser.AddBadFood(1);
             }
 
             else
             {
                 comment = guestComment.GetGoodComments();
+                GameManager.Instance.CurrentUser.AddGoodFood(1);
             }
         }
 
@@ -101,6 +105,7 @@ public class EvaluateRamen : MonoBehaviour
 
                 GameManager.Instance.QuestManager.UpdateAchievement(AchievementType.BadCook, 1);
                 //재료가 더 많을 때 
+                GameManager.Instance.CurrentUser.AddBadFood(1);
             }
 
             else
@@ -122,6 +127,7 @@ public class EvaluateRamen : MonoBehaviour
                 comment = guestComment.GetBadComments();
 
                 //재료가 더 없을 때 
+                GameManager.Instance.CurrentUser.AddBadFood(1);
             }
         }
     }
