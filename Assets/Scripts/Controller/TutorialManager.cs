@@ -174,7 +174,7 @@ public class TutorialManager : MonoBehaviour
     }
     public void SkipButton()
     {
-
+        GameManager.Instance.SaveToJson();
         GameManager.Instance.CurrentUser.isCompleteTutorial = true;
         EndTutorial();
     }
@@ -193,6 +193,7 @@ public class TutorialManager : MonoBehaviour
         }
         isEndTutorial = true;
         TutorialPanel.SetActive(false);
+        GameManager.Instance.SaveToJson();
     }
     public void OnApplicationQuit()
     {

@@ -26,14 +26,7 @@ public class BuyFirstIngredient : MonoBehaviour
         button = GetComponent<Button>();
         button?.onClick.AddListener(() => OnClick());
         ActiveCollider();
-
-
-    }
-
-    private void Update()
-    {
-        if (index == 0) return;
-        gameObject.SetActive(GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index - 1]);
+        ActiveFarm();
     }
 
     public void SetValue(int index)
@@ -42,6 +35,8 @@ public class BuyFirstIngredient : MonoBehaviour
 
         if (ingredientName != null)
             ingredientName.text = GameManager.Instance.GetIngredients()[index].name;
+
+        ActiveFarm();
     }
 
     public void OnClick()
@@ -91,6 +86,7 @@ public class BuyFirstIngredient : MonoBehaviour
         ingredientPurchase?.UpdateUI();
         panel.OnInactive();
         ActiveCollider();
+        ActiveFarm();
     }
 
     private void AssignButtonListner()
@@ -104,8 +100,13 @@ public class BuyFirstIngredient : MonoBehaviour
         Ingredient ingredient = GameManager.Instance.GetIngredients()[index];
 
         if (ingredient.type == IngredientType.meat)
-        {
             col.enabled = !GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index];
-        }
+    }
+
+    public void ActiveFarm()
+    {
+        if (index == 0) return;
+        Debug.Log(index + ", " + GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index - 1]);
+        gameObject.SetActive(GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index - 1]);
     }
 }

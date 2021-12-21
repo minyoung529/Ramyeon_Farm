@@ -13,41 +13,16 @@ public class TimeManager : MonoBehaviour
     float second = 30;
     float time;
 
-    void Update()
-    {
-        Timer();
-    }
-
     private void Start()
     {
         time = second / end - begin / 6;
         //StartCoroutine(dd());
     }
 
-    private IEnumerator dd()
-    {
-        for (int i = begin; i <= end; i++)
-        {
-            for (int j = 0; j < 60; j += 10)
-            {
-                Debug.Log(i + ", " + j);
-                yield return new WaitForSeconds(time);
-            }
-        }
-    }
-    void Timer()
-    {
-        curTime += Time.deltaTime;
-
-        if (curTime >= maxTime && !timePanel.gameObject.activeSelf)
-        {
-            Show();
-        }
-    }
-
     void Show()
     {
         Time.timeScale = 0;
+        GameManager.Instance.UIManager.UpdateDayText();
         timePanel.OnActive();
         GameManager.Instance.CurrentUser.AddDay();
         GameManager.Instance.SaveToJson();

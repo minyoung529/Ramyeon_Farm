@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text questTimeText;
     [SerializeField] private Text priceEffectText;
     [SerializeField] private Text moneyText;
+    [SerializeField] private Text dayText;
     #endregion
 
 
@@ -92,21 +93,23 @@ public class UIManager : MonoBehaviour
     EvaluateRamen evaluateRamen = new EvaluateRamen();
     MenuButton menuButton;
     float currenTime = 0f;
+
+    [SerializeField] List<BuyFirstIngredient> buyFirstIngredients = new List<BuyFirstIngredient>();
     private void Awake()
     {
         screenWidth = Screen.width;
-        ingredientPanelWidth = ingredientPanelObj.GetComponent<RectTransform>().sizeDelta.x;
         distanceX = Mathf.Abs(distanceTransform.position.x) * 2f;
         distanceY = Mathf.Abs(distanceTransform.position.y) * 2f;
+
         errorText = errorPanel.GetComponentInChildren<Text>();
+        lottoParticle = lottoPanel.GetComponentInChildren<ParticleSystem>();
+        ingredientPanelWidth = ingredientPanelObj.GetComponent<RectTransform>().sizeDelta.x;
+
         menuButton = FindObjectOfType<MenuButton>();
         guest = FindObjectOfType<GuestMove>();
 
-        lottoParticle = lottoPanel.GetComponentInChildren<ParticleSystem>();
         for (int i = 0; i < stagesObj.Count; i++)
-        {
             stagesObj[i].transform.position = new Vector2(distanceX * i, 0);
-        }
 
         yesButton.onClick.AddListener(() => SettingAd());
         noButton.onClick.AddListener(() => RejectAd());
@@ -152,6 +155,11 @@ public class UIManager : MonoBehaviour
         questTimeText.text = string.Format("{0}시간 {1}분 {2}초", (23 - DateTime.Now.Hour), (59 - DateTime.Now.Minute), (59 - DateTime.Now.Second));
     }
 
+    public void UpdateDayText()
+    {
+        dayText.DOText(string.Format("{0}일차 끝!", GameManager.Instance.CurrentUser.GetDay()), 0.5f);
+    }
+
     public void UpdateMoneyText()
     {
         moneyText.text = string.Format("{0}원", GameManager.Instance.CurrentUser.GetMoney());
@@ -179,6 +187,7 @@ public class UIManager : MonoBehaviour
             if (ingredients[i].type == state)
             {
                 GameObject obj = Instantiate(template, template.transform.parent);
+                buyFirstIngredients.Add(obj.GetComponent<BuyFirstIngredient>());
                 FieldPanel fieldPanel = obj.GetComponent<FieldPanel>();
                 fieldPanels.Add(fieldPanel);
                 fieldPanel.SetValue(i);
@@ -219,6 +228,7 @@ public class UIManager : MonoBehaviour
     {
         UpdateIngredientPanel();
         UpdateAchievementPanel();
+        UpdateFarm();
         UpdateIngredientUpgradePanel();
         UpdateBookPanel((int)BookType.Ingredient);
     }
@@ -633,10 +643,18 @@ public class UIManager : MonoBehaviour
 
     public void AppearCalculatorPanel()
     {
-        foreach(PanelBase panel in calculatePanels)
+        foreach (PanelBase panel in calculatePanels)
         {
             panel.UpdateUI();
         }
         incomeText.text = GetIncome().ToString();
+    }
+
+    public void UpdateFarm()
+    {
+        for (int i = 0; i < buyFirstIngredients.Count; i++)
+        {
+            buyFirstIngredients[i].ActiveFarm();
+        }
     }
 }
