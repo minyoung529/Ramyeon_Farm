@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class BuyFirstIngredient : MonoBehaviour
 {
+    [SerializeField]
     int index;
     Button button;
 
@@ -25,6 +26,14 @@ public class BuyFirstIngredient : MonoBehaviour
         button = GetComponent<Button>();
         button?.onClick.AddListener(() => OnClick());
         ActiveCollider();
+
+
+    }
+
+    private void Update()
+    {
+        if (index == 0) return;
+        gameObject.SetActive(GameManager.Instance.CurrentUser.GetIsIngredientsHave()[index - 1]);
     }
 
     public void SetValue(int index)
@@ -32,9 +41,7 @@ public class BuyFirstIngredient : MonoBehaviour
         this.index = index;
 
         if (ingredientName != null)
-        {
             ingredientName.text = GameManager.Instance.GetIngredients()[index].name;
-        }
     }
 
     public void OnClick()
